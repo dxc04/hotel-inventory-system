@@ -10,6 +10,7 @@ We'll have to dockerized the setup later on
 ## Installation
 
 `composer install`
+
 `php artisan migrate`
 
 Part of the installation uses Orchid Admin Panel to easily manage and handle entities, roles, permissions, pages
