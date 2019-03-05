@@ -5,7 +5,7 @@
 * PHP 7.2.2-fpm,
 * composer,
 * MySQL 5.7.2,
-* Laravel 5.7.15
+* Laravel 5.8
 
 ## Installation
 Steps:
