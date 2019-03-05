@@ -12,7 +12,12 @@ Steps:
 
 2. Clone the repo and start setup the framework
 ```git clone git@github.com:sorit/hsg.git hsg_portal```
+
 ```docker pull composer```
+
 ```docker run --rm -v $(pwd):/app composer install```
+
 ```cp .env.example .env```
+
 ```docker-compose exec app php artisan key:generate```
+
