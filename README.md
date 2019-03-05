@@ -36,10 +36,15 @@ Steps:
 
 ## Config
 Database
- db name: hsg_portal
+
+ db name: hsg_portal 
+ 
  user: homestead
+ 
  host: 0.0.0.0
+ 
  port: 33061
+ 
  password: secret
 
 
