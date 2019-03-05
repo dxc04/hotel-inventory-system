@@ -34,6 +34,8 @@ Steps:
 
 ```docker-compose exec app php artisan key:generate```
 
+```docker-compose exec app chmod -R o+w storage/ bootstrap/cache/```
+
 4. You can then access the new app on http://0.0.0.0:8080
 
 ## Config
