@@ -24,7 +24,7 @@ Steps:
 
 ```docker-compose up```
 
-3. Setup Laravel framework. Open new terminal.
+3. Setup Laravel framework. Open a new terminal.
 
 ```docker pull composer```
 
@@ -36,7 +36,15 @@ Steps:
 
 ```docker-compose exec app chmod -R o+w storage/ bootstrap/cache/```
 
-4. You can then access the new app on http://0.0.0.0:8080
+4. Migrate Orchid Admin db migrations and add an admin user
+
+```docker-compose exec app php artisan migrate```
+
+```docker-compose exec app php artisan orchid:admin admin admin@admin.com password```
+
+5. You can then access the new app on http://0.0.0.0:8080
+6. To access the admin panel http://0.0.0.0:8080/dashboard
+   Use the credentials used when adding an admin user.
 
 ## Config
 Database
