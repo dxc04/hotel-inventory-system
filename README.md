@@ -26,28 +26,28 @@ Steps:
 
 3. Setup Laravel framework. Open a new terminal.
 
-```docker pull composer```
+    ```docker pull composer```
 
-```docker run --rm -v $(pwd):/app composer install```
+    ```docker run --rm -v $(pwd):/app composer install```
 
-```cp .env.example .env```
+    ```cp .env.example .env```
 
-```docker-compose exec app php artisan key:generate```
+    ```docker-compose exec app php artisan key:generate```
 
-```docker-compose exec app chmod -R o+w storage/ bootstrap/cache/```
+    ```docker-compose exec app chmod -R o+w storage/ bootstrap/cache/```
 
 4. Migrate Orchid Admin db migrations and add an admin user
 
-```docker-compose exec app php artisan migrate```
-
-```docker-compose exec app php artisan orchid:admin admin admin@admin.com password```
+    ```docker-compose exec app php artisan migrate```
+    
+    ```docker-compose exec app php artisan orchid:admin admin admin@admin.com password```
 
 5. You can then access the new app on http://0.0.0.0:8080
 6. To access the admin panel http://0.0.0.0:8080/dashboard
    Use the credentials used when adding an admin user.
 
 ## Config
-Database
+**Database**
 
  db name: hsg_portal 
  
