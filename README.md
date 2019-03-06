@@ -46,6 +46,16 @@ Steps:
 6. To access the admin panel http://0.0.0.0:8080/dashboard
    Use the credentials used when adding an admin user.
 
+# Resetting development
+
+1. `ctrl+c` to currently running docker terminal. Then run the following:
+    ```docker rm hsg_portal_web_1 hsg_portal_database_1 hsg_portal_app_1```
+    ```docker volume rm hsg_portal_dbdata```
+2. Run docker compose again
+    ```docker-compose up```
+3. Then continue the installation steps starting with step #2.
+    
+
 ## Config
 **Database**
 
