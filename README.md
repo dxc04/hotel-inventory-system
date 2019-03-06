@@ -53,7 +53,7 @@ Steps:
     ```docker volume rm hsg_portal_dbdata```
 2. Run docker compose again
     ```docker-compose up```
-3. Then continue the installation steps starting with step #2.
+3. Then continue the installation steps starting with step #3.
     
 
 ## Config
