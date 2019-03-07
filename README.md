@@ -3,7 +3,7 @@
 ## Installation
 Steps:
 
-**Note**
+**Notes**
 
 * Add `sudo` if commands don't work.
 * Run all commands in the terminal
@@ -19,6 +19,8 @@ Steps:
 2. Clone the repo and run docker-compose
 
     ```git clone git@github.com:sorit/hsg.git hsg_portal```
+    
+    ```cd hsg_portal```
 
     ```docker-compose up```
 
