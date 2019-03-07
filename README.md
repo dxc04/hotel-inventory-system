@@ -3,7 +3,7 @@
 ## Installation
 Steps:
 
-**Note**
+**Notes**
 
 * Add `sudo` if commands don't work.
 * Run all commands in the terminal
