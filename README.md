@@ -79,3 +79,6 @@ Steps:
 * Laravel 5.7.*
 * composer
 
+## LAP - Laravel Admin Panel
+
+We are utilizing admin panel called "LAP". Documentation can be found here https://lap.kjjdion.com/docs 
