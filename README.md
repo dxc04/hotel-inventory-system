@@ -2,7 +2,11 @@
 
 ## Installation
 Steps:
-**Note 
+
+**Note**
+
+* Add `sudo` if commands don't work.
+* Run all commands in the terminal
 
 1. Install [Docker Toolbox](https://docs.docker.com/toolbox/overview/) or [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) 
 
