@@ -37,9 +37,11 @@ Steps:
     
     Password: admin123
     
-**Resetting Development**
+##Resetting Development
 
     ```docker rm hsg_portal_app_1 hsg_portal_web_1```
+    
+    ```docker volume rm hsg_portal_dbdata```
 
 ## Config
 **Database**
