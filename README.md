@@ -1,12 +1,5 @@
 ## HSG Portal
 
-## What's inside?
-* Nginx,
-* PHP 7.2.2-fpm,
-* composer,
-* MySQL 5.7.2,
-* Laravel 5.7.*
-
 ## Installation
 Steps:
 
@@ -26,17 +19,20 @@ Steps:
 
 3. Setup Laravel framework. Open a new terminal.
 
-    ```docker pull composer```
-
-    ```docker run --rm -v $(pwd):/app composer install```
+    ```docker-compose exec app composer install```
 
     ```cp .env.example .env```
 
     ```docker-compose exec app php artisan key:generate```
 
     ```docker-compose exec app chmod -R o+w storage/ bootstrap/cache/```
-
+    
+    ```docker-compose exec app php artisan migrate```
+    
 5. You can then access the new app on http://0.0.0.0:8080
+6. The admin site can be access on http://0.0.0.0:8080/admin
+    Email Address: admin@example.com
+    Password: admin123
 
 ## Config
 **Database**
@@ -51,4 +47,11 @@ Steps:
  
  password: secret
 
+## What's inside on docker?
+* Nginx,
+* PHP 7.2.2-fpm,
+* composer,
+* MySQL 5.7.2,
+* Laravel 5.7.*
+* composer
 
