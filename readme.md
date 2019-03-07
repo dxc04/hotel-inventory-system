@@ -1,14 +1,12 @@
 ## HSG Portal
 
-## What's inside?
-* Nginx,
-* PHP 7.2.2-fpm,
-* composer,
-* MySQL 5.7.2,
-* Laravel 5.7.*
-
 ## Installation
 Steps:
+
+**Note**
+
+* Add `sudo` if commands don't work.
+* Run all commands in the terminal
 
 1. Install [Docker Toolbox](https://docs.docker.com/toolbox/overview/) or [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) 
 
@@ -26,18 +24,38 @@ Steps:
 
 3. Setup Laravel framework. Open a new terminal.
 
-    ```docker pull composer```
-
-    ```docker run --rm -v $(pwd):/app composer install```
-
-    ```cp .env.example .env```
+    ```docker-compose exec app cp .env.example .env```
+    
+    ```docker-compose exec app php artisan config:cache```
+    
+    ```docker-compose exec app composer install```
 
     ```docker-compose exec app php artisan key:generate```
 
     ```docker-compose exec app chmod -R o+w storage/ bootstrap/cache/```
-
+    
+    ```docker-compose exec app php artisan migrate```
+    
 5. You can then access the new app on http://0.0.0.0:8080
+6. The admin site can be access on http://0.0.0.0:8080/admin
+    
+    Email Address: admin@example.com
+    
+    Password: admin123
 
+
+**Resetting Setup**
+
+* If you need to reset the development setup just run the following:
+
+    ```docker rm hsg_portal_app_1 hsg_portal_web_1```
+
+    ```docker volume rm hsg_portal_dbdata```
+    
+    ```docker-compose up```
+    
+    ```docker-compose exec app php artisan migrate```
+    
 ## Config
 **Database**
 
@@ -51,4 +69,11 @@ Steps:
  
  password: secret
 
+## What's inside on docker?
+* Nginx,
+* PHP 7.2.2-fpm,
+* composer,
+* MySQL 5.7.2,
+* Laravel 5.7.*
+* composer
 
