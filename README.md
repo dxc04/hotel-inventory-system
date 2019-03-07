@@ -36,6 +36,7 @@ Steps:
     Email Address: admin@example.com
     
     Password: admin123
+    
 **Resetting Development**
 
     ```docker rm hsg_portal_app_1 hsg_portal_web_1```
