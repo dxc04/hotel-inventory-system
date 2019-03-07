@@ -31,7 +31,9 @@ Steps:
     
 5. You can then access the new app on http://0.0.0.0:8080
 6. The admin site can be access on http://0.0.0.0:8080/admin
+    
     Email Address: admin@example.com
+    
     Password: admin123
 
 ## Config
