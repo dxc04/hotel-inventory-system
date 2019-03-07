@@ -2,6 +2,7 @@
 
 ## Installation
 Steps:
+**Note 
 
 1. Install [Docker Toolbox](https://docs.docker.com/toolbox/overview/) or [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) 
 
@@ -15,7 +16,7 @@ Steps:
 
     ```git clone git@github.com:sorit/hsg.git hsg_portal```
 
-    ```docker-compose up``` or in linux ```sudo docker-compose up```
+    ```docker-compose up```
 
 3. Setup Laravel framework. Open a new terminal.
 
