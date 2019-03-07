@@ -15,7 +15,7 @@ Steps:
 
     ```git clone git@github.com:sorit/hsg.git hsg_portal```
 
-    ```docker-compose up```
+    ```docker-compose up``` or in linux ```sudo docker-compose up```
 
 3. Setup Laravel framework. Open a new terminal.
 
