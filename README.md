@@ -36,13 +36,19 @@ Steps:
     Email Address: admin@example.com
     
     Password: admin123
-    
-## Resetting Development
 
-    `docker rm hsg_portal_app_1 hsg_portal_web_1`
+
+**Resetting Setup**
+
+* If you need to reset the development setup just run the following:
+
+    ```docker rm hsg_portal_app_1 hsg_portal_web_1```
+
+    ```docker volume rm hsg_portal_dbdata```
     
-    `docker volume rm hsg_portal_dbdata`
+    ```docker-compose up```
     
+    ```docker-compose exec app php artisan migrate```
     
 ## Config
 **Database**
