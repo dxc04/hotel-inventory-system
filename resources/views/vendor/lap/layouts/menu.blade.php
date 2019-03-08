@@ -1,6 +1,31 @@
 <li{!! request()->is('admin/dashboard') ? ' class="active"' : '' !!}>
     <a href="{{ route('admin.dashboard') }}"><i class="fal fa-fw fa-tachometer mr-3"></i>Dashboard</a>
 </li>
+@can('Read Room Statuses')
+    <li{!! request()->is('admin/room_statuses') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.room_statuses') }}"><i class="fal fa-fw fa-door-open mr-3"></i>Room Statuses</a>
+    </li>
+@endcan
+@can('Read Rooms')
+    <li{!! request()->is('admin/rooms') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.rooms') }}"><i class="fal fa-fw fa-hotel mr-3"></i>Rooms</a>
+    </li>
+@endcan
+@can('Read Room Types')
+    <li{!! request()->is('admin/room_types') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.room_types') }}"><i class="fal fa-fw fa-door-open mr-3"></i>Room Types</a>
+    </li>
+@endcan
+@can('Read Statuses')
+    <li{!! request()->is('admin/statuses') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.statuses') }}"><i class="fal fa-fw fa-door-closed mr-3"></i>Statuses</a>
+    </li>
+@endcan
+@can('Read Guests')
+    <li{!! request()->is('admin/guests') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.guests') }}"><i class="fal fa-fw fa-user-circle mr-3"></i>Guests</a>
+    </li>
+@endcan
 @can('Read Suppliers')
     <li{!! request()->is('admin/suppliers') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.suppliers') }}"><i class="fal fa-fw fa-link mr-3"></i>Suppliers</a>
