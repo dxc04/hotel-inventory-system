@@ -33,3 +33,50 @@ Route::get('admin/suppliers/read/{supplier}', 'Admin\SupplierController@read')->
 Route::get('admin/suppliers/update/{supplier}', 'Admin\SupplierController@updateForm')->name('admin.suppliers.update');
 Route::patch('admin/suppliers/update/{supplier}', 'Admin\SupplierController@update');
 Route::delete('admin/suppliers/delete/{supplier}', 'Admin\SupplierController@delete')->name('admin.suppliers.delete');
+
+// guests
+Route::get('admin/guests', 'Admin\GuestController@index')->name('admin.guests');
+Route::get('admin/guests/create', 'Admin\GuestController@createForm')->name('admin.guests.create');
+Route::post('admin/guests/create', 'Admin\GuestController@create');
+Route::get('admin/guests/read/{guest}', 'Admin\GuestController@read')->name('admin.guests.read');
+Route::get('admin/guests/update/{guest}', 'Admin\GuestController@updateForm')->name('admin.guests.update');
+Route::patch('admin/guests/update/{guest}', 'Admin\GuestController@update');
+Route::delete('admin/guests/delete/{guest}', 'Admin\GuestController@delete')->name('admin.guests.delete');
+
+// statuses
+Route::get('admin/statuses', 'Admin\StatusController@index')->name('admin.statuses');
+Route::get('admin/statuses/create', 'Admin\StatusController@createForm')->name('admin.statuses.create');
+Route::post('admin/statuses/create', 'Admin\StatusController@create');
+Route::get('admin/statuses/read/{status}', 'Admin\StatusController@read')->name('admin.statuses.read');
+Route::get('admin/statuses/update/{status}', 'Admin\StatusController@updateForm')->name('admin.statuses.update');
+Route::patch('admin/statuses/update/{status}', 'Admin\StatusController@update');
+Route::delete('admin/statuses/delete/{status}', 'Admin\StatusController@delete')->name('admin.statuses.delete');
+
+// room_types
+Route::get('admin/room_types', 'Admin\RoomTypeController@index')->name('admin.room_types');
+Route::get('admin/room_types/create', 'Admin\RoomTypeController@createForm')->name('admin.room_types.create');
+Route::post('admin/room_types/create', 'Admin\RoomTypeController@create');
+Route::get('admin/room_types/read/{room_type}', 'Admin\RoomTypeController@read')->name('admin.room_types.read');
+Route::get('admin/room_types/update/{room_type}', 'Admin\RoomTypeController@updateForm')->name('admin.room_types.update');
+Route::patch('admin/room_types/update/{room_type}', 'Admin\RoomTypeController@update');
+Route::delete('admin/room_types/delete/{room_type}', 'Admin\RoomTypeController@delete')->name('admin.room_types.delete');
+
+
+
+// rooms
+Route::get('admin/rooms', 'Admin\RoomController@index')->name('admin.rooms');
+Route::get('admin/rooms/create', 'Admin\RoomController@createForm')->name('admin.rooms.create');
+Route::post('admin/rooms/create', 'Admin\RoomController@create');
+Route::get('admin/rooms/read/{room}', 'Admin\RoomController@read')->name('admin.rooms.read');
+Route::get('admin/rooms/update/{room}', 'Admin\RoomController@updateForm')->name('admin.rooms.update');
+Route::patch('admin/rooms/update/{room}', 'Admin\RoomController@update');
+Route::delete('admin/rooms/delete/{room}', 'Admin\RoomController@delete')->name('admin.rooms.delete');
+
+// room_statuses
+Route::get('admin/room_statuses', 'Admin\RoomStatusController@index')->name('admin.room_statuses');
+Route::get('admin/room_statuses/create', 'Admin\RoomStatusController@createForm')->name('admin.room_statuses.create');
+Route::post('admin/room_statuses/create', 'Admin\RoomStatusController@create');
+Route::get('admin/room_statuses/read/{room_status}', 'Admin\RoomStatusController@read')->name('admin.room_statuses.read');
+Route::get('admin/room_statuses/update/{room_status}', 'Admin\RoomStatusController@updateForm')->name('admin.room_statuses.update');
+Route::patch('admin/room_statuses/update/{room_status}', 'Admin\RoomStatusController@update');
+Route::delete('admin/room_statuses/delete/{room_status}', 'Admin\RoomStatusController@delete')->name('admin.room_statuses.delete');
