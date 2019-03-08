@@ -6,7 +6,8 @@ Steps:
 **Notes**
 
 * Add `sudo` if commands don't work.
-* Run all commands in the terminal. You ma use Power Shell in Windows
+* Run all commands in the terminal. You ma use [Git Bash](https://gitforwindows.org/) in Windows
+* You may also need to setup your github ssh keys https://help.github.com/en/articles/connecting-to-github-with-ssh
 
 1. Install [Docker Toolbox](https://docs.docker.com/toolbox/overview/) or [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) 
    
