@@ -6,15 +6,11 @@ Steps:
 **Notes**
 
 * Add `sudo` if commands don't work.
-* Run all commands in the terminal
+* Run all commands in the terminal. You ma use Power Shell in Windows
 
 1. Install [Docker Toolbox](https://docs.docker.com/toolbox/overview/) or [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) 
-
-   * **Windows 10: Install [Docker Toolbox Windows](https://docs.docker.com/docker-for-windows/)**
    
    * **Linux Ubuntu [Docker CE](https://docs.docker.com/install/linux/docker-ce/ubuntu/)**
-
-   * **Mac: Yosemite 10.10.3 or above Install [Docker Community Edition for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac); otherwise, Install [Docker Toolbox for Mac](https://docs.docker.com/docker-for-mac/)**
 
 2. Clone the repo and run docker-compose
 
