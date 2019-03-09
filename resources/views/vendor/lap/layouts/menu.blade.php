@@ -3,7 +3,7 @@
 </li>
 @can('Read Room Statuses')
     <li{!! request()->is('admin/room_statuses') ? ' class="active"' : '' !!}>
-        <a href="{{ route('admin.room_statuses') }}"><i class="fal fa-fw fa-door-open mr-3"></i>Room Statuses</a>
+        <a href="{{ route('admin.room_statuses') }}"><i class="fal fa-fw fa-list-alt mr-3"></i>Room Statuses</a>
     </li>
 @endcan
 @can('Read Rooms')

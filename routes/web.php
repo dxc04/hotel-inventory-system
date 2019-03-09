@@ -72,6 +72,7 @@ Route::get('admin/rooms/update/{room}', 'Admin\RoomController@updateForm')->name
 Route::patch('admin/rooms/update/{room}', 'Admin\RoomController@update');
 Route::delete('admin/rooms/delete/{room}', 'Admin\RoomController@delete')->name('admin.rooms.delete');
 
+
 // room_statuses
 Route::get('admin/room_statuses', 'Admin\RoomStatusController@index')->name('admin.room_statuses');
 Route::get('admin/room_statuses/create', 'Admin\RoomStatusController@createForm')->name('admin.room_statuses.create');
