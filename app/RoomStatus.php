@@ -12,14 +12,14 @@ class RoomStatus extends Eloquent
 
     
 
-    public function status()
+    public function room()
     {
-        return $this->belongsTo('App\Status');
+        return $this->belongsTo('App\Room');
     }
 
     public function status()
     {
-        return $this->belongsTo('App\Room');
+        return $this->belongsTo('App\Status');
     }
 
     

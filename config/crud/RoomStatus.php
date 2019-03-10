@@ -14,13 +14,38 @@ return [
     ],
 
     // menu icon (fontawesome class)
-    'icon' => 'fa-door-open',
+    'icon' => 'fa-list-alt',
 
     // model attributes
     'attributes' => [
 
-        'status_id' => [
+        'room_id' => [
             'primary' => true,
+            'migrations' => [
+                'integer:room_id|unique',
+            ],
+            'relationship' => [
+                'room' => 'belongsTo:App\Room',
+            ],
+            'validations' => [
+                'create' => 'required|exists:rooms,id|unique:room_statuses',
+                'update' => 'required|exists:rooms,id|unique:room_statuses,room_id,{$room_status->id}',
+            ],
+            'datatable' => [
+                'title' => 'Room Number',
+                'data' => 'room.room_number',
+            ],
+            'input' => [
+                'type' => 'select',
+                'options' => [
+                    'app:App\Room|orderBy:room_number|get' => [
+                        'id' => 'room_number',
+                    ],
+                ],
+            ],
+        ],
+
+        'status_id' => [
             'migrations' => [
                 'integer:status_id',
             ],
@@ -40,32 +65,6 @@ return [
                 'options' => [
                     'app:App\Status|orderBy:status_name|get' => [
                         'id' => 'status_name',
-                    ],
-                ],
-            ],
-        ],
-
-        'room_id' => [
-            'primary' => true,
-            'migrations' => [
-                'integer:room_id',
-            ],
-            'relationship' => [
-                'status' => 'belongsTo:App\Room',
-            ],
-            'validations' => [
-                'create' => 'required|exists:rooms,id',
-                'update' => 'required|exists:rooms,id',
-            ],
-            'datatable' => [
-                'title' => 'Room',
-                'data' => 'room.room_number',
-            ],
-            'input' => [
-                'type' => 'select',
-                'options' => [
-                    'app:App\Room|orderBy:room_number|get' => [
-                        'id' => 'room_number',
                     ],
                 ],
             ],

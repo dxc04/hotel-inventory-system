@@ -30,15 +30,15 @@
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Status Id</div>
-                <div class="col-md-8">{{ $room_status->status_id }}</div>
+                <div class="col-md-2">Room Id</div>
+                <div class="col-md-8">{{ $room_status->room_id }}</div>
             </div>
         </div>
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Room Id</div>
-                <div class="col-md-8">{{ $room_status->room_id }}</div>
+                <div class="col-md-2">Status Id</div>
+                <div class="col-md-8">{{ $room_status->status_id }}</div>
             </div>
         </div>
 

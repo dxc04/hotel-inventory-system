@@ -10,12 +10,12 @@
         <div class="list-group">
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="status_id" class="col-md-2 col-form-label">Status Id</label>
+                    <label for="room_id" class="col-md-2 col-form-label">Room Id</label>
                     <div class="col-md-8">
-                        <select name="status_id" id="status_id" class="form-control">
+                        <select name="room_id" id="room_id" class="form-control">
                             <option value=""></option>
-                            @foreach(app('App\Status')->orderBy('status_name')->get() as $model)
-                                <option value="{{ $model->id }}">{{ $model->status_name }}</option>
+                            @foreach(app('App\Room')->orderBy('room_number')->get() as $model)
+                                <option value="{{ $model->id }}">{{ $model->room_number }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -24,12 +24,12 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="room_id" class="col-md-2 col-form-label">Room Id</label>
+                    <label for="status_id" class="col-md-2 col-form-label">Status Id</label>
                     <div class="col-md-8">
-                        <select name="room_id" id="room_id" class="form-control">
+                        <select name="status_id" id="status_id" class="form-control">
                             <option value=""></option>
-                            @foreach(app('App\Room')->orderBy('room_number')->get() as $model)
-                                <option value="{{ $model->id }}">{{ $model->room_number }}</option>
+                            @foreach(app('App\Status')->orderBy('status_name')->get() as $model)
+                                <option value="{{ $model->id }}">{{ $model->status_name }}</option>
                             @endforeach
                         </select>
                     </div>

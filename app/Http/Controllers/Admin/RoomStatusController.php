@@ -21,7 +21,7 @@ class RoomStatusController extends Controller
     public function index(Builder $builder)
     {
         if (request()->ajax()) {
-            $room_statuses = RoomStatus::query()->with('status', 'status');
+            $room_statuses = RoomStatus::query()->with('room', 'status');
             $datatable = datatables($room_statuses)
                 ->editColumn('actions', function ($room_status) {
                     return view('admin.room_statuses.datatable.actions', compact('room_status'));
@@ -32,8 +32,8 @@ class RoomStatusController extends Controller
         }
 
         $html = $builder->columns([
+            ['title' => 'Room Number', 'data' => 'room.room_number'],
             ['title' => 'Room Status', 'data' => 'status.status_name'],
-            ['title' => 'Room', 'data' => 'room.room_number'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
         $html->setTableAttribute('id', 'room_statuses_datatable');
@@ -49,8 +49,8 @@ class RoomStatusController extends Controller
     public function create()
     {
         $this->validate(request(), [
+            "room_id" => "required|exists:rooms,id|unique:room_statuses",
             "status_id" => "required|exists:statuses,id",
-            "room_id" => "required|exists:rooms,id",
         ]);
 
         $room_status = RoomStatus::create(request()->all());
@@ -79,8 +79,8 @@ class RoomStatusController extends Controller
     public function update(RoomStatus $room_status)
     {
         $this->validate(request(), [
+            "room_id" => "required|exists:rooms,id|unique:room_statuses,room_id,{$room_status->id}",
             "status_id" => "required|exists:statuses,id",
-            "room_id" => "required|exists:rooms,id",
         ]);
 
         $room_status->update(request()->all());
