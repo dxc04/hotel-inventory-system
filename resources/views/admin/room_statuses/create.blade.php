@@ -24,14 +24,17 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="status_id" class="col-md-2 col-form-label">Status Id</label>
+                    <label for="status" class="col-md-2 col-form-label">Status</label>
                     <div class="col-md-8">
-                        <select name="status_id" id="status_id" class="form-control">
-                            <option value=""></option>
+                        <div class="form-control-plaintext">
+                            <input type="hidden" name="{attribute}">
                             @foreach(app('App\Status')->orderBy('status_name')->get() as $model)
-                                <option value="{{ $model->id }}">{{ $model->status_name }}</option>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="status[]" id="status_{{ $loop->index }}" class="custom-control-input" value="{{ $model->id }}">
+                                    <label for="status_{{ $loop->index }}" class="custom-control-label">{{ $model->status_name }}</label>
+                                </div>
                             @endforeach
-                        </select>
+                        </div>
                     </div>
                 </div>
             </div>

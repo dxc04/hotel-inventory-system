@@ -36,6 +36,7 @@ return [
                 'data' => 'room.room_number',
             ],
             'input' => [
+                'label' => 'Room',
                 'type' => 'select',
                 'options' => [
                     'app:App\Room|orderBy:room_number|get' => [
@@ -45,23 +46,17 @@ return [
             ],
         ],
 
-        'status_id' => [
+        'status' => [
             'migrations' => [
-                'integer:status_id',
-            ],
-            'relationship' => [
-                'status' => 'belongsTo:App\Status',
-            ],
-            'validations' => [
-                'create' => 'required|exists:statuses,id',
-                'update' => 'required|exists:statuses,id',
+                'text:status|nullable',
             ],
             'datatable' => [
-                'title' => 'Room Status',
-                'data' => 'status.status_name',
+                'title' => 'Status',
+                'data' => 'status',
             ],
+            'casts' => 'array',
             'input' => [
-                'type' => 'select',
+                'type' => 'checkbox',
                 'options' => [
                     'app:App\Status|orderBy:status_name|get' => [
                         'id' => 'status_name',

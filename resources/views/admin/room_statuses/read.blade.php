@@ -37,8 +37,8 @@
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Status Id</div>
-                <div class="col-md-8">{{ $room_status->status_id }}</div>
+                <div class="col-md-2">Status</div>
+                <div class="col-md-8">{{ implode(', ', $room_status->status) }}</div>
             </div>
         </div>
 

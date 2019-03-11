@@ -13,6 +13,7 @@ class CreateRoomTable extends Migration
             $table->increments('id');
             $table->integer('room_number')->unique();
             $table->integer('room_type_id');
+            $table->text('description');
             $table->timestamps();
         });
 

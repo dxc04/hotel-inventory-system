@@ -54,12 +54,25 @@ return [
                 'data' => 'room_type.room_type',
             ],
             'input' => [
+                'label' => 'Room Type',
                 'type' => 'select',
                 'options' => [
                     'app:App\RoomType|orderBy:room_type|get' => [
                         'id' => 'room_type',
                     ],
                 ],
+            ],
+        ],
+        'description' => [
+            'migrations' => [
+                'text:description',
+            ],
+            'validations' => [
+                'create' => 'required|min:10',
+                'update' => 'required|min:10',
+            ],
+            'input' => [
+                'type' => 'textarea',
             ],
         ],
 

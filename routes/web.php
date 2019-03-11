@@ -81,3 +81,12 @@ Route::get('admin/room_statuses/read/{room_status}', 'Admin\RoomStatusController
 Route::get('admin/room_statuses/update/{room_status}', 'Admin\RoomStatusController@updateForm')->name('admin.room_statuses.update');
 Route::patch('admin/room_statuses/update/{room_status}', 'Admin\RoomStatusController@update');
 Route::delete('admin/room_statuses/delete/{room_status}', 'Admin\RoomStatusController@delete')->name('admin.room_statuses.delete');
+
+// purchases
+Route::get('admin/purchases', 'Admin\PurchaseController@index')->name('admin.purchases');
+Route::get('admin/purchases/create', 'Admin\PurchaseController@createForm')->name('admin.purchases.create');
+Route::post('admin/purchases/create', 'Admin\PurchaseController@create');
+Route::get('admin/purchases/read/{purchase}', 'Admin\PurchaseController@read')->name('admin.purchases.read');
+Route::get('admin/purchases/update/{purchase}', 'Admin\PurchaseController@updateForm')->name('admin.purchases.update');
+Route::patch('admin/purchases/update/{purchase}', 'Admin\PurchaseController@update');
+Route::delete('admin/purchases/delete/{purchase}', 'Admin\PurchaseController@delete')->name('admin.purchases.delete');

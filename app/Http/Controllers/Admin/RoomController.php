@@ -51,6 +51,7 @@ class RoomController extends Controller
         $this->validate(request(), [
             "room_number" => "required|unique:rooms",
             "room_type_id" => "required|exists:room_types,id",
+            "description" => "required|min:10",
         ]);
 
         $room = Room::create(request()->all());
@@ -81,6 +82,7 @@ class RoomController extends Controller
         $this->validate(request(), [
             "room_number" => "required|unique:rooms,room_number,{$room->id}",
             "room_type_id" => "required|exists:room_types,id",
+            "description" => "required|min:10",
         ]);
 
         $room->update(request()->all());
