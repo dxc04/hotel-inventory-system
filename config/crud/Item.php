@@ -19,22 +19,40 @@ return [
     // model attributes
     'attributes' => [
 
-        'product_name' => [
+        'item_name' => [
             'primary' => true,
             'migrations' => [
-                'string:product_name|unique',
+                'string:item_name|unique',
             ],
             'validations' => [
-                'create' => 'required|unique:products',
-                'update' => 'required|unique:products,product_name,{$product->id}',
+                'create' => 'required|unique:items',
+                'update' => 'required|unique:items,item_name,{$item->id}',
             ],
             'datatable' => [
-                'title' => 'Product Name',
-                'data' => 'product_name',
+                'title' => 'Item Name',
+                'data' => 'item_name',
             ],
             'input' => [
                 'type' => 'text',
             ],
+        ],
+
+        'sku' => [
+            'migrations' => [
+                'string:sku|unique',
+            ],
+            'validations' => [
+                'create' => 'required|unique:items',
+                'update' => 'required|unique:items,sku,{$item->sku}',
+            ],
+            'datatable' => [
+                'title' => 'SKU',
+                'data' => 'sku',
+            ],
+            'input' => [
+                'type' => 'text',
+            ],
+        
         ],
 
         'photo' => [
@@ -50,18 +68,17 @@ return [
             ],
         ],
 
-        'quantity' => [
-            'primary' => true,
+        'amount' => [
             'migrations' => [
-                'integer:quantity|default:0',
+                'double:amount|default:0',
             ],
             'validations' => [
                 'create' => 'integer',
                 'update' => 'integer',
             ],
             'datatable' => [
-                'title' => 'Quantity',
-                'data' => 'quantity',
+                'title' => 'Amount',
+                'data' => 'amount',
             ],
             'input' => [
                 'type' => 'text',

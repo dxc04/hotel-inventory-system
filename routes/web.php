@@ -16,15 +16,6 @@ Route::get('/', function () {
 });
 
 
-// products
-Route::get('admin/products', 'Admin\ProductController@index')->name('admin.products');
-Route::get('admin/products/create', 'Admin\ProductController@createForm')->name('admin.products.create');
-Route::post('admin/products/create', 'Admin\ProductController@create');
-Route::get('admin/products/read/{product}', 'Admin\ProductController@read')->name('admin.products.read');
-Route::get('admin/products/update/{product}', 'Admin\ProductController@updateForm')->name('admin.products.update');
-Route::patch('admin/products/update/{product}', 'Admin\ProductController@update');
-Route::delete('admin/products/delete/{product}', 'Admin\ProductController@delete')->name('admin.products.delete');
-
 // suppliers
 Route::get('admin/suppliers', 'Admin\SupplierController@index')->name('admin.suppliers');
 Route::get('admin/suppliers/create', 'Admin\SupplierController@createForm')->name('admin.suppliers.create');
@@ -90,3 +81,31 @@ Route::get('admin/purchases/read/{purchase}', 'Admin\PurchaseController@read')->
 Route::get('admin/purchases/update/{purchase}', 'Admin\PurchaseController@updateForm')->name('admin.purchases.update');
 Route::patch('admin/purchases/update/{purchase}', 'Admin\PurchaseController@update');
 Route::delete('admin/purchases/delete/{purchase}', 'Admin\PurchaseController@delete')->name('admin.purchases.delete');
+
+// stocks_transactions
+Route::get('admin/stocks_transactions', 'Admin\StocksTransactionController@index')->name('admin.stocks_transactions');
+Route::get('admin/stocks_transactions/create', 'Admin\StocksTransactionController@createForm')->name('admin.stocks_transactions.create');
+Route::post('admin/stocks_transactions/create', 'Admin\StocksTransactionController@create');
+Route::get('admin/stocks_transactions/read/{stocks_transaction}', 'Admin\StocksTransactionController@read')->name('admin.stocks_transactions.read');
+Route::get('admin/stocks_transactions/update/{stocks_transaction}', 'Admin\StocksTransactionController@updateForm')->name('admin.stocks_transactions.update');
+Route::patch('admin/stocks_transactions/update/{stocks_transaction}', 'Admin\StocksTransactionController@update');
+Route::delete('admin/stocks_transactions/delete/{stocks_transaction}', 'Admin\StocksTransactionController@delete')->name('admin.stocks_transactions.delete');
+
+// items
+Route::get('admin/items', 'Admin\ItemController@index')->name('admin.items');
+Route::get('admin/items/create', 'Admin\ItemController@createForm')->name('admin.items.create');
+Route::post('admin/items/create', 'Admin\ItemController@create');
+Route::get('admin/items/read/{item}', 'Admin\ItemController@read')->name('admin.items.read');
+Route::get('admin/items/update/{item}', 'Admin\ItemController@updateForm')->name('admin.items.update');
+Route::patch('admin/items/update/{item}', 'Admin\ItemController@update');
+Route::delete('admin/items/delete/{item}', 'Admin\ItemController@delete')->name('admin.items.delete');
+
+
+// bookings
+Route::get('admin/bookings', 'Admin\BookingController@index')->name('admin.bookings');
+Route::get('admin/bookings/create', 'Admin\BookingController@createForm')->name('admin.bookings.create');
+Route::post('admin/bookings/create', 'Admin\BookingController@create');
+Route::get('admin/bookings/read/{booking}', 'Admin\BookingController@read')->name('admin.bookings.read');
+Route::get('admin/bookings/update/{booking}', 'Admin\BookingController@updateForm')->name('admin.bookings.update');
+Route::patch('admin/bookings/update/{booking}', 'Admin\BookingController@update');
+Route::delete('admin/bookings/delete/{booking}', 'Admin\BookingController@delete')->name('admin.bookings.delete');

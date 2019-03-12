@@ -37,6 +37,20 @@
 
         <div class="list-group-item">
             <div class="row">
+                <div class="col-md-2">Contact Number</div>
+                <div class="col-md-8">{{ $supplier->contact_number }}</div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="row">
+                <div class="col-md-2">Address</div>
+                <div class="col-md-8">{{ $supplier->address }}</div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="row">
                 <div class="col-md-2">Created At</div>
                 <div class="col-md-8">{{ $supplier->created_at }}</div>
             </div>

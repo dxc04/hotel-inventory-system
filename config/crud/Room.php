@@ -38,7 +38,6 @@ return [
         ],
 
         'room_type_id' => [
-            'primary' => true,
             'migrations' => [
                 'integer:room_type_id',
             ],
@@ -63,6 +62,7 @@ return [
                 ],
             ],
         ],
+
         'description' => [
             'migrations' => [
                 'text:description',
@@ -73,6 +73,31 @@ return [
             ],
             'input' => [
                 'type' => 'textarea',
+            ],
+        ],
+
+        'transacted_by' => [
+            'migrations' => [
+                'integer:transacted_by',
+            ],
+            'relationship' => [
+                'user' => 'belongsTo:App\User',
+            ],
+            'validations' => [
+                'create' => 'required|exists:users,id',
+                'update' => 'required|exists:users,id',
+            ],
+            'datatable' => [
+                'title' => 'User',
+                'data' => 'user.last_name',
+            ],
+            'input' => [
+                'type' => 'select',
+                'options' => [
+                    'app:App\User|orderBy:last_name|get' => [
+                        'id' => 'last_name',
+                    ],
+                ],
             ],
         ],
 

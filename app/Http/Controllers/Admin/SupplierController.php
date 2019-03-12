@@ -33,6 +33,8 @@ class SupplierController extends Controller
 
         $html = $builder->columns([
             ['title' => 'Supplier Name', 'data' => 'supplier_name'],
+            ['title' => 'Contact Number', 'data' => 'contact_number'],
+            ['title' => 'Address', 'data' => 'address'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
         $html->setTableAttribute('id', 'suppliers_datatable');
