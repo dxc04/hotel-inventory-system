@@ -15,8 +15,8 @@
                     <div class="col-md-8">
                         <select name="room_id" id="room_id" class="form-control">
                             <option value=""></option>
-                            @foreach(app('App\Room')->orderBy('room_number')->get() as $model)
-                                <option value="{{ $model->id }}"{{ $model->id == $room_status->room_id ? ' selected' : '' }}>{{ $model->room_number }}</option>
+                            @foreach(app('App\Room')->orderBy('room_name')->get() as $model)
+                                <option value="{{ $model->id }}"{{ $model->id == $room_status->room_id ? ' selected' : '' }}>{{ $model->room_name }}</option>
                             @endforeach
                         </select>
                     </div>

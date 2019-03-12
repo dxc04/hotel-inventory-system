@@ -15,8 +15,8 @@
                     <div class="col-md-8">
                         <select name="room_id" id="room_id" class="form-control">
                             <option value=""></option>
-                            @foreach(app('App\Room')->orderBy('room_number')->get() as $model)
-                                <option value="{{ $model->id }}"{{ $model->id == $purchase->room_id ? ' selected' : '' }}>{{ $model->room_number }}</option>
+                            @foreach(app('App\Room')->orderBy('room_name')->get() as $model)
+                                <option value="{{ $model->id }}"{{ $model->id == $purchase->room_id ? ' selected' : '' }}>{{ $model->room_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -25,12 +25,12 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="product_id" class="col-md-2 col-form-label">Product Id</label>
+                    <label for="item_id" class="col-md-2 col-form-label">Item Id</label>
                     <div class="col-md-8">
-                        <select name="product_id" id="product_id" class="form-control">
+                        <select name="item_id" id="item_id" class="form-control">
                             <option value=""></option>
-                            @foreach(app('App\Product')->orderBy('product_name')->get() as $model)
-                                <option value="{{ $model->id }}"{{ $model->id == $purchase->product_id ? ' selected' : '' }}>{{ $model->product_name }}</option>
+                            @foreach(app('App\Item')->orderBy('item_name')->get() as $model)
+                                <option value="{{ $model->id }}"{{ $model->id == $purchase->item_id ? ' selected' : '' }}>{{ $model->item_name }}</option>
                             @endforeach
                         </select>
                     </div>

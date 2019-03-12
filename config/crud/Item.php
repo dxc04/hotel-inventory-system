@@ -73,8 +73,8 @@ return [
                 'double:amount|default:0',
             ],
             'validations' => [
-                'create' => 'integer',
-                'update' => 'integer',
+                'create' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+                'update' => 'required|regex:/^\d*(\.\d{1,2})?$/',
             ],
             'datatable' => [
                 'title' => 'Amount',

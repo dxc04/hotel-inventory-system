@@ -32,42 +32,42 @@ return [
             ],
             'datatable' => [
                 'title' => 'Room',
-                'data' => 'room.room_number',
+                'data' => 'room.room_name',
             ],
             'input' => [
                 'label' => 'Room',
                 'title' => 'Room',
                 'type' => 'select',
                 'options' => [
-                    'app:App\Room|orderBy:room_number|get' => [
-                        'id' => 'room_number',
+                    'app:App\Room|orderBy:room_name|get' => [
+                        'id' => 'room_name',
                     ],
                 ],
             ],
         ],
 
-        'product_id' => [
+        'item_id' => [
             'migrations' => [
-                'integer:product_id',
+                'integer:item_id',
             ],
             'relationship' => [
-                'product' => 'belongsTo:App\Product',
+                'item' => 'belongsTo:App\Item',
             ],
             'validations' => [
-                'create' => 'required|exists:products,id',
-                'update' => 'required|exists:products,id',
+                'create' => 'required|exists:items,id',
+                'update' => 'required|exists:items,id',
             ],
             'datatable' => [
-                'title' => 'Product',
-                'data' => 'product.product_name',
+                'title' => 'Item',
+                'data' => 'item.item_name',
             ],
             'input' => [
-                'label' => 'Product',
-                'title' => 'Product',
+                'label' => 'Item',
+                'title' => 'Item',
                 'type' => 'select',
                 'options' => [
-                    'app:App\Product|orderBy:product_name|get' => [
-                        'id' => 'product_name',
+                    'app:App\Item|orderBy:item_name|get' => [
+                        'id' => 'item_name',
                     ],
                 ],
             ],

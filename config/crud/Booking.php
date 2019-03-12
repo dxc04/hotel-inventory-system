@@ -32,14 +32,14 @@ return [
             ],
             'datatable' => [
                 'title' => 'Room',
-                'data' => 'room.room_number',
+                'data' => 'room.room_name',
             ],
             'input' => [
                 'label' => 'Room',
                 'type' => 'select',
                 'options' => [
-                    'app:App\Room|orderBy:room_number|get' => [
-                        'id' => 'room_number',
+                    'app:App\Room|orderBy:room_name|get' => [
+                        'id' => 'room_name',
                     ],
                 ],
             ],
@@ -50,23 +50,23 @@ return [
                 'integer:guest_id',
             ],
             'relationship' => [
-                'guest' => 'belongsTo:App\guest',
+                'guest' => 'belongsTo:App\Guest',
             ],
             'validations' => [
                 'create' => 'required|exists:guests,id',
                 'update' => 'required|exists:guests,id',
             ],
             'datatable' => [
-                'title' => 'guest',
-                'data' => "guest.last_name || ', ' || guest.first_name",
+                'title' => 'Guest',
+                'data' => "guest.last_name",
             ],
             'input' => [
                 'label' => 'guest',
                 'type' => 'select',
                 'options' => [
                     'app:App\guest|orderBy:last_name|get' => [
-                        'last_name' => 'last_name',
-                        'first_name' => 'first_name',
+                        'id' => 'last_name',
+                        'first_name' => 'first_name'
                     ],
                 ],
             ],

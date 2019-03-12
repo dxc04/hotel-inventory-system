@@ -13,6 +13,8 @@ class CreateGuestTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('contact_number');
+            $table->string('address');
             $table->timestamps();
         });
 

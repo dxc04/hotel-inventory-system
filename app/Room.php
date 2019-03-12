@@ -17,5 +17,10 @@ class Room extends Eloquent
         return $this->belongsTo('App\RoomType');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     
 }

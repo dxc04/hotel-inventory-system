@@ -37,6 +37,15 @@ return [
             ],
         ],
 
+        'description' => [
+            'migrations' => [
+                'text:description|nullable',
+            ],
+            'input' => [
+                'type' => 'textarea',
+            ],
+        ],
+
     ],
 
 ];

@@ -14,7 +14,7 @@ return [
     ],
 
     // menu icon (fontawesome class)
-    'icon' => 'fa-link',
+    'icon' => 'fa-user-tag',
 
     // model attributes
     'attributes' => [

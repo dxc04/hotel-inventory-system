@@ -37,6 +37,13 @@
 
         <div class="list-group-item">
             <div class="row">
+                <div class="col-md-2">Description</div>
+                <div class="col-md-8">{{ $room_type->description }}</div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="row">
                 <div class="col-md-2">Created At</div>
                 <div class="col-md-8">{{ $room_type->created_at }}</div>
             </div>

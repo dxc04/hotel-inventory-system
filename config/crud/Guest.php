@@ -55,6 +55,32 @@ return [
             ],
         ],
 
+        'contact_number' => [
+            'migrations' => [
+                'string:contact_number',
+            ],
+            'datatable' => [
+                'title' => 'Contact Number',
+                'data' => 'contact_number',
+            ],
+            'input' => [
+                'type' => 'text',
+            ],
+        ],
+
+        'address' => [
+            'migrations' => [
+                'string:address',
+            ],
+            'datatable' => [
+                'title' => 'Address',
+                'data' => 'address',
+            ],
+            'input' => [
+                'type' => 'text',
+            ],
+        ],
+
     ],
 
 ];

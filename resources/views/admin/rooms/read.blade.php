@@ -30,8 +30,8 @@
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Room Number</div>
-                <div class="col-md-8">{{ $room->room_number }}</div>
+                <div class="col-md-2">Room Name</div>
+                <div class="col-md-8">{{ $room->room_name }}</div>
             </div>
         </div>
 
@@ -39,6 +39,13 @@
             <div class="row">
                 <div class="col-md-2">Room Type Id</div>
                 <div class="col-md-8">{{ $room->room_type_id }}</div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="row">
+                <div class="col-md-2">Created By</div>
+                <div class="col-md-8">{{ $room->created_by }}</div>
             </div>
         </div>
 

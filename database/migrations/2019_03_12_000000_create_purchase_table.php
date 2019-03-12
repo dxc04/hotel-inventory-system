@@ -12,7 +12,7 @@ class CreatePurchaseTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('room_id');
-            $table->integer('product_id');
+            $table->integer('item_id');
             $table->integer('quantity')->default(1);
             $table->timestamps();
         });

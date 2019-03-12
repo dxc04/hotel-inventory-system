@@ -33,14 +33,14 @@ return [
             ],
             'datatable' => [
                 'title' => 'Room Number',
-                'data' => 'room.room_number',
+                'data' => 'room.room_name',
             ],
             'input' => [
                 'label' => 'Room',
                 'type' => 'select',
                 'options' => [
-                    'app:App\Room|orderBy:room_number|get' => [
-                        'id' => 'room_number',
+                    'app:App\Room|orderBy:room_name|get' => [
+                        'id' => 'room_name',
                     ],
                 ],
             ],

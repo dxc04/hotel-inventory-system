@@ -34,6 +34,8 @@ class GuestController extends Controller
         $html = $builder->columns([
             ['title' => 'First Name', 'data' => 'first_name'],
             ['title' => 'Last Name', 'data' => 'last_name'],
+            ['title' => 'Contact Number', 'data' => 'contact_number'],
+            ['title' => 'Address', 'data' => 'address'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
         $html->setTableAttribute('id', 'guests_datatable');

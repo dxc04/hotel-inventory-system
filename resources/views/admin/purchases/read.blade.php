@@ -37,8 +37,8 @@
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Product Id</div>
-                <div class="col-md-8">{{ $purchase->product_id }}</div>
+                <div class="col-md-2">Item Id</div>
+                <div class="col-md-8">{{ $purchase->item_id }}</div>
             </div>
         </div>
 

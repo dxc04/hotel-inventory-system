@@ -26,6 +26,24 @@
                 </div>
             </div>
 
+            <div class="list-group-item">
+                <div class="form-group row mb-0">
+                    <label for="contact_number" class="col-md-2 col-form-label">Contact Number</label>
+                    <div class="col-md-8">
+                        <input type="text" name="contact_number" id="contact_number" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-group row mb-0">
+                    <label for="address" class="col-md-2 col-form-label">Address</label>
+                    <div class="col-md-8">
+                        <input type="text" name="address" id="address" class="form-control">
+                    </div>
+                </div>
+            </div>
+
             <div class="list-group-item bg-light text-left text-md-right pb-1">
                 <button type="submit" name="_submit" class="btn btn-primary mb-2" value="reload_page">Save</button>
                 <button type="submit" name="_submit" class="btn btn-primary mb-2" value="redirect">Save &amp; Go Back</button>

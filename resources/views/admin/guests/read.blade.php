@@ -44,6 +44,20 @@
 
         <div class="list-group-item">
             <div class="row">
+                <div class="col-md-2">Contact Number</div>
+                <div class="col-md-8">{{ $guest->contact_number }}</div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="row">
+                <div class="col-md-2">Address</div>
+                <div class="col-md-8">{{ $guest->address }}</div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="row">
                 <div class="col-md-2">Created At</div>
                 <div class="col-md-8">{{ $guest->created_at }}</div>
             </div>

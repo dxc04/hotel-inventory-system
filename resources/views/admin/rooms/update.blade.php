@@ -11,9 +11,9 @@
         <div class="list-group">
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="room_number" class="col-md-2 col-form-label">Room Number</label>
+                    <label for="room_name" class="col-md-2 col-form-label">Room Name</label>
                     <div class="col-md-8">
-                        <input type="text" name="room_number" id="room_number" class="form-control" value="{{ $room->room_number }}">
+                        <input type="text" name="room_name" id="room_name" class="form-control" value="{{ $room->room_name }}">
                     </div>
                 </div>
             </div>
@@ -26,6 +26,20 @@
                             <option value=""></option>
                             @foreach(app('App\RoomType')->orderBy('room_type')->get() as $model)
                                 <option value="{{ $model->id }}"{{ $model->id == $room->room_type_id ? ' selected' : '' }}>{{ $model->room_type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-group row mb-0">
+                    <label for="created_by" class="col-md-2 col-form-label">Created By</label>
+                    <div class="col-md-8">
+                        <select name="created_by" id="created_by" class="form-control">
+                            <option value=""></option>
+                            @foreach(app('App\User')->orderBy('name')->get() as $model)
+                                <option value="{{ $model->id }}"{{ $model->id == $room->created_by ? ' selected' : '' }}>{{ $model->name }}</option>
                             @endforeach
                         </select>
                     </div>

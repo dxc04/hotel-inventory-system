@@ -32,8 +32,8 @@ class BookingController extends Controller
         }
 
         $html = $builder->columns([
-            ['title' => 'Room', 'data' => 'room.room_number'],
-            ['title' => 'guest', 'data' => 'guest.last_name || ', ' || guest.first_name'],
+            ['title' => 'Room', 'data' => 'room.room_name'],
+            ['title' => 'Guest', 'data' => 'guest.last_name'],
             ['title' => 'Number of Guests', 'data' => 'number_of_guests'],
             ['title' => 'Checkout At', 'data' => 'checkout_at'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],

@@ -11,19 +11,14 @@
         <a href="{{ route('admin.guests') }}"><i class="fal fa-fw fa-user-circle mr-3"></i>Guests</a>
     </li>
 @endcan
+@can('Read Rooms')
+    <li{!! request()->is('admin/rooms') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.rooms') }}"><i class="fal fa-fw fa-hotel mr-3"></i>Rooms</a>
+    </li>
+@endcan
 @can('Read Items')
     <li{!! request()->is('admin/items') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.items') }}"><i class="fal fa-fw fa-box-full mr-3"></i>Items</a>
-    </li>
-@endcan
-@can('Read Suppliers')
-    <li{!! request()->is('admin/suppliers') ? ' class="active"' : '' !!}>
-        <a href="{{ route('admin.suppliers') }}"><i class="fal fa-fw fa-link mr-3"></i>Suppliers</a>
-    </li>
-@endcan
-@can('Read Stocks Transactions')
-    <li{!! request()->is('admin/stocks_transactions') ? ' class="active"' : '' !!}>
-        <a href="{{ route('admin.stocks_transactions') }}"><i class="fal fa-fw fa-clipboard-list-check mr-3"></i>Stocks Transactions</a>
     </li>
 @endcan
 @can('Read Purchases')
@@ -31,14 +26,14 @@
         <a href="{{ route('admin.purchases') }}"><i class="fal fa-fw fa-credit-card-front mr-3"></i>Purchases</a>
     </li>
 @endcan
+@can('Read Stocks Transactions')
+    <li{!! request()->is('admin/stocks_transactions') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.stocks_transactions') }}"><i class="fal fa-fw fa-clipboard-list-check mr-3"></i>Stocks Transactions</a>
+    </li>
+@endcan
 @can('Read Room Statuses')
     <li{!! request()->is('admin/room_statuses') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.room_statuses') }}"><i class="fal fa-fw fa-list-alt mr-3"></i>Room Statuses</a>
-    </li>
-@endcan
-@can('Read Rooms')
-    <li{!! request()->is('admin/rooms') ? ' class="active"' : '' !!}>
-        <a href="{{ route('admin.rooms') }}"><i class="fal fa-fw fa-hotel mr-3"></i>Rooms</a>
     </li>
 @endcan
 @can('Read Room Types')
@@ -49,6 +44,11 @@
 @can('Read Statuses')
     <li{!! request()->is('admin/statuses') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.statuses') }}"><i class="fal fa-fw fa-door-closed mr-3"></i>Statuses</a>
+    </li>
+@endcan
+@can('Read Suppliers')
+    <li{!! request()->is('admin/suppliers') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.suppliers') }}"><i class="fal fa-fw fa-user-tag mr-3"></i>Suppliers</a>
     </li>
 @endcan
 @can('Read Roles')

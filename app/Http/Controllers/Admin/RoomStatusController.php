@@ -32,7 +32,7 @@ class RoomStatusController extends Controller
         }
 
         $html = $builder->columns([
-            ['title' => 'Room Number', 'data' => 'room.room_number'],
+            ['title' => 'Room Number', 'data' => 'room.room_name'],
             ['title' => 'Status', 'data' => 'status'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);

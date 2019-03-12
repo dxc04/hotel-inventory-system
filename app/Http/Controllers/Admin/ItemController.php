@@ -53,7 +53,7 @@ class ItemController extends Controller
             "item_name" => "required|unique:items",
             "sku" => "required|unique:items",
             "photo" => "nullable|image",
-            "amount" => "integer",
+            "amount" => "required|regex:/^\d*(\.\d{1,2})?$/",
         ]);
 
         $item = Item::create(request()->all());
@@ -85,7 +85,7 @@ class ItemController extends Controller
             "item_name" => "required|unique:items,item_name,{$item->id}",
             "sku" => "required|unique:items,sku,{$item->sku}",
             "photo" => "nullable|image",
-            "amount" => "integer",
+            "amount" => "required|regex:/^\d*(\.\d{1,2})?$/",
         ]);
 
         $item->update(request()->all());

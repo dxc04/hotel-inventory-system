@@ -51,7 +51,7 @@ return [
             ],
             'input' => [
                 'type' => 'select',
-                'options' => ['Item Supplied','Room Replenishment','Purchase','Reject'],
+                'options' => ['Item Supplied','Room Replenishment','Purchase','Room Stock Reject', 'Item Stock Reject'],
             ],
         ],
 

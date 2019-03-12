@@ -24,7 +24,7 @@
                     <div class="col-md-8">
                         <select name="transaction_type" id="transaction_type" class="form-control">
                             <option value=""></option>
-                            @foreach(['Item Supplied', 'Room Replenishment', 'Purchase', 'Reject'] as $option)
+                            @foreach(['Item Supplied', 'Room Replenishment', 'Purchase', 'Room Stock Reject', 'Item Stock Reject'] as $option)
                                 <option value="{{ $option }}"{{ $option == $stocks_transaction->transaction_type ? ' selected' : '' }}>{{ $option }}</option>
                             @endforeach
                         </select>

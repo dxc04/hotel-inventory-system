@@ -19,7 +19,7 @@ class Booking extends Eloquent
 
     public function guest()
     {
-        return $this->belongsTo('App\guest');
+        return $this->belongsTo('App\Guest');
     }
 
     public function getCheckoutAtAttribute($value)

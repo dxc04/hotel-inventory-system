@@ -19,18 +19,18 @@ return [
     // model attributes
     'attributes' => [
 
-        'room_number' => [
+        'room_name' => [
             'primary' => true,
             'migrations' => [
-                'integer:room_number|unique',
+                'string:room_name|unique',
             ],
             'validations' => [
                 'create' => 'required|unique:rooms',
-                'update' => 'required|unique:rooms,room_number,{$room->id}',
+                'update' => 'required|unique:rooms,room_name,{$room->id}',
             ],
             'datatable' => [
-                'title' => 'Room Number',
-                'data' => 'room_number',
+                'title' => 'Room Name',
+                'data' => 'room_name',
             ],
             'input' => [
                 'type' => 'text',
@@ -63,22 +63,9 @@ return [
             ],
         ],
 
-        'description' => [
+        'created_by' => [
             'migrations' => [
-                'text:description',
-            ],
-            'validations' => [
-                'create' => 'required|min:10',
-                'update' => 'required|min:10',
-            ],
-            'input' => [
-                'type' => 'textarea',
-            ],
-        ],
-
-        'transacted_by' => [
-            'migrations' => [
-                'integer:transacted_by',
+                'integer:created_by',
             ],
             'relationship' => [
                 'user' => 'belongsTo:App\User',
@@ -88,16 +75,25 @@ return [
                 'update' => 'required|exists:users,id',
             ],
             'datatable' => [
-                'title' => 'User',
-                'data' => 'user.last_name',
+                'title' => 'Created By',
+                'data' => 'user.name',
             ],
             'input' => [
                 'type' => 'select',
                 'options' => [
-                    'app:App\User|orderBy:last_name|get' => [
-                        'id' => 'last_name',
+                    'app:App\User|orderBy:name|get' => [
+                        'id' => 'name',
                     ],
                 ],
+            ],
+        ],
+
+        'description' => [
+            'migrations' => [
+                'text:description|nullable',
+            ],
+            'input' => [
+                'type' => 'textarea',
             ],
         ],
 

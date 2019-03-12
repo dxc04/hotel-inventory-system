@@ -17,9 +17,9 @@ class Purchase extends Eloquent
         return $this->belongsTo('App\Room');
     }
 
-    public function product()
+    public function item()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('App\Item');
     }
 
     

@@ -21,7 +21,7 @@ class RoomController extends Controller
     public function index(Builder $builder)
     {
         if (request()->ajax()) {
-            $rooms = Room::query()->with('room_type');
+            $rooms = Room::query()->with('room_type', 'user');
             $datatable = datatables($rooms)
                 ->editColumn('actions', function ($room) {
                     return view('admin.rooms.datatable.actions', compact('room'));
@@ -32,8 +32,9 @@ class RoomController extends Controller
         }
 
         $html = $builder->columns([
-            ['title' => 'Room Number', 'data' => 'room_number'],
+            ['title' => 'Room Name', 'data' => 'room_name'],
             ['title' => 'Room Type', 'data' => 'room_type.room_type'],
+            ['title' => 'Created By', 'data' => 'user.name'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
         $html->setTableAttribute('id', 'rooms_datatable');
@@ -49,14 +50,14 @@ class RoomController extends Controller
     public function create()
     {
         $this->validate(request(), [
-            "room_number" => "required|unique:rooms",
+            "room_name" => "required|unique:rooms",
             "room_type_id" => "required|exists:room_types,id",
-            "description" => "required|min:10",
+            "created_by" => "required|exists:users,id",
         ]);
 
         $room = Room::create(request()->all());
 
-        activity('Created Room: ' . $room->room_type_id, request()->all(), $room);
+        activity('Created Room: ' . $room->room_name, request()->all(), $room);
         flash(['success', 'Room created!']);
 
         if (request()->input('_submit') == 'redirect') {
@@ -80,14 +81,14 @@ class RoomController extends Controller
     public function update(Room $room)
     {
         $this->validate(request(), [
-            "room_number" => "required|unique:rooms,room_number,{$room->id}",
+            "room_name" => "required|unique:rooms,room_name,{$room->id}",
             "room_type_id" => "required|exists:room_types,id",
-            "description" => "required|min:10",
+            "created_by" => "required|exists:users,id",
         ]);
 
         $room->update(request()->all());
 
-        activity('Updated Room: ' . $room->room_type_id, request()->all(), $room);
+        activity('Updated Room: ' . $room->room_name, request()->all(), $room);
         flash(['success', 'Room updated!']);
 
         if (request()->input('_submit') == 'redirect') {
@@ -102,7 +103,7 @@ class RoomController extends Controller
     {
         $room->delete();
 
-        activity('Deleted Room: ' . $room->room_type_id, $room->toArray());
+        activity('Deleted Room: ' . $room->room_name, $room->toArray());
         $flash = ['success', 'Room deleted!'];
 
         if (request()->input('_submit') == 'reload_datatables') {
