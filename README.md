@@ -24,10 +24,10 @@ Steps:
 3. Setup Laravel framework. Open a new terminal.
 
     ```docker-compose exec app cp .env.example .env```
+           
+    ```docker-compose exec app composer install```
     
     ```docker-compose exec app php artisan config:cache```
-    
-    ```docker-compose exec app composer install```
 
     ```docker-compose exec app php artisan key:generate```
 
