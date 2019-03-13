@@ -66,6 +66,11 @@
         <a href="{{ route('admin.activity_logs') }}"><i class="fal fa-fw fa-file-alt mr-3"></i>Activity Logs</a>
     </li>
 @endcan
+@can('Read Config Definitions')
+    <li{!! request()->is('admin/config_definitions') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.config_definitions') }}"><i class="fal fa-fw fa-tags mr-3"></i>Config Definitions</a>
+    </li>
+@endcan
 @can('Read Docs')
     <li{!! request()->is('admin/docs') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.docs') }}"><i class="fal fa-fw fa-book mr-3"></i>Docs</a>

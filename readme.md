@@ -3,32 +3,31 @@
 ## Installation
 Steps:
 
-**Note**
+**Notes**
 
 * Add `sudo` if commands don't work.
-* Run all commands in the terminal
+* Run all commands in the terminal. You ma use [Git Bash](https://gitforwindows.org/) in Windows
+* You may also need to setup your github ssh keys https://help.github.com/en/articles/connecting-to-github-with-ssh
 
 1. Install [Docker Toolbox](https://docs.docker.com/toolbox/overview/) or [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) 
-
-   * **Windows 10: Install [Docker Toolbox Windows](https://docs.docker.com/docker-for-windows/)**
    
    * **Linux Ubuntu [Docker CE](https://docs.docker.com/install/linux/docker-ce/ubuntu/)**
-
-   * **Mac: Yosemite 10.10.3 or above Install [Docker Community Edition for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac); otherwise, Install [Docker Toolbox for Mac](https://docs.docker.com/docker-for-mac/)**
 
 2. Clone the repo and run docker-compose
 
     ```git clone git@github.com:sorit/hsg.git hsg_portal```
+    
+    ```cd hsg_portal```
 
     ```docker-compose up```
 
 3. Setup Laravel framework. Open a new terminal.
 
     ```docker-compose exec app cp .env.example .env```
+           
+    ```docker-compose exec app composer install```
     
     ```docker-compose exec app php artisan config:cache```
-    
-    ```docker-compose exec app composer install```
 
     ```docker-compose exec app php artisan key:generate```
 
@@ -77,3 +76,6 @@ Steps:
 * Laravel 5.7.*
 * composer
 
+## LAP - Laravel Admin Panel
+
+We are utilizing admin panel called "LAP". Documentation can be found here https://lap.kjjdion.com/docs 

@@ -109,3 +109,12 @@ Route::get('admin/bookings/read/{booking}', 'Admin\BookingController@read')->nam
 Route::get('admin/bookings/update/{booking}', 'Admin\BookingController@updateForm')->name('admin.bookings.update');
 Route::patch('admin/bookings/update/{booking}', 'Admin\BookingController@update');
 Route::delete('admin/bookings/delete/{booking}', 'Admin\BookingController@delete')->name('admin.bookings.delete');
+
+// config_definitions
+Route::get('admin/config_definitions', 'Admin\ConfigDefinitionController@index')->name('admin.config_definitions');
+Route::get('admin/config_definitions/create', 'Admin\ConfigDefinitionController@createForm')->name('admin.config_definitions.create');
+Route::post('admin/config_definitions/create', 'Admin\ConfigDefinitionController@create');
+Route::get('admin/config_definitions/read/{config_definition}', 'Admin\ConfigDefinitionController@read')->name('admin.config_definitions.read');
+Route::get('admin/config_definitions/update/{config_definition}', 'Admin\ConfigDefinitionController@updateForm')->name('admin.config_definitions.update');
+Route::patch('admin/config_definitions/update/{config_definition}', 'Admin\ConfigDefinitionController@update');
+Route::delete('admin/config_definitions/delete/{config_definition}', 'Admin\ConfigDefinitionController@delete')->name('admin.config_definitions.delete');
