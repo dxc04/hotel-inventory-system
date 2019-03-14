@@ -34,6 +34,15 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
+                    <label for="room_floor_name" class="col-md-2 col-form-label">Room Floor Name</label>
+                    <div class="col-md-8">
+                        <input type="text" name="room_floor_name" id="room_floor_name" class="form-control" value="{{ $room->room_floor_name }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-group row mb-0">
                     <label for="created_by" class="col-md-2 col-form-label">Created By</label>
                     <div class="col-md-8">
                         <select name="created_by" id="created_by" class="form-control">

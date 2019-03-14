@@ -19,7 +19,7 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="room_type_id" class="col-md-2 col-form-label">Room Type Id</label>
+                    <label for="room_type_id" class="col-md-2 col-form-label">Room Type</label>
                     <div class="col-md-8">
                         <select name="room_type_id" id="room_type_id" class="form-control">
                             <option value=""></option>
@@ -27,6 +27,15 @@
                                 <option value="{{ $model->id }}">{{ $model->room_type }}</option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-group row mb-0">
+                    <label for="room_floor_name" class="col-md-2 col-form-label">Room Floor Name</label>
+                    <div class="col-md-8">
+                        <input type="text" name="room_floor_name" id="room_floor_name" class="form-control">
                     </div>
                 </div>
             </div>

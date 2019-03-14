@@ -53,17 +53,6 @@ Route::patch('admin/room_types/update/{room_type}', 'Admin\RoomTypeController@up
 Route::delete('admin/room_types/delete/{room_type}', 'Admin\RoomTypeController@delete')->name('admin.room_types.delete');
 
 
-
-// rooms
-Route::get('admin/rooms', 'Admin\RoomController@index')->name('admin.rooms');
-Route::get('admin/rooms/create', 'Admin\RoomController@createForm')->name('admin.rooms.create');
-Route::post('admin/rooms/create', 'Admin\RoomController@create');
-Route::get('admin/rooms/read/{room}', 'Admin\RoomController@read')->name('admin.rooms.read');
-Route::get('admin/rooms/update/{room}', 'Admin\RoomController@updateForm')->name('admin.rooms.update');
-Route::patch('admin/rooms/update/{room}', 'Admin\RoomController@update');
-Route::delete('admin/rooms/delete/{room}', 'Admin\RoomController@delete')->name('admin.rooms.delete');
-
-
 // room_statuses
 Route::get('admin/room_statuses', 'Admin\RoomStatusController@index')->name('admin.room_statuses');
 Route::get('admin/room_statuses/create', 'Admin\RoomStatusController@createForm')->name('admin.room_statuses.create');
@@ -118,3 +107,14 @@ Route::get('admin/config_definitions/read/{config_definition}', 'Admin\ConfigDef
 Route::get('admin/config_definitions/update/{config_definition}', 'Admin\ConfigDefinitionController@updateForm')->name('admin.config_definitions.update');
 Route::patch('admin/config_definitions/update/{config_definition}', 'Admin\ConfigDefinitionController@update');
 Route::delete('admin/config_definitions/delete/{config_definition}', 'Admin\ConfigDefinitionController@delete')->name('admin.config_definitions.delete');
+
+
+
+// rooms
+Route::get('admin/rooms', 'Admin\RoomController@index')->name('admin.rooms');
+Route::get('admin/rooms/create', 'Admin\RoomController@createForm')->name('admin.rooms.create');
+Route::post('admin/rooms/create', 'Admin\RoomController@create');
+Route::get('admin/rooms/read/{room}', 'Admin\RoomController@read')->name('admin.rooms.read');
+Route::get('admin/rooms/update/{room}', 'Admin\RoomController@updateForm')->name('admin.rooms.update');
+Route::patch('admin/rooms/update/{room}', 'Admin\RoomController@update');
+Route::delete('admin/rooms/delete/{room}', 'Admin\RoomController@delete')->name('admin.rooms.delete');

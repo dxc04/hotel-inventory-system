@@ -34,6 +34,7 @@ class RoomController extends Controller
         $html = $builder->columns([
             ['title' => 'Room Name', 'data' => 'room_name'],
             ['title' => 'Room Type', 'data' => 'room_type.room_type'],
+            ['title' => 'Floor', 'data' => 'room_floor_name'],
             ['title' => 'Created By', 'data' => 'user.name'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
@@ -52,6 +53,7 @@ class RoomController extends Controller
         $this->validate(request(), [
             "room_name" => "required|unique:rooms",
             "room_type_id" => "required|exists:room_types,id",
+            "room_floor_name" => "required",
             "created_by" => "required|exists:users,id",
         ]);
 
@@ -83,6 +85,7 @@ class RoomController extends Controller
         $this->validate(request(), [
             "room_name" => "required|unique:rooms,room_name,{$room->id}",
             "room_type_id" => "required|exists:room_types,id",
+            "room_floor_name" => "required",
             "created_by" => "required|exists:users,id",
         ]);
 

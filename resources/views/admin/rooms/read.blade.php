@@ -44,6 +44,13 @@
 
         <div class="list-group-item">
             <div class="row">
+                <div class="col-md-2">Room Floor Name</div>
+                <div class="col-md-8">{{ $room->room_floor_name }}</div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="row">
                 <div class="col-md-2">Created By</div>
                 <div class="col-md-8">{{ $room->created_by }}</div>
             </div>

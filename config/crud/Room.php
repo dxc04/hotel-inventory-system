@@ -63,6 +63,23 @@ return [
             ],
         ],
 
+        'room_floor_name' => [
+            'migrations' => [
+                'string:room_floor_name',
+            ],
+            'validations' => [
+                'create' => 'required',
+                'update' => 'required',
+            ],
+            'datatable' => [
+                'title' => 'Floor',
+                'data' => 'room_floor_name',
+            ],
+            'input' => [
+                'type' => 'text',
+            ],
+        ],
+
         'created_by' => [
             'migrations' => [
                 'integer:created_by',
