@@ -10,7 +10,7 @@
         <div class="list-group">
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="room_id" class="col-md-2 col-form-label">Room Id</label>
+                    <label for="room_id" class="col-md-2 col-form-label">Room</label>
                     <div class="col-md-8">
                         <select name="room_id" id="room_id" class="form-control">
                             <option value=""></option>
