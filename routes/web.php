@@ -129,3 +129,6 @@ Route::get('admin/rooms/read/{room}', 'Admin\RoomController@read')->name('admin.
 Route::get('admin/rooms/update/{room}', 'Admin\RoomController@updateForm')->name('admin.rooms.update');
 Route::patch('admin/rooms/update/{room}', 'Admin\RoomController@update');
 Route::delete('admin/rooms/delete/{room}', 'Admin\RoomController@delete')->name('admin.rooms.delete');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
