@@ -47,7 +47,7 @@ return [
             ],
             'datatable' => [
                 'title' => 'Transaction Type',
-                'data' => 'transactio_type',
+                'data' => 'transaction_type',
             ],
             'input' => [
                 'type' => 'select',
@@ -96,7 +96,7 @@ return [
             ],
             'datatable' => [
                 'title' => 'Purchase',
-                'data' => 'purchase.purchase_id',
+                'data' => 'purchase_id',
             ],
             'input' => [
                 'label' => 'Purchase',

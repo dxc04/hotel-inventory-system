@@ -6,6 +6,11 @@
         <a href="{{ route('admin.rooms') }}"><i class="fal fa-fw fa-hotel mr-3"></i>Rooms</a>
     </li>
 @endcan
+@can('Read Floors')
+    <li{!! request()->is('admin/floors') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.floors') }}"><i class="fal fa-fw fa-building mr-3"></i>Floors</a>
+    </li>
+@endcan
 @can('Read Bookings')
     <li{!! request()->is('admin/bookings') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.bookings') }}"><i class="fal fa-fw fa-file-user mr-3"></i>Bookings</a>

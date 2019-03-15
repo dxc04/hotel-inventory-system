@@ -62,23 +62,32 @@ return [
                 ],
             ],
         ],
-
-        'room_floor_name' => [
+ 
+        'floor_id' => [
             'migrations' => [
-                'string:room_floor_name',
+                'integer:floor_id',
+            ],
+            'relationship' => [
+                'floor' => 'belongsTo:App\Floor',
             ],
             'validations' => [
-                'create' => 'required',
-                'update' => 'required',
+                'create' => 'required|exists:floors,id',
+                'update' => 'required|exists:floors,id',
             ],
             'datatable' => [
                 'title' => 'Floor',
-                'data' => 'room_floor_name',
+                'data' => 'floor.floor_name',
             ],
             'input' => [
-                'type' => 'text',
+                'type' => 'select',
+                'options' => [
+                    'app:App\Floor|orderBy:floor_name|get' => [
+                        'id' => 'floor_name',
+                    ],
+                ],
             ],
         ],
+
 
         'created_by' => [
             'migrations' => [

@@ -33,9 +33,14 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="room_floor_name" class="col-md-2 col-form-label">Room Floor Name</label>
+                    <label for="floor_id" class="col-md-2 col-form-label">Floor</label>
                     <div class="col-md-8">
-                        <input type="text" name="room_floor_name" id="room_floor_name" class="form-control">
+                        <select name="floor_id" id="floor_id" class="form-control">
+                            <option value=""></option>
+                            @foreach(app('App\Floor')->orderBy('floor_name')->get() as $model)
+                                <option value="{{ $model->id }}">{{ $model->floor_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>

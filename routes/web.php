@@ -110,6 +110,17 @@ Route::delete('admin/config_definitions/delete/{config_definition}', 'Admin\Conf
 
 
 
+// floors
+Route::get('admin/floors', 'Admin\FloorController@index')->name('admin.floors');
+Route::get('admin/floors/create', 'Admin\FloorController@createForm')->name('admin.floors.create');
+Route::post('admin/floors/create', 'Admin\FloorController@create');
+Route::get('admin/floors/read/{floor}', 'Admin\FloorController@read')->name('admin.floors.read');
+Route::get('admin/floors/update/{floor}', 'Admin\FloorController@updateForm')->name('admin.floors.update');
+Route::patch('admin/floors/update/{floor}', 'Admin\FloorController@update');
+Route::delete('admin/floors/delete/{floor}', 'Admin\FloorController@delete')->name('admin.floors.delete');
+
+
+
 // rooms
 Route::get('admin/rooms', 'Admin\RoomController@index')->name('admin.rooms');
 Route::get('admin/rooms/create', 'Admin\RoomController@createForm')->name('admin.rooms.create');

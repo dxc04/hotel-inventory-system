@@ -33,9 +33,9 @@ class StocksTransactionController extends Controller
 
         $html = $builder->columns([
             ['title' => 'Quantity', 'data' => 'quantity'],
-            ['title' => 'Transaction Type', 'data' => 'transactio_type'],
+            ['title' => 'Transaction Type', 'data' => 'transaction_type'],
             ['title' => 'Supplier', 'data' => 'supplier.supplier_name'],
-            ['title' => 'Purchase', 'data' => 'purchase.purchase_id'],
+            ['title' => 'Purchase', 'data' => 'purchase_id'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
         $html->setTableAttribute('id', 'stocks_transactions_datatable');

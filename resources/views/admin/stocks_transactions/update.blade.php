@@ -34,7 +34,7 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="supplier_id" class="col-md-2 col-form-label">Supplier Id</label>
+                    <label for="supplier_id" class="col-md-2 col-form-label">Supplier</label>
                     <div class="col-md-8">
                         <select name="supplier_id" id="supplier_id" class="form-control">
                             <option value=""></option>
@@ -48,7 +48,7 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="purchase_id" class="col-md-2 col-form-label">Purchase Id</label>
+                    <label for="purchase_id" class="col-md-2 col-form-label">Purchase</label>
                     <div class="col-md-8">
                         <select name="purchase_id" id="purchase_id" class="form-control">
                             <option value=""></option>

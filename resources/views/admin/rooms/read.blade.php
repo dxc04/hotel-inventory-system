@@ -44,8 +44,8 @@
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Room Floor Name</div>
-                <div class="col-md-8">{{ $room->room_floor_name }}</div>
+                <div class="col-md-2">Floor Id</div>
+                <div class="col-md-8">{{ $room->floor_id }}</div>
             </div>
         </div>
 

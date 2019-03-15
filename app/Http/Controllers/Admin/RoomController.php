@@ -21,7 +21,7 @@ class RoomController extends Controller
     public function index(Builder $builder)
     {
         if (request()->ajax()) {
-            $rooms = Room::query()->with('room_type', 'user');
+            $rooms = Room::query()->with('room_type', 'floor', 'user');
             $datatable = datatables($rooms)
                 ->editColumn('actions', function ($room) {
                     return view('admin.rooms.datatable.actions', compact('room'));
@@ -34,7 +34,7 @@ class RoomController extends Controller
         $html = $builder->columns([
             ['title' => 'Room Name', 'data' => 'room_name'],
             ['title' => 'Room Type', 'data' => 'room_type.room_type'],
-            ['title' => 'Floor', 'data' => 'room_floor_name'],
+            ['title' => 'Floor', 'data' => 'floor.floor_name'],
             ['title' => 'Created By', 'data' => 'user.name'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
@@ -53,7 +53,7 @@ class RoomController extends Controller
         $this->validate(request(), [
             "room_name" => "required|unique:rooms",
             "room_type_id" => "required|exists:room_types,id",
-            "room_floor_name" => "required",
+            "floor_id" => "required|exists:floors,id",
             "created_by" => "required|exists:users,id",
         ]);
 
@@ -85,7 +85,7 @@ class RoomController extends Controller
         $this->validate(request(), [
             "room_name" => "required|unique:rooms,room_name,{$room->id}",
             "room_type_id" => "required|exists:room_types,id",
-            "room_floor_name" => "required",
+            "floor_id" => "required|exists:floors,id",
             "created_by" => "required|exists:users,id",
         ]);
 

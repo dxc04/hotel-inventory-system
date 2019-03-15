@@ -83,7 +83,7 @@ return [
             ],
             'datatable' => [
                 'title' => 'Quantity',
-                'data' => 'purchase.quantity',
+                'data' => 'quantity',
             ],
             'input' => [
                 'type' => 'text',

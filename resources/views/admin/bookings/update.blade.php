@@ -11,7 +11,7 @@
         <div class="list-group">
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="room_id" class="col-md-2 col-form-label">Room Id</label>
+                    <label for="room_id" class="col-md-2 col-form-label">Room</label>
                     <div class="col-md-8">
                         <select name="room_id" id="room_id" class="form-control">
                             <option value=""></option>
@@ -25,11 +25,11 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="guest_id" class="col-md-2 col-form-label">Guest Id</label>
+                    <label for="guest_id" class="col-md-2 col-form-label">Guest</label>
                     <div class="col-md-8">
                         <select name="guest_id" id="guest_id" class="form-control">
                             <option value=""></option>
-                            @foreach(app('App\guest')->orderBy('last_name')->get() as $model)
+                            @foreach(app('App\Guest')->orderBy('last_name')->get() as $model)
                                 <option value="{{ $model->id }}"{{ $model->id == $booking->guest_id ? ' selected' : '' }}>{{ $model->last_name }}</option>
                             @endforeach
                         </select>

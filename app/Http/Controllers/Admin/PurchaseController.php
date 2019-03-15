@@ -34,7 +34,7 @@ class PurchaseController extends Controller
         $html = $builder->columns([
             ['title' => 'Room', 'data' => 'room.room_name'],
             ['title' => 'Item', 'data' => 'item.item_name'],
-            ['title' => 'Quantity', 'data' => 'purchase.quantity'],
+            ['title' => 'Quantity', 'data' => 'quantity'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
         $html->setTableAttribute('id', 'purchases_datatable');
