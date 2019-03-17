@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Status;
 use App\RoomStatus;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Html\Builder;
@@ -25,6 +26,9 @@ class RoomStatusController extends Controller
             $datatable = datatables($room_statuses)
                 ->editColumn('actions', function ($room_status) {
                     return view('admin.room_statuses.datatable.actions', compact('room_status'));
+                })
+                ->editColumn('status', function ($room_status) {
+                    return Status::findMany($room_status->status)->pluck('status_name')->toArray();
                 })
                 ->rawColumns(['actions']);
 
