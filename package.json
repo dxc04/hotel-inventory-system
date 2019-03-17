@@ -22,6 +22,8 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "bootstrap-vue": "^2.0.0-rc.14"
+        "@fortawesome/fontawesome-free": "^5.7.2",
+        "bootstrap-vue": "^2.0.0-rc.14",
+        "startbootstrap-sb-admin-2": "^4.0.2"
     }
 }
