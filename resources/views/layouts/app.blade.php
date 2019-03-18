@@ -40,25 +40,25 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="{ route('home') }}">
+        <a class="nav-link" href="{{ route('home') }}">
           <i class="fas fa-2x fa-th-large"></i>
           <span>Dashboard</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{ route('home') }}">
+        <a class="nav-link" href="{{ route('home') }}">
           <i class="fas fa-fw fa-door-open"></i>
           <span>Visit</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{ route('home') }}">
+        <a class="nav-link" href="{{ route('home') }}">
           <i class="fas fa-2x fa-fw fa-building"></i>
           <span>Rooms</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{ route('home') }}">
+        <a class="nav-link" href="{{ route('home') }}">
           <i class="fas fa-fw fa-edit"></i>
           <span>Take Note</span></a>
       </li>
