@@ -23,6 +23,8 @@ Steps:
 
 3. Setup Laravel framework. Open a new terminal.
 
+    ```docker exec -ti hsg_portal_web_1 bash```
+
     ```cp .env.example .env```
            
     ```composer install```
@@ -47,7 +49,7 @@ Steps:
 
 * If you need to reset the development setup just run the following:
 
-    ```docker rm hsg_portal_app_1 hsg_portal_web_1```
+    ```docker rm hsg_portal_web_1```
 
     ```docker volume rm hsg_portal_dbdata```
     
