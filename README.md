@@ -23,20 +23,20 @@ Steps:
 
 3. Setup Laravel framework. Open a new terminal.
 
-    ```docker-compose exec app cp .env.example .env```
+    ```cp .env.example .env```
            
-    ```docker-compose exec app composer install```
+    ```composer install```
     
-    ```docker-compose exec app php artisan config:cache```
+    ```php artisan config:cache```
 
-    ```docker-compose exec app php artisan key:generate```
+    ```php artisan key:generate```
 
-    ```docker-compose exec app chmod -R o+w storage/ bootstrap/cache/```
+    ```chmod -R o+w storage/ bootstrap/cache/```
     
-    ```docker-compose exec app php artisan migrate```
+    ```php artisan migrate```
     
-5. You can then access the new app on http://0.0.0.0:8080
-6. The admin site can be access on http://0.0.0.0:8080/admin
+5. You can then access the new app on http://0.0.0.0
+6. The admin site can be access on http://0.0.0.0/admin
     
     Email Address: admin@example.com
     
@@ -79,3 +79,13 @@ Steps:
 ## LAP - Laravel Admin Panel
 
 We are utilizing admin panel called "LAP". Documentation can be found here https://lap.kjjdion.com/docs 
+
+## DEMO SITE 
+
+http://hsg-portal-demo.herokuapp.com  - Front End
+http://hsg-portal-demo.herokuapp.com/admin - Admin 
+
+    Email Address: admin@example.com
+    
+    Password: admin123
+
