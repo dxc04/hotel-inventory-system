@@ -23,20 +23,22 @@ Steps:
 
 3. Setup Laravel framework. Open a new terminal.
 
-    ```docker-compose exec app cp .env.example .env```
+    ```docker exec -ti hsg_portal_web_1 bash```
+
+    ```cp .env.example .env```
            
-    ```docker-compose exec app composer install```
+    ```composer install```
     
-    ```docker-compose exec app php artisan config:cache```
+    ```php artisan config:cache```
 
-    ```docker-compose exec app php artisan key:generate```
+    ```php artisan key:generate```
 
-    ```docker-compose exec app chmod -R o+w storage/ bootstrap/cache/```
+    ```chmod -R o+w storage/ bootstrap/cache/```
     
-    ```docker-compose exec app php artisan migrate```
+    ```php artisan migrate```
     
-5. You can then access the new app on http://0.0.0.0:8080
-6. The admin site can be access on http://0.0.0.0:8080/admin
+5. You can then access the new app on http://0.0.0.0
+6. The admin site can be access on http://0.0.0.0/admin
     
     Email Address: admin@example.com
     
@@ -47,7 +49,7 @@ Steps:
 
 * If you need to reset the development setup just run the following:
 
-    ```docker rm hsg_portal_app_1 hsg_portal_web_1```
+    ```docker rm hsg_portal_web_1```
 
     ```docker volume rm hsg_portal_dbdata```
     
@@ -79,3 +81,13 @@ Steps:
 ## LAP - Laravel Admin Panel
 
 We are utilizing admin panel called "LAP". Documentation can be found here https://lap.kjjdion.com/docs 
+
+## DEMO SITE 
+
+http://hsg-portal-demo.herokuapp.com  - Front End
+http://hsg-portal-demo.herokuapp.com/admin - Admin 
+
+    Email Address: admin@example.com
+    
+    Password: admin123
+
