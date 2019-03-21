@@ -180,7 +180,9 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
+        <div id="app">
         @yield('content')
+        </div>
         <!-- /.container-fluid -->
 
       </div>
@@ -207,11 +209,8 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Scripts -->
-  <script src="{{ mix('js/manifest.js') }}"></script>
-  <script src="{{ asset('js/vendor.js') }}" defer></script>
-  <script src="{{ asset('js/app.js') }}" defer></script>
-
+  <script type="text/javascript" src="{{ mix('js/app.compiled.min.js') }}"></script>
+  @stack('scripts')
 </body>
 
 </html>

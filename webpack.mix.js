@@ -14,7 +14,16 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
 
-   mix.extract([
-      'jquery',
-      'vue', 'axios'
-   ], 'public/js/vendor.js');
+mix.extract([
+    'jquery',
+    'vue', 'axios'
+], 'public/js/vendor.js');
+
+mix.scripts(
+    [
+        'public/js/manifest.js',
+        'public/js/vendor.js',
+        'public/js/app.js'
+    ],
+    'public/js/app.compiled.min.js'
+);

@@ -130,3 +130,4 @@ Route::delete('admin/rooms/delete/{room}', 'Admin\RoomController@delete')->name(
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

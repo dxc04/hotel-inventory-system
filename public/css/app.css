@@ -10550,6 +10550,34 @@ a.text-dark:hover, a.text-dark:focus {
 }/*!
  * BootstrapVue Custom CSS (https://bootstrap-vue.js.org)
  */
+@media (max-width: 575.98px) {
+  .bv-d-xs-down-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .bv-d-sm-down-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .bv-d-md-down-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .bv-d-lg-down-none {
+    display: none !important;
+  }
+}
+
+.bv-d-xl-down-none {
+  display: none !important;
+}
+
 .alert.fade-enter-active, .alert.alert.fade-leave-active {
   -webkit-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
@@ -10891,6 +10919,62 @@ input[type="color"].form-control:disabled {
   background: rgba(220, 53, 69, 0.35);
 }
 
+@media (max-width: 575.98px) {
+  .bv-d-xs-down-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .bv-d-sm-down-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .bv-d-md-down-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .bv-d-lg-down-none {
+    display: none !important;
+  }
+}
+
+.bv-d-xl-down-none {
+  display: none !important;
+}
+
+@media (max-width: 575.98px) {
+  .bv-d-xs-down-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .bv-d-sm-down-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .bv-d-md-down-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .bv-d-lg-down-none {
+    display: none !important;
+  }
+}
+
+.bv-d-xl-down-none {
+  display: none !important;
+}
+
 /* b-table: general styling */
 .b-table.table.b-table-fixed {
   /* fixed width columns */
@@ -11194,10 +11278,6 @@ input[type="color"].form-control:disabled {
 /* b-table: selectable rows */
 table.b-table.b-table-selectable > tbody > tr {
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }a.anchorjs-link {
     color: rgba(65, 131, 196, 0.1);
     font-weight: 400;
@@ -11215,6 +11295,11 @@ sup {
     font-size: 0.75em !important;
 }
 table.dataTable{clear:both;margin-top:6px !important;margin-bottom:6px !important;max-width:none !important;border-collapse:separate !important;border-spacing:0}table.dataTable td,table.dataTable th{-webkit-box-sizing:content-box;box-sizing:content-box}table.dataTable td.dataTables_empty,table.dataTable th.dataTables_empty{text-align:center}table.dataTable.nowrap th,table.dataTable.nowrap td{white-space:nowrap}div.dataTables_wrapper div.dataTables_length label{font-weight:normal;text-align:left;white-space:nowrap}div.dataTables_wrapper div.dataTables_length select{width:auto;display:inline-block}div.dataTables_wrapper div.dataTables_filter{text-align:right}div.dataTables_wrapper div.dataTables_filter label{font-weight:normal;white-space:nowrap;text-align:left}div.dataTables_wrapper div.dataTables_filter input{margin-left:0.5em;display:inline-block;width:auto}div.dataTables_wrapper div.dataTables_info{padding-top:0.85em;white-space:nowrap}div.dataTables_wrapper div.dataTables_paginate{margin:0;white-space:nowrap;text-align:right}div.dataTables_wrapper div.dataTables_paginate ul.pagination{margin:2px 0;white-space:nowrap;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}div.dataTables_wrapper div.dataTables_processing{position:absolute;top:50%;left:50%;width:200px;margin-left:-100px;margin-top:-26px;text-align:center;padding:1em 0}table.dataTable thead>tr>th.sorting_asc,table.dataTable thead>tr>th.sorting_desc,table.dataTable thead>tr>th.sorting,table.dataTable thead>tr>td.sorting_asc,table.dataTable thead>tr>td.sorting_desc,table.dataTable thead>tr>td.sorting{padding-right:30px}table.dataTable thead>tr>th:active,table.dataTable thead>tr>td:active{outline:none}table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTable thead .sorting_desc,table.dataTable thead .sorting_asc_disabled,table.dataTable thead .sorting_desc_disabled{cursor:pointer;position:relative}table.dataTable thead .sorting:before,table.dataTable thead .sorting:after,table.dataTable thead .sorting_asc:before,table.dataTable thead .sorting_asc:after,table.dataTable thead .sorting_desc:before,table.dataTable thead .sorting_desc:after,table.dataTable thead .sorting_asc_disabled:before,table.dataTable thead .sorting_asc_disabled:after,table.dataTable thead .sorting_desc_disabled:before,table.dataTable thead .sorting_desc_disabled:after{position:absolute;bottom:0.9em;display:block;opacity:0.3}table.dataTable thead .sorting:before,table.dataTable thead .sorting_asc:before,table.dataTable thead .sorting_desc:before,table.dataTable thead .sorting_asc_disabled:before,table.dataTable thead .sorting_desc_disabled:before{right:1em;content:"\2191"}table.dataTable thead .sorting:after,table.dataTable thead .sorting_asc:after,table.dataTable thead .sorting_desc:after,table.dataTable thead .sorting_asc_disabled:after,table.dataTable thead .sorting_desc_disabled:after{right:0.5em;content:"\2193"}table.dataTable thead .sorting_asc:before,table.dataTable thead .sorting_desc:after{opacity:1}table.dataTable thead .sorting_asc_disabled:before,table.dataTable thead .sorting_desc_disabled:after{opacity:0}div.dataTables_scrollHead table.dataTable{margin-bottom:0 !important}div.dataTables_scrollBody table{border-top:none;margin-top:0 !important;margin-bottom:0 !important}div.dataTables_scrollBody table thead .sorting:before,div.dataTables_scrollBody table thead .sorting_asc:before,div.dataTables_scrollBody table thead .sorting_desc:before,div.dataTables_scrollBody table thead .sorting:after,div.dataTables_scrollBody table thead .sorting_asc:after,div.dataTables_scrollBody table thead .sorting_desc:after{display:none}div.dataTables_scrollBody table tbody tr:first-child th,div.dataTables_scrollBody table tbody tr:first-child td{border-top:none}div.dataTables_scrollFoot>.dataTables_scrollFootInner{-webkit-box-sizing:content-box;box-sizing:content-box}div.dataTables_scrollFoot>.dataTables_scrollFootInner>table{margin-top:0 !important;border-top:none}@media screen and (max-width: 767px){div.dataTables_wrapper div.dataTables_length,div.dataTables_wrapper div.dataTables_filter,div.dataTables_wrapper div.dataTables_info,div.dataTables_wrapper div.dataTables_paginate{text-align:center}}table.dataTable.table-sm>thead>tr>th{padding-right:20px}table.dataTable.table-sm .sorting:before,table.dataTable.table-sm .sorting_asc:before,table.dataTable.table-sm .sorting_desc:before{top:5px;right:0.85em}table.dataTable.table-sm .sorting:after,table.dataTable.table-sm .sorting_asc:after,table.dataTable.table-sm .sorting_desc:after{top:5px}table.table-bordered.dataTable th,table.table-bordered.dataTable td{border-left-width:0}table.table-bordered.dataTable th:last-child,table.table-bordered.dataTable th:last-child,table.table-bordered.dataTable td:last-child,table.table-bordered.dataTable td:last-child{border-right-width:0}table.table-bordered.dataTable tbody th,table.table-bordered.dataTable tbody td{border-bottom-width:0}div.dataTables_scrollHead table.table-bordered{border-bottom-width:0}div.table-responsive>div.dataTables_wrapper>div.row{margin:0}div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:first-child{padding-left:0}div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-child{padding-right:0}
+/*!
+ * Font Awesome Free 5.8.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
 .fa,
 .fas,
 .far,
@@ -11499,6 +11584,10 @@ readers do not read off random characters that represent icons */
 
 .fa-air-freshener:before {
   content: "\f5d0";
+}
+
+.fa-airbnb:before {
+  content: "\f834";
 }
 
 .fa-algolia:before {
@@ -11837,6 +11926,10 @@ readers do not read off random characters that represent icons */
   content: "\f241";
 }
 
+.fa-battle-net:before {
+  content: "\f835";
+}
+
 .fa-bed:before {
   content: "\f236";
 }
@@ -11985,6 +12078,10 @@ readers do not read off random characters that represent icons */
   content: "\f02e";
 }
 
+.fa-bootstrap:before {
+  content: "\f836";
+}
+
 .fa-bowling-ball:before {
   content: "\f436";
 }
@@ -12035,6 +12132,10 @@ readers do not read off random characters that represent icons */
 
 .fa-btc:before {
   content: "\f15a";
+}
+
+.fa-buffer:before {
+  content: "\f837";
 }
 
 .fa-bug:before {
@@ -12387,6 +12488,10 @@ readers do not read off random characters that represent icons */
 
 .fa-chrome:before {
   content: "\f268";
+}
+
+.fa-chromecast:before {
+  content: "\f838";
 }
 
 .fa-church:before {
@@ -13071,6 +13176,10 @@ readers do not read off random characters that represent icons */
 
 .fa-euro-sign:before {
   content: "\f153";
+}
+
+.fa-evernote:before {
+  content: "\f839";
 }
 
 .fa-exchange-alt:before {
@@ -14111,6 +14220,10 @@ readers do not read off random characters that represent icons */
 
 .fa-italic:before {
   content: "\f033";
+}
+
+.fa-itch-io:before {
+  content: "\f83a";
 }
 
 .fa-itunes:before {
@@ -15393,6 +15506,10 @@ readers do not read off random characters that represent icons */
   content: "\f267";
 }
 
+.fa-salesforce:before {
+  content: "\f83b";
+}
+
 .fa-sass:before {
   content: "\f41e";
 }
@@ -15765,6 +15882,10 @@ readers do not read off random characters that represent icons */
   content: "\f3f3";
 }
 
+.fa-speaker-deck:before {
+  content: "\f83c";
+}
+
 .fa-spider:before {
   content: "\f717";
 }
@@ -15983,6 +16104,10 @@ readers do not read off random characters that represent icons */
 
 .fa-swimming-pool:before {
   content: "\f5c5";
+}
+
+.fa-symfony:before {
+  content: "\f83d";
 }
 
 .fa-synagogue:before {
@@ -16661,6 +16786,14 @@ readers do not read off random characters that represent icons */
   content: "\f773";
 }
 
+.fa-wave-square:before {
+  content: "\f83e";
+}
+
+.fa-waze:before {
+  content: "\f83f";
+}
+
 .fa-weebly:before {
   content: "\f5cc";
 }
@@ -16809,6 +16942,10 @@ readers do not read off random characters that represent icons */
   content: "\f19e";
 }
 
+.fa-yammer:before {
+  content: "\f840";
+}
+
 .fa-yandex:before {
   content: "\f413";
 }
@@ -16870,13 +17007,18 @@ readers do not read off random characters that represent icons */
   width: auto;
 }
 
+/*!
+ * Font Awesome Free 5.8.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
 @font-face {
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 400;
   font-display: auto;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?414ff5daad323a1c47c5177d4bd29674);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?414ff5daad323a1c47c5177d4bd29674) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff2?65779ebcc35604a25c2ba77309c5b8af) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff?5dd3976cb5d61e2e561f2a46b916f377) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.ttf?f6c6f6c8cb7784254ad00056f6fbd74e) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.svg?e7e957c87c454bccaa3bf9fdaa6874f8) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?73e57f339e3e8574d0d4bc7a7c412d2a);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?73e57f339e3e8574d0d4bc7a7c412d2a) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff2?34e0db45ef15f5a058149de318ca0641) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff?c6e6643b688fe307651aa9374343d194) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.ttf?7599ecd0c99d05133229e0c4822b3086) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.svg?47758afd15884569fa987bb98ec2348f) format("svg");
 }
 
 .far {
@@ -16884,13 +17026,18 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
+/*!
+ * Font Awesome Free 5.8.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
 @font-face {
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 900;
   font-display: auto;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?b5596f4d339f99e3d69bc41be78db962);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?b5596f4d339f99e3d69bc41be78db962) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?462806316fea535a6a57651bc2b000b0) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?61969d433bf265b9717a6c357a1e04e4) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?b70cea0339374107969eb53e5b1f603f) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?82905d8d1c06969df11c8c378e9bdd4c) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?cb45ce038f8d6ccf24a4307993230f8b);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?cb45ce038f8d6ccf24a4307993230f8b) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?fb4ea3247aace8c1c8bcf904772a91c7) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?ecafd67cb64dc8f4d064abcf680dd924) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?26fdf2ddc0e845cc454b72c97cdc705c) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?e474ff3afacf902ab8f4dd43344f4f30) format("svg");
 }
 
 .fa,
@@ -16899,13 +17046,18 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
+/*!
+ * Font Awesome Free 5.8.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
 @font-face {
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
   font-weight: normal;
   font-display: auto;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?d9d17590c975aad1be0ddab673f9c769);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?d9d17590c975aad1be0ddab673f9c769) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?4b115e1153a9ea339d6a0bb284cc8ed3) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff?b90365bccdabd68c6c03902b4b141f09) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?c39278f7abfc798a241551194f55e29f) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg?80533988ff5fecd5be26557d08ce8237) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?28c2e91df5676f8a615bd3d519f0757b);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?28c2e91df5676f8a615bd3d519f0757b) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?24a77b8baa5b34fb50814225fae0272d) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff?175ef492f87a05e2ce45cb701d62c450) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?8742c0293a67556fbb57133b56bb076e) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg?85dcebc2b9d56a2b94f79c8a7b731b00) format("svg");
 }
 
 .fab {
@@ -29762,173 +29914,173 @@ form.user .btn-user {
 
 @-webkit-keyframes noise-anim {
   0% {
-    clip: rect(92px, 9999px, 12px, 0);
+    clip: rect(94px, 9999px, 82px, 0);
   }
 
   5% {
-    clip: rect(92px, 9999px, 52px, 0);
+    clip: rect(42px, 9999px, 78px, 0);
   }
 
   10% {
-    clip: rect(13px, 9999px, 50px, 0);
+    clip: rect(59px, 9999px, 79px, 0);
   }
 
   15% {
-    clip: rect(53px, 9999px, 32px, 0);
+    clip: rect(40px, 9999px, 62px, 0);
   }
 
   20% {
-    clip: rect(65px, 9999px, 34px, 0);
+    clip: rect(84px, 9999px, 16px, 0);
   }
 
   25% {
-    clip: rect(89px, 9999px, 45px, 0);
+    clip: rect(62px, 9999px, 36px, 0);
   }
 
   30% {
-    clip: rect(62px, 9999px, 91px, 0);
+    clip: rect(30px, 9999px, 1px, 0);
   }
 
   35% {
-    clip: rect(73px, 9999px, 38px, 0);
+    clip: rect(67px, 9999px, 75px, 0);
   }
 
   40% {
-    clip: rect(38px, 9999px, 11px, 0);
+    clip: rect(18px, 9999px, 88px, 0);
   }
 
   45% {
-    clip: rect(94px, 9999px, 90px, 0);
+    clip: rect(42px, 9999px, 16px, 0);
   }
 
   50% {
-    clip: rect(58px, 9999px, 98px, 0);
+    clip: rect(51px, 9999px, 70px, 0);
   }
 
   55% {
-    clip: rect(28px, 9999px, 4px, 0);
+    clip: rect(19px, 9999px, 36px, 0);
   }
 
   60% {
-    clip: rect(41px, 9999px, 10px, 0);
+    clip: rect(69px, 9999px, 68px, 0);
   }
 
   65% {
-    clip: rect(35px, 9999px, 81px, 0);
+    clip: rect(17px, 9999px, 67px, 0);
   }
 
   70% {
-    clip: rect(30px, 9999px, 3px, 0);
+    clip: rect(93px, 9999px, 6px, 0);
   }
 
   75% {
-    clip: rect(42px, 9999px, 96px, 0);
+    clip: rect(39px, 9999px, 8px, 0);
   }
 
   80% {
-    clip: rect(81px, 9999px, 84px, 0);
+    clip: rect(99px, 9999px, 25px, 0);
   }
 
   85% {
-    clip: rect(39px, 9999px, 61px, 0);
+    clip: rect(91px, 9999px, 41px, 0);
   }
 
   90% {
-    clip: rect(71px, 9999px, 63px, 0);
+    clip: rect(53px, 9999px, 64px, 0);
   }
 
   95% {
-    clip: rect(53px, 9999px, 79px, 0);
+    clip: rect(30px, 9999px, 48px, 0);
   }
 
   100% {
-    clip: rect(31px, 9999px, 74px, 0);
+    clip: rect(82px, 9999px, 23px, 0);
   }
 }
 
 @keyframes noise-anim {
   0% {
-    clip: rect(92px, 9999px, 12px, 0);
+    clip: rect(94px, 9999px, 82px, 0);
   }
 
   5% {
-    clip: rect(92px, 9999px, 52px, 0);
+    clip: rect(42px, 9999px, 78px, 0);
   }
 
   10% {
-    clip: rect(13px, 9999px, 50px, 0);
+    clip: rect(59px, 9999px, 79px, 0);
   }
 
   15% {
-    clip: rect(53px, 9999px, 32px, 0);
+    clip: rect(40px, 9999px, 62px, 0);
   }
 
   20% {
-    clip: rect(65px, 9999px, 34px, 0);
+    clip: rect(84px, 9999px, 16px, 0);
   }
 
   25% {
-    clip: rect(89px, 9999px, 45px, 0);
+    clip: rect(62px, 9999px, 36px, 0);
   }
 
   30% {
-    clip: rect(62px, 9999px, 91px, 0);
+    clip: rect(30px, 9999px, 1px, 0);
   }
 
   35% {
-    clip: rect(73px, 9999px, 38px, 0);
+    clip: rect(67px, 9999px, 75px, 0);
   }
 
   40% {
-    clip: rect(38px, 9999px, 11px, 0);
+    clip: rect(18px, 9999px, 88px, 0);
   }
 
   45% {
-    clip: rect(94px, 9999px, 90px, 0);
+    clip: rect(42px, 9999px, 16px, 0);
   }
 
   50% {
-    clip: rect(58px, 9999px, 98px, 0);
+    clip: rect(51px, 9999px, 70px, 0);
   }
 
   55% {
-    clip: rect(28px, 9999px, 4px, 0);
+    clip: rect(19px, 9999px, 36px, 0);
   }
 
   60% {
-    clip: rect(41px, 9999px, 10px, 0);
+    clip: rect(69px, 9999px, 68px, 0);
   }
 
   65% {
-    clip: rect(35px, 9999px, 81px, 0);
+    clip: rect(17px, 9999px, 67px, 0);
   }
 
   70% {
-    clip: rect(30px, 9999px, 3px, 0);
+    clip: rect(93px, 9999px, 6px, 0);
   }
 
   75% {
-    clip: rect(42px, 9999px, 96px, 0);
+    clip: rect(39px, 9999px, 8px, 0);
   }
 
   80% {
-    clip: rect(81px, 9999px, 84px, 0);
+    clip: rect(99px, 9999px, 25px, 0);
   }
 
   85% {
-    clip: rect(39px, 9999px, 61px, 0);
+    clip: rect(91px, 9999px, 41px, 0);
   }
 
   90% {
-    clip: rect(71px, 9999px, 63px, 0);
+    clip: rect(53px, 9999px, 64px, 0);
   }
 
   95% {
-    clip: rect(53px, 9999px, 79px, 0);
+    clip: rect(30px, 9999px, 48px, 0);
   }
 
   100% {
-    clip: rect(31px, 9999px, 74px, 0);
+    clip: rect(82px, 9999px, 23px, 0);
   }
 }
 
@@ -29947,173 +30099,173 @@ form.user .btn-user {
 
 @-webkit-keyframes noise-anim-2 {
   0% {
-    clip: rect(46px, 9999px, 66px, 0);
+    clip: rect(29px, 9999px, 94px, 0);
   }
 
   5% {
-    clip: rect(71px, 9999px, 47px, 0);
+    clip: rect(36px, 9999px, 65px, 0);
   }
 
   10% {
-    clip: rect(76px, 9999px, 91px, 0);
+    clip: rect(37px, 9999px, 37px, 0);
   }
 
   15% {
-    clip: rect(12px, 9999px, 50px, 0);
+    clip: rect(52px, 9999px, 45px, 0);
   }
 
   20% {
-    clip: rect(70px, 9999px, 20px, 0);
+    clip: rect(17px, 9999px, 18px, 0);
   }
 
   25% {
-    clip: rect(47px, 9999px, 77px, 0);
+    clip: rect(15px, 9999px, 77px, 0);
   }
 
   30% {
-    clip: rect(63px, 9999px, 55px, 0);
+    clip: rect(30px, 9999px, 71px, 0);
   }
 
   35% {
-    clip: rect(97px, 9999px, 79px, 0);
+    clip: rect(94px, 9999px, 2px, 0);
   }
 
   40% {
-    clip: rect(40px, 9999px, 38px, 0);
+    clip: rect(3px, 9999px, 27px, 0);
   }
 
   45% {
-    clip: rect(71px, 9999px, 92px, 0);
+    clip: rect(34px, 9999px, 75px, 0);
   }
 
   50% {
-    clip: rect(93px, 9999px, 10px, 0);
+    clip: rect(34px, 9999px, 34px, 0);
   }
 
   55% {
-    clip: rect(89px, 9999px, 33px, 0);
+    clip: rect(42px, 9999px, 38px, 0);
   }
 
   60% {
-    clip: rect(77px, 9999px, 53px, 0);
+    clip: rect(31px, 9999px, 40px, 0);
   }
 
   65% {
-    clip: rect(64px, 9999px, 81px, 0);
+    clip: rect(13px, 9999px, 6px, 0);
   }
 
   70% {
-    clip: rect(44px, 9999px, 9px, 0);
+    clip: rect(97px, 9999px, 83px, 0);
   }
 
   75% {
-    clip: rect(64px, 9999px, 78px, 0);
+    clip: rect(87px, 9999px, 54px, 0);
   }
 
   80% {
-    clip: rect(1px, 9999px, 95px, 0);
+    clip: rect(74px, 9999px, 87px, 0);
   }
 
   85% {
-    clip: rect(38px, 9999px, 18px, 0);
+    clip: rect(83px, 9999px, 3px, 0);
   }
 
   90% {
-    clip: rect(2px, 9999px, 82px, 0);
+    clip: rect(45px, 9999px, 76px, 0);
   }
 
   95% {
-    clip: rect(47px, 9999px, 18px, 0);
+    clip: rect(88px, 9999px, 100px, 0);
   }
 
   100% {
-    clip: rect(8px, 9999px, 77px, 0);
+    clip: rect(59px, 9999px, 90px, 0);
   }
 }
 
 @keyframes noise-anim-2 {
   0% {
-    clip: rect(46px, 9999px, 66px, 0);
+    clip: rect(29px, 9999px, 94px, 0);
   }
 
   5% {
-    clip: rect(71px, 9999px, 47px, 0);
+    clip: rect(36px, 9999px, 65px, 0);
   }
 
   10% {
-    clip: rect(76px, 9999px, 91px, 0);
+    clip: rect(37px, 9999px, 37px, 0);
   }
 
   15% {
-    clip: rect(12px, 9999px, 50px, 0);
+    clip: rect(52px, 9999px, 45px, 0);
   }
 
   20% {
-    clip: rect(70px, 9999px, 20px, 0);
+    clip: rect(17px, 9999px, 18px, 0);
   }
 
   25% {
-    clip: rect(47px, 9999px, 77px, 0);
+    clip: rect(15px, 9999px, 77px, 0);
   }
 
   30% {
-    clip: rect(63px, 9999px, 55px, 0);
+    clip: rect(30px, 9999px, 71px, 0);
   }
 
   35% {
-    clip: rect(97px, 9999px, 79px, 0);
+    clip: rect(94px, 9999px, 2px, 0);
   }
 
   40% {
-    clip: rect(40px, 9999px, 38px, 0);
+    clip: rect(3px, 9999px, 27px, 0);
   }
 
   45% {
-    clip: rect(71px, 9999px, 92px, 0);
+    clip: rect(34px, 9999px, 75px, 0);
   }
 
   50% {
-    clip: rect(93px, 9999px, 10px, 0);
+    clip: rect(34px, 9999px, 34px, 0);
   }
 
   55% {
-    clip: rect(89px, 9999px, 33px, 0);
+    clip: rect(42px, 9999px, 38px, 0);
   }
 
   60% {
-    clip: rect(77px, 9999px, 53px, 0);
+    clip: rect(31px, 9999px, 40px, 0);
   }
 
   65% {
-    clip: rect(64px, 9999px, 81px, 0);
+    clip: rect(13px, 9999px, 6px, 0);
   }
 
   70% {
-    clip: rect(44px, 9999px, 9px, 0);
+    clip: rect(97px, 9999px, 83px, 0);
   }
 
   75% {
-    clip: rect(64px, 9999px, 78px, 0);
+    clip: rect(87px, 9999px, 54px, 0);
   }
 
   80% {
-    clip: rect(1px, 9999px, 95px, 0);
+    clip: rect(74px, 9999px, 87px, 0);
   }
 
   85% {
-    clip: rect(38px, 9999px, 18px, 0);
+    clip: rect(83px, 9999px, 3px, 0);
   }
 
   90% {
-    clip: rect(2px, 9999px, 82px, 0);
+    clip: rect(45px, 9999px, 76px, 0);
   }
 
   95% {
-    clip: rect(47px, 9999px, 18px, 0);
+    clip: rect(88px, 9999px, 100px, 0);
   }
 
   100% {
-    clip: rect(8px, 9999px, 77px, 0);
+    clip: rect(59px, 9999px, 90px, 0);
   }
 }
 
@@ -30144,6 +30296,11 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+/*!
+ * Font Awesome Free 5.8.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
 
 .fa,
 .fas,
@@ -30417,6 +30574,10 @@ readers do not read off random characters that represent icons */
 
 .fa-air-freshener:before {
   content: "\f5d0";
+}
+
+.fa-airbnb:before {
+  content: "\f834";
 }
 
 .fa-algolia:before {
@@ -30755,6 +30916,10 @@ readers do not read off random characters that represent icons */
   content: "\f241";
 }
 
+.fa-battle-net:before {
+  content: "\f835";
+}
+
 .fa-bed:before {
   content: "\f236";
 }
@@ -30903,6 +31068,10 @@ readers do not read off random characters that represent icons */
   content: "\f02e";
 }
 
+.fa-bootstrap:before {
+  content: "\f836";
+}
+
 .fa-bowling-ball:before {
   content: "\f436";
 }
@@ -30953,6 +31122,10 @@ readers do not read off random characters that represent icons */
 
 .fa-btc:before {
   content: "\f15a";
+}
+
+.fa-buffer:before {
+  content: "\f837";
 }
 
 .fa-bug:before {
@@ -31305,6 +31478,10 @@ readers do not read off random characters that represent icons */
 
 .fa-chrome:before {
   content: "\f268";
+}
+
+.fa-chromecast:before {
+  content: "\f838";
 }
 
 .fa-church:before {
@@ -31989,6 +32166,10 @@ readers do not read off random characters that represent icons */
 
 .fa-euro-sign:before {
   content: "\f153";
+}
+
+.fa-evernote:before {
+  content: "\f839";
 }
 
 .fa-exchange-alt:before {
@@ -33029,6 +33210,10 @@ readers do not read off random characters that represent icons */
 
 .fa-italic:before {
   content: "\f033";
+}
+
+.fa-itch-io:before {
+  content: "\f83a";
 }
 
 .fa-itunes:before {
@@ -34311,6 +34496,10 @@ readers do not read off random characters that represent icons */
   content: "\f267";
 }
 
+.fa-salesforce:before {
+  content: "\f83b";
+}
+
 .fa-sass:before {
   content: "\f41e";
 }
@@ -34683,6 +34872,10 @@ readers do not read off random characters that represent icons */
   content: "\f3f3";
 }
 
+.fa-speaker-deck:before {
+  content: "\f83c";
+}
+
 .fa-spider:before {
   content: "\f717";
 }
@@ -34901,6 +35094,10 @@ readers do not read off random characters that represent icons */
 
 .fa-swimming-pool:before {
   content: "\f5c5";
+}
+
+.fa-symfony:before {
+  content: "\f83d";
 }
 
 .fa-synagogue:before {
@@ -35579,6 +35776,14 @@ readers do not read off random characters that represent icons */
   content: "\f773";
 }
 
+.fa-wave-square:before {
+  content: "\f83e";
+}
+
+.fa-waze:before {
+  content: "\f83f";
+}
+
 .fa-weebly:before {
   content: "\f5cc";
 }
@@ -35727,6 +35932,10 @@ readers do not read off random characters that represent icons */
   content: "\f19e";
 }
 
+.fa-yammer:before {
+  content: "\f840";
+}
+
 .fa-yandex:before {
   content: "\f413";
 }
@@ -35788,13 +35997,18 @@ readers do not read off random characters that represent icons */
   width: auto;
 }
 
+/*!
+ * Font Awesome Free 5.8.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
 @font-face {
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 400;
   font-display: auto;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?414ff5daad323a1c47c5177d4bd29674);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?414ff5daad323a1c47c5177d4bd29674) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff2?65779ebcc35604a25c2ba77309c5b8af) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff?5dd3976cb5d61e2e561f2a46b916f377) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.ttf?f6c6f6c8cb7784254ad00056f6fbd74e) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.svg?e7e957c87c454bccaa3bf9fdaa6874f8) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?73e57f339e3e8574d0d4bc7a7c412d2a);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?73e57f339e3e8574d0d4bc7a7c412d2a) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff2?34e0db45ef15f5a058149de318ca0641) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff?c6e6643b688fe307651aa9374343d194) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.ttf?7599ecd0c99d05133229e0c4822b3086) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.svg?47758afd15884569fa987bb98ec2348f) format("svg");
 }
 
 .far {
@@ -35802,13 +36016,18 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
+/*!
+ * Font Awesome Free 5.8.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
 @font-face {
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 900;
   font-display: auto;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?b5596f4d339f99e3d69bc41be78db962);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?b5596f4d339f99e3d69bc41be78db962) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?462806316fea535a6a57651bc2b000b0) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?61969d433bf265b9717a6c357a1e04e4) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?b70cea0339374107969eb53e5b1f603f) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?82905d8d1c06969df11c8c378e9bdd4c) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?cb45ce038f8d6ccf24a4307993230f8b);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?cb45ce038f8d6ccf24a4307993230f8b) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?fb4ea3247aace8c1c8bcf904772a91c7) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?ecafd67cb64dc8f4d064abcf680dd924) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?26fdf2ddc0e845cc454b72c97cdc705c) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?e474ff3afacf902ab8f4dd43344f4f30) format("svg");
 }
 
 .fa,
@@ -35817,13 +36036,18 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
+/*!
+ * Font Awesome Free 5.8.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
 @font-face {
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
   font-weight: normal;
   font-display: auto;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?d9d17590c975aad1be0ddab673f9c769);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?d9d17590c975aad1be0ddab673f9c769) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?4b115e1153a9ea339d6a0bb284cc8ed3) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff?b90365bccdabd68c6c03902b4b141f09) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?c39278f7abfc798a241551194f55e29f) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg?80533988ff5fecd5be26557d08ce8237) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?28c2e91df5676f8a615bd3d519f0757b);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?28c2e91df5676f8a615bd3d519f0757b) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?24a77b8baa5b34fb50814225fae0272d) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff?175ef492f87a05e2ce45cb701d62c450) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?8742c0293a67556fbb57133b56bb076e) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg?85dcebc2b9d56a2b94f79c8a7b731b00) format("svg");
 }
 
 .fab {
