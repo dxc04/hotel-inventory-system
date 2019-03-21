@@ -1,6 +1,17 @@
-## HSG Portal
+# HSG Portal
 
-## Installation
+Used by hotel attendants to track guests' purchases
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+Docker
+
+### Installing
+
 Steps:
 
 **Notes**
@@ -43,8 +54,7 @@ Steps:
     Email Address: admin@example.com
     
     Password: admin123
-
-
+    
 **Resetting Setup**
 
 * If you need to reset the development setup just run the following:
@@ -54,9 +64,7 @@ Steps:
     ```docker volume rm hsg_portal_dbdata```
     
     ```docker-compose up```
-    
-    ```docker-compose exec app php artisan migrate```
-    
+
 ## Config
 **Database**
 
@@ -70,17 +78,13 @@ Steps:
  
  password: secret
 
-## What's inside on docker?
-* Nginx,
-* PHP 7.2.2-fpm,
-* composer,
-* MySQL 5.7.2,
-* Laravel 5.7.*
-* composer
+## Built With
 
-## LAP - Laravel Admin Panel
+* [Laravel](https://laravel.com/) - The web framework used
+* [npm](https://www.npmjs.com/) - Package Management
+* [LAP](https://lap.kjjdion.com/docs) - Admin System
+* [sb-admin-2](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2) - Frontend UI Template
 
-We are utilizing admin panel called "LAP". Documentation can be found here https://lap.kjjdion.com/docs 
 
 ## DEMO SITE 
 
