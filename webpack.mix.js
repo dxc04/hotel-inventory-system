@@ -27,3 +27,7 @@ mix.scripts(
     ],
     'public/js/app.compiled.min.js'
 );
+
+if (mix.inProduction()) {
+    mix.version();
+}

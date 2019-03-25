@@ -22,7 +22,7 @@ return [
         'room_id' => [
             'primary' => true,
             'migrations' => [
-                'integer:room_id|unique',
+                'integer:room_id',
             ],
             'relationship' => [
                 'room' => 'belongsTo:App\Room',
