@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\RoomStatus as RoomStatusRepo;
+use App\RoomStatus;
 
 class HomeController extends Controller
 {
@@ -11,7 +12,7 @@ class HomeController extends Controller
     /**
      * @var App\Repositories\RoomStatus
      */
-    public $room_status_repo;
+    private $room_status_repo;
 
     /**
      * Create a new controller instance.
@@ -20,7 +21,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->room_status_repo = new RoomStatusRepo;
+        $this->room_status_repo = new RoomStatusRepo(new RoomStatus());
         $this->middleware('auth');
     }
 

@@ -2,7 +2,8 @@
 
 namespace App\Repositories;
 
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+use Illuminate\Database\QueryException;
+use Jsdecena\Baserepo\BaseRepository;
 use App\RoomStatus as RoomStatusModel;
 use App\Room as RoomModel; 
 use App\Status as StatusModel;

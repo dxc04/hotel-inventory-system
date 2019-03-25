@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Jsdecena\Baserepo\BaseRepositoryProvider::class,
 
         /*
          * Application Service Providers...
