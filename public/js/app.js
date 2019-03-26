@@ -40095,13 +40095,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return Object.keys(this.purchasesByRooms).length;
         },
         dndRooms: function dndRooms() {
-            var dnd_status = this.roomStatuses.statuses.find(function (status) {
-                status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover';
-            });
+            var dnd_statuses = this.roomStatuses.statuses.reduce(function (acc, status) {
+                if (status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover') {
+                    acc.push(status.id);
+                }
+                return acc;
+            }, []);
+
             return this.roomStatuses.room_statuses.filter(function (room_status) {
-                room_status.status.find(function (status) {
-                    return status == dnd_status.id;
+                var with_dnd = room_status.status.find(function (status) {
+                    var id = parseInt(status);
+                    return dnd_statuses.includes(id);
                 });
+                return with_dnd;
             }).length;
         },
         purchasesByRooms: function purchasesByRooms() {

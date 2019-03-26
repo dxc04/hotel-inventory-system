@@ -101,11 +101,19 @@
 
             },
             dndRooms() {
-                let dnd_status = this.roomStatuses.statuses.find(status => {
-                    status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover' 
-                })
+                let dnd_statuses = this.roomStatuses.statuses.reduce((acc, status) => {
+                    if (status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover') {
+                        acc.push(status.id)
+                    }
+                    return acc
+                }, [])
+                
                 return this.roomStatuses.room_statuses.filter(room_status => {
-                    room_status.status.find(status => status == dnd_status.id)
+                    let with_dnd = room_status.status.find(status => {
+                        let id = parseInt(status)
+                        return dnd_statuses.includes(id)
+                    })
+                    return with_dnd
                 }).length
             },
             purchasesByRooms() {
