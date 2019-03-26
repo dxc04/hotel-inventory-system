@@ -40152,7 +40152,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 labels: Object.keys(this.purchasesByItems),
                 datasets: [{
                     data: Object.values(this.purchasesByItems),
-                    backgroundColor: '#f87979'
+                    backgroundColor: function backgroundColor() {
+                        return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
+                    }
                 }]
             };
             return chart_data;
@@ -40499,7 +40501,7 @@ var staticRenderFns = [
           },
           [
             _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-              _vm._v("Logs for Today")
+              _vm._v("Today's Logs")
             ])
           ]
         ),
@@ -40520,7 +40522,7 @@ var staticRenderFns = [
       },
       [
         _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-          _vm._v("Earnings")
+          _vm._v("Today's Earnings")
         ])
       ]
     )

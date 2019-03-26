@@ -37,7 +37,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Logs for Today</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Today's Logs</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -50,7 +50,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Earnings</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Today's Earnings</h6>
                 </div>                  
                 <!-- Card Body -->
                 <div class="card-body">
@@ -157,7 +157,9 @@
                     labels: Object.keys(this.purchasesByItems),
                     datasets: [{
                         data: Object.values(this.purchasesByItems),
-                        backgroundColor: '#f87979'
+                        backgroundColor: function () { 
+                            return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
+                        }
                     }]
                 }
                 return chart_data
