@@ -49,7 +49,7 @@ class RoomStatusController extends Controller
     public function create()
     {
         $this->validate(request(), [
-            "room_id" => "required|exists:rooms,id|unique:room_statuses",
+            "room_id" => "required|exists:rooms,id",
         ]);
 
         $room_status = RoomStatus::create(request()->all());
