@@ -7,6 +7,8 @@ use Jsdecena\Baserepo\BaseRepository;
 use App\RoomStatus as RoomStatusModel;
 use App\Room as RoomModel; 
 use App\Status as StatusModel;
+use App\Purchase as PurchaseModel;
+use App\Item as ItemModel;
 use Carbon\Carbon;
 
 /**
@@ -29,8 +31,10 @@ class RoomStatus extends BaseRepository
     {
         return [
             'room_statuses' => RoomStatusModel::whereDate('created_at', Carbon::today())->get()->toArray(),
+            'purchases' => PurchaseModel::whereDate('created_at', Carbon::today())->get()->toArray(),
             'rooms' => RoomModel::all()->toArray(),
             'statuses' => StatusModel::all()->toArray(),
+            'items' => ItemModel::all()->toArray(),
         ];
     }
 }

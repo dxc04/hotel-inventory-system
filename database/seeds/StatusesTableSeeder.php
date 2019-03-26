@@ -14,10 +14,10 @@ class StatusesTableSeeder extends Seeder
         DB::table('statuses')->insert(
             [
                 [
-                    'status_name' => 'DND Stay Over'
+                    'status_name' => 'DND Stayover'
                 ],
                 [
-                    'status_name' => 'DND Due'
+                    'status_name' => 'DND Due-Out'
                 ],
                 [
                     'status_name' => 'Checked In'

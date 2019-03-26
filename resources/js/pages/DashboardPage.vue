@@ -7,7 +7,7 @@
 
           <!-- Content Row -->
         <div class="row">
-            <!-- Rooms Restocked Card -->
+            <!-- Rooms Rechecked Card -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <quick-card theme="info" title="Rooms Checked" :info="roomsCheckedPercentage" :progress="roomsCheckedPercentage" dashboard-icon="fa-clipboard-list"></quick-card>
             </div>
@@ -19,12 +19,12 @@
 
             <!-- Rooms with Sales Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <quick-card theme="success" title="Rooms with Sales" :info="roomsCheckedPercentage" dashboard-icon="fa-file-invoice-dollar"></quick-card>
+                <quick-card theme="success" title="Rooms with Sales" :info="roomsWithSales" dashboard-icon="fa-file-invoice-dollar"></quick-card>
             </div>
 
             <!-- DND Rooms Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <quick-card theme="warning" title="DND Rooms" :info="roomsCheckedPercentage" dashboard-icon="fa-door-closed"></quick-card>
+                <quick-card theme="warning" title="DND Rooms" :info="dndRooms" dashboard-icon="fa-door-closed"></quick-card>
             </div>
         </div>
 
@@ -54,8 +54,9 @@
                 </div>                  
                 <!-- Card Body -->
                 <div class="card-body">
+                    <sales-chart :chartData="earningsChartData"></sales-chart> 
                   <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
+
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
@@ -78,16 +79,18 @@
 
 <script>
     import QuickCard from '../components/QuickCard.vue'
+    import SalesChart from '../charts/SalesChart.js'
 
     export default {
         name: 'DashboardPage',
+        components: {
+            QuickCard,
+            SalesChart
+        },
         props: {
             roomStatuses: {
                 type: Object
             }
-        },
-        components: {
-            QuickCard,
         },
         mounted() {
             console.log('Component mounted.')
@@ -95,13 +98,69 @@
         },
         computed: {
             roomsCheckedPercentage() {
-                return Math.round((this.roomStatuses.room_statuses.length / this.roomStatuses.rooms.length) * 100)
+                return this.roomStatuses.room_statuses.length
+                    ? Math.round((this.roomStatuses.room_statuses.length / this.roomStatuses.rooms.length) * 100)
+                    : 0
             },
             roomsRestocked() {
                 let restocked_status = this.roomStatuses.statuses.find(status => status.status_name === 'Restocked')
                 return this.roomStatuses.room_statuses.filter(room_status => {
                     room_status.status.find(status => status == restocked_status.id)
                 }).length
+            },
+            roomsWithSales() {
+                return Object.keys(this.purchasesByRooms).length
+
+            },
+            dndRooms() {
+                let dnd_status = this.roomStatuses.statuses.find(status => {
+                    status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover' 
+                })
+                return this.roomStatuses.room_statuses.filter(room_status => {
+                    room_status.status.find(status => status == dnd_status.id)
+                }).length
+            },
+            purchasesByRooms() {
+                let purchases = this.roomStatuses.purchases.reduce(function (acc, obj) {
+                    var key = obj['room_id'];
+                    if (!acc[key]) {
+                        acc[key] = [];
+                    }
+                    acc[key].push(obj);
+                    return acc;
+                }, {})
+                return purchases;
+            },
+            purchasesByItems() {
+                let items = this.roomStatuses.items.reduce(function (acc, obj) {
+                    var key = obj['id']
+                    acc[key] = obj
+                    return acc
+                }, {})
+
+                let purchases = this.roomStatuses.purchases.reduce(function (purchase_items, obj) {
+                    let item = items[obj['item_id']]
+                    let item_amount = obj['quantity'] * item.amount
+                    if (name in purchase_items) {
+                        purchase_items[item.item_name] = purchase_items[item.item_name] + item_amount
+                    }
+                    else {
+                        purchase_items[item.item_name] = item_amount
+                    }
+                    return purchase_items
+                }, {})
+
+                return purchases
+            },
+            earningsChartData() {
+                let chart_data = {
+                    labels: Object.keys(this.purchasesByItems),
+                    datasets: [{
+                        data: Object.values(this.purchasesByItems),
+                        backgroundColor: '#f87979'
+                    }]
+                }
+                return chart_data
             }
         }
     }
