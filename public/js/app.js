@@ -40147,7 +40147,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             return purchases;
         },
-        earningsChartData: function earningsChartData() {
+        salesChartData: function salesChartData() {
             var chart_data = {
                 labels: Object.keys(this.purchasesByItems),
                 datasets: [{
@@ -40442,9 +40442,7 @@ var render = function() {
             "div",
             { staticClass: "card-body" },
             [
-              _c("sales-chart", {
-                attrs: { chartData: _vm.earningsChartData }
-              }),
+              _c("sales-chart", { attrs: { chartData: _vm.salesChartData } }),
               _vm._v(" "),
               _c("div", { staticClass: "chart-pie pt-4 pb-2" }),
               _vm._v(" "),
@@ -40522,7 +40520,7 @@ var staticRenderFns = [
       },
       [
         _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-          _vm._v("Today's Earnings")
+          _vm._v("Today's Sales")
         ])
       ]
     )

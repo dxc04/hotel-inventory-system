@@ -50,11 +50,11 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Today's Earnings</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Today's Sales</h6>
                 </div>                  
                 <!-- Card Body -->
                 <div class="card-body">
-                    <sales-chart :chartData="earningsChartData"></sales-chart> 
+                    <sales-chart :chartData="salesChartData"></sales-chart> 
                   <div class="chart-pie pt-4 pb-2">
 
                   </div>
@@ -152,7 +152,7 @@
 
                 return purchases
             },
-            earningsChartData() {
+            salesChartData() {
                 let chart_data = {
                     labels: Object.keys(this.purchasesByItems),
                     datasets: [{
