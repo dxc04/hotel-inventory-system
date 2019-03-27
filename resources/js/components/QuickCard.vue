@@ -44,7 +44,7 @@
             }
         },
         mounted() {
-            console.log(this.testing)
+        
         },
         methods: {
 

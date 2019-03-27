@@ -18,6 +18,15 @@
                 </div>
             </div>
 
+            <div class="list-group-item">
+                <div class="form-group row mb-0">
+                    <label for="status_key" class="col-md-2 col-form-label">Status Key</label>
+                    <div class="col-md-8">
+                        <input type="text" name="status_key" id="status_key" class="form-control" value="{{ $status->status_key }}">
+                    </div>
+                </div>
+            </div>
+
             <div class="list-group-item bg-light text-left text-md-right pb-1">
                 <button type="submit" name="_submit" class="btn btn-primary mb-2" value="reload_page">Save</button>
                 <button type="submit" name="_submit" class="btn btn-primary mb-2" value="redirect">Save &amp; Go Back</button>

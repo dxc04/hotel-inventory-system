@@ -37,11 +37,11 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Today's Logs</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Logs for Today</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <daily-logs :daily-logs-data="dailyLogsData"></daily-logs> 
+                    <daily-logs :daily-logs-data="dailyLogsData"></daily-logs>
                 </div>
               </div>
             </div>
@@ -51,12 +51,24 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Today's Sales</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Earnings</h6>
                 </div>                  
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="pt-4 pb-2">
-                    <sales-chart :chartData="salesChartData"></sales-chart> 
+                    <sales-chart :chartData="earningsChartData"></sales-chart> 
+                  <div class="chart-pie pt-4 pb-2">
+
+                  </div>
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-primary"></i> Direct
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Social
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-info"></i> Referral
+                    </span>
                   </div>
                 </div>
               </div>
@@ -104,20 +116,13 @@
 
             },
             dndRooms() {
-                let dnd_statuses = this.roomStatuses.statuses.reduce((acc, status) => {
-                    if (status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover') {
-                        acc.push(status.id)
-                    }
-                    return acc
-                }, [])
-                
-                return this.roomStatuses.room_statuses.filter(room_status => {
-                    let with_dnd = room_status.status.find(status => {
-                        let id = parseInt(status)
-                        return dnd_statuses.includes(id)
-                    })
-                    return with_dnd
-                }).length
+            //    let dnd_status = this.roomStatuses.statuses.find(status => {
+            //        status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover' 
+            //    })
+            //    return this.roomStatuses.room_statuses.filter(room_status => {
+            //        room_status.status.find(status => status == dnd_status.id)
+            //    }).length
+                return 10
             },
             purchasesByRooms() {
                 let purchases = this.roomStatuses.purchases.reduce(function (acc, obj) {
@@ -151,14 +156,12 @@
 
                 return purchases
             },
-            salesChartData() {
+            earningsChartData() {
                 let chart_data = {
                     labels: Object.keys(this.purchasesByItems),
                     datasets: [{
                         data: Object.values(this.purchasesByItems),
-                        backgroundColor: function () { 
-                            return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
-                        }
+                        backgroundColor: '#f87979'
                     }]
                 }
                 return chart_data

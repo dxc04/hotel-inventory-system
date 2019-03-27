@@ -33,6 +33,7 @@ class StatusController extends Controller
 
         $html = $builder->columns([
             ['title' => 'Status Name', 'data' => 'status_name'],
+            ['title' => 'Status Key', 'data' => 'status_key'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
         $html->setTableAttribute('id', 'statuses_datatable');
@@ -49,6 +50,7 @@ class StatusController extends Controller
     {
         $this->validate(request(), [
             "status_name" => "required|unique:statuses",
+            "status_key" => "required|unique:statuses",
         ]);
 
         $status = Status::create(request()->all());
@@ -78,6 +80,7 @@ class StatusController extends Controller
     {
         $this->validate(request(), [
             "status_name" => "required|unique:statuses,status_name,{$status->id}",
+            "status_key" => "required|unique:statuses,status_key,{$status->id}",
         ]);
 
         $status->update(request()->all());

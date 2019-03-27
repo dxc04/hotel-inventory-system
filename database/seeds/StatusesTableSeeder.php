@@ -14,22 +14,28 @@ class StatusesTableSeeder extends Seeder
         DB::table('statuses')->insert(
             [
                 [
-                    'status_name' => 'DND Stayover'
+                    'status_name' => 'DND Stayover',
+                    'status_key'  => 'dnd_stayover'
                 ],
                 [
-                    'status_name' => 'DND Due-Out'
+                    'status_name' => 'DND Due-Out',
+                    'status_key'  => 'dnd_due_out'
                 ],
                 [
-                    'status_name' => 'Checked In'
+                    'status_name' => 'Checked In',
+                    'status_key'  => 'checked_in'
                 ],
                 [
-                    'status_name' => 'Restocked'
+                    'status_name' => 'Restocked',
+                    'status_key'  => 'restocked'
                 ],
                 [
-                    'status_name' => 'Cleaned'
+                    'status_name' => 'Cleaned',
+                    'status_key'  => 'cleaned'
                 ],
                 [
-                    'status_name' => 'Cleaning In Progress'
+                    'status_name' => 'Cleaning In Progress',
+                    'status_key'  => 'cleaning_in_progress'
                 ]
             ]
         );

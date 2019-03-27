@@ -37,6 +37,24 @@ return [
             ],
         ],
 
+         'status_key' => [
+            'migrations' => [
+                'string:status_key|unique',
+            ],
+            'validations' => [
+                'create' => 'required|unique:statuses',
+                'update' => 'required|unique:statuses,status_key,{$status->id}',
+            ],
+            'datatable' => [
+                'title' => 'Status Key',
+                'data' => 'status_key',
+            ],
+            'input' => [
+                'type' => 'text',
+            ],
+        ],
+
+
     ],
 
 ];
