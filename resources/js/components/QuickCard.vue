@@ -17,6 +17,12 @@
                 </div>
                 <div class="col-auto">
                     <i :class="iconClass"></i>
+                    <span v-if="info">
+                        <div class="text-xs text-right"><a class="text-info" v-b-modal="modalId">Details</a></div>
+                        <b-modal :id="modalId" :title="title" hide-footer>
+                            <slot name="modal-content"></slot>
+                        </b-modal>
+                    </span>
                 </div>
             </div>
         </div>
@@ -24,6 +30,7 @@
 </template>
 
 <script>
+
     export default {
         name: 'QuickCard',
         props: {
@@ -41,10 +48,13 @@
             },
             progress: {
                 type: Number
-            }
+            },
+            modalId: {
+                type: String,
+                required: true
+            },
         },
         mounted() {
-        
         },
         methods: {
 

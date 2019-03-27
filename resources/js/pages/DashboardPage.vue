@@ -9,22 +9,62 @@
         <div class="row">
             <!-- Rooms Rechecked Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <quick-card theme="info" title="Rooms Checked" :info="roomsCheckedPercentage" :progress="roomsCheckedPercentage" dashboard-icon="fa-clipboard-list"></quick-card>
+                <quick-card 
+                    theme="info" title="Rooms Checked"
+                    :info="roomsCheckedPercentage"
+                    :progress="roomsCheckedPercentage"
+                    dashboardIcon="fa-clipboard-list"
+                    modalId="rooms-checked"
+                >
+                    <template v-slot:modal-content>
+                        <quick-list theme="info" :items="roomsCheckedDetails"></quick-list>
+                    </template>    
+                </quick-card>
             </div>
 
             <!-- Rooms Restocked Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <quick-card theme="primary" title="Rooms Restocked" :info="roomsRestocked" dashboard-icon="fa-box"></quick-card>
+                <quick-card
+                    modalId="rooms-restocked"
+                    theme="primary"
+                    title="Rooms Restocked"
+                    :info="roomsRestockedCount"
+                    dashboardIcon="fa-box"
+                >
+                    <template v-slot:modal-content>
+                        <quick-list :items="roomsRestockedDetails"></quick-list>
+                    </template>
+                </quick-card>
             </div>
 
             <!-- Rooms with Sales Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <quick-card theme="success" title="Rooms with Sales" :info="roomsWithSales" dashboard-icon="fa-file-invoice-dollar"></quick-card>
+                <quick-card
+                    modalId="rooms-sales"
+                    theme="success"
+                    title="Rooms with Sales"
+                    :info="roomsWithSalesCount"
+                    dashboard-icon="fa-file-invoice-dollar"
+                >
+                    <template v-slot:modal-content>
+                        <quick-list theme="success" :items="roomsWithSalesDetails"></quick-list>
+                    </template>
+                </quick-card>
             </div>
 
             <!-- DND Rooms Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <quick-card theme="warning" title="DND Rooms" :info="dndRooms" dashboard-icon="fa-door-closed"></quick-card>
+                <quick-card
+                    modalId="dnd-rooms"
+                    theme="warning"
+                    title="DND Rooms"
+                    :info="dndRoomsCount"
+                    dashboardIcon="fa-door-closed"
+                    >
+                    <template v-slot:modal-content>
+                        <quick-list theme="warning" :items="dndRoomsDetails"></quick-list>
+                    </template>
+                </quick-card>
             </div>
         </div>
 
@@ -46,7 +86,7 @@
               </div>
             </div>
 
-            <!-- Today's Earnings -->
+            <!-- Today's Sales -->
             <div class="col-xl-6 col-lg-6">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
@@ -68,13 +108,15 @@
 
 <script>
     import QuickCard from '../components/QuickCard.vue'
-    import SalesChart from '../charts/SalesChart.js'
+    import QuickList from '../components/QuickList.vue'
     import DailyLogs from '../components/dashboard/DailyLogs.vue'
+    import SalesChart from '../charts/SalesChart.js'
 
     export default {
         name: 'DashboardPage',
         components: {
             QuickCard,
+            QuickList,
             SalesChart,
             DailyLogs
         },
@@ -83,25 +125,24 @@
                 type: Object
             }
         },
-        mounted() {
-            console.log('Component mounted.')
-            console.log(this.roomStatuses)
-        },
         computed: {
-            roomsCheckedPercentage() {
-                return this.roomStatuses.room_statuses.length
-                    ? Math.round((this.roomStatuses.room_statuses.length / this.roomStatuses.rooms.length) * 100)
-                    : 0
+            roomsChecked() {
+                let rooms = this.roomStatuses.room_statuses.reduce(function (acc, obj) {
+                    var key = obj['room_id'];
+                    if (!acc[key]) {
+                        acc[key] = [];
+                    }
+                    acc[key].push(obj);
+                    return acc;
+                }, {})
+                return rooms
             },
             roomsRestocked() {
                 let restocked_status = this.roomStatuses.statuses.find(status => status.status_name === 'Restocked')
-                return this.roomStatuses.room_statuses.filter(room_status => {
+                let rooms = this.roomStatuses.room_statuses.filter(room_status => {
                     room_status.status.find(status => status == restocked_status.id)
-                }).length
-            },
-            roomsWithSales() {
-                return Object.keys(this.purchasesByRooms).length
-
+                })
+                return rooms
             },
             dndRooms() {
                 let dnd_statuses = this.roomStatuses.statuses.reduce((acc, status) => {
@@ -111,13 +152,15 @@
                     return acc
                 }, [])
                 
-                return this.roomStatuses.room_statuses.filter(room_status => {
+                let rooms = this.roomStatuses.room_statuses.filter(room_status => {
                     let with_dnd = room_status.status.find(status => {
                         let id = parseInt(status)
                         return dnd_statuses.includes(id)
                     })
                     return with_dnd
-                }).length
+                })
+                console.log('dnd', rooms)
+                return rooms
             },
             purchasesByRooms() {
                 let purchases = this.roomStatuses.purchases.reduce(function (acc, obj) {
@@ -162,6 +205,52 @@
                     }]
                 }
                 return chart_data
+            },
+            roomsCheckedPercentage() {
+                return Object.keys(this.roomsChecked).length
+                    ? Math.round((Object.keys(this.roomsChecked).length / this.roomStatuses.rooms.length) * 100)
+                    : 0
+            },
+            roomsRestockedCount() {
+                return this.roomsRestocked.length
+            },
+            roomsWithSalesCount() {
+                return Object.keys(this.purchasesByRooms).length
+            },
+            dndRoomsCount() {
+                return this.dndRooms.length
+            },
+            roomsCheckedDetails() {
+                let rooms = []
+                for (let i in this.roomsChecked) {
+                    let room = this.roomStatuses.rooms.find(room => room.id == i)
+                    rooms.push({Room: room.room_name})
+                }
+                return rooms;
+            },
+            roomsRestockedDetails() {
+                let rooms = []
+                for (let i in this.roomsRestocked) {
+                    let room = this.roomsRestocked[i]
+                    rooms.push({Room: room.room_name})
+                }
+                return rooms;
+            },
+            roomsWithSalesDetails() {
+                let rooms = []
+                for (let i in this.purchasesByRooms) {
+                    let room = this.roomStatuses.rooms.find(room => room.id == i)
+                    rooms.push({Room: room.room_name})
+                }
+                return rooms;
+            },
+            dndRoomsDetails() {
+                let rooms = []
+                for (let i in this.dndRooms) {
+                    let room = this.roomStatuses.rooms.find(room => this.dndRooms[i].room_id == room.id)
+                    rooms.push({Room: room.room_name})
+                }
+                return rooms;
             },
             dailyLogsData() {
                 let statuses = this.roomStatuses.statuses

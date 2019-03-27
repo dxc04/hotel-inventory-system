@@ -30,8 +30,10 @@ class RoomStatus extends BaseRepository
     public function getAllTheData()
     {
         return [
-            'room_statuses' => RoomStatusModel::whereDate('created_at', Carbon::today())->get()->toArray(),
-            'purchases' => PurchaseModel::whereDate('created_at', Carbon::today())->get()->toArray(),
+            //'room_statuses' => RoomStatusModel::whereDate('created_at', Carbon::today())->get()->toArray(),
+            //'purchases' => PurchaseModel::whereDate('created_at', Carbon::today())->get()->toArray(),
+            'room_statuses' => RoomStatusModel::all()->toArray(),
+            'purchases' => PurchaseModel::all()->toArray(),
             'rooms' => RoomModel::all()->toArray(),
             'statuses' => StatusModel::all()->toArray(),
             'items' => ItemModel::all()->toArray(),

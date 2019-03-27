@@ -21,6 +21,9 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 import DashboardPage from './pages/DashboardPage.vue';
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
 Vue.component('dashboard-page', DashboardPage);
 
 /**
