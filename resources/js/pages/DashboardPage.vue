@@ -140,7 +140,7 @@
             roomsRestocked() {
                 let restocked_status = this.roomStatuses.statuses.find(status => status.status_name === 'Restocked')
                 let rooms = this.roomStatuses.room_statuses.filter(room_status => {
-                    room_status.status.find(status => status == restocked_status.id)
+                    return room_status.status.find(status => status == restocked_status.id)
                 })
                 return rooms
             },
@@ -231,7 +231,7 @@
             roomsRestockedDetails() {
                 let rooms = []
                 for (let i in this.roomsRestocked) {
-                    let room = this.roomsRestocked[i]
+                    let room = this.roomStatuses.rooms.find(room => this.roomsRestocked[i].room_id == room.id)
                     rooms.push({Room: room.room_name})
                 }
                 return rooms;

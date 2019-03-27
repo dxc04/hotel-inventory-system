@@ -7,7 +7,6 @@
         </div>
         <div class="col col-lg-4 text-right">
         <span>
-            Room
             {{ DailyLog.room.room_name }}
         </span>
         </div>
