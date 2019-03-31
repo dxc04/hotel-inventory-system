@@ -48,7 +48,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ route('home') }}">
           <i class="fas fa-fw fa-door-open"></i>
-          <span>Visit</span></a>
+          <span>Check Rooms</span></a>
       </li>
 
       <li class="nav-item">
@@ -60,7 +60,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ route('home') }}">
           <i class="fas fa-fw fa-edit"></i>
-          <span>Take Note</span></a>
+          <span>Notes</span></a>
       </li>
 
       <!-- Divider -->

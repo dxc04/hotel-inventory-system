@@ -8,6 +8,7 @@
 
 <script>
     export default {
+        name: 'DashboardCard',
         props: {
             border: {
                 type: Array
@@ -16,7 +17,6 @@
                 type: String
             }
         },
-        name: 'DashboardCard',
         mounted() {
         }
     }

@@ -19,12 +19,20 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+import BootstrapVue from 'bootstrap-vue';
+import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-layers', FontAwesomeLayers)
+Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 
 import DashboardPage from './pages/DashboardPage.vue';
-import BootstrapVue from 'bootstrap-vue'
+import CheckRoomsPage from './pages/CheckRoomsPage.vue';
+import store from './store/index';
 
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue);
 Vue.component('dashboard-page', DashboardPage);
+Vue.component('check-rooms-page', CheckRoomsPage);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -33,5 +41,6 @@ Vue.component('dashboard-page', DashboardPage);
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store
 });
