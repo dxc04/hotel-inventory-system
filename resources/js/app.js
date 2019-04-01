@@ -28,12 +28,21 @@ Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 
 import DashboardPage from './pages/DashboardPage.vue';
 import CheckRoomsPage from './pages/CheckRoomsPage.vue';
+import App from './App.vue'
+
+import { makeRouter } from './router.js'
 import store from './store/index';
 
 Vue.use(BootstrapVue);
 Vue.component('dashboard-page', DashboardPage);
 Vue.component('check-rooms-page', CheckRoomsPage);
+Vue.component('app', App);
 
+const app_data = JSON.parse(document.getElementById('app-page').getAttribute('room-statuses'))
+
+store.dispatch('loadRoomStatuses', app_data)
+
+const router = makeRouter()
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -42,5 +51,6 @@ Vue.component('check-rooms-page', CheckRoomsPage);
 
 const app = new Vue({
     el: '#app',
-    store
+    store,
+    router
 });

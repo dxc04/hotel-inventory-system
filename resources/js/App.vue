@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div>
         <!-- Page Wrapper -->
         <div id="wrapper">
 
@@ -167,6 +167,8 @@ export default {
         logout() {
             document.getElementById('logout-form').submit()
         }
+    },
+    mounted() {
     }
 }
 </script>

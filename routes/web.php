@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('default');
-
+Route::get('/{any}', 'HomeController@index')->where('any', 'home|rooms|notes|CheckRooms');
 
 // suppliers
 Route::get('admin/suppliers', 'Admin\SupplierController@index')->name('admin.suppliers');
@@ -129,5 +128,4 @@ Route::patch('admin/rooms/update/{room}', 'Admin\RoomController@update');
 Route::delete('admin/rooms/delete/{room}', 'Admin\RoomController@delete')->name('admin.rooms.delete');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 

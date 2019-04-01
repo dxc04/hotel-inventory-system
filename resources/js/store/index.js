@@ -8,12 +8,21 @@ Vue.use(VueAxios, axios)
 
 export default new Vuex.Store({
   state: {
-     coins: []
+     room_statuses: {}
   },
   actions: {
-    
+    loadRoomStatuses({ commit, state }, room_statuses) {
+        commit('mutateRoomStatuses', room_statuses)
+    }
   },
   mutations: {
-    
+    mutateRoomStatuses(state, room_statuses) {
+        state.room_statuses = room_statuses
+    }
+  },
+  getters: {
+      getRoomStatuses: state => {
+        return state.room_statuses
+    }
   }
 })

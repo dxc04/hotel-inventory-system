@@ -33,7 +33,7 @@ class HomeController extends Controller
     public function index()
     {
        // dd($this->room_status_repo->getRoomStatusesToday()->toArray());
-        return view('home', [
+        return view('layouts.app', [
             'data' => $this->room_status_repo->getAllTheData()
         ]);
     }

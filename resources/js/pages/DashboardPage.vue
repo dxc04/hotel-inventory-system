@@ -111,6 +111,7 @@
     import QuickList from '../components/QuickList.vue'
     import DailyLogs from '../components/dashboard/DailyLogs.vue'
     import SalesChart from '../charts/SalesChart.js'
+    import { mapGetters } from 'vuex'
 
     export default {
         name: 'DashboardPage',
@@ -120,12 +121,13 @@
             SalesChart,
             DailyLogs
         },
-        props: {
-            roomStatuses: {
-                type: Object
-            }
+        mounted() {
+            console.log(this.roomStatuses.room_statuses)
         },
         computed: {
+            ...mapGetters({
+                roomStatuses: 'getRoomStatuses'
+            }),
             roomsChecked() {
                 let rooms = this.roomStatuses.room_statuses.reduce(function (acc, obj) {
                     var key = obj['room_id'];
