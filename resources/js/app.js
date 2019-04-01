@@ -50,7 +50,7 @@ const router = makeRouter()
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#wrapper',
     store,
     router
 });

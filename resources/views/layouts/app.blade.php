@@ -22,12 +22,10 @@
 <body id="page-top">
 
   <!-- Page Wrapper -->
-  <div id="wrapper">
-    <div id="app">
-        <div id="app-page" room-statuses="{{ json_encode($data) }}">
-        <app></app>
-    </div>
 
+  <div id="wrapper">
+    <span id="app-page" room-statuses="{{ json_encode($data) }}"></span>
+        <app></app>
   </div>
   <!-- End of Page Wrapper -->
 

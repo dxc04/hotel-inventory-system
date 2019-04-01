@@ -70,7 +70,7 @@
 
         <!-- Content Row -->
 
-          <div class="row">
+        <div class="row">
 
             <!-- Today's Logs -->
             <div class="col-xl-6 col-lg-6">
@@ -101,7 +101,7 @@
                 </div>
               </div>
             </div>
-          </div>       
+        </div>       
 
     </div>
 </template>
