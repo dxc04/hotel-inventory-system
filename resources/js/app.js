@@ -26,16 +26,11 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 
-import DashboardPage from './pages/DashboardPage.vue';
-import CheckRoomsPage from './pages/CheckRoomsPage.vue';
 import App from './App.vue'
-
 import { makeRouter } from './router.js'
 import store from './store/index';
 
 Vue.use(BootstrapVue);
-Vue.component('dashboard-page', DashboardPage);
-Vue.component('check-rooms-page', CheckRoomsPage);
 Vue.component('app', App);
 
 const app_data = JSON.parse(document.getElementById('app-page').getAttribute('room-statuses'))
@@ -50,7 +45,7 @@ const router = makeRouter()
  */
 
 const app = new Vue({
-    el: '#wrapper',
+    el: '#app',
     store,
     router
 });

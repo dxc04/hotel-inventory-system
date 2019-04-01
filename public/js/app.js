@@ -9647,7 +9647,56 @@ __webpack_require__.r(__webpack_exports__);
       document.getElementById('logout-form').submit();
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    "use strict"; // Start of use strict
+    // Toggle the side navigation
+
+    $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
+      $("body").toggleClass("sidebar-toggled");
+      $(".sidebar").toggleClass("toggled");
+
+      if ($(".sidebar").hasClass("toggled")) {
+        $('.sidebar .collapse').collapse('hide');
+      }
+
+      ;
+    }); // Close any open menu accordions when window is resized below 768px
+
+    $(window).resize(function () {
+      if ($(window).width() < 768) {
+        $('.sidebar .collapse').collapse('hide');
+      }
+
+      ;
+    }); // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+
+    $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
+      if ($(window).width() > 768) {
+        var e0 = e.originalEvent,
+            delta = e0.wheelDelta || -e0.detail;
+        this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+        e.preventDefault();
+      }
+    }); // Scroll to top button appear
+
+    $(document).on('scroll', function () {
+      var scrollDistance = $(this).scrollTop();
+
+      if (scrollDistance > 100) {
+        $('.scroll-to-top').fadeIn();
+      } else {
+        $('.scroll-to-top').fadeOut();
+      }
+    }); // Smooth scrolling using jQuery easing
+
+    $(document).on('click', 'a.scroll-to-top', function (e) {
+      var $anchor = $(this);
+      $('html, body').stop().animate({
+        scrollTop: $($anchor.attr('href')).offset().top
+      }, 1000, 'easeInOutExpo');
+      e.preventDefault();
+    });
+  }
 });
 
 /***/ }),
@@ -104792,23 +104841,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/startbootstrap-sb-admin-2/js/sb-admin-2.min.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/startbootstrap-sb-admin-2/js/sb-admin-2.min.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*!
- * Start Bootstrap - SB Admin 2 v4.0.3 (https://startbootstrap.com/template-overviews/sb-admin-2)
- * Copyright 2013-2019 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin-2/blob/master/LICENSE)
- */
-
-!function(t){"use strict";t("#sidebarToggle, #sidebarToggleTop").on("click",function(o){t("body").toggleClass("sidebar-toggled"),t(".sidebar").toggleClass("toggled"),t(".sidebar").hasClass("toggled")&&t(".sidebar .collapse").collapse("hide")}),t(window).resize(function(){t(window).width()<768&&t(".sidebar .collapse").collapse("hide")}),t("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel",function(o){if(768<t(window).width()){var e=o.originalEvent,l=e.wheelDelta||-e.detail;this.scrollTop+=30*(l<0?1:-1),o.preventDefault()}}),t(document).on("scroll",function(){100<t(this).scrollTop()?t(".scroll-to-top").fadeIn():t(".scroll-to-top").fadeOut()}),t(document).on("click","a.scroll-to-top",function(o){var e=t(this);t("html, body").stop().animate({scrollTop:t(e.attr("href")).offset().top},1e3,"easeInOutExpo"),o.preventDefault()})}(jQuery);
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/LogDetails.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader/dist/cjs.js??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/LogDetails.vue?vue&type=style&index=0&lang=css& ***!
@@ -105768,11 +105800,15 @@ var render = function() {
           "li",
           { staticClass: "nav-item" },
           [
-            _c("router-link", { staticClass: "nav-link", attrs: { to: "/" } }, [
-              _c("i", { staticClass: "fas fa-2x fa-th-large" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Dashboard")])
-            ])
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: "/home" } },
+              [
+                _c("i", { staticClass: "fas fa-2x fa-th-large" }),
+                _vm._v(" "),
+                _c("span", [_vm._v("Dashboard")])
+              ]
+            )
           ],
           1
         ),
@@ -105881,7 +105917,11 @@ var render = function() {
                           "a",
                           {
                             staticClass: "dropdown-item",
-                            on: { click: _vm.logout }
+                            on: {
+                              click: function($event) {
+                                return _vm.logout()
+                              }
+                            }
                           },
                           [
                             _c("i", {
@@ -105991,7 +106031,9 @@ var staticRenderFns = [
         },
         [
           _c("h6", { staticClass: "dropdown-header" }, [
-            _vm._v("\n                Notification Center\n                ")
+            _vm._v(
+              "\n                            Notification Center\n                            "
+            )
           ]),
           _vm._v(" "),
           _c(
@@ -106068,7 +106110,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
       _c("i", { staticClass: "fas fa-user fa-sm fa-fw mr-2 text-gray-400" }),
-      _vm._v("\n                Profile\n                ")
+      _vm._v(
+        "\n                            Profile\n                            "
+      )
     ])
   },
   function() {
@@ -106077,7 +106121,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
       _c("i", { staticClass: "fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" }),
-      _vm._v("\n                Settings\n                ")
+      _vm._v(
+        "\n                            Settings\n                            "
+      )
     ])
   },
   function() {
@@ -106086,7 +106132,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
       _c("i", { staticClass: "fas fa-list fa-sm fa-fw mr-2 text-gray-400" }),
-      _vm._v("\n                Activity Log\n                ")
+      _vm._v(
+        "\n                            Activity Log\n                            "
+      )
     ])
   },
   function() {
@@ -110927,11 +110975,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/es/index.js");
 /* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _pages_DashboardPage_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/DashboardPage.vue */ "./resources/js/pages/DashboardPage.vue");
-/* harmony import */ var _pages_CheckRoomsPage_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/CheckRoomsPage.vue */ "./resources/js/pages/CheckRoomsPage.vue");
-/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
-/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
+/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -110958,15 +111004,11 @@ Vue.component('font-awesome-layers-text', _fortawesome_vue_fontawesome__WEBPACK_
 
 
 
-
-
 Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0___default.a);
-Vue.component('dashboard-page', _pages_DashboardPage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
-Vue.component('check-rooms-page', _pages_CheckRoomsPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
-Vue.component('app', _App_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
+Vue.component('app', _App_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var app_data = JSON.parse(document.getElementById('app-page').getAttribute('room-statuses'));
-_store_index__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch('loadRoomStatuses', app_data);
-var router = Object(_router_js__WEBPACK_IMPORTED_MODULE_5__["makeRouter"])();
+_store_index__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('loadRoomStatuses', app_data);
+var router = Object(_router_js__WEBPACK_IMPORTED_MODULE_3__["makeRouter"])();
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -110974,8 +111016,8 @@ var router = Object(_router_js__WEBPACK_IMPORTED_MODULE_5__["makeRouter"])();
  */
 
 var app = new Vue({
-  el: '#wrapper',
-  store: _store_index__WEBPACK_IMPORTED_MODULE_6__["default"],
+  el: '#app',
+  store: _store_index__WEBPACK_IMPORTED_MODULE_4__["default"],
   router: router
 });
 
@@ -111002,8 +111044,6 @@ try {
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 
   __webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js");
-
-  __webpack_require__(/*! startbootstrap-sb-admin-2/js/sb-admin-2.min */ "./node_modules/startbootstrap-sb-admin-2/js/sb-admin-2.min.js");
 } catch (e) {}
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -111717,6 +111757,10 @@ var router = function router() {
       component: _pages_DashboardPage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
     }, {
       path: '/',
+      name: 'dashboard',
+      component: _pages_DashboardPage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    }, {
+      path: '/home',
       name: 'home',
       component: _pages_DashboardPage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
     }, {

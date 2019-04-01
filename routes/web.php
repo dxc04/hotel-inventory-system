@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/{any}', 'HomeController@index')->where('any', 'home|rooms|notes|CheckRooms');
+Route::get('/{any}', 'HomeController@index')->where('any', '^(home|rooms|notes|check-rooms)$');
 
 // suppliers
 Route::get('admin/suppliers', 'Admin\SupplierController@index')->name('admin.suppliers');

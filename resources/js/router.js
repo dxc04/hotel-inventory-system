@@ -16,6 +16,11 @@ const router = () => {
             },
             {
                 path: '/',
+                name: 'dashboard',
+                component: DashboardPage
+            },
+            {
+                path: '/home',
                 name: 'home',
                 component: DashboardPage
             },

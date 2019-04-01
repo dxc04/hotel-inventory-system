@@ -23,9 +23,9 @@
 
   <!-- Page Wrapper -->
 
-  <div id="wrapper">
+  <div id="app">
+    <app></app>
     <span id="app-page" room-statuses="{{ json_encode($data) }}"></span>
-        <app></app>
   </div>
   <!-- End of Page Wrapper -->
 
@@ -33,6 +33,9 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
+  <form method="POST" action="{{ route('logout') }}" id="logout-form">
+      @csrf
+  </form>
 
   <script type="text/javascript" src="{{ mix('js/app.compiled.min.js') }}"></script>
   @stack('scripts')
