@@ -111818,7 +111818,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODUL
       commit('mutateAppName', atd.app_name);
       commit('mutateRoomsData', atd.rooms_data);
     },
-    loadRoomStatuses: function loadRoomStatuses(_ref2, rooms_data) {
+    loadRoomData: function loadRoomData(_ref2, rooms_data) {
       var commit = _ref2.commit,
           state = _ref2.state;
       commit('mutateRoomsData', rooms_data);

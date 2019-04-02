@@ -18,7 +18,7 @@ export default new Vuex.Store({
       commit('mutateAppName', atd.app_name)
       commit('mutateRoomsData', atd.rooms_data)
     },
-    loadRoomStatuses({ commit, state }, rooms_data) {
+    loadRoomData({ commit, state }, rooms_data) {
       commit('mutateRoomsData', rooms_data)
     }
   },
