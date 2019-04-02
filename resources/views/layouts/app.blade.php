@@ -25,7 +25,6 @@
 
   <div id="app">
     <app></app>
-    <span id="app-page" room-statuses="{{ json_encode($data) }}"></span>
   </div>
   <!-- End of Page Wrapper -->
 
@@ -37,8 +36,8 @@
       @csrf
   </form>
 
+  @javascript('allthedata', $allthedata)
   <script type="text/javascript" src="{{ mix('js/app.compiled.min.js') }}"></script>
-  @stack('scripts')
 </body>
 
 </html>

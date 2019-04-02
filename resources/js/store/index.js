@@ -8,21 +8,36 @@ Vue.use(VueAxios, axios)
 
 export default new Vuex.Store({
   state: {
-     room_statuses: {}
+    user: {},
+    app_name: {},
+    rooms_data: {}
   },
   actions: {
-    loadRoomStatuses({ commit, state }, room_statuses) {
-        commit('mutateRoomStatuses', room_statuses)
+    loadAllTheData({ commit }, atd) {
+      commit('mutateUser', atd.user)
+      commit('mutateAppName', atd.app_name)
+      commit('mutateRoomsData', atd.rooms_data)
+    },
+    loadRoomStatuses({ commit, state }, rooms_data) {
+      commit('mutateRoomsData', rooms_data)
     }
   },
   mutations: {
-    mutateRoomStatuses(state, room_statuses) {
-        state.room_statuses = room_statuses
+    mutateUser(state, user) {
+      state.user = user
+    },
+    mutateAppName(state, app_name) {
+      state.app_name = app_name
+    },
+    mutateRoomsData(state, rooms_data) {
+      state.rooms_data = rooms_data
     }
   },
   getters: {
-      getRoomStatuses: state => {
-        return state.room_statuses
+    user: state => state.user,
+    appName: state => state.app_name,
+    getRoomsData: state => {
+      return state.rooms_data
     }
   }
 })

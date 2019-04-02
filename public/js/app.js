@@ -9480,6 +9480,11 @@ var FontAwesomeLayersText = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -9641,12 +9646,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    logout: function logout() {
-      document.getElementById('logout-form').submit();
-    }
-  },
   mounted: function mounted() {
     "use strict"; // Start of use strict
     // Toggle the side navigation
@@ -9696,7 +9697,17 @@ __webpack_require__.r(__webpack_exports__);
       }, 1000, 'easeInOutExpo');
       e.preventDefault();
     });
-  }
+  },
+  methods: {
+    logout: function logout() {
+      document.getElementById('logout-form').submit();
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['user', 'appName']), {
+    userName: function userName() {
+      return this.user.name;
+    }
+  })
 });
 
 /***/ }),
@@ -10186,13 +10197,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     DailyLogs: _components_dashboard_DailyLogs_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mounted: function mounted() {
-    console.log(this.roomStatuses.room_statuses);
+    console.log(this.roomsData.room_statuses);
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapGetters"])({
-    roomStatuses: 'getRoomStatuses'
+    roomsData: 'getRoomsData'
   }), {
     roomsChecked: function roomsChecked() {
-      var rooms = this.roomStatuses.room_statuses.reduce(function (acc, obj) {
+      var rooms = this.roomsData.room_statuses.reduce(function (acc, obj) {
         var key = obj['room_id'];
 
         if (!acc[key]) {
@@ -10205,10 +10216,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return rooms;
     },
     roomsRestocked: function roomsRestocked() {
-      var restocked_status = this.roomStatuses.statuses.find(function (status) {
+      var restocked_status = this.roomsData.statuses.find(function (status) {
         return status.status_name === 'Restocked';
       });
-      var rooms = this.roomStatuses.room_statuses.filter(function (room_status) {
+      var rooms = this.roomsData.room_statuses.filter(function (room_status) {
         return room_status.status.find(function (status) {
           return status == restocked_status.id;
         });
@@ -10216,25 +10227,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return rooms;
     },
     dndRooms: function dndRooms() {
-      var dnd_statuses = this.roomStatuses.statuses.reduce(function (acc, status) {
+      var dnd_statuses = this.roomsData.statuses.reduce(function (acc, status) {
         if (status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover') {
           acc.push(status.id);
         }
 
         return acc;
       }, []);
-      var rooms = this.roomStatuses.room_statuses.filter(function (room_status) {
+      var rooms = this.roomsData.room_statuses.filter(function (room_status) {
         var with_dnd = room_status.status.find(function (status) {
           var id = parseInt(status);
           return dnd_statuses.includes(id);
         });
         return with_dnd;
       });
-      console.log('dnd', rooms);
       return rooms;
     },
     purchasesByRooms: function purchasesByRooms() {
-      var purchases = this.roomStatuses.purchases.reduce(function (acc, obj) {
+      var purchases = this.roomsData.purchases.reduce(function (acc, obj) {
         var key = obj['room_id'];
 
         if (!acc[key]) {
@@ -10247,12 +10257,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return purchases;
     },
     purchasesByItems: function purchasesByItems() {
-      var items = this.roomStatuses.items.reduce(function (acc, obj) {
+      var items = this.roomsData.items.reduce(function (acc, obj) {
         var key = obj['id'];
         acc[key] = obj;
         return acc;
       }, {});
-      var purchases = this.roomStatuses.purchases.reduce(function (purchase_items, obj) {
+      var purchases = this.roomsData.purchases.reduce(function (purchase_items, obj) {
         var item = items[obj['item_id']];
         var item_amount = obj['quantity'] * item.amount;
 
@@ -10279,7 +10289,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return chart_data;
     },
     roomsCheckedPercentage: function roomsCheckedPercentage() {
-      return Object.keys(this.roomsChecked).length ? Math.round(Object.keys(this.roomsChecked).length / this.roomStatuses.rooms.length * 100) : 0;
+      return Object.keys(this.roomsChecked).length ? Math.round(Object.keys(this.roomsChecked).length / this.roomsData.rooms.length * 100) : 0;
     },
     roomsRestockedCount: function roomsRestockedCount() {
       return this.roomsRestocked.length;
@@ -10296,7 +10306,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var rooms = [];
 
       var _loop = function _loop(i) {
-        var room = _this.roomStatuses.rooms.find(function (room) {
+        var room = _this.roomsData.rooms.find(function (room) {
           return room.id == i;
         });
 
@@ -10317,7 +10327,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var rooms = [];
 
       var _loop2 = function _loop2(i) {
-        var room = _this2.roomStatuses.rooms.find(function (room) {
+        var room = _this2.roomsData.rooms.find(function (room) {
           return _this2.roomsRestocked[i].room_id == room.id;
         });
 
@@ -10338,7 +10348,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var rooms = [];
 
       var _loop3 = function _loop3(i) {
-        var room = _this3.roomStatuses.rooms.find(function (room) {
+        var room = _this3.roomsData.rooms.find(function (room) {
           return room.id == i;
         });
 
@@ -10359,7 +10369,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var rooms = [];
 
       var _loop4 = function _loop4(i) {
-        var room = _this4.roomStatuses.rooms.find(function (room) {
+        var room = _this4.roomsData.rooms.find(function (room) {
           return _this4.dndRooms[i].room_id == room.id;
         });
 
@@ -10375,10 +10385,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return rooms;
     },
     dailyLogsData: function dailyLogsData() {
-      var statuses = this.roomStatuses.statuses;
-      var rooms = this.roomStatuses.rooms;
+      var statuses = this.roomsData.statuses;
+      var rooms = this.roomsData.rooms;
       var daily_logs = [];
-      var daily_logs_data = this.roomStatuses.room_statuses.reduce(function (room_status, obj) {
+      var daily_logs_data = this.roomsData.room_statuses.reduce(function (room_status, obj) {
         var _loop5 = function _loop5(i) {
           log = [];
           log['room_status'] = statuses.find(function (status) {
@@ -105792,7 +105802,20 @@ var render = function() {
         attrs: { id: "accordionSidebar" }
       },
       [
-        _vm._m(0),
+        _c(
+          "a",
+          {
+            staticClass:
+              "sidebar-brand d-flex align-items-center justify-content-center"
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "sidebar-brand-text mx-3" }, [
+              _vm._v(_vm._s(_vm.appName))
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c("hr", { staticClass: "sidebar-divider my-0" }),
         _vm._v(" "),
@@ -105895,7 +105918,37 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("li", { staticClass: "nav-item dropdown no-arrow" }, [
-                    _vm._m(4),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link dropdown-toggle",
+                        attrs: {
+                          href: "#",
+                          id: "userDropdown",
+                          role: "button",
+                          "data-toggle": "dropdown",
+                          "aria-haspopup": "true",
+                          "aria-expanded": "false"
+                        }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            staticClass:
+                              "mr-2 d-none d-lg-inline text-gray-600 small"
+                          },
+                          [_vm._v(_vm._s(_vm.userName))]
+                        ),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "img-profile rounded-circle",
+                          attrs: {
+                            src: "https://source.unsplash.com/QAB-WJcbgJk/60x60"
+                          }
+                        })
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -105905,11 +105958,11 @@ var render = function() {
                         attrs: { "aria-labelledby": "userDropdown" }
                       },
                       [
+                        _vm._m(4),
+                        _vm._v(" "),
                         _vm._m(5),
                         _vm._v(" "),
                         _vm._m(6),
-                        _vm._v(" "),
-                        _vm._m(7),
                         _vm._v(" "),
                         _c("div", { staticClass: "dropdown-divider" }),
                         _vm._v(" "),
@@ -105944,7 +105997,15 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(8)
+        _c("footer", { staticClass: "sticky-footer bg-white" }, [
+          _c("div", { staticClass: "container my-auto" }, [
+            _c("div", { staticClass: "copyright text-center my-auto" }, [
+              _c("span", [
+                _vm._v("Copyright © " + _vm._s(_vm.appName) + " 2019")
+              ])
+            ])
+          ])
+        ])
       ]
     )
   ])
@@ -105954,22 +106015,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass:
-          "sidebar-brand d-flex align-items-center justify-content-center"
-      },
-      [
-        _c("div", { staticClass: "sidebar-brand-icon" }, [
-          _c("i", { staticClass: "fas fa-hotel" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "sidebar-brand-text mx-3" }, [
-          _vm._v("HSG Portal ")
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "sidebar-brand-icon" }, [
+      _c("i", { staticClass: "fas fa-hotel" })
+    ])
   },
   function() {
     var _vm = this
@@ -106077,37 +106125,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link dropdown-toggle",
-        attrs: {
-          href: "#",
-          id: "userDropdown",
-          role: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c(
-          "span",
-          { staticClass: "mr-2 d-none d-lg-inline text-gray-600 small" },
-          [_vm._v(" User")]
-        ),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img-profile rounded-circle",
-          attrs: { src: "https://source.unsplash.com/QAB-WJcbgJk/60x60" }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
       _c("i", { staticClass: "fas fa-user fa-sm fa-fw mr-2 text-gray-400" }),
       _vm._v(
@@ -106135,18 +106152,6 @@ var staticRenderFns = [
       _vm._v(
         "\n                            Activity Log\n                            "
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "sticky-footer bg-white" }, [
-      _c("div", { staticClass: "container my-auto" }, [
-        _c("div", { staticClass: "copyright text-center my-auto" }, [
-          _c("span", [_vm._v("Copyright © HSG Portal 2019")])
-        ])
-      ])
     ])
   }
 ]
@@ -110975,9 +110980,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/es/index.js");
 /* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
-/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -110998,26 +111003,19 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-Vue.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"]);
-Vue.component('font-awesome-layers', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeLayers"]);
-Vue.component('font-awesome-layers-text', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeLayersText"]);
 
 
 
 Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0___default.a);
-Vue.component('app', _App_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
-var app_data = JSON.parse(document.getElementById('app-page').getAttribute('room-statuses'));
-_store_index__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('loadRoomStatuses', app_data);
-var router = Object(_router_js__WEBPACK_IMPORTED_MODULE_3__["makeRouter"])();
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
+Vue.component('app', _App_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
+Vue.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"]);
+Vue.component('font-awesome-layers', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeLayers"]);
+Vue.component('font-awesome-layers-text', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeLayersText"]);
+_store_index__WEBPACK_IMPORTED_MODULE_3__["default"].dispatch('loadAllTheData', window.allthedata);
+var router = Object(_router_js__WEBPACK_IMPORTED_MODULE_2__["makeRouter"])();
 var app = new Vue({
   el: '#app',
-  store: _store_index__WEBPACK_IMPORTED_MODULE_4__["default"],
+  store: _store_index__WEBPACK_IMPORTED_MODULE_3__["default"],
   router: router
 });
 
@@ -111809,23 +111807,43 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_3___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    room_statuses: {}
+    user: {},
+    app_name: {},
+    rooms_data: {}
   },
   actions: {
-    loadRoomStatuses: function loadRoomStatuses(_ref, room_statuses) {
-      var commit = _ref.commit,
-          state = _ref.state;
-      commit('mutateRoomStatuses', room_statuses);
+    loadAllTheData: function loadAllTheData(_ref, atd) {
+      var commit = _ref.commit;
+      commit('mutateUser', atd.user);
+      commit('mutateAppName', atd.app_name);
+      commit('mutateRoomsData', atd.rooms_data);
+    },
+    loadRoomStatuses: function loadRoomStatuses(_ref2, rooms_data) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
+      commit('mutateRoomsData', rooms_data);
     }
   },
   mutations: {
-    mutateRoomStatuses: function mutateRoomStatuses(state, room_statuses) {
-      state.room_statuses = room_statuses;
+    mutateUser: function mutateUser(state, user) {
+      state.user = user;
+    },
+    mutateAppName: function mutateAppName(state, app_name) {
+      state.app_name = app_name;
+    },
+    mutateRoomsData: function mutateRoomsData(state, rooms_data) {
+      state.rooms_data = rooms_data;
     }
   },
   getters: {
-    getRoomStatuses: function getRoomStatuses(state) {
-      return state.room_statuses;
+    user: function user(state) {
+      return state.user;
+    },
+    appName: function appName(state) {
+      return state.app_name;
+    },
+    getRoomsData: function getRoomsData(state) {
+      return state.rooms_data;
     }
   }
 }));

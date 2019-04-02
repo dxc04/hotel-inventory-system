@@ -122,14 +122,14 @@
             DailyLogs
         },
         mounted() {
-            console.log(this.roomStatuses.room_statuses)
+            console.log(this.roomsData.room_statuses)
         },
         computed: {
             ...mapGetters({
-                roomStatuses: 'getRoomStatuses'
+                roomsData: 'getRoomsData'
             }),
             roomsChecked() {
-                let rooms = this.roomStatuses.room_statuses.reduce(function (acc, obj) {
+                let rooms = this.roomsData.room_statuses.reduce(function (acc, obj) {
                     var key = obj['room_id'];
                     if (!acc[key]) {
                         acc[key] = [];
@@ -140,32 +140,31 @@
                 return rooms
             },
             roomsRestocked() {
-                let restocked_status = this.roomStatuses.statuses.find(status => status.status_name === 'Restocked')
-                let rooms = this.roomStatuses.room_statuses.filter(room_status => {
+                let restocked_status = this.roomsData.statuses.find(status => status.status_name === 'Restocked')
+                let rooms = this.roomsData.room_statuses.filter(room_status => {
                     return room_status.status.find(status => status == restocked_status.id)
                 })
                 return rooms
             },
             dndRooms() {
-                let dnd_statuses = this.roomStatuses.statuses.reduce((acc, status) => {
+                let dnd_statuses = this.roomsData.statuses.reduce((acc, status) => {
                     if (status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover') {
                         acc.push(status.id)
                     }
                     return acc
                 }, [])
                 
-                let rooms = this.roomStatuses.room_statuses.filter(room_status => {
+                let rooms = this.roomsData.room_statuses.filter(room_status => {
                     let with_dnd = room_status.status.find(status => {
                         let id = parseInt(status)
                         return dnd_statuses.includes(id)
                     })
                     return with_dnd
                 })
-                console.log('dnd', rooms)
                 return rooms
             },
             purchasesByRooms() {
-                let purchases = this.roomStatuses.purchases.reduce(function (acc, obj) {
+                let purchases = this.roomsData.purchases.reduce(function (acc, obj) {
                     var key = obj['room_id'];
                     if (!acc[key]) {
                         acc[key] = [];
@@ -176,13 +175,13 @@
                 return purchases;
             },
             purchasesByItems() {
-                let items = this.roomStatuses.items.reduce(function (acc, obj) {
+                let items = this.roomsData.items.reduce(function (acc, obj) {
                     var key = obj['id']
                     acc[key] = obj
                     return acc
                 }, {})
 
-                let purchases = this.roomStatuses.purchases.reduce(function (purchase_items, obj) {
+                let purchases = this.roomsData.purchases.reduce(function (purchase_items, obj) {
                     let item = items[obj['item_id']]
                     let item_amount = obj['quantity'] * item.amount
                     if (name in purchase_items) {
@@ -210,7 +209,7 @@
             },
             roomsCheckedPercentage() {
                 return Object.keys(this.roomsChecked).length
-                    ? Math.round((Object.keys(this.roomsChecked).length / this.roomStatuses.rooms.length) * 100)
+                    ? Math.round((Object.keys(this.roomsChecked).length / this.roomsData.rooms.length) * 100)
                     : 0
             },
             roomsRestockedCount() {
@@ -225,7 +224,7 @@
             roomsCheckedDetails() {
                 let rooms = []
                 for (let i in this.roomsChecked) {
-                    let room = this.roomStatuses.rooms.find(room => room.id == i)
+                    let room = this.roomsData.rooms.find(room => room.id == i)
                     rooms.push({Room: room.room_name})
                 }
                 return rooms;
@@ -233,7 +232,7 @@
             roomsRestockedDetails() {
                 let rooms = []
                 for (let i in this.roomsRestocked) {
-                    let room = this.roomStatuses.rooms.find(room => this.roomsRestocked[i].room_id == room.id)
+                    let room = this.roomsData.rooms.find(room => this.roomsRestocked[i].room_id == room.id)
                     rooms.push({Room: room.room_name})
                 }
                 return rooms;
@@ -241,7 +240,7 @@
             roomsWithSalesDetails() {
                 let rooms = []
                 for (let i in this.purchasesByRooms) {
-                    let room = this.roomStatuses.rooms.find(room => room.id == i)
+                    let room = this.roomsData.rooms.find(room => room.id == i)
                     rooms.push({Room: room.room_name})
                 }
                 return rooms;
@@ -249,16 +248,16 @@
             dndRoomsDetails() {
                 let rooms = []
                 for (let i in this.dndRooms) {
-                    let room = this.roomStatuses.rooms.find(room => this.dndRooms[i].room_id == room.id)
+                    let room = this.roomsData.rooms.find(room => this.dndRooms[i].room_id == room.id)
                     rooms.push({Room: room.room_name})
                 }
                 return rooms;
             },
             dailyLogsData() {
-                let statuses = this.roomStatuses.statuses
-                let rooms = this.roomStatuses.rooms
+                let statuses = this.roomsData.statuses
+                let rooms = this.roomsData.rooms
                 let daily_logs = []
-                let daily_logs_data = this.roomStatuses.room_statuses.reduce(function (room_status, obj) {
+                let daily_logs_data = this.roomsData.room_statuses.reduce(function (room_status, obj) {
                     for (let i = 0; i < obj.status.length; i++) {
                         var log = []
 

@@ -21,29 +21,18 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 import BootstrapVue from 'bootstrap-vue';
 import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
+import { makeRouter } from './router.js'
+import store from './store/index';
+import App from './App.vue'
 
+Vue.use(BootstrapVue);
+Vue.component('app', App);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 
-import App from './App.vue'
-import { makeRouter } from './router.js'
-import store from './store/index';
-
-Vue.use(BootstrapVue);
-Vue.component('app', App);
-
-const app_data = JSON.parse(document.getElementById('app-page').getAttribute('room-statuses'))
-
-store.dispatch('loadRoomStatuses', app_data)
-
+store.dispatch('loadAllTheData', window.allthedata)
 const router = makeRouter()
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 const app = new Vue({
     el: '#app',
     store,

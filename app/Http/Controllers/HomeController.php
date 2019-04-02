@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\RoomStatus as RoomStatusRepo;
 use App\RoomStatus;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -34,7 +35,11 @@ class HomeController extends Controller
     {
        // dd($this->room_status_repo->getRoomStatusesToday()->toArray());
         return view('layouts.app', [
-            'data' => $this->room_status_repo->getAllTheData()
+            'allthedata' => [
+                'user' => Auth::user(),
+                'app_name' => config('app.name', 'HSG Portal'),
+                'rooms_data' => $this->room_status_repo->getAllTheData(),
+            ]
         ]);
     }
 

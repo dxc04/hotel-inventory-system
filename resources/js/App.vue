@@ -10,7 +10,7 @@
                 <div class="sidebar-brand-icon">
                 <i class="fas fa-hotel"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">HSG Portal <!-- config('app.name', 'HSG Portal') --></div>
+                <div class="sidebar-brand-text mx-3">{{ appName }}</div>
             </a>
 
             <!-- Divider -->
@@ -105,7 +105,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><!-- Auth::user()->name --> User</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ userName }}</span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -146,7 +146,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright &copy; HSG Portal 2019</span>
+                <span>Copyright &copy; {{ appName }} 2019</span>
             </div>
             </div>
         </footer>
@@ -160,59 +160,70 @@
 </template>
 
 <script>
-export default {
-    methods: {
-        logout() {
-            document.getElementById('logout-form').submit()
-        }
-    },
-    mounted() {
-        "use strict"; // Start of use strict
+    import { mapGetters } from 'vuex'
 
-        // Toggle the side navigation
-        $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
-            $("body").toggleClass("sidebar-toggled");
-            $(".sidebar").toggleClass("toggled");
-            if ($(".sidebar").hasClass("toggled")) {
-            $('.sidebar .collapse').collapse('hide');
-            };
-        });
+    export default {
+        mounted() {
+            "use strict"; // Start of use strict
 
-        // Close any open menu accordions when window is resized below 768px
-        $(window).resize(function() {
-            if ($(window).width() < 768) {
-            $('.sidebar .collapse').collapse('hide');
-            };
-        });
+            // Toggle the side navigation
+            $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+                $("body").toggleClass("sidebar-toggled");
+                $(".sidebar").toggleClass("toggled");
+                if ($(".sidebar").hasClass("toggled")) {
+                $('.sidebar .collapse').collapse('hide');
+                };
+            });
 
-        // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
-        $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {
-            if ($(window).width() > 768) {
-            var e0 = e.originalEvent,
-                delta = e0.wheelDelta || -e0.detail;
-            this.scrollTop += (delta < 0 ? 1 : -1) * 30;
-            e.preventDefault();
+            // Close any open menu accordions when window is resized below 768px
+            $(window).resize(function() {
+                if ($(window).width() < 768) {
+                $('.sidebar .collapse').collapse('hide');
+                };
+            });
+
+            // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+            $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {
+                if ($(window).width() > 768) {
+                var e0 = e.originalEvent,
+                    delta = e0.wheelDelta || -e0.detail;
+                this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+                e.preventDefault();
+                }
+            });
+
+            // Scroll to top button appear
+            $(document).on('scroll', function() {
+                var scrollDistance = $(this).scrollTop();
+                if (scrollDistance > 100) {
+                $('.scroll-to-top').fadeIn();
+                } else {
+                $('.scroll-to-top').fadeOut();
+                }
+            });
+
+            // Smooth scrolling using jQuery easing
+            $(document).on('click', 'a.scroll-to-top', function(e) {
+                var $anchor = $(this);
+                $('html, body').stop().animate({
+                scrollTop: ($($anchor.attr('href')).offset().top)
+                }, 1000, 'easeInOutExpo');
+                e.preventDefault();
+            });
+        },
+        methods: {
+            logout() {
+                document.getElementById('logout-form').submit()
             }
-        });
-
-        // Scroll to top button appear
-        $(document).on('scroll', function() {
-            var scrollDistance = $(this).scrollTop();
-            if (scrollDistance > 100) {
-            $('.scroll-to-top').fadeIn();
-            } else {
-            $('.scroll-to-top').fadeOut();
+        },
+        computed: {
+            ...mapGetters([
+                'user',
+                'appName'
+            ]),
+            userName() {
+                return this.user.name
             }
-        });
-
-        // Smooth scrolling using jQuery easing
-        $(document).on('click', 'a.scroll-to-top', function(e) {
-            var $anchor = $(this);
-            $('html, body').stop().animate({
-            scrollTop: ($($anchor.attr('href')).offset().top)
-            }, 1000, 'easeInOutExpo');
-            e.preventDefault();
-        });
+        } 
     }
-}
 </script>
