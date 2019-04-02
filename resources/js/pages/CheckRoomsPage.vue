@@ -1,7 +1,7 @@
 <template>
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Check Rooms</h1>
+        <h1 class="h3 mb-0 text-gray-800">Check Rooms <span v-if="selectedRoom"> - <b>{{ selectedRoom.room_name }}</b></span></h1>
     </div>
     <div class="row mb-3">
         <div class="flex-column col-sm-12 col-md-8">
@@ -51,7 +51,7 @@
                     </b-card-header>
                     <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
                         <b-card-body>
-                        <b-card-text>{{ text }}</b-card-text>
+                            <select-room :rooms="rooms" :floors="floors" @select-room="setSelectedRoom"></select-room>
                         </b-card-body>
                     </b-collapse>
                     </b-card>
@@ -90,30 +90,47 @@
 </template>
 
 <script>
-    import { faFileInvoiceDollar, faMinusSquare, faDoorClosed, faTimesCircle, faCommentDollar, faDollarSign, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
+
+    import SelectRoom from '../components/check_rooms/SelectRoom.vue'
+    import { faFileInvoiceDollar, faMinusSquare, faDoorClosed, faTimesCircle,
+        faCommentDollar, faDollarSign, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
+    import { mapGetters } from 'vuex'
 
     export default {
         name: 'CheckRoomsPage',
+        components: {
+            SelectRoom
+        },
         mounted() {
         },
         data() {
             return {
                 text: `
                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-                brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-                wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-                vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-                synth nesciunt you probably haven't heard of them accusamus labore VHS.
                 `,
                 fileInvoiceDollar: faFileInvoiceDollar,
                 minusSquare: faMinusSquare,
                 doorClosed: faDoorClosed,
                 timesCircle: faTimesCircle,
                 dollarSign: faDollarSign,
-                clipboardCheck: faClipboardCheck
+                clipboardCheck: faClipboardCheck,
+                selectedRoom: null
+            }
+        },
+        computed: {
+            ...mapGetters({
+                roomsData: 'getRoomsData'
+            }),
+            rooms() {
+                return this.roomsData.rooms
+            },
+            floors() {
+                return this.roomsData.floors
+            }
+        },
+        methods: {
+            setSelectedRoom(room) {
+                this.selectedRoom = room
             }
         }
     }

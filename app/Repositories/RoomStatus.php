@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Illuminate\Database\QueryException;
 use Jsdecena\Baserepo\BaseRepository;
 use App\RoomStatus as RoomStatusModel;
+use App\Floor as FloorModel;
 use App\Room as RoomModel; 
 use App\Status as StatusModel;
 use App\Purchase as PurchaseModel;
@@ -37,6 +38,7 @@ class RoomStatus extends BaseRepository
             'rooms' => RoomModel::all()->toArray(),
             'statuses' => StatusModel::all()->toArray(),
             'items' => ItemModel::all()->toArray(),
+            'floors' => FloorModel::all()->toArray(),
         ];
     }
 }
