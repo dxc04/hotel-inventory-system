@@ -81,7 +81,7 @@ Steps:
 ## Built With
 
 * [Laravel](https://laravel.com/) - The web framework used
-* [npm](https://www.npmjs.com/) - Package Management
+* [Vue.js](https://vuejs.org/) - Package Management
 * [LAP](https://lap.kjjdion.com/docs) - Admin System
 * [sb-admin-2](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2) - Frontend UI Template
 
