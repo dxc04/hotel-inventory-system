@@ -107,7 +107,6 @@ Route::patch('admin/config_definitions/update/{config_definition}', 'Admin\Confi
 Route::delete('admin/config_definitions/delete/{config_definition}', 'Admin\ConfigDefinitionController@delete')->name('admin.config_definitions.delete');
 
 
-
 // floors
 Route::get('admin/floors', 'Admin\FloorController@index')->name('admin.floors');
 Route::get('admin/floors/create', 'Admin\FloorController@createForm')->name('admin.floors.create');
@@ -116,7 +115,6 @@ Route::get('admin/floors/read/{floor}', 'Admin\FloorController@read')->name('adm
 Route::get('admin/floors/update/{floor}', 'Admin\FloorController@updateForm')->name('admin.floors.update');
 Route::patch('admin/floors/update/{floor}', 'Admin\FloorController@update');
 Route::delete('admin/floors/delete/{floor}', 'Admin\FloorController@delete')->name('admin.floors.delete');
-
 
 
 // rooms
@@ -130,3 +128,20 @@ Route::delete('admin/rooms/delete/{room}', 'Admin\RoomController@delete')->name(
 Auth::routes();
 
 
+// categories
+Route::get('admin/categories', 'Admin\CategoryController@index')->name('admin.categories');
+Route::get('admin/categories/create', 'Admin\CategoryController@createForm')->name('admin.categories.create');
+Route::post('admin/categories/create', 'Admin\CategoryController@create');
+Route::get('admin/categories/read/{category}', 'Admin\CategoryController@read')->name('admin.categories.read');
+Route::get('admin/categories/update/{category}', 'Admin\CategoryController@updateForm')->name('admin.categories.update');
+Route::patch('admin/categories/update/{category}', 'Admin\CategoryController@update');
+Route::delete('admin/categories/delete/{category}', 'Admin\CategoryController@delete')->name('admin.categories.delete');
+
+// item_categories
+Route::get('admin/item_categories', 'Admin\ItemCategoryController@index')->name('admin.item_categories');
+Route::get('admin/item_categories/create', 'Admin\ItemCategoryController@createForm')->name('admin.item_categories.create');
+Route::post('admin/item_categories/create', 'Admin\ItemCategoryController@create');
+Route::get('admin/item_categories/read/{item_category}', 'Admin\ItemCategoryController@read')->name('admin.item_categories.read');
+Route::get('admin/item_categories/update/{item_category}', 'Admin\ItemCategoryController@updateForm')->name('admin.item_categories.update');
+Route::patch('admin/item_categories/update/{item_category}', 'Admin\ItemCategoryController@update');
+Route::delete('admin/item_categories/delete/{item_category}', 'Admin\ItemCategoryController@delete')->name('admin.item_categories.delete');

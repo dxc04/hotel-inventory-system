@@ -26,6 +26,16 @@
         <a href="{{ route('admin.items') }}"><i class="fal fa-fw fa-box-full mr-3"></i>Items</a>
     </li>
 @endcan
+@can('Read Item Categories')
+    <li{!! request()->is('admin/item_categories') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.item_categories') }}"><i class="fal fa-fw fa-tag mr-3"></i>Item Categories</a>
+    </li>
+@endcan
+@can('Read Categories')
+    <li{!! request()->is('admin/categories') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.categories') }}"><i class="fal fa-fw fa-tags mr-3"></i>Categories</a>
+    </li>
+@endcan
 @can('Read Purchases')
     <li{!! request()->is('admin/purchases') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.purchases') }}"><i class="fal fa-fw fa-credit-card-front mr-3"></i>Purchases</a>
