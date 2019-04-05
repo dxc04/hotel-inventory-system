@@ -49,12 +49,13 @@ class ItemCategoryController extends Controller
     public function create()
     {
         $this->validate(request(), [
-            
+            "item_id" => "required",
+            "category_id" => "required",
         ]);
 
         $item_category = ItemCategory::create(request()->all());
 
-        activity('Created Item Category: ' . $item_category->category_id, request()->all(), $item_category);
+        activity('Created Item Category: ' . $item_category->item_id, request()->all(), $item_category);
         flash(['success', 'Item Category created!']);
 
         if (request()->input('_submit') == 'redirect') {
@@ -78,12 +79,13 @@ class ItemCategoryController extends Controller
     public function update(ItemCategory $item_category)
     {
         $this->validate(request(), [
-            
+            "item_id" => "required",
+            "category_id" => "required",
         ]);
 
         $item_category->update(request()->all());
 
-        activity('Updated Item Category: ' . $item_category->category_id, request()->all(), $item_category);
+        activity('Updated Item Category: ' . $item_category->item_id, request()->all(), $item_category);
         flash(['success', 'Item Category updated!']);
 
         if (request()->input('_submit') == 'redirect') {
@@ -98,7 +100,7 @@ class ItemCategoryController extends Controller
     {
         $item_category->delete();
 
-        activity('Deleted Item Category: ' . $item_category->category_id, $item_category->toArray());
+        activity('Deleted Item Category: ' . $item_category->item_id, $item_category->toArray());
         $flash = ['success', 'Item Category deleted!'];
 
         if (request()->input('_submit') == 'reload_datatables') {

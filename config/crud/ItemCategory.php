@@ -24,6 +24,10 @@ return [
             'migrations' => [
                 'integer:item_id',
             ],
+            'validations' => [
+                'create' => 'required',
+                'update' => 'required',
+            ],
             'relationship' => [
                 'item' => 'belongsTo:App\Item',
             ],
@@ -43,9 +47,12 @@ return [
         ],
 
         'category_id' => [
-            'primary' => true,
             'migrations' => [
                 'integer:category_id',
+            ],
+            'validations' => [
+                'create' => 'required',
+                'update' => 'required',
             ],
             'relationship' => [
                 'category' => 'belongsTo:App\Category',

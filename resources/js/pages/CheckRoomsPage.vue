@@ -92,7 +92,7 @@
                     </b-card-header>
                     <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                         <b-card-body>
-                            <select-items></select-items>
+                            <select-items :categories="categories"></select-items>
                         </b-card-body>
                     </b-collapse>
                     </b-card>
@@ -151,6 +151,9 @@
             },
             floors() {
                 return this.roomsData.floors
+            },
+            categories() {
+                return this.roomsData.categories
             }
         },
         methods: {

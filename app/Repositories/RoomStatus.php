@@ -10,6 +10,8 @@ use App\Room as RoomModel;
 use App\Status as StatusModel;
 use App\Purchase as PurchaseModel;
 use App\Item as ItemModel;
+use App\Category as CategoryModel;
+use App\ItemCategory as ItemCategoryModel;
 use Carbon\Carbon;
 
 /**
@@ -38,6 +40,8 @@ class RoomStatus extends BaseRepository
             'rooms' => RoomModel::all()->toArray(),
             'statuses' => StatusModel::all()->toArray(),
             'items' => ItemModel::all()->toArray(),
+            'categories' => CategoryModel::all()->toArray(),
+            'item_categories' => ItemCategoryModel::all()->toArray(),
             'floors' => FloorModel::all()->toArray(),
         ];
     }

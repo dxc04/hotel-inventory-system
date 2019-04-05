@@ -2,11 +2,8 @@
     <div>
         <b-card no-body>
             <b-tabs card>
-                <b-tab title="Minibar" active>
-                    <b-card-text>Tab Contents 1</b-card-text>
-                </b-tab>
-                <b-tab title="Top Tray">
-                    <b-card-text>Tab Contents 2</b-card-text>
+                <b-tab  v-for="(category, index) in categories" :title="category.category_name" :key="index" active>
+                    <b-card-text><item-category :category_id="category.id"></item-category></b-card-text>
                 </b-tab>
             </b-tabs>
         </b-card>
@@ -14,9 +11,12 @@
 </template>
 
 <script>
-
+    import ItemCategory from '../check_rooms/ItemCategory.vue'
     export default {
         name: 'SelectItems',
+        props: {
+            categories: Array
+        },
         data() {
             return {
                 selected: [], // Must be an array reference!
@@ -27,6 +27,9 @@
                     { text: 'Grape', value: 'grape' }
                 ]
             }
+        },
+        components: {
+            ItemCategory
         },
         mounted() {
 
