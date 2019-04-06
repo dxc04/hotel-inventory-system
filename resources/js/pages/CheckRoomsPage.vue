@@ -3,45 +3,62 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Check Rooms</h1>
     </div>
-    <div class="row mb-3">
+
+    <div class="row ml-3 mb-2">
+        <div class="col-2">
+            <div class="mb-2">
+                <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Room</span></p>
+                <p class="text-lg pl-0 ml-0 pt-0"><span v-if="selectedRoom">{{ selectedRoom.room_name }}</span>&nbsp;</p>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-2">
+                <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Guest</span></p>
+                <p class="text-lg pl-0 ml-0 pt-0"><span v-if="guestName">{{ guestName }}</span>&nbsp;</p>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-2">
+                <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Status</span></p>
+                <p class="text-lg pl-0 ml-0 pt-0"><span v-if="status">{{ status }}&nbsp;</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2">
         <div class="flex-column col-sm-12 col-md-8">
-            <div class="row">
-                <div class="ml-1 mr-4 col-2 justify-center">
-                    <div class="mb-2"><h4><span v-if="selectedRoom">{{ selectedRoom.room_name }}</span>&nbsp;</h4></div>
-                    <div class="mb-2 pl-2 border-left-success"><b>Guest:</b> <span v-if="guestName">{{ guestName }}</span></div>
-                    <div class="mb-2 pl-2 border-left-success"><b>Status:</b> <span v-if="status">{{ status }}</span></div>
-                </div>
-                <div class="mr-4 col-auto text-center justify-center">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#" class="btn btn-primary btn-circle btn-lg">
                         <font-awesome-icon class="justify-center" :icon="fileInvoiceDollar"/>
                     </a>
                     <div class="mt-2">Post Sale</div>
                 </div>
-                <div class="mr-4 col-auto text-center justify-center">
+                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#" class="btn btn-primary btn-circle btn-lg">
                         <font-awesome-icon :icon="minusSquare"/>
                     </a>
                     <div class="mt-2">No Sale</div>
                 </div>
-                <div class="mr-4 col-auto text-center justify-center">
+                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#" class="btn btn-primary btn-circle btn-lg">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a>                    
                     <div class="mt-2">DND Due Out</div>
                 </div>
-                <div class="mr-4 col-auto text-center justify-center">
+                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#" class="btn btn-primary btn-circle btn-lg">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a> 
                     <div class="mt-2">DND Stayover</div>
                 </div>
-                <div class="mr-4 col-auto text-center justify-center">
+                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#" class="btn btn-primary btn-circle btn-lg">
                         <font-awesome-icon :icon="timesCircle"/>
                     </a>                     
                     <div class="mt-2">Item Reject</div>
                 </div>
-                <div class="mr-4  col-auto text-center justify-center">
+                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#" class="btn btn-primary btn-circle btn-lg">
                         <font-awesome-icon :icon="dollarSign"/>
                     </a>  
