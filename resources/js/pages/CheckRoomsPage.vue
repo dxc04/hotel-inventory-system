@@ -170,7 +170,27 @@
                 return this.roomsData.floors
             },
             categories() {
-                return this.roomsData.categories
+                let items = this.roomsData.items
+                let all_item_categories = this.roomsData.item_categories
+                let item_categories = this.roomsData.categories.reduce(function (category, obj) {
+                    let cat = []
+                    cat['category_id'] = obj.id
+                    cat['category_name'] = obj.category_name
+                    cat['items'] = []
+                    
+                    for (let i in all_item_categories) {
+                        let item_category = all_item_categories[i]
+                        if (item_category.category_id == obj.id) {
+                            let item = items.find(item => item_category.item_id == item.id)
+                            cat['items'].push({item_id: item.id, item_amount: item.amount, item_name: item.item_name, item_category_id: item_category.id})
+                        }
+                    }
+                    category[obj.id] = cat
+
+                    return category
+                }, {})
+
+                return item_categories
             }
         },
         methods: {

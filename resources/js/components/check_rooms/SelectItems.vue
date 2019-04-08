@@ -3,7 +3,7 @@
         <b-card no-body>
             <b-tabs card>
                 <b-tab  v-for="(category, index) in categories" :title="category.category_name" :key="index" active>
-                    <b-card-text><item-category :category_id="category.id"></item-category></b-card-text>
+                    <b-card-text><item-category :category="category" @update-selected-items="updateSelectedItems"></item-category></b-card-text>
                 </b-tab>
             </b-tabs>
         </b-card>
@@ -15,17 +15,11 @@
     export default {
         name: 'SelectItems',
         props: {
-            categories: Array
+            categories: Object
         },
         data() {
             return {
-                selected: [], // Must be an array reference!
-                options: [
-                    { text: 'Orange', value: 'orange' },
-                    { text: 'Apple', value: 'apple' },
-                    { text: 'Pineapple', value: 'pineapple' },
-                    { text: 'Grape', value: 'grape' }
-                ]
+                selected: []
             }
         },
         components: {
@@ -43,6 +37,13 @@
             selectStatus() {
                 this.$emit('select-status', this.status)
             },
+            updateSelectedItems(index, value, action) {
+                if (action == 'add') {
+                    this.selected[index] = {item_category_id: index, quantity: value}
+                } else {
+                    this.$delete(this.selected, index)
+                }
+            }
         }
     }
 </script>

@@ -1,32 +1,35 @@
 <template>
-    <div class="row category-item-list">
-        <div class="col col-lg-8">
-            <span>
-                {{ category_id }}
-            </span>
+    <div>
+        <div class="category-item-list" v-for="(item, index) in category.items" :key="index">
+            <item  @update-selected-items="updateSelectedItem" :item="item""></item>
         </div>
-        <div class="col col-lg-2 text-right">
-            <span>
-                
-            </span>
-        </div>
-        <div class="col col-lg-2 text-right">
-            <span>
-                
-            </span>
-        </div>
-
     </div>
 </template>
 
 <script>
+    import Item from '../check_rooms/Item.vue'
+
     export default {
         name: 'ItemCategory',
         props: {
-            category_id: Number
+            category: Array
+        },
+        data() {
+            return {
+                disabled: 0
+            }
+        },
+        components: {
+            Item
         },
         computed: {
             
+        },
+        methods: {
+            updateSelectedItem(index, value, action) {
+                this.$emit('update-selected-items', index, value, action)
+            },          
         }
     }
 </script>
+
