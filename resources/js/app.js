@@ -33,7 +33,6 @@ Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 
 
 store.dispatch('loadAllTheData', window.allthedata)
-store.dispatch('postASale')
 const router = makeRouter()
 const app = new Vue({
     el: '#app',

@@ -26,7 +26,7 @@
     </div>
 
     <div class="row mb-2">
-        <div class="flex-column col-sm-12 col-md-8">
+        <div class="flex-column col-sm-12 col-md-9">
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#" class="btn btn-primary btn-circle btn-lg">
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex-column col-sm-12 col-md-4">
+        <div class="flex-column col-sm-12 col-md-3">
             <div class="row">
                 <div class="ml-5 mr-5 col-auto text-center justify-center">
                     <a href="#" class="btn btn-primary btn-circle btn-lg">
@@ -78,7 +78,7 @@
         </div>
     </div>  
     <div class="row">
-        <div class="flex-column col-sm-12 col-md-8">
+        <div class="flex-column col-sm-12 col-md-9">
             <b-card>
                 <div role="tablist">
                     <b-card no-body class="mb-1">
@@ -109,14 +109,14 @@
                     </b-card-header>
                     <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                         <b-card-body>
-                            <select-items :categories="categories"></select-items>
+                            <select-items :categories="categories" @set-item-categories="setItemCategories"></select-items>
                         </b-card-body>
                     </b-collapse>
                     </b-card>
                 </div>
             </b-card>
         </div>
-        <div class="flex-column col-sm-12 col-md-4">
+        <div class="flex-column col-sm-12 col-md-3">
             <b-card>
 
             </b-card>
@@ -157,6 +157,7 @@
                 selectedRoom: null,
                 guestName: null,
                 status: null,
+                itemCategories: {}
             }
         },
         computed: {
@@ -203,6 +204,9 @@
             selectStatus(status) {
                 this.status = status
             },
+            setItemCategories(item_categories) {
+                this.itemCategories = item_categories
+            }
         }
     }
 </script>

@@ -1,13 +1,11 @@
 <template>
-    <div>
-        <b-card no-body>
-            <b-tabs card>
-                <b-tab  v-for="(category, index) in categories" :title="category.category_name" :key="index" active>
-                    <b-card-text><item-category :category="category" @update-selected-items="updateSelectedItems"></item-category></b-card-text>
-                </b-tab>
-            </b-tabs>
-        </b-card>
-    </div>
+    <b-card no-body>
+        <b-tabs card>
+            <b-tab  v-for="(category, index) in categories" :title="category.category_name" :key="index" active>
+                <b-card-text><item-category :category="category" @update-item="updateItem"></item-category></b-card-text>
+            </b-tab>
+        </b-tabs>
+    </b-card>
 </template>
 
 <script>
@@ -17,11 +15,6 @@
         props: {
             categories: Object
         },
-        data() {
-            return {
-                selected: []
-            }
-        },
         components: {
             ItemCategory
         },
@@ -29,21 +22,26 @@
 
         },
         computed: {
+            itemCategories() {
+                let item_categories = []
+                for (let i in this.categories) {
+                    for (let index in this.categories[i].items) {
+                        let item = this.categories[i].items[index]
+                        item_categories[item.item_category_id] = 0
+                    }
+                }
+
+                return item_categories
+            }
         },
         methods: {
-            inputGuestName() {
-                this.$emit('input-guest-name', this.guest)
+            updateSelectedItems(item_category_id, qty) {
+                this.item_categories[item_category_id] = qty
             },
-            selectStatus() {
-                this.$emit('select-status', this.status)
-            },
-            updateSelectedItems(index, value, action) {
-                if (action == 'add') {
-                    this.selected[index] = {item_category_id: index, quantity: value}
-                } else {
-                    this.$delete(this.selected, index)
-                }
-            }
+            updateItem(item_category_id, qty) {
+                this.itemCategories[item_category_id] = qty
+                this.$emit('set-item-categories', this.itemCategories)
+            }, 
         }
     }
 </script>

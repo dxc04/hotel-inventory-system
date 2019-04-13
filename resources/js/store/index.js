@@ -60,7 +60,7 @@ export default new Vuex.Store({
       .then(res => {
         console.log('post-extra-sale', res)
         // post a re stock first then an extra sale
-        
+
       }).catch(err => {
         console.log(err)
       })
@@ -69,6 +69,7 @@ export default new Vuex.Store({
       axios.post('/api/v1/post-restock')
       .then(res => {
         console.log('post-restock', res)
+        // update replenishments
       }).catch(err => {
         console.log(err)
       })

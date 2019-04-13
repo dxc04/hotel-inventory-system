@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="category-item-list" v-for="(item, index) in category.items" :key="index">
-            <item  @update-selected-items="updateSelectedItem" :item="item""></item>
+            <item @update-item="updateItem" :item="item"></item>
         </div>
     </div>
 </template>
@@ -14,20 +14,14 @@
         props: {
             category: Array
         },
-        data() {
-            return {
-                disabled: 0
-            }
+        mounted() {
         },
         components: {
             Item
         },
-        computed: {
-            
-        },
         methods: {
-            updateSelectedItem(index, value, action) {
-                this.$emit('update-selected-items', index, value, action)
+            updateItem(item_category_id, qty) {
+                this.$emit('update-item', item_category_id, qty)
             },          
         }
     }

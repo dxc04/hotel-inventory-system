@@ -1,37 +1,36 @@
 <template>
-    <div>
-        <div class="row">
-            <div class="col col-lg-4 align-middle">
-                <b-form-checkbox 
-                    :name="'checkbox_' + getItemCategoryId()" 
-                    @change="updateSelectedItem($event)"
-                    v-model="disabled"
-                    :id="'checkbox_' + getItemCategoryId()"
-                    type="checkbox" value=1>
-                </b-form-checkbox>
-            </div>
-
-            <div class="col col-lg-4 text-right align-middle">
-                <span>
-                    {{ formatItemName() }}
-                </span>
-            </div>
-            <div class="col col-lg-4 text-right align-middle">
+    <div class="row">
+        <div class="col-lg-3 col-sm-5 mt-2">
+            <div>{{ itemName }}</div>
+            <div>{{ itemPrice }}</div>
+        </div>
+        <div class="col-lg-9 col-sm-7 m-0">
+            <span class="mr-1">
+                <a href="#" class="btn btn-danger btn-circle btn-sm" @click="minusQty()">
+                    <font-awesome-icon class="justify-center" :icon="minus"/>
+                </a>
+            </span>
+            <span>
                 <b-form-input 
                     :name="'input_' + getItemCategoryId()"
-                    :id="'input_' + getItemCategoryId()"
                     class="quantity" 
                     v-model="quantity"
-                    type="number"
-                    :disabled="disabled != 1"
-                    @change="updateSelectedItems($event)" >
+                    type="text"
+                    @change="updateItem()"
+                >
                 </b-form-input>
-            </div>
+            </span>    
+            <span class="ml-1">
+                <a href="#" class="btn btn-success btn-circle btn-sm" @click="addQty()">
+                    <font-awesome-icon class="justify-center" :icon="plus"/>
+                </a>
+            </span> 
         </div>
     </div>
 </template>
 
 <script>
+    import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
     export default {
         name: 'Item',
         props: {
@@ -40,43 +39,54 @@
         data() {
             return {
                 disabled: 0,
-                quantity: null
+                quantity: 0,
+                minus: faMinus,
+                plus: faPlus,
             }
         },
         computed: {
-            
+            itemName() {
+                return this.item.item_name
+            },
+            itemPrice() {
+                return '(' + this.item.item_amount + ')'
+            },
         },
         methods: {
-            formatItemName() {
-                return this.item.item_name +  ' (' + this.item.item_amount + ')'
+            addQty() {
+                this.quantity++
+                this.updateItem()
             },
-            updateSelectedItems(value) {
-                this.quantity = value
-                this.$emit('update-selected-items', this.item.item_category_id, value, 'add')
-            },
-            updateSelectedItem(value) {
-                if(!value) {
-                    this.quantity = null
-                    this.$emit('update-selected-items', this.item.item_category_id, null, 'remove')
+            minusQty() {
+                if (this.quantity) {
+                    this.quantity--
+                    this.updateItem()
                 }
             },
-            getItemCategoryId()
-            {
+            updateItem() {
+                this.$emit('update-item', this.item.item_category_id, this.quantity)
+            }, 
+            getItemCategoryId() {
                 return this.item.item_category_id
             }
         }
     }
 </script>
 
-<style>
+<style scoped>
 .category-item-list {
         padding: 5px;
         height: 50px;
     }
 
     .quantity {
-        width: 20%;
+        width: 40px;
         display: inline-block;
     }
- 
+    
+    .btn-circle {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
 </style>
