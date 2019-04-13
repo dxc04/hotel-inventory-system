@@ -13,6 +13,7 @@
 
 Route::get('/{any}', 'HomeController@index')->where('any', '^(home|rooms|notes|check-rooms)$');
 Route::get('/', 'HomeController@index');
+Auth::routes();
 
 // suppliers
 Route::get('admin/suppliers', 'Admin\SupplierController@index')->name('admin.suppliers');
@@ -125,7 +126,7 @@ Route::get('admin/rooms/read/{room}', 'Admin\RoomController@read')->name('admin.
 Route::get('admin/rooms/update/{room}', 'Admin\RoomController@updateForm')->name('admin.rooms.update');
 Route::patch('admin/rooms/update/{room}', 'Admin\RoomController@update');
 Route::delete('admin/rooms/delete/{room}', 'Admin\RoomController@delete')->name('admin.rooms.delete');
-Auth::routes();
+
 
 
 // categories
@@ -145,3 +146,4 @@ Route::get('admin/item_categories/read/{item_category}', 'Admin\ItemCategoryCont
 Route::get('admin/item_categories/update/{item_category}', 'Admin\ItemCategoryController@updateForm')->name('admin.item_categories.update');
 Route::patch('admin/item_categories/update/{item_category}', 'Admin\ItemCategoryController@update');
 Route::delete('admin/item_categories/delete/{item_category}', 'Admin\ItemCategoryController@delete')->name('admin.item_categories.delete');
+

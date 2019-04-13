@@ -11,7 +11,7 @@ use Kjjdion\LaravelAdminPanel\Traits\UserTimezone;
 
 class User extends Authenticatable
 {
-    use Notifiable, AdminUser, DynamicFillable, UserTimezone;
+    use Notifiable, AdminUser, DynamicFillable, UserTimezone, \Laravel\Passport\HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
