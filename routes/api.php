@@ -18,12 +18,12 @@ use Illuminate\Http\Request;
 //});
 
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
-    Route::get('post-a-sale', 'Api\AppController@postASale');
-    Route::get('post-no-sale', 'Api\AppController@postNoSale');
-    Route::get('post-dnd-due-out', 'Api\AppController@postDNDDueOut');
-    Route::get('post-dnd-stayover', 'Api\AppController@postDNDStayover');
-    Route::get('post-extra-sale', 'Api\AppController@postExtraSale');
-    Route::get('post-restock', 'Api\AppController@postRestock');
+    Route::post('post-a-sale', 'Api\AppController@postASale');
+    Route::post('post-no-sale', 'Api\AppController@postNoSale');
+    Route::post('post-dnd-due-out', 'Api\AppController@postDNDDueOut');
+    Route::post('post-dnd-stayover', 'Api\AppController@postDNDStayover');
+    Route::post('post-extra-sale', 'Api\AppController@postExtraSale');
+    Route::post('post-restock', 'Api\AppController@postRestock');
 });
 
 
