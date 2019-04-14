@@ -29,37 +29,37 @@
         <div class="flex-column col-sm-12 col-md-9">
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postASale()">
                         <font-awesome-icon class="justify-center" :icon="fileInvoiceDollar"/>
                     </a>
                     <div class="mt-2">Post Sale</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postNoSale()">
                         <font-awesome-icon :icon="minusSquare"/>
                     </a>
                     <div class="mt-2">No Sale</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postDNDDueOut()">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a>                    
                     <div class="mt-2">DND Due Out</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postDNDStayover()">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a> 
                     <div class="mt-2">DND Stayover</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postAnItemReject()">
                         <font-awesome-icon :icon="timesCircle"/>
                     </a>                     
                     <div class="mt-2">Item Reject</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postAnExtraSale()">
                         <font-awesome-icon :icon="dollarSign"/>
                     </a>  
                     <div class="mt-2">Extra Sale</div>
@@ -69,7 +69,7 @@
         <div class="flex-column col-sm-12 col-md-3">
             <div class="row">
                 <div class="ml-5 mr-5 col-auto text-center justify-center">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postARestock()">
                         <font-awesome-icon :icon="clipboardCheck"/>
                     </a>  
                     <div class="mt-2">Restock</div>
@@ -132,7 +132,7 @@
     import SelectItems from '../components/check_rooms/SelectItems.vue'
     import { faFileInvoiceDollar, faMinusSquare, faDoorClosed, faTimesCircle,
         faCommentDollar, faDollarSign, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
-    import { mapGetters } from 'vuex'
+    import { mapGetters, mapActions } from 'vuex'
 
     export default {
         name: 'CheckRoomsPage',
@@ -195,6 +195,15 @@
             }
         },
         methods: {
+            ...mapActions([
+                'postASale',
+                'postNoSale',
+                'postDNDDueOut',
+                'postDNDStayover',
+                'postAnItemReject',
+                'postAnExtraSale',
+                'postARestock'
+            ]),
             setSelectedRoom(room) {
                 this.selectedRoom = room
             },

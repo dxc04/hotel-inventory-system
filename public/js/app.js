@@ -10526,7 +10526,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return item_categories;
     }
   }),
-  methods: {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapActions"])(['postASale', 'postNoSale', 'postDNDDueOut', 'postDNDStayover', 'postAnItemReject', 'postAnExtraSale', 'postARestock']), {
     setSelectedRoom: function setSelectedRoom(room) {
       this.selectedRoom = room;
     },
@@ -10539,7 +10539,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setItemCategories: function setItemCategories(item_categories) {
       this.itemCategories = item_categories;
     }
-  }
+  })
 });
 
 /***/ }),
@@ -107392,7 +107392,12 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-primary btn-circle btn-lg",
-                  attrs: { href: "#" }
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.postASale()
+                    }
+                  }
                 },
                 [
                   _c("font-awesome-icon", {
@@ -107417,7 +107422,12 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-primary btn-circle btn-lg",
-                  attrs: { href: "#" }
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.postNoSale()
+                    }
+                  }
                 },
                 [_c("font-awesome-icon", { attrs: { icon: _vm.minusSquare } })],
                 1
@@ -107437,7 +107447,12 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-primary btn-circle btn-lg",
-                  attrs: { href: "#" }
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.postDNDDueOut()
+                    }
+                  }
                 },
                 [_c("font-awesome-icon", { attrs: { icon: _vm.doorClosed } })],
                 1
@@ -107457,7 +107472,12 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-primary btn-circle btn-lg",
-                  attrs: { href: "#" }
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.postDNDStayover()
+                    }
+                  }
                 },
                 [_c("font-awesome-icon", { attrs: { icon: _vm.doorClosed } })],
                 1
@@ -107477,7 +107497,12 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-primary btn-circle btn-lg",
-                  attrs: { href: "#" }
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.postAnItemReject()
+                    }
+                  }
                 },
                 [_c("font-awesome-icon", { attrs: { icon: _vm.timesCircle } })],
                 1
@@ -107497,7 +107522,12 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-primary btn-circle btn-lg",
-                  attrs: { href: "#" }
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.postAnExtraSale()
+                    }
+                  }
                 },
                 [_c("font-awesome-icon", { attrs: { icon: _vm.dollarSign } })],
                 1
@@ -107519,7 +107549,12 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-primary btn-circle btn-lg",
-                  attrs: { href: "#" }
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.postARestock()
+                    }
+                  }
                 },
                 [
                   _c("font-awesome-icon", {
@@ -113341,8 +113376,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.min.js");
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_axios__WEBPACK_IMPORTED_MODULE_3__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -113355,7 +113388,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODUL
     app_name: {},
     rooms_data: {}
   },
-  actions: _defineProperty({
+  actions: {
     loadAllTheData: function loadAllTheData(_ref, atd) {
       var commit = _ref.commit;
       commit('mutateUser', atd.user);
@@ -113400,22 +113433,31 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODUL
         console.log(err);
       });
     },
-    postExtraSale: function postExtraSale(_ref7) {
+    postAnItemReject: function postAnItemReject(_ref7) {
       var commit = _ref7.commit;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/v1/post-extra-sale').then(function (res) {
-        console.log('post-extra-sale', res); // post a re stock first then an extra sale
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/v1/post-an-item-reject').then(function (res) {
+        console.log('post-an-item-reject', res); // post a re stock first then an extra sale
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    postAnExtraSale: function postAnExtraSale(_ref8) {
+      var commit = _ref8.commit;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/v1/post-an-extra-sale').then(function (res) {
+        console.log('post-an-extra-sale', res); // post a re stock first then an extra sale
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    postARestock: function postARestock(_ref9) {
+      var commit = _ref9.commit;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/v1/post-a-restock').then(function (res) {
+        console.log('post-a-restock', res); // update replenishments
       }).catch(function (err) {
         console.log(err);
       });
     }
-  }, "postExtraSale", function postExtraSale(_ref8) {
-    var commit = _ref8.commit;
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/v1/post-restock').then(function (res) {
-      console.log('post-restock', res); // update replenishments
-    }).catch(function (err) {
-      console.log(err);
-    });
-  }),
+  },
   mutations: {
     mutateUser: function mutateUser(state, user) {
       state.user = user;

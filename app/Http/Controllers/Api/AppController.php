@@ -38,12 +38,17 @@ class AppController extends Controller
         return response()->json(['hello' => 'Dixie']);
     }
 
-    public function postExtraSale()
+    public function postAnItemReject()
     {
         return response()->json(['hello' => 'Dixie']);        
     }
 
-    public function postRestock()
+    public function postAnExtraSale()
+    {
+        return response()->json(['hello' => 'Dixie']);        
+    }
+
+    public function postARestock()
     {
         return response()->json(['hello' => 'Dixie']);        
     }

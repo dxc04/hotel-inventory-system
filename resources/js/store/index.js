@@ -55,20 +55,30 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    postExtraSale({ commit }) {
-      axios.post('/api/v1/post-extra-sale')
+    postAnItemReject({ commit }) {
+      axios.post('/api/v1/post-an-item-reject')
       .then(res => {
-        console.log('post-extra-sale', res)
+        console.log('post-an-item-reject', res)
         // post a re stock first then an extra sale
 
       }).catch(err => {
         console.log(err)
       })
     },
-    postExtraSale({ commit }) {
-      axios.post('/api/v1/post-restock')
+    postAnExtraSale({ commit }) {
+      axios.post('/api/v1/post-an-extra-sale')
       .then(res => {
-        console.log('post-restock', res)
+        console.log('post-an-extra-sale', res)
+        // post a re stock first then an extra sale
+
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    postARestock({ commit }) {
+      axios.post('/api/v1/post-a-restock')
+      .then(res => {
+        console.log('post-a-restock', res)
         // update replenishments
       }).catch(err => {
         console.log(err)
