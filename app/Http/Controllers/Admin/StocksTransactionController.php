@@ -21,7 +21,7 @@ class StocksTransactionController extends Controller
     public function index(Builder $builder)
     {
         if (request()->ajax()) {
-            $stocks_transactions = StocksTransaction::query()->with('supplier', 'purchase');
+            $stocks_transactions = StocksTransaction::query()->with('sale', 'purchase');
             $datatable = datatables($stocks_transactions)
                 ->editColumn('actions', function ($stocks_transaction) {
                     return view('admin.stocks_transactions.datatable.actions', compact('stocks_transaction'));
@@ -34,7 +34,7 @@ class StocksTransactionController extends Controller
         $html = $builder->columns([
             ['title' => 'Quantity', 'data' => 'quantity'],
             ['title' => 'Transaction Type', 'data' => 'transaction_type'],
-            ['title' => 'Supplier', 'data' => 'supplier.supplier_name'],
+            ['title' => 'Sale', 'data' => 'sale_id'],
             ['title' => 'Purchase', 'data' => 'purchase_id'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
@@ -53,7 +53,7 @@ class StocksTransactionController extends Controller
         $this->validate(request(), [
             "quantity" => "required",
             "transaction_type" => "required|in:Item Supplied,Room Replenishment,Purchase,Reject",
-            "supplier_id" => "required|exists:suppliers,id",
+            "sale_id" => "required|exists:sales,id",
             "purchase_id" => "required|exists:purchases,id",
             "notes" => "required|min:10",
         ]);
@@ -86,7 +86,7 @@ class StocksTransactionController extends Controller
         $this->validate(request(), [
             "quantity" => "required",
             "transaction_type" => "required|in:Item Supplied,Room Replenishment,Purchase,Reject",
-            "supplier_id" => "required|exists:suppliers,id",
+            "sale_id" => "required|exists:sales,id",
             "purchase_id" => "required|exists:purchases,id",
             "notes" => "required|min:10",
         ]);

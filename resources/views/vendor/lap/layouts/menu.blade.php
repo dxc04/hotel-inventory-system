@@ -1,6 +1,11 @@
 <li{!! request()->is('admin/dashboard') ? ' class="active"' : '' !!}>
     <a href="{{ route('admin.dashboard') }}"><i class="fal fa-fw fa-tachometer mr-3"></i>Dashboard</a>
 </li>
+@can('Read Sales')
+    <li{!! request()->is('admin/sales') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.sales') }}"><i class="fal fa-fw fa-dollar-sign mr-3"></i>Sales</a>
+    </li>
+@endcan
 @can('Read Rooms')
     <li{!! request()->is('admin/rooms') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.rooms') }}"><i class="fal fa-fw fa-hotel mr-3"></i>Rooms</a>

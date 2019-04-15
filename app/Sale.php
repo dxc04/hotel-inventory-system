@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 use Kjjdion\LaravelAdminPanel\Traits\DynamicFillable;
 use Kjjdion\LaravelAdminPanel\Traits\UserTimezone;
 
-class StocksTransaction extends Eloquent
+class Sale extends Eloquent
 {
     use DynamicFillable, UserTimezone;
 
     
 
-    public function sale()
+    public function room()
     {
-        return $this->belongsTo('App\Sale');
+        return $this->belongsTo('App\Room');
     }
 
-    public function purchase()
+    public function item()
     {
-        return $this->belongsTo('App\Purchase');
+        return $this->belongsTo('App\ItemCategory');
     }
 
     

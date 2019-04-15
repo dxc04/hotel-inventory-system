@@ -11,7 +11,7 @@
         <div class="list-group">
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="room_id" class="col-md-2 col-form-label">Room</label>
+                    <label for="room_id" class="col-md-2 col-form-label">Room Id</label>
                     <div class="col-md-8">
                         <select name="room_id" id="room_id" class="form-control">
                             <option value=""></option>
@@ -25,7 +25,7 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="item_id" class="col-md-2 col-form-label">Item</label>
+                    <label for="item_id" class="col-md-2 col-form-label">Item Id</label>
                     <div class="col-md-8">
                         <select name="item_id" id="item_id" class="form-control">
                             <option value=""></option>
