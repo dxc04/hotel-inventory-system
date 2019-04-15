@@ -33,12 +33,12 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="supplier_id" class="col-md-2 col-form-label">Supplier</label>
+                    <label for="sale_id" class="col-md-2 col-form-label">Sale Id</label>
                     <div class="col-md-8">
-                        <select name="supplier_id" id="supplier_id" class="form-control">
+                        <select name="sale_id" id="sale_id" class="form-control">
                             <option value=""></option>
-                            @foreach(app('App\Supplier')->orderBy('supplier_name')->get() as $model)
-                                <option value="{{ $model->id }}">{{ $model->supplier_name }}</option>
+                            @foreach(app('App\Sale')->orderBy('id')->get() as $model)
+                                <option value="{{ $model->id }}">{{ $model->id }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -47,7 +47,7 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="purchase_id" class="col-md-2 col-form-label">Purchase</label>
+                    <label for="purchase_id" class="col-md-2 col-form-label">Purchase Id</label>
                     <div class="col-md-8">
                         <select name="purchase_id" id="purchase_id" class="form-control">
                             <option value=""></option>

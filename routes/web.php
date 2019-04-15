@@ -147,3 +147,13 @@ Route::get('admin/item_categories/update/{item_category}', 'Admin\ItemCategoryCo
 Route::patch('admin/item_categories/update/{item_category}', 'Admin\ItemCategoryController@update');
 Route::delete('admin/item_categories/delete/{item_category}', 'Admin\ItemCategoryController@delete')->name('admin.item_categories.delete');
 
+
+
+// sales
+Route::get('admin/sales', 'Admin\SaleController@index')->name('admin.sales');
+Route::get('admin/sales/create', 'Admin\SaleController@createForm')->name('admin.sales.create');
+Route::post('admin/sales/create', 'Admin\SaleController@create');
+Route::get('admin/sales/read/{sale}', 'Admin\SaleController@read')->name('admin.sales.read');
+Route::get('admin/sales/update/{sale}', 'Admin\SaleController@updateForm')->name('admin.sales.update');
+Route::patch('admin/sales/update/{sale}', 'Admin\SaleController@update');
+Route::delete('admin/sales/delete/{sale}', 'Admin\SaleController@delete')->name('admin.sales.delete');

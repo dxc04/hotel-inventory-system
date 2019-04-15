@@ -55,28 +55,28 @@ return [
             ],
         ],
 
-        'supplier_id' => [
+        'sale_id' => [
             'primary' => true,
             'migrations' => [
-                'integer:supplier_id',
+                'integer:sale_id',
             ],
             'relationship' => [
-                'supplier' => 'belongsTo:App\Supplier',
+                'sale' => 'belongsTo:App\Sale',
             ],
             'validations' => [
-                'create' => 'required|exists:suppliers,id',
-                'update' => 'required|exists:suppliers,id',
+                'create' => 'required|exists:sales,id',
+                'update' => 'required|exists:sales,id',
             ],
             'datatable' => [
-                'title' => 'Supplier',
-                'data' => 'supplier.supplier_name',
+                'title' => 'Sale',
+                'data' => 'sale_id',
             ],
             'input' => [
-                'label' => 'Supplier',
+                'label' => 'Sale ID',
                 'type' => 'select',
                 'options' => [
-                    'app:App\Supplier|orderBy:supplier_name|get' => [
-                        'id' => 'supplier_name',
+                    'app:App\Sale|orderBy:id|get' => [
+                        'id' => 'id',
                     ],
                 ],
             ],
@@ -99,7 +99,7 @@ return [
                 'data' => 'purchase_id',
             ],
             'input' => [
-                'label' => 'Purchase',
+                'label' => 'Purchase ID',
                 'type' => 'select',
                 'options' => [
                     'app:App\Purchase|orderBy:id|get' => [

@@ -44,8 +44,8 @@
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Supplier Id</div>
-                <div class="col-md-8">{{ $stocks_transaction->supplier_id }}</div>
+                <div class="col-md-2">Sale Id</div>
+                <div class="col-md-8">{{ $stocks_transaction->sale_id }}</div>
             </div>
         </div>
 

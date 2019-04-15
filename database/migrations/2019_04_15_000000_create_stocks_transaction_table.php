@@ -13,7 +13,7 @@ class CreateStocksTransactionTable extends Migration
             $table->increments('id');
             $table->integer('quantity');
             $table->string('transaction_type');
-            $table->integer('supplier_id');
+            $table->integer('sale_id');
             $table->integer('purchase_id');
             $table->text('notes');
             $table->timestamps();
