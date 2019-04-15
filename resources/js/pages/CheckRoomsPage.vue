@@ -35,19 +35,19 @@
                     <div class="mt-2">Post Sale</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postNoSale()">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postNoSale(selectedRoom)">
                         <font-awesome-icon :icon="minusSquare"/>
                     </a>
                     <div class="mt-2">No Sale</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postDNDDueOut()">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postDNDDueOut(selectedRoom)">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a>                    
                     <div class="mt-2">DND Due Out</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postDNDStayover()">
+                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postDNDStayover(selectedRoom)">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a> 
                     <div class="mt-2">DND Stayover</div>

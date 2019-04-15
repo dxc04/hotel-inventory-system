@@ -45,4 +45,17 @@ class RoomStatus extends BaseRepository
             'floors' => FloorModel::all()->toArray(),
         ];
     }
+
+    public function postRoomStatus($room_id, $status_id)
+    {
+        $room_status = RoomStatusModel::firstOrCreate(['room_id' => $room_id]);
+
+        $statuses = $room_status->status ? $room_status->status : [];
+        if (!in_array($status_id, $statuses)) {
+            $statuses[] = $status_id;
+        }
+
+        $room_status->status = $statuses;
+        $room_status->save();
+    }
 }

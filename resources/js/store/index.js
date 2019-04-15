@@ -31,26 +31,26 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    postNoSale({ commit }) {
-      axios.post('/api/v1/post-no-sale')
+    postNoSale({ commit }, selected_room) {
+      axios.post('/api/v1/post-no-sale', {'selected_room': selected_room.id})
       .then(res => {
-        console.log('post-no-sale', res)
+        commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
     },
-    postDNDDueOut({ commit }) {
-      axios.post('/api/v1/post-dnd-due-out')
+    postDNDDueOut({ commit }, selected_room) {
+      axios.post('/api/v1/post-dnd-due-out', {'selected_room': selected_room.id})
       .then(res => {
-        console.log('post-dnd-due-out', res)
+        commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
     },
-    postDNDStayover({ commit }) {
-      axios.post('/api/v1/post-dnd-stayover')
+    postDNDStayover({ commit }, selected_room) {
+      axios.post('/api/v1/post-dnd-stayover', {'selected_room': selected_room.id})
       .then(res => {
-        console.log('post-dnd-stayover', res)
+        commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })

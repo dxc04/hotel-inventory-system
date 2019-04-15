@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Status;
+use App\RoomStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\RoomStatus as RoomStatusRepo;
 use Auth;
 
 class AppController extends Controller
@@ -13,8 +16,11 @@ class AppController extends Controller
      *
      * @return void
      */
+    private $room_status_repo;
+
     public function __construct()
     {
+        $this->room_status_repo = new RoomStatusRepo(new RoomStatus());
         //$this->middleware('api');
     }
 
@@ -25,17 +31,30 @@ class AppController extends Controller
 
     public function postNoSale()
     {
-        return response()->json(['hello' => 'Dixie']);
+        $status_id = Status::where('status_key', 'no_sale')->pluck('id')->first();
+        $room_id = request('selected_room');
+
+        $this->room_status_repo->postRoomStatus($room_id, $status_id);
+        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
     }
 
     public function postDNDDueOut()
     {
-        return response()->json(['hello' => 'Dixie']);
+        $status_id = Status::where('status_key', 'dnd_due_out')->pluck('id')->first();
+        $room_id = request('selected_room');
+
+        $this->room_status_repo->postRoomStatus($room_id, $status_id);
+        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
     }
 
     public function postDNDStayover()
     {
-        return response()->json(['hello' => 'Dixie']);
+        $status_id = Status::where('status_key', 'dnd_stayover')->pluck('id')->first();
+        $room_id = request('selected_room');
+
+        $this->room_status_repo->postRoomStatus($room_id, $status_id);
+        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
+
     }
 
     public function postAnItemReject()
