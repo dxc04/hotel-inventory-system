@@ -11,10 +11,9 @@ class CreateStocksTransactionTable extends Migration
         // create table
         Schema::create('stocks_transactions', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('transaction_key');
             $table->integer('quantity');
-            $table->string('transaction_type');
-            $table->integer('sale_id');
-            $table->integer('purchase_id');
+            $table->integer('remote_id');
             $table->text('notes');
             $table->timestamps();
         });

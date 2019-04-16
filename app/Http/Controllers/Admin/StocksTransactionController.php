@@ -21,7 +21,7 @@ class StocksTransactionController extends Controller
     public function index(Builder $builder)
     {
         if (request()->ajax()) {
-            $stocks_transactions = StocksTransaction::query()->with('sale', 'purchase');
+            $stocks_transactions = StocksTransaction::query();
             $datatable = datatables($stocks_transactions)
                 ->editColumn('actions', function ($stocks_transaction) {
                     return view('admin.stocks_transactions.datatable.actions', compact('stocks_transaction'));
@@ -32,10 +32,9 @@ class StocksTransactionController extends Controller
         }
 
         $html = $builder->columns([
+            ['title' => 'Transaction Type', 'data' => 'transaction_key'],
             ['title' => 'Quantity', 'data' => 'quantity'],
-            ['title' => 'Transaction Type', 'data' => 'transaction_type'],
-            ['title' => 'Sale', 'data' => 'sale_id'],
-            ['title' => 'Purchase', 'data' => 'purchase_id'],
+            ['title' => 'Remote ID', 'data' => 'remote_id'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
         $html->setTableAttribute('id', 'stocks_transactions_datatable');
@@ -51,16 +50,15 @@ class StocksTransactionController extends Controller
     public function create()
     {
         $this->validate(request(), [
+            "transaction_key" => "required|in:sale,purchase,replenishment,room-stock-reject,item-stock-reject",
             "quantity" => "required",
-            "transaction_type" => "required|in:Item Supplied,Room Replenishment,Purchase,Reject",
-            "sale_id" => "required|exists:sales,id",
-            "purchase_id" => "required|exists:purchases,id",
-            "notes" => "required|min:10",
+            "remote_id" => "required|integer",
+            "notes" => "required|min:250",
         ]);
 
         $stocks_transaction = StocksTransaction::create(request()->all());
 
-        activity('Created Stocks Transaction: ' . $stocks_transaction->purchase_id, request()->all(), $stocks_transaction);
+        activity('Created Stocks Transaction: ' . $stocks_transaction->remote_id, request()->all(), $stocks_transaction);
         flash(['success', 'Stocks Transaction created!']);
 
         if (request()->input('_submit') == 'redirect') {
@@ -84,16 +82,15 @@ class StocksTransactionController extends Controller
     public function update(StocksTransaction $stocks_transaction)
     {
         $this->validate(request(), [
+            "transaction_key" => "required|in:sale,purchase,replenishment,room-stock-reject,item-stock-reject",
             "quantity" => "required",
-            "transaction_type" => "required|in:Item Supplied,Room Replenishment,Purchase,Reject",
-            "sale_id" => "required|exists:sales,id",
-            "purchase_id" => "required|exists:purchases,id",
-            "notes" => "required|min:10",
+            "remote_id" => "required|integer",
+            "notes" => "required|min:250",
         ]);
 
         $stocks_transaction->update(request()->all());
 
-        activity('Updated Stocks Transaction: ' . $stocks_transaction->purchase_id, request()->all(), $stocks_transaction);
+        activity('Updated Stocks Transaction: ' . $stocks_transaction->remote_id, request()->all(), $stocks_transaction);
         flash(['success', 'Stocks Transaction updated!']);
 
         if (request()->input('_submit') == 'redirect') {
@@ -108,7 +105,7 @@ class StocksTransactionController extends Controller
     {
         $stocks_transaction->delete();
 
-        activity('Deleted Stocks Transaction: ' . $stocks_transaction->purchase_id, $stocks_transaction->toArray());
+        activity('Deleted Stocks Transaction: ' . $stocks_transaction->remote_id, $stocks_transaction->toArray());
         $flash = ['success', 'Stocks Transaction deleted!'];
 
         if (request()->input('_submit') == 'reload_datatables') {

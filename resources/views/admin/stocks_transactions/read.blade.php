@@ -30,6 +30,13 @@
 
         <div class="list-group-item">
             <div class="row">
+                <div class="col-md-2">Transaction Key</div>
+                <div class="col-md-8">{{ $stocks_transaction->transaction_key }}</div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="row">
                 <div class="col-md-2">Quantity</div>
                 <div class="col-md-8">{{ $stocks_transaction->quantity }}</div>
             </div>
@@ -37,22 +44,8 @@
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Transaction Type</div>
-                <div class="col-md-8">{{ $stocks_transaction->transaction_type }}</div>
-            </div>
-        </div>
-
-        <div class="list-group-item">
-            <div class="row">
-                <div class="col-md-2">Sale Id</div>
-                <div class="col-md-8">{{ $stocks_transaction->sale_id }}</div>
-            </div>
-        </div>
-
-        <div class="list-group-item">
-            <div class="row">
-                <div class="col-md-2">Purchase Id</div>
-                <div class="col-md-8">{{ $stocks_transaction->purchase_id }}</div>
+                <div class="col-md-2">Remote Id</div>
+                <div class="col-md-8">{{ $stocks_transaction->remote_id }}</div>
             </div>
         </div>
 

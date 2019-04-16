@@ -19,6 +19,30 @@ return [
     // model attributes
     'attributes' => [
 
+        'transaction_key' => [
+            'migrations' => [
+                'string:transaction_key',
+            ],
+            'validations' => [
+                'create' => 'required|in:sale,purchase,replenishment,room-stock-reject,item-stock-reject',
+                'update' => 'required|in:sale,purchase,replenishment,room-stock-reject,item-stock-reject',
+            ],
+            'datatable' => [
+                'title' => 'Transaction Type',
+                'data' => 'transaction_key',
+            ],
+            'input' => [
+                'type' => 'select',
+                'options' => [
+                    'sale' => 'Sale',
+                    'purchase' => 'Purchase',
+                    'replenishment' => 'Room Replenishment',
+                    'room-stock-reject' => 'Room Stock Reject',
+                    'item-stock-reject' => 'Item Stock Reject'
+                ],
+            ],
+        ],
+
         'quantity' => [
             'primary' => true,
             'migrations' => [
@@ -37,75 +61,21 @@ return [
             ],
         ],
 
-        'transaction_type' => [
-            'migrations' => [
-                'string:transaction_type',
-            ],
-            'validations' => [
-                'create' => 'required|in:Item Supplied,Room Replenishment,Purchase,Reject',
-                'update' => 'required|in:Item Supplied,Room Replenishment,Purchase,Reject',
-            ],
-            'datatable' => [
-                'title' => 'Transaction Type',
-                'data' => 'transaction_type',
-            ],
-            'input' => [
-                'type' => 'select',
-                'options' => ['Item Supplied','Room Replenishment','Purchase','Room Stock Reject', 'Item Stock Reject'],
-            ],
-        ],
-
-        'sale_id' => [
+        'remote_id' => [
             'primary' => true,
             'migrations' => [
-                'integer:sale_id',
-            ],
-            'relationship' => [
-                'sale' => 'belongsTo:App\Sale',
+                'integer:remote_id',
             ],
             'validations' => [
-                'create' => 'required|exists:sales,id',
-                'update' => 'required|exists:sales,id',
+                'create' => 'required|integer',
+                'update' => 'required|integer',
             ],
             'datatable' => [
-                'title' => 'Sale',
-                'data' => 'sale_id',
+                'title' => 'Remote ID',
+                'data' => 'remote_id',
             ],
             'input' => [
-                'label' => 'Sale ID',
-                'type' => 'select',
-                'options' => [
-                    'app:App\Sale|orderBy:id|get' => [
-                        'id' => 'id',
-                    ],
-                ],
-            ],
-        ],
-
-        'purchase_id' => [
-            'primary' => true,
-            'migrations' => [
-                'integer:purchase_id',
-            ],
-            'relationship' => [
-                'purchase' => 'belongsTo:App\Purchase',
-            ],
-            'validations' => [
-                'create' => 'required|exists:purchases,id',
-                'update' => 'required|exists:purchases,id',
-            ],
-            'datatable' => [
-                'title' => 'Purchase',
-                'data' => 'purchase_id',
-            ],
-            'input' => [
-                'label' => 'Purchase ID',
-                'type' => 'select',
-                'options' => [
-                    'app:App\Purchase|orderBy:id|get' => [
-                        'id' => 'id',
-                    ],
-                ],
+                'type' => 'text',
             ],
         ],
 
@@ -114,8 +84,8 @@ return [
                 'text:notes',
             ],
             'validations' => [
-                'create' => 'required|min:10',
-                'update' => 'required|min:10',
+                'create' => 'required|min:250',
+                'update' => 'required|min:250',
             ],
             'input' => [
                 'type' => 'textarea',

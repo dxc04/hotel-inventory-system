@@ -10,6 +10,20 @@
         <div class="list-group">
             <div class="list-group-item">
                 <div class="form-group row mb-0">
+                    <label for="transaction_key" class="col-md-2 col-form-label">Transaction Key</label>
+                    <div class="col-md-8">
+                        <select name="transaction_key" id="transaction_key" class="form-control">
+                            <option value=""></option>
+                            @foreach(['sale' => 'Sale', 'purchase' => 'Purchase', 'replenishment' => 'Room Replenishment', 'room-stock-reject' => 'Room Stock Reject', 'item-stock-reject' => 'Item Stock Reject'] as $value => $label)
+                                <option value="{{ $value }}">{{ $label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-group row mb-0">
                     <label for="quantity" class="col-md-2 col-form-label">Quantity</label>
                     <div class="col-md-8">
                         <input type="text" name="quantity" id="quantity" class="form-control">
@@ -19,42 +33,9 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="transaction_type" class="col-md-2 col-form-label">Transaction Type</label>
+                    <label for="remote_id" class="col-md-2 col-form-label">Remote Id</label>
                     <div class="col-md-8">
-                        <select name="transaction_type" id="transaction_type" class="form-control">
-                            <option value=""></option>
-                            @foreach(['Item Supplied', 'Room Replenishment', 'Purchase', 'Room Stock Reject', 'Item Stock Reject'] as $option)
-                                <option value="{{ $option }}">{{ $option }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-group-item">
-                <div class="form-group row mb-0">
-                    <label for="sale_id" class="col-md-2 col-form-label">Sale Id</label>
-                    <div class="col-md-8">
-                        <select name="sale_id" id="sale_id" class="form-control">
-                            <option value=""></option>
-                            @foreach(app('App\Sale')->orderBy('id')->get() as $model)
-                                <option value="{{ $model->id }}">{{ $model->id }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-group-item">
-                <div class="form-group row mb-0">
-                    <label for="purchase_id" class="col-md-2 col-form-label">Purchase Id</label>
-                    <div class="col-md-8">
-                        <select name="purchase_id" id="purchase_id" class="form-control">
-                            <option value=""></option>
-                            @foreach(app('App\Purchase')->orderBy('id')->get() as $model)
-                                <option value="{{ $model->id }}">{{ $model->id }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="remote_id" id="remote_id" class="form-control">
                     </div>
                 </div>
             </div>

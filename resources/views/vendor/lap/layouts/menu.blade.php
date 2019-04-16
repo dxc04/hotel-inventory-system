@@ -1,11 +1,6 @@
 <li{!! request()->is('admin/dashboard') ? ' class="active"' : '' !!}>
     <a href="{{ route('admin.dashboard') }}"><i class="fal fa-fw fa-tachometer mr-3"></i>Dashboard</a>
 </li>
-@can('Read Room Stocks')
-    <li{!! request()->is('admin/room_stocks') ? ' class="active"' : '' !!}>
-        <a href="{{ route('admin.room_stocks') }}"><i class="fal fa-fw fa-link mr-3"></i>Room Stocks</a>
-    </li>
-@endcan
 @can('Read Sales')
     <li{!! request()->is('admin/sales') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.sales') }}"><i class="fal fa-fw fa-dollar-sign mr-3"></i>Sales</a>
@@ -19,11 +14,6 @@
 @can('Read Floors')
     <li{!! request()->is('admin/floors') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.floors') }}"><i class="fal fa-fw fa-building mr-3"></i>Floors</a>
-    </li>
-@endcan
-@can('Read Bookings')
-    <li{!! request()->is('admin/bookings') ? ' class="active"' : '' !!}>
-        <a href="{{ route('admin.bookings') }}"><i class="fal fa-fw fa-file-user mr-3"></i>Bookings</a>
     </li>
 @endcan
 @can('Read Guests')
@@ -46,9 +36,19 @@
         <a href="{{ route('admin.categories') }}"><i class="fal fa-fw fa-tags mr-3"></i>Categories</a>
     </li>
 @endcan
+@can('Read Suppliers')
+    <li{!! request()->is('admin/suppliers') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.suppliers') }}"><i class="fal fa-fw fa-user-tag mr-3"></i>Suppliers</a>
+    </li>
+@endcan
 @can('Read Purchases')
     <li{!! request()->is('admin/purchases') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.purchases') }}"><i class="fal fa-fw fa-credit-card-front mr-3"></i>Purchases</a>
+    </li>
+@endcan
+@can('Read Room Stocks')
+    <li{!! request()->is('admin/room_stocks') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.room_stocks') }}"><i class="fal fa-fw fa-ticket mr-3"></i>Room Stocks</a>
     </li>
 @endcan
 @can('Read Stocks Transactions')
@@ -71,9 +71,9 @@
         <a href="{{ route('admin.statuses') }}"><i class="fal fa-fw fa-door-closed mr-3"></i>Statuses</a>
     </li>
 @endcan
-@can('Read Suppliers')
-    <li{!! request()->is('admin/suppliers') ? ' class="active"' : '' !!}>
-        <a href="{{ route('admin.suppliers') }}"><i class="fal fa-fw fa-user-tag mr-3"></i>Suppliers</a>
+@can('Read Bookings')
+    <li{!! request()->is('admin/bookings') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.bookings') }}"><i class="fal fa-fw fa-file-user mr-3"></i>Bookings</a>
     </li>
 @endcan
 @can('Read Roles')

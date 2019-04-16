@@ -12,15 +12,7 @@ class StocksTransaction extends Eloquent
 
     
 
-    public function sale()
-    {
-        return $this->belongsTo('App\Sale');
-    }
-
-    public function purchase()
-    {
-        return $this->belongsTo('App\Purchase');
-    }
+    
 
     
 }
