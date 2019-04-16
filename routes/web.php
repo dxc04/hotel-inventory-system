@@ -157,3 +157,13 @@ Route::get('admin/sales/read/{sale}', 'Admin\SaleController@read')->name('admin.
 Route::get('admin/sales/update/{sale}', 'Admin\SaleController@updateForm')->name('admin.sales.update');
 Route::patch('admin/sales/update/{sale}', 'Admin\SaleController@update');
 Route::delete('admin/sales/delete/{sale}', 'Admin\SaleController@delete')->name('admin.sales.delete');
+
+
+// room_stocks
+Route::get('admin/room_stocks', 'Admin\RoomStockController@index')->name('admin.room_stocks');
+Route::get('admin/room_stocks/create', 'Admin\RoomStockController@createForm')->name('admin.room_stocks.create');
+Route::post('admin/room_stocks/create', 'Admin\RoomStockController@create');
+Route::get('admin/room_stocks/read/{room_stock}', 'Admin\RoomStockController@read')->name('admin.room_stocks.read');
+Route::get('admin/room_stocks/update/{room_stock}', 'Admin\RoomStockController@updateForm')->name('admin.room_stocks.update');
+Route::patch('admin/room_stocks/update/{room_stock}', 'Admin\RoomStockController@update');
+Route::delete('admin/room_stocks/delete/{room_stock}', 'Admin\RoomStockController@delete')->name('admin.room_stocks.delete');
