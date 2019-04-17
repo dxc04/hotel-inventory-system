@@ -29,37 +29,49 @@
         <div class="flex-column col-sm-12 col-md-9">
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postASale()">
+                    <a href="#" 
+                        v-bind:class="getBtnCss('post-sale')"
+                        @click="postASale()">
                         <font-awesome-icon class="justify-center" :icon="fileInvoiceDollar"/>
                     </a>
                     <div class="mt-2">Post Sale</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postNoSale(selectedRoom)">
+                    <a href="#"
+                        v-bind:class="getBtnCss('no-sale')"
+                        @click="postNoSale(selectedRoom)">
                         <font-awesome-icon :icon="minusSquare"/>
                     </a>
                     <div class="mt-2">No Sale</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postDNDDueOut(selectedRoom)">
+                    <a href="#"
+                        v-bind:class="getBtnCss('dnd-due-out')"
+                        @click="postDNDDueOut(selectedRoom)">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a>                    
                     <div class="mt-2">DND Due Out</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postDNDStayover(selectedRoom)">
+                    <a href="#"
+                        v-bind:class="getBtnCss('dnd-stayover')"
+                        @click="postDNDStayover(selectedRoom)">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a> 
                     <div class="mt-2">DND Stayover</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postAnItemReject()">
+                    <a href="#"
+                        v-bind:class="getBtnCss('item-reject')"
+                        @click="postAnItemReject()">
                         <font-awesome-icon :icon="timesCircle"/>
                     </a>                     
                     <div class="mt-2">Item Reject</div>
                 </div>
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postAnExtraSale()">
+                    <a href="#"
+                        v-bind:class="getBtnCss('extra-sale')"
+                        @click="postAnExtraSale()">
                         <font-awesome-icon :icon="dollarSign"/>
                     </a>  
                     <div class="mt-2">Extra Sale</div>
@@ -69,7 +81,9 @@
         <div class="flex-column col-sm-12 col-md-3">
             <div class="row">
                 <div class="ml-5 mr-5 col-auto text-center justify-center">
-                    <a href="#" class="btn btn-primary btn-circle btn-lg" @click="postARestock()">
+                    <a href="#"
+                        v-bind:class="getBtnCss('restock')"
+                        @click="postARestock()">
                         <font-awesome-icon :icon="clipboardCheck"/>
                     </a>  
                     <div class="mt-2">Restock</div>
@@ -157,7 +171,7 @@
                 selectedRoom: null,
                 guestName: null,
                 status: null,
-                itemCategories: {}
+                itemCategories: {},
             }
         },
         computed: {
@@ -192,7 +206,13 @@
                 }, {})
 
                 return item_categories
-            }
+            },
+            canProcessItem() {
+                return this.selectedRoom && this.guestName && this.itemCategories.length
+            },
+            canPostStatus() {
+                return this.selectedRoom && this.guestName
+            },
         },
         methods: {
             ...mapActions([
@@ -215,7 +235,34 @@
             },
             setItemCategories(item_categories) {
                 this.itemCategories = item_categories
-            }
+            },
+            getBtnCss(btn) {
+                let btn_state = false
+                if (['post-sale', 'item-reject', 'extra-sale'].includes(btn) && this.canProcessItem) {
+                    btn_state = true
+                } 
+                else if (['no-sale', 'dnd-due-out', 'dnd-stayover'].includes(btn) && this.canPostStatus) {
+                    btn_state = true    
+                }
+
+                return {
+                    'btn btn-primary btn-circle btn-lg': true,
+                    'btn-active' : btn_state,
+                    'btn-inactive': !btn_state
+                }        
+            },
         }
     }
 </script>
+
+<style scoped>
+    .btn-inactive {
+        background-color: #c1ced8;
+        border-color:  #c1ced8;
+    }
+
+    .btn-active {
+        background-color: #1c72b9;
+        border-color:  #1c72b9;
+    }
+</style>

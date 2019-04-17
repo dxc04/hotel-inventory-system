@@ -10454,6 +10454,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10524,6 +10538,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return category;
       }, {});
       return item_categories;
+    },
+    canProcessItem: function canProcessItem() {
+      return this.selectedRoom && this.guestName && this.itemCategories.length;
+    },
+    canPostStatus: function canPostStatus() {
+      return this.selectedRoom && this.guestName;
     }
   }),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapActions"])(['postASale', 'postNoSale', 'postDNDDueOut', 'postDNDStayover', 'postAnItemReject', 'postAnExtraSale', 'postARestock']), {
@@ -10538,6 +10558,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     setItemCategories: function setItemCategories(item_categories) {
       this.itemCategories = item_categories;
+    },
+    getBtnCss: function getBtnCss(btn) {
+      var btn_state = false;
+
+      if (['post-sale', 'item-reject', 'extra-sale'].includes(btn) && this.canProcessItem) {
+        btn_state = true;
+      } else if (['no-sale', 'dnd-due-out', 'dnd-stayover'].includes(btn) && this.canPostStatus) {
+        btn_state = true;
+      }
+
+      return {
+        'btn btn-primary btn-circle btn-lg': true,
+        'btn-active': btn_state,
+        'btn-inactive': !btn_state
+      };
     }
   })
 });
@@ -52053,6 +52088,21 @@ exports.push([module.i, "\n.category-item-list[data-v-9f5a1d68] {\n        paddi
 exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
 exports.push([module.i, "\n.log-details {\n    padding: 10px;\n}\n", ""]);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, "\n.btn-inactive[data-v-46fb53c8] {\n    background-color: #c1ced8;\n    border-color:  #c1ced8;\n}\n.btn-active[data-v-46fb53c8] {\n    background-color: #1c72b9;\n    border-color:  #1c72b9;\n}\n", ""]);
 
 
 
@@ -105413,6 +105463,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader/dist/cjs.js??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -107321,10 +107401,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8& ***!
-  \************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -107391,7 +107471,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary btn-circle btn-lg",
+                  class: _vm.getBtnCss("post-sale"),
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -107421,7 +107501,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary btn-circle btn-lg",
+                  class: _vm.getBtnCss("no-sale"),
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -107446,7 +107526,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary btn-circle btn-lg",
+                  class: _vm.getBtnCss("dnd-due-out"),
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -107471,7 +107551,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary btn-circle btn-lg",
+                  class: _vm.getBtnCss("dnd-stayover"),
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -107496,7 +107576,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary btn-circle btn-lg",
+                  class: _vm.getBtnCss("item-reject"),
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -107521,7 +107601,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary btn-circle btn-lg",
+                  class: _vm.getBtnCss("extra-sale"),
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -107548,7 +107628,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary btn-circle btn-lg",
+                  class: _vm.getBtnCss("restock"),
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -113027,9 +113107,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CheckRoomsPage_vue_vue_type_template_id_46fb53c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CheckRoomsPage.vue?vue&type=template&id=46fb53c8& */ "./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&");
+/* harmony import */ var _CheckRoomsPage_vue_vue_type_template_id_46fb53c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CheckRoomsPage.vue?vue&type=template&id=46fb53c8&scoped=true& */ "./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&scoped=true&");
 /* harmony import */ var _CheckRoomsPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CheckRoomsPage.vue?vue&type=script&lang=js& */ "./resources/js/pages/CheckRoomsPage.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _CheckRoomsPage_vue_vue_type_style_index_0_id_46fb53c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css& */ "./resources/js/pages/CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -113037,13 +113119,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _CheckRoomsPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CheckRoomsPage_vue_vue_type_template_id_46fb53c8___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CheckRoomsPage_vue_vue_type_template_id_46fb53c8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CheckRoomsPage_vue_vue_type_template_id_46fb53c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CheckRoomsPage_vue_vue_type_template_id_46fb53c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "46fb53c8",
   null
   
 )
@@ -113069,19 +113151,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8& ***!
-  \******************************************************************************/
+/***/ "./resources/js/pages/CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/pages/CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css& ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_dist_cjs_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_style_index_0_id_46fb53c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader/dist/cjs.js??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/CheckRoomsPage.vue?vue&type=style&index=0&id=46fb53c8&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_dist_cjs_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_style_index_0_id_46fb53c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_dist_cjs_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_style_index_0_id_46fb53c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_dist_cjs_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_style_index_0_id_46fb53c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_dist_cjs_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_style_index_0_id_46fb53c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_dist_cjs_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_style_index_0_id_46fb53c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&scoped=true&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&scoped=true& ***!
+  \******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_template_id_46fb53c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CheckRoomsPage.vue?vue&type=template&id=46fb53c8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_template_id_46fb53c8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_template_id_46fb53c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CheckRoomsPage.vue?vue&type=template&id=46fb53c8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/CheckRoomsPage.vue?vue&type=template&id=46fb53c8&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_template_id_46fb53c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_template_id_46fb53c8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckRoomsPage_vue_vue_type_template_id_46fb53c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
