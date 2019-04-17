@@ -24,8 +24,12 @@ import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fort
 import { makeRouter } from './router.js'
 import store from './store/index';
 import App from './App.vue'
+import Snotify from 'vue-snotify'
+
+import 'vue-snotify/styles/material.css'
 
 Vue.use(BootstrapVue);
+Vue.use(Snotify);
 Vue.component('app', App);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)

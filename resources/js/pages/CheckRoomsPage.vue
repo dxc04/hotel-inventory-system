@@ -39,7 +39,7 @@
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#"
                         v-bind:class="getBtnCss('no-sale')"
-                        @click="postNoSale(selectedRoom)">
+                        @click="noSale">
                         <font-awesome-icon :icon="minusSquare"/>
                     </a>
                     <div class="mt-2">No Sale</div>
@@ -47,7 +47,7 @@
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#"
                         v-bind:class="getBtnCss('dnd-due-out')"
-                        @click="postDNDDueOut(selectedRoom)">
+                        @click="DNDDueOut">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a>                    
                     <div class="mt-2">DND Due Out</div>
@@ -55,7 +55,7 @@
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#"
                         v-bind:class="getBtnCss('dnd-stayover')"
-                        @click="postDNDStayover(selectedRoom)">
+                        @click="DNDStayover">
                         <font-awesome-icon :icon="doorClosed"/>
                     </a> 
                     <div class="mt-2">DND Stayover</div>
@@ -136,6 +136,7 @@
             </b-card>
         </div>
     </div>
+    <vue-snotify></vue-snotify>
 </div>
 </template>
 
@@ -236,6 +237,36 @@
             setItemCategories(item_categories) {
                 this.itemCategories = item_categories
             },
+            noSale() {
+                if (this.canPostStatus) {
+                    this.postNoSale(this.selectedRoom)
+                    .then(res => {
+                        this.$snotify.success('No Sale posted to room ' + this.selectedRoom.room_name)
+                    })
+                } else {
+                    this.postStatusWarning()
+                }
+            },
+            DNDDueOut() {
+                if (this.canPostStatus) {
+                    this.postDNDDueOut(this.selectedRoom)
+                    .then(res => {
+                        this.$snotify.success('DND Due Out posted to room ' + this.selectedRoom.room_name)
+                    })
+                } else {
+                    this.postStatusWarning()
+                }
+            },
+            DNDStayover() {
+                if (this.canPostStatus) {
+                    this.postDNDStayover(this.selectedRoom)
+                    .then(res => {
+                        this.$snotify.success('DND Stayover posted to room ' + this.selectedRoom.room_name)
+                    })
+                } else {
+                    this.postStatusWarning()
+                }
+            },
             getBtnCss(btn) {
                 let btn_state = false
                 if (['post-sale', 'item-reject', 'extra-sale'].includes(btn) && this.canProcessItem) {
@@ -251,6 +282,9 @@
                     'btn-inactive': !btn_state
                 }        
             },
+            postStatusWarning() {
+                this.$snotify.warning('Select a room and input guest information.')
+            }
         }
     }
 </script>
