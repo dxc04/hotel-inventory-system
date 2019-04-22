@@ -31,7 +31,7 @@
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#" 
                         v-bind:class="getBtnCss('post-sale')"
-                        @click="postASale()">
+                        @click="sale">
                         <font-awesome-icon class="justify-center" :icon="fileInvoiceDollar"/>
                     </a>
                     <div class="mt-2">Post Sale</div>
@@ -63,7 +63,7 @@
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#"
                         v-bind:class="getBtnCss('item-reject')"
-                        @click="postAnItemReject()">
+                        @click="itemReject">
                         <font-awesome-icon :icon="timesCircle"/>
                     </a>                     
                     <div class="mt-2">Item Reject</div>
@@ -71,7 +71,7 @@
                 <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
                     <a href="#"
                         v-bind:class="getBtnCss('extra-sale')"
-                        @click="postAnExtraSale()">
+                        @click="extraSale">
                         <font-awesome-icon :icon="dollarSign"/>
                     </a>  
                     <div class="mt-2">Extra Sale</div>
@@ -83,7 +83,7 @@
                 <div class="ml-5 mr-5 col-auto text-center justify-center">
                     <a href="#"
                         v-bind:class="getBtnCss('restock')"
-                        @click="postARestock()">
+                        @click="restock">
                         <font-awesome-icon :icon="clipboardCheck"/>
                     </a>  
                     <div class="mt-2">Restock</div>
@@ -160,9 +160,11 @@
         },
         data() {
             return {
-                text: `
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                `,
+                notifyOptions: {
+                    timeout: 5000,
+                    showProgressBar: false,
+                    closeOnClick: false,
+                },
                 fileInvoiceDollar: faFileInvoiceDollar,
                 minusSquare: faMinusSquare,
                 doorClosed: faDoorClosed,
@@ -173,6 +175,7 @@
                 guestName: null,
                 status: null,
                 itemCategories: {},
+
             }
         },
         computed: {
@@ -237,11 +240,19 @@
             setItemCategories(item_categories) {
                 this.itemCategories = item_categories
             },
+            sale() {
+                if (this.canProcessItem) {
+
+                }
+                else {
+                    this.postProcessItemWarning()
+                }
+            },
             noSale() {
                 if (this.canPostStatus) {
                     this.postNoSale(this.selectedRoom)
                     .then(res => {
-                        this.$snotify.success('No Sale posted to room ' + this.selectedRoom.room_name)
+                        this.$snotify.success('No Sale posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
                     })
                 } else {
                     this.postStatusWarning()
@@ -251,7 +262,7 @@
                 if (this.canPostStatus) {
                     this.postDNDDueOut(this.selectedRoom)
                     .then(res => {
-                        this.$snotify.success('DND Due Out posted to room ' + this.selectedRoom.room_name)
+                        this.$snotify.success('DND Due Out posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
                     })
                 } else {
                     this.postStatusWarning()
@@ -261,10 +272,34 @@
                 if (this.canPostStatus) {
                     this.postDNDStayover(this.selectedRoom)
                     .then(res => {
-                        this.$snotify.success('DND Stayover posted to room ' + this.selectedRoom.room_name)
+                        this.$snotify.success('DND Stayover posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
                     })
                 } else {
                     this.postStatusWarning()
+                }
+            },
+            itemReject() {
+                if (this.canProcessItem) {
+
+                }
+                else {
+                    this.postProcessItemWarning()
+                }
+            },
+            extraSale() {
+                if (this.canProcessItem) {
+
+                }
+                else {
+                    this.postProcessItemWarning()
+                }
+            },
+            restock() {
+                if (this.canProcessItem) {
+
+                }
+                else {
+                    this.postProcessItemWarning()
                 }
             },
             getBtnCss(btn) {
@@ -283,7 +318,10 @@
                 }        
             },
             postStatusWarning() {
-                this.$snotify.warning('Select a room and input guest information.')
+                this.$snotify.warning('You need to select a room and input guest information first.', this.notifyOptions)
+            },
+            postProcessItemWarning() {
+                this.$snotify.warning('You need to select a room, add guest information, and select items first.', this.notifyOptions)
             }
         }
     }
