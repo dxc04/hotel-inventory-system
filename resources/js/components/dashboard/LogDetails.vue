@@ -26,9 +26,9 @@
                 statusClasses: {
                     dnd_stayover: 'badge-warning',
                     dnd_due_out: 'badge-danger',
-                    restocked: 'badge-success',
+                    restocked: 'badge-dark',
                     no_sale: 'badge-secondary',
-                    cleaning_in_progress: 'badge-dark',
+                    sale: 'badge-success',
                     cleaned: 'badge-primary',
                     checked_in: 'badge-secondary'
                 }

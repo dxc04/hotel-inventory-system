@@ -24,8 +24,8 @@ return [
                 'string:transaction_key',
             ],
             'validations' => [
-                'create' => 'required|in:sale,purchase,replenishment,room-stock-reject,item-stock-reject',
-                'update' => 'required|in:sale,purchase,replenishment,room-stock-reject,item-stock-reject',
+                'create' => 'required|in:sale,purchase,restock,room-stock-reject,item-stock-reject',
+                'update' => 'required|in:sale,purchase,restock,room-stock-reject,item-stock-reject',
             ],
             'datatable' => [
                 'title' => 'Transaction Type',
@@ -36,7 +36,7 @@ return [
                 'options' => [
                     'sale' => 'Sale',
                     'purchase' => 'Purchase',
-                    'replenishment' => 'Room Replenishment',
+                    'restock' => 'Room Restock',
                     'room-stock-reject' => 'Room Stock Reject',
                     'item-stock-reject' => 'Item Stock Reject'
                 ],

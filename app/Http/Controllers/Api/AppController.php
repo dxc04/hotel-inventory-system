@@ -26,7 +26,9 @@ class AppController extends Controller
 
     public function postASale()
     {
-        return response()->json(['hello' => 'Dixie']);
+        $sale_data = request()->post();
+        $this->room_status_repo->postASale($sale_data);
+        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
     }
 
     public function postNoSale()
@@ -59,16 +61,22 @@ class AppController extends Controller
 
     public function postAnItemReject()
     {
-        return response()->json(['hello' => 'Dixie']);        
+        $data = request()->post();
+        $this->room_status_repo->postAnItemReject($data);
+        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
     }
 
     public function postAnExtraSale()
     {
-        return response()->json(['hello' => 'Dixie']);        
+        $data = request()->post();
+        $this->room_status_repo->postAnExtraSale($data);
+        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);    
     }
 
     public function postARestock()
     {
-        return response()->json(['hello' => 'Dixie']);        
+        $data = request()->post();
+        $this->room_status_repo->postARestock($data);
+        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);      
     }
 }

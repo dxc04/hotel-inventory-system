@@ -161,9 +161,10 @@
         data() {
             return {
                 notifyOptions: {
-                    timeout: 5000,
+                    timeout: 3000,
                     showProgressBar: false,
                     closeOnClick: false,
+                    position: 'rightTop',
                 },
                 fileInvoiceDollar: faFileInvoiceDollar,
                 minusSquare: faMinusSquare,
@@ -242,7 +243,14 @@
             },
             sale() {
                 if (this.canProcessItem) {
-
+                    let sale_data = {
+                        room_id: this.selectedRoom.id,
+                        item_categories: this.itemCategories
+                    }
+                    this.postASale(sale_data)
+                    .then(res => {
+                        this.$snotify.success('Sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
                 }
                 else {
                     this.postProcessItemWarning()
@@ -280,7 +288,11 @@
             },
             itemReject() {
                 if (this.canProcessItem) {
-
+                    let data = {
+                        room_id: this.selectedRoom.id,
+                        item_categories: this.itemCategories
+                    }
+                    this.postAnItemReject(data)
                 }
                 else {
                     this.postProcessItemWarning()
@@ -288,7 +300,14 @@
             },
             extraSale() {
                 if (this.canProcessItem) {
-
+                    let data = {
+                        room_id: this.selectedRoom.id,
+                        item_categories: this.itemCategories
+                    }
+                    this.postAnExtraSale(data)
+                    .then(res => {
+                        this.$snotify.success('An extra sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
                 }
                 else {
                     this.postProcessItemWarning()
@@ -296,7 +315,14 @@
             },
             restock() {
                 if (this.canProcessItem) {
-
+                    let data = {
+                        room_id: this.selectedRoom.id,
+                        item_categories: this.itemCategories
+                    }
+                    this.postARestock(data)
+                    .then(res => {
+                        this.$snotify.success('A restock has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
                 }
                 else {
                     this.postProcessItemWarning()

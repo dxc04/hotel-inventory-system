@@ -30,8 +30,8 @@ class StatusesTableSeeder extends Seeder
                     'status_key'  => 'restocked'
                 ],
                 [
-                    'status_name' => 'Cleaned',
-                    'status_key'  => 'cleaned'
+                    'status_name' => 'Sale',
+                    'status_key'  => 'sale'
                 ],
                 [
                     'status_name' => 'Cleaning In Progress',

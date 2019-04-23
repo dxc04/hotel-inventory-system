@@ -21,18 +21,16 @@ export default new Vuex.Store({
     loadRoomData({ commit, state }, rooms_data) {
       commit('mutateRoomsData', rooms_data)
     },
-    postASale({ commit }) {
-      axios.post('/api/v1/post-a-sale')
+    postASale({ commit }, data) {
+      return axios.post('/api/v1/post-a-sale', data)
       .then(res => {
-        console.log('post-a-sale', res)
-        // update item availability
-        // add to replishments
+        commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
     },
     postNoSale({ commit }, selected_room) {
-      axios.post('/api/v1/post-no-sale', {'selected_room': selected_room.id})
+      return axios.post('/api/v1/post-no-sale', {'selected_room': selected_room.id})
       .then(res => {
         commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
@@ -40,7 +38,7 @@ export default new Vuex.Store({
       })
     },
     postDNDDueOut({ commit }, selected_room) {
-      axios.post('/api/v1/post-dnd-due-out', {'selected_room': selected_room.id})
+      return axios.post('/api/v1/post-dnd-due-out', {'selected_room': selected_room.id})
       .then(res => {
         commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
@@ -48,38 +46,33 @@ export default new Vuex.Store({
       })
     },
     postDNDStayover({ commit }, selected_room) {
-      axios.post('/api/v1/post-dnd-stayover', {'selected_room': selected_room.id})
+      return axios.post('/api/v1/post-dnd-stayover', {'selected_room': selected_room.id})
       .then(res => {
         commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
     },
-    postAnItemReject({ commit }) {
-      axios.post('/api/v1/post-an-item-reject')
+    postAnItemReject({ commit }, data) {
+      return axios.post('/api/v1/post-an-item-reject', data)
       .then(res => {
-        console.log('post-an-item-reject', res)
-        // post a re stock first then an extra sale
-
+        commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
     },
-    postAnExtraSale({ commit }) {
-      axios.post('/api/v1/post-an-extra-sale')
+    postAnExtraSale({ commit }, data) {
+      return axios.post('/api/v1/post-an-extra-sale', data)
       .then(res => {
-        console.log('post-an-extra-sale', res)
-        // post a re stock first then an extra sale
-
+        commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
     },
-    postARestock({ commit }) {
-      axios.post('/api/v1/post-a-restock')
+    postARestock({ commit }, data) {
+      return axios.post('/api/v1/post-a-restock', data)
       .then(res => {
-        console.log('post-a-restock', res)
-        // update replenishments
+        commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })

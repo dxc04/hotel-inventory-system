@@ -49,7 +49,7 @@
                 return this.item.item_name
             },
             itemPrice() {
-                return '(' + this.item.item_amount + ')'
+                return '$' + this.item.item_amount.toFixed(2)
             },
         },
         methods: {

@@ -27,7 +27,10 @@
                 for (let i in this.categories) {
                     for (let index in this.categories[i].items) {
                         let item = this.categories[i].items[index]
-                        item_categories[item.item_category_id] = 0
+                        item_categories.push({
+                            item_category_id: item.item_category_id,
+                            quantity: 0
+                        })
                     }
                 }
 
@@ -35,12 +38,11 @@
             }
         },
         methods: {
-            updateSelectedItems(item_category_id, qty) {
-                this.item_categories[item_category_id] = qty
-            },
             updateItem(item_category_id, qty) {
-                this.itemCategories[item_category_id] = qty
-                this.$emit('set-item-categories', this.itemCategories)
+                let index = this.itemCategories.findIndex(ic => ic.item_category_id == item_category_id)
+                this.itemCategories[index].quantity = qty
+                let item_cat_data = this.itemCategories.filter(ic => ic.quantity)
+                this.$emit('set-item-categories', item_cat_data)
             }, 
         }
     }

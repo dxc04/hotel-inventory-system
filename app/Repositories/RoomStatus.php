@@ -12,6 +12,8 @@ use App\Purchase as PurchaseModel;
 use App\Item as ItemModel;
 use App\Category as CategoryModel;
 use App\ItemCategory as ItemCategoryModel;
+use App\Sale as SaleModel;
+use App\StocksTransaction as StocksTransactionModel;
 use Carbon\Carbon;
 
 /**
@@ -43,6 +45,7 @@ class RoomStatus extends BaseRepository
             'categories' => CategoryModel::all()->toArray(),
             'item_categories' => ItemCategoryModel::all()->toArray(),
             'floors' => FloorModel::all()->toArray(),
+            
         ];
     }
 
@@ -58,4 +61,83 @@ class RoomStatus extends BaseRepository
         $room_status->status = $statuses;
         $room_status->save();
     }
+
+    public function postASale($data)
+    {
+        $status_id = StatusModel::where('status_key', 'sale')->pluck('id')->first();
+        $this->postRoomStatus($data['room_id'], $status_id);
+
+        foreach ($data['item_categories'] as $ic) {
+            $ic['room_id'] = $data['room_id'];
+            $sale = SaleModel::firstOrCreate($ic);
+            $sale->save();
+            $stock_transaction = StocksTransactionModel::firstOrCreate([
+                'remote_id' => $sale->id,
+                'quantity' => $ic['quantity'],
+                'transaction_key' => 'sale',
+                'notes' => ''
+            ]);
+            $stock_transaction->save();
+        }
+
+    }
+
+    public function postAnItemReject($data)
+    {
+        foreach ($data['item_categories'] as $ic) {
+            $stock_transaction = StocksTransactionModel::firstOrCreate([
+                'remote_id' => $ic['item_category_id'],
+                'quantity' => $ic['quantity'],
+                'transaction_key' => 'item-stock-reject',
+                'notes' => ''
+            ]);
+            $stock_transaction->save();
+        }
+    }
+
+    public function postAnExtraSale($data)
+    {
+
+        $restock_status_id = StatusModel::where('status_key', 'restock')->pluck('id')->first();
+        $this->postRoomStatus($data['room_id'], $restock_status_id);
+
+        foreach ($data['item_categories'] as $ic) {
+            $stock_transaction_1 = StocksTransactionModel::firstOrCreate([
+                'remote_id' => $ic['item_category_id'],
+                'quantity' => $ic['quantity'],
+                'transaction_key' => 'restock',
+                'notes' => 'extra sale'
+            ]);
+            $stock_transaction_1->save();
+
+            $stock_transaction_2 = StocksTransactionModel::firstOrCreate([
+                'remote_id' => $ic['item_category_id'],
+                'quantity' => $ic['quantity'],
+                'transaction_key' => 'sale',
+                'notes' => 'extra sale'
+            ]);
+            $stock_transaction_2->save();
+  
+        }
+
+        $sale_status_id = StatusModel::where('status_key', 'sale')->pluck('id')->first();
+        $this->postRoomStatus($data['room_id'], $sale_status_id);
+    }
+
+    public function postARestock($data)
+    {
+        $restock_status_id = StatusModel::where('status_key', 'restock')->pluck('id')->first();
+
+        foreach ($data['item_categories'] as $ic) {
+            $stock_transaction = StocksTransactionModel::firstOrCreate([
+                'remote_id' => $ic['item_category_id'],
+                'quantity' => $ic['quantity'],
+                'transaction_key' => 'restock',
+                'notes' => ''
+            ]);
+            $stock_transaction->save();
+            $this->postRoomStatus($data['room_id'], $restock_status_id);
+        }
+    }
+
 }
