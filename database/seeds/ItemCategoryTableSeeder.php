@@ -11,56 +11,16 @@ class ItemCategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('item_categories')->insert(
-            [
+        $items = App\Item::all();
+
+        foreach($items as $item) {
+            DB::table('item_categories')->insert(
                 [
-                    'item_id'       => $this->getRandomItemId(),
-                    'category_id'   => $this->getRandomCategoryId()
-                ],
-                [
-                    'item_id'       => $this->getRandomItemId(),
-                    'category_id'   => $this->getRandomCategoryId()
-                ],
-                [
-                    'item_id'       => $this->getRandomItemId(),
-                    'category_id'   => $this->getRandomCategoryId()
-                ],
-                [
-                    'item_id'       => $this->getRandomItemId(),
-                    'category_id'   => $this->getRandomCategoryId()
-                ],
-                [
-                    'item_id'       => $this->getRandomItemId(),
-                    'category_id'   => $this->getRandomCategoryId()
-                ],
-                [
-                    'item_id'       => $this->getRandomItemId(),
-                    'category_id'   => $this->getRandomCategoryId()
-                ],
-                [
-                    'item_id'       => $this->getRandomItemId(),
-                    'category_id'   => $this->getRandomCategoryId()
-                ],
-                [
-                    'item_id'       => $this->getRandomItemId(),
-                    'category_id'   => $this->getRandomCategoryId()
-                ],
-                [
-                    'item_id'       => $this->getRandomItemId(),
-                    'category_id'   => $this->getRandomCategoryId()
-                ],
-                [
-                    'item_id'       => $this->getRandomItemId(),
+                    'item_id'       => $item->id,
                     'category_id'   => $this->getRandomCategoryId()
                 ]
-            ]
-        );
-    }
-
-    private function getRandomItemId()
-    {
-        $item = App\Item::inRandomOrder()->first();
-        return $item->id;    
+            );
+        }
     }
 
     private function getRandomCategoryId()
