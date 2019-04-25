@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             RoomTableSeeder::class,
             ItemCategoryTableSeeder::class,
-            SupplierTableSeeder::class
+            SupplierTableSeeder::class,
+            PurchaseTableSeeder::class,
+            RoomStocksTableSeeder::class
         ]);
     }
 }
