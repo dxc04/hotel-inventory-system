@@ -45,7 +45,7 @@ class RoomStatus extends BaseRepository
             'categories' => CategoryModel::all()->toArray(),
             'item_categories' => ItemCategoryModel::all()->toArray(),
             'floors' => FloorModel::all()->toArray(),
-            
+
         ];
     }
 
@@ -138,6 +138,11 @@ class RoomStatus extends BaseRepository
             $stock_transaction->save();
             $this->postRoomStatus($data['room_id'], $restock_status_id);
         }
+    }
+
+    public function stockComputation()
+    {
+        
     }
 
 }

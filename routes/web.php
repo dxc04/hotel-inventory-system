@@ -167,3 +167,12 @@ Route::get('admin/room_stocks/read/{room_stock}', 'Admin\RoomStockController@rea
 Route::get('admin/room_stocks/update/{room_stock}', 'Admin\RoomStockController@updateForm')->name('admin.room_stocks.update');
 Route::patch('admin/room_stocks/update/{room_stock}', 'Admin\RoomStockController@update');
 Route::delete('admin/room_stocks/delete/{room_stock}', 'Admin\RoomStockController@delete')->name('admin.room_stocks.delete');
+
+// stocks_computations
+Route::get('admin/stocks_computations', 'Admin\StocksComputationController@index')->name('admin.stocks_computations');
+Route::get('admin/stocks_computations/create', 'Admin\StocksComputationController@createForm')->name('admin.stocks_computations.create');
+Route::post('admin/stocks_computations/create', 'Admin\StocksComputationController@create');
+Route::get('admin/stocks_computations/read/{stocks_computation}', 'Admin\StocksComputationController@read')->name('admin.stocks_computations.read');
+Route::get('admin/stocks_computations/update/{stocks_computation}', 'Admin\StocksComputationController@updateForm')->name('admin.stocks_computations.update');
+Route::patch('admin/stocks_computations/update/{stocks_computation}', 'Admin\StocksComputationController@update');
+Route::delete('admin/stocks_computations/delete/{stocks_computation}', 'Admin\StocksComputationController@delete')->name('admin.stocks_computations.delete');

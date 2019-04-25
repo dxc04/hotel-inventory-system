@@ -3,14 +3,14 @@
         <div class="row mb-2 ml-1"><h4>Which floor?</h4></div>
         <div class="row mb-4 align-content-center align-items-center center">
             <div class="col-auto" v-for="floor in floors">
-                <floor-box :floor="floor" @select-floor="selectFloor"></floor-box>
+                <floor-box :floor="floor" @select-floor="selectFloor" :floorSelected="floorSelected(floor)"></floor-box>
             </div>
         </div>
         <span v-if="selectedFloor">
             <div class="row mb-2 ml-1"><h4>Select a room...</h4></div>
             <div class="row align-content-center align-items-center center">
                 <div class="col-auto" v-for="room in roomsBySelectedFloor">
-                    <room-box :room="room" @select-room="selectRoom"></room-box>
+                    <room-box :room="room" @select-room="selectRoom" :roomSelected="roomSelected(room)"></room-box>
                 </div>
             </div>
         </span>
@@ -49,7 +49,7 @@
         computed: {
             roomsBySelectedFloor() {
                 return this.rooms.filter(room => room.floor_id == this.selectedFloor.id)
-            }
+            },
         },
         methods: {
             selectFloor(floor) {
@@ -58,6 +58,12 @@
             selectRoom(room) {
                 this.selectedRoom = room
                 this.$emit('select-room', room)
+            },
+            floorSelected(floor) {
+                return this.selectedFloor ? (this.selectedFloor.id == floor.id) : false
+            },
+            roomSelected(room) {
+                return this.selectedRoom ? (this.selectedRoom.id == room.id) : false
             }
         }
     }

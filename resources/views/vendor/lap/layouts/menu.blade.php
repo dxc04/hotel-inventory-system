@@ -1,6 +1,11 @@
 <li{!! request()->is('admin/dashboard') ? ' class="active"' : '' !!}>
     <a href="{{ route('admin.dashboard') }}"><i class="fal fa-fw fa-tachometer mr-3"></i>Dashboard</a>
 </li>
+@can('Read Stocks Computations')
+    <li{!! request()->is('admin/stocks_computations') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.stocks_computations') }}"><i class="fal fa-fw fa-calculator mr-3"></i>Stocks Computations</a>
+    </li>
+@endcan
 @can('Read Sales')
     <li{!! request()->is('admin/sales') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.sales') }}"><i class="fal fa-fw fa-dollar-sign mr-3"></i>Sales</a>

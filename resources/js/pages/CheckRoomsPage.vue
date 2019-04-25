@@ -357,6 +357,7 @@
     .btn-inactive {
         background-color: #c1ced8;
         border-color:  #c1ced8;
+        pointer-events: none;
     }
 
     .btn-active {

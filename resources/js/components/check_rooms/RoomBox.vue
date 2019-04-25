@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="btn btn-secondary btn-lg" @click="selectRoom()">{{ room.room_name }}</button>
+    <button type="button" :class="buttonClass" @click="selectRoom()">{{ room.room_name }}</button>
 </template>
 
 <script>
@@ -9,9 +9,19 @@
             room: { 
                 type: Object,
                 required: true
+            },
+            roomSelected: {
+                type: Boolean,
+                required: true
             }
         },
         computed: {
+            buttonClass() {
+                return {
+                    'btn btn-secondary btn-lg': true,
+                    'room-selected': this.roomSelected
+                }
+            },
         },
         methods: {
             selectRoom() {
@@ -20,3 +30,11 @@
         }
     }
 </script>
+
+
+<style scoped>
+    .room-selected {
+        background-color: #4caf50;
+        border-color: #4caf50;
+    }
+</style>
