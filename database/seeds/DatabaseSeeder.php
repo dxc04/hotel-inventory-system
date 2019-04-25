@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             RoomTypesTableSeeder::class,
             StatusesTableSeeder::class,
             ItemsTableSeeder::class,
-            CategoriesTableSeeder::class
+            CategoriesTableSeeder::class,
+            RoomTableSeeder::class
         ]);
     }
 }
