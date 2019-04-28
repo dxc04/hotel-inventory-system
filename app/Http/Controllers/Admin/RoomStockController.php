@@ -33,7 +33,7 @@ class RoomStockController extends Controller
 
         $html = $builder->columns([
             ['title' => 'Room', 'data' => 'room.room_name'],
-            ['title' => 'Item Category', 'data' => 'item_category.id'],
+            ['title' => 'Item Category', 'data' => 'item_category_id'],
             ['title' => 'Stock Quantity', 'data' => 'stock_quantity'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);

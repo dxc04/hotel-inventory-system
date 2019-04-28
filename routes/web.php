@@ -176,3 +176,12 @@ Route::get('admin/stocks_computations/read/{stocks_computation}', 'Admin\StocksC
 Route::get('admin/stocks_computations/update/{stocks_computation}', 'Admin\StocksComputationController@updateForm')->name('admin.stocks_computations.update');
 Route::patch('admin/stocks_computations/update/{stocks_computation}', 'Admin\StocksComputationController@update');
 Route::delete('admin/stocks_computations/delete/{stocks_computation}', 'Admin\StocksComputationController@delete')->name('admin.stocks_computations.delete');
+
+// room_stock_limits
+Route::get('admin/room_stock_limits', 'Admin\RoomStockLimitController@index')->name('admin.room_stock_limits');
+Route::get('admin/room_stock_limits/create', 'Admin\RoomStockLimitController@createForm')->name('admin.room_stock_limits.create');
+Route::post('admin/room_stock_limits/create', 'Admin\RoomStockLimitController@create');
+Route::get('admin/room_stock_limits/read/{room_stock_limit}', 'Admin\RoomStockLimitController@read')->name('admin.room_stock_limits.read');
+Route::get('admin/room_stock_limits/update/{room_stock_limit}', 'Admin\RoomStockLimitController@updateForm')->name('admin.room_stock_limits.update');
+Route::patch('admin/room_stock_limits/update/{room_stock_limit}', 'Admin\RoomStockLimitController@update');
+Route::delete('admin/room_stock_limits/delete/{room_stock_limit}', 'Admin\RoomStockLimitController@delete')->name('admin.room_stock_limits.delete');

@@ -74,7 +74,7 @@
 </script>
 
 <style scoped>
-.category-item-list {
+    .category-item-list {
         padding: 5px;
         height: 50px;
     }

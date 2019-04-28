@@ -19,28 +19,28 @@ return [
     // model attributes
     'attributes' => [
 
-        'room_id' => [
+        'supplier_id' => [
             'migrations' => [
-                'integer:room_id',
+                'integer:supplier_id',
             ],
             'relationship' => [
-                'room' => 'belongsTo:App\Room',
+                'supplier' => 'belongsTo:App\Supplier',
             ],
             'validations' => [
-                'create' => 'required|exists:rooms,id',
-                'update' => 'required|exists:rooms,id',
+                'create' => 'required|exists:suppliers,id',
+                'update' => 'required|exists:suppliers,id',
             ],
             'datatable' => [
-                'title' => 'Room',
-                'data' => 'room.room_name',
+                'title' => 'Supplier',
+                'data' => 'supplier.supplier_name',
             ],
             'input' => [
-                'label' => 'Room',
-                'title' => 'Room',
+                'label' => 'Supplier',
+                'title' => 'Supplier',
                 'type' => 'select',
                 'options' => [
-                    'app:App\Room|orderBy:room_name|get' => [
-                        'id' => 'room_name',
+                    'app:App\Supplier|orderBy:supplier_name|get' => [
+                        'id' => 'supplier_name',
                     ],
                 ],
             ],

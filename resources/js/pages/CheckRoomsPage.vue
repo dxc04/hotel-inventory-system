@@ -4,7 +4,7 @@
         <h1 class="h3 mb-0 text-gray-800">Check Rooms</h1>
     </div>
 
-    <div class="row ml-3 mb-2">
+    <div class="row ml-3">
         <div class="col-2">
             <div class="mb-2">
                 <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Room</span></p>
@@ -25,114 +25,115 @@
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="flex-column col-sm-12 col-md-9">
-            <div class="row justify-content-center">
-                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#" 
-                        v-bind:class="getBtnCss('post-sale')"
-                        @click="sale">
-                        <font-awesome-icon class="justify-center" :icon="fileInvoiceDollar"/>
-                    </a>
-                    <div class="mt-2">Post Sale</div>
-                </div>
-                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#"
-                        v-bind:class="getBtnCss('no-sale')"
-                        @click="noSale">
-                        <font-awesome-icon :icon="minusSquare"/>
-                    </a>
-                    <div class="mt-2">No Sale</div>
-                </div>
-                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#"
-                        v-bind:class="getBtnCss('dnd-due-out')"
-                        @click="DNDDueOut">
-                        <font-awesome-icon :icon="doorClosed"/>
-                    </a>                    
-                    <div class="mt-2">DND Due Out</div>
-                </div>
-                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#"
-                        v-bind:class="getBtnCss('dnd-stayover')"
-                        @click="DNDStayover">
-                        <font-awesome-icon :icon="doorClosed"/>
-                    </a> 
-                    <div class="mt-2">DND Stayover</div>
-                </div>
-                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#"
-                        v-bind:class="getBtnCss('item-reject')"
-                        @click="itemReject">
-                        <font-awesome-icon :icon="timesCircle"/>
-                    </a>                     
-                    <div class="mt-2">Item Reject</div>
-                </div>
-                <div class="col-sm-4 col-md-2 text-center justify-center mb-3">
-                    <a href="#"
-                        v-bind:class="getBtnCss('extra-sale')"
-                        @click="extraSale">
-                        <font-awesome-icon :icon="dollarSign"/>
-                    </a>  
-                    <div class="mt-2">Extra Sale</div>
-                </div>
-            </div>
-        </div>
-        <div class="flex-column col-sm-12 col-md-3">
-            <div class="row">
-                <div class="ml-5 mr-5 col-auto text-center justify-center">
-                    <a href="#"
-                        v-bind:class="getBtnCss('restock')"
-                        @click="restock">
-                        <font-awesome-icon :icon="clipboardCheck"/>
-                    </a>  
-                    <div class="mt-2">Restock</div>
-                </div>
-            </div>    
-        </div>
-    </div>  
     <div class="row">
-        <div class="flex-column col-sm-12 col-md-9">
+        <div class="flex-column col-sm-12 col-md-6">
             <b-card>
+                <div class="row justify-content-center">
+                    <div class="col-md-4 text-center justify-center mb-3">
+                        <a href="#" 
+                            v-bind:class="getBtnCss('post-sale')"
+                            @click="sale">
+                            <font-awesome-icon class="justify-center" :icon="fileInvoiceDollar"/>
+                        </a>
+                        <div class="mt-2">Post Sale</div>
+                    </div>
+                    <div class="col-md-4 text-center justify-center mb-3">
+                        <a href="#"
+                            v-bind:class="getBtnCss('no-sale')"
+                            @click="noSale">
+                            <font-awesome-icon :icon="minusSquare"/>
+                        </a>
+                        <div class="mt-2">No Sale</div>
+                    </div>
+                    <div class="col-md-4 text-center justify-center mb-3">
+                        <a href="#"
+                            v-bind:class="getBtnCss('dnd-due-out')"
+                            @click="DNDDueOut">
+                            <font-awesome-icon :icon="doorClosed"/>
+                        </a>                    
+                        <div class="mt-2">DND Due Out</div>
+                    </div>
+                    <div class="col-md-4 text-center justify-center mb-3">
+                        <a href="#"
+                            v-bind:class="getBtnCss('dnd-stayover')"
+                            @click="DNDStayover">
+                            <font-awesome-icon :icon="doorClosed"/>
+                        </a> 
+                        <div class="mt-2">DND Stayover</div>
+                    </div>
+                    <div class="col-md-4 text-center justify-center mb-3">
+                        <a href="#"
+                            v-bind:class="getBtnCss('item-reject')"
+                            @click="itemReject">
+                            <font-awesome-icon :icon="timesCircle"/>
+                        </a>                     
+                        <div class="mt-2">Item Reject</div>
+                    </div>
+                    <div class="col-md-4 text-center justify-center mb-3">
+                        <a href="#"
+                            v-bind:class="getBtnCss('extra-sale')"
+                            @click="extraSale">
+                            <font-awesome-icon :icon="dollarSign"/>
+                        </a>  
+                        <div class="mt-2">Extra Sale</div>
+                    </div>
+                </div>
+
+
+
                 <div role="tablist">
                     <b-card no-body class="mb-1">
-                    <b-card-header header-tag="header" class="p-1" role="tab">
-                        <b-button block href="#" v-b-toggle.accordion-1 variant="default">Select a Room</b-button>
-                    </b-card-header>
-                    <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
-                        <b-card-body>
-                            <select-room :rooms="rooms" :floors="floors" @select-room="setSelectedRoom"></select-room>
-                        </b-card-body>
-                    </b-collapse>
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                            <b-button block href="#" v-b-toggle.accordion-1 variant="default">Select a Room</b-button>
+                        </b-card-header>
+                        <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <select-room :rooms="rooms" :floors="floors" @select-room="setSelectedRoom"></select-room>
+                            </b-card-body>
+                        </b-collapse>
                     </b-card>
 
                     <b-card no-body class="mb-1">
-                    <b-card-header header-tag="header" class="p-1" role="tab">
-                        <b-button block href="#" v-b-toggle.accordion-2 variant="default"><span class="text-left">Add Guest Info</span></b-button>
-                    </b-card-header>
-                    <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
-                        <b-card-body>
-                            <add-guest-info @input-guest-name="inputGuestName" @select-status="selectStatus"></add-guest-info>
-                        </b-card-body>
-                    </b-collapse>
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                            <b-button block href="#" v-b-toggle.accordion-2 variant="default"><span class="text-left">Add Guest Info</span></b-button>
+                        </b-card-header>
+                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <add-guest-info @input-guest-name="inputGuestName" @select-status="selectStatus"></add-guest-info>
+                            </b-card-body>
+                        </b-collapse>
                     </b-card>
 
                     <b-card no-body class="mb-1">
-                    <b-card-header header-tag="header" class="p-1" role="tab">
-                        <b-button block href="#" v-b-toggle.accordion-3 variant="default">Select Items</b-button></b-button>
-                    </b-card-header>
-                    <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
-                        <b-card-body>
-                            <select-items :categories="categories" @set-item-categories="setItemCategories"></select-items>
-                        </b-card-body>
-                    </b-collapse>
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                            <b-button block href="#" v-b-toggle.accordion-3 variant="default">Select Items</b-button></b-button>
+                        </b-card-header>
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <select-items :categories="categories" @set-item-categories="setItemCategories"></select-items>
+                            </b-card-body>
+                        </b-collapse>
                     </b-card>
                 </div>
             </b-card>
         </div>
-        <div class="flex-column col-sm-12 col-md-3">
+        <div class="flex-column col-sm-12 col-md-6">
             <b-card>
+                <div v-if="restockCategories.length" class="row">
+                    <div class="ml-5 mr-5 mb-3 col-auto text-center justify-center">
+                        <a href="#"
+                            v-bind:class="getBtnCss('restock')"
+                            @click="restock">
+                            <font-awesome-icon :icon="clipboardCheck"/>
+                        </a>  
+                        <div class="mt-2">Restock</div>
+                    </div>
+                </div>  
 
+                <restock-items v-if="restockCategories.length" :categories="restockCategories" @set-item-restock-categories="setRestockItemCategories"></restock-items>
+                <div v-if="!restockCategories.length" class="text-center justify-center no-restock">
+                    <font-awesome-icon size="3x" :icon="box"/> <h3>Nothing to Restock</h3>
+                </div> 
             </b-card>
         </div>
     </div>
@@ -145,16 +146,18 @@
     import SelectRoom from '../components/check_rooms/SelectRoom.vue'
     import AddGuestInfo from '../components/check_rooms/AddGuestInfo.vue'
     import SelectItems from '../components/check_rooms/SelectItems.vue'
+    import RestockItems from '../components/check_rooms/RestockItems.vue'
     import { faFileInvoiceDollar, faMinusSquare, faDoorClosed, faTimesCircle,
-        faCommentDollar, faDollarSign, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
+        faCommentDollar, faDollarSign, faClipboardCheck, faBox } from '@fortawesome/free-solid-svg-icons'
     import { mapGetters, mapActions } from 'vuex'
 
     export default {
         name: 'CheckRoomsPage',
-        components: {
+        components: { 
             SelectRoom,
             AddGuestInfo,
-            SelectItems
+            SelectItems,
+            RestockItems
         },
         mounted() {
         },
@@ -172,10 +175,12 @@
                 timesCircle: faTimesCircle,
                 dollarSign: faDollarSign,
                 clipboardCheck: faClipboardCheck,
+                box: faBox,
                 selectedRoom: null,
                 guestName: null,
                 status: null,
                 itemCategories: {},
+                restockItemsCategories: {}
 
             }
         },
@@ -212,6 +217,9 @@
 
                 return item_categories
             },
+            restockCategories() {
+                return {}
+            },
             canProcessItem() {
                 return this.selectedRoom && this.guestName && this.itemCategories.length
             },
@@ -240,6 +248,9 @@
             },
             setItemCategories(item_categories) {
                 this.itemCategories = item_categories
+            },
+            setRestockItemCategories(restock_items) {
+                this.restockItemsCategories = restock_items
             },
             sale() {
                 if (this.canProcessItem) {
@@ -363,5 +374,14 @@
     .btn-active {
         background-color: #1c72b9;
         border-color:  #1c72b9;
+    }
+    .btn-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .no-restock {
+        color: grey;
     }
 </style>

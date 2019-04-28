@@ -30,8 +30,8 @@
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Room Id</div>
-                <div class="col-md-8">{{ $purchase->room_id }}</div>
+                <div class="col-md-2">Supplier Id</div>
+                <div class="col-md-8">{{ $purchase->supplier_id }}</div>
             </div>
         </div>
 

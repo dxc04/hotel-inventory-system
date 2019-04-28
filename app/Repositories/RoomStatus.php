@@ -36,16 +36,16 @@ class RoomStatus extends BaseRepository
     {
         return [
             //'room_statuses' => RoomStatusModel::whereDate('created_at', Carbon::today())->get()->toArray(),
-            //'purchases' => PurchaseModel::whereDate('created_at', Carbon::today())->get()->toArray(),
+            //'sales' => SaleModel::whereDate('created_at', Carbon::today())->get()->toArray(),
             'room_statuses' => RoomStatusModel::all()->toArray(),
-            'purchases' => PurchaseModel::all()->toArray(),
+            'sales' => SaleModel::all()->toArray(),
             'rooms' => RoomModel::all()->toArray(),
             'statuses' => StatusModel::all()->toArray(),
             'items' => ItemModel::all()->toArray(),
             'categories' => CategoryModel::all()->toArray(),
             'item_categories' => ItemCategoryModel::all()->toArray(),
             'floors' => FloorModel::all()->toArray(),
-
+            'restock_item_categories' => $this->roomStocks()
         ];
     }
 
@@ -140,9 +140,14 @@ class RoomStatus extends BaseRepository
         }
     }
 
-    public function stockComputation()
+    public function roomStocks()
     {
+        // dummy
         
+        return [
+
+
+        ];
     }
 
 }

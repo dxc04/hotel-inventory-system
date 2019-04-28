@@ -1,9 +1,9 @@
 <li{!! request()->is('admin/dashboard') ? ' class="active"' : '' !!}>
     <a href="{{ route('admin.dashboard') }}"><i class="fal fa-fw fa-tachometer mr-3"></i>Dashboard</a>
 </li>
-@can('Read Stocks Computations')
-    <li{!! request()->is('admin/stocks_computations') ? ' class="active"' : '' !!}>
-        <a href="{{ route('admin.stocks_computations') }}"><i class="fal fa-fw fa-calculator mr-3"></i>Stocks Computations</a>
+@can('Read Room Stock Limits')
+    <li{!! request()->is('admin/room_stock_limits') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.room_stock_limits') }}"><i class="fal fa-fw fa-layer-group mr-3"></i>Room Stock Limits</a>
     </li>
 @endcan
 @can('Read Sales')
@@ -59,6 +59,11 @@
 @can('Read Stocks Transactions')
     <li{!! request()->is('admin/stocks_transactions') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.stocks_transactions') }}"><i class="fal fa-fw fa-clipboard-list-check mr-3"></i>Stocks Transactions</a>
+    </li>
+@endcan
+@can('Read Stocks Computations')
+    <li{!! request()->is('admin/stocks_computations') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.stocks_computations') }}"><i class="fal fa-fw fa-calculator mr-3"></i>Stocks Computations</a>
     </li>
 @endcan
 @can('Read Room Statuses')

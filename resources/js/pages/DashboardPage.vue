@@ -163,8 +163,8 @@
                 })
                 return rooms
             },
-            purchasesByRooms() {
-                let purchases = this.roomsData.purchases.reduce(function (acc, obj) {
+            salesByRooms() {
+                let sales = this.roomsData.sales.reduce(function (acc, obj) {
                     var key = obj['room_id'];
                     if (!acc[key]) {
                         acc[key] = [];
@@ -172,34 +172,34 @@
                     acc[key].push(obj);
                     return acc;
                 }, {})
-                return purchases;
+                return sales;
             },
-            purchasesByItems() {
+            salesByItems() {
                 let items = this.roomsData.items.reduce(function (acc, obj) {
                     var key = obj['id']
                     acc[key] = obj
                     return acc
                 }, {})
 
-                let purchases = this.roomsData.purchases.reduce(function (purchase_items, obj) {
+                let sales = this.roomsData.sales.reduce(function (sale_items, obj) {
                     let item = items[obj['item_id']]
                     let item_amount = obj['quantity'] * item.amount
-                    if (name in purchase_items) {
-                        purchase_items[item.item_name] = purchase_items[item.item_name] + item_amount
+                    if (name in sale_items) {
+                        sale_items[item.item_name] = sale_items[item.item_name] + item_amount
                     }
                     else {
-                        purchase_items[item.item_name] = item_amount
+                        sale_items[item.item_name] = item_amount
                     }
-                    return purchase_items
+                    return sale_items
                 }, {})
 
-                return purchases
+                return sales
             },
             salesChartData() {
                 let chart_data = {
-                    labels: Object.keys(this.purchasesByItems),
+                    labels: Object.keys(this.salesByItems),
                     datasets: [{
-                        data: Object.values(this.purchasesByItems),
+                        data: Object.values(this.salesByItems),
                         backgroundColor: function () { 
                             return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
                         }
@@ -216,7 +216,7 @@
                 return this.roomsRestocked.length
             },
             roomsWithSalesCount() {
-                return Object.keys(this.purchasesByRooms).length
+                return Object.keys(this.salesByRooms).length
             },
             dndRoomsCount() {
                 return this.dndRooms.length
@@ -239,7 +239,7 @@
             },
             roomsWithSalesDetails() {
                 let rooms = []
-                for (let i in this.purchasesByRooms) {
+                for (let i in this.salesByRooms) {
                     let room = this.roomsData.rooms.find(room => room.id == i)
                     rooms.push({Room: room.room_name})
                 }

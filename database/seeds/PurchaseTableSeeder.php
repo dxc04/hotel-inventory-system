@@ -19,17 +19,17 @@ class PurchaseTableSeeder extends Seeder
         foreach($items as $item) {
             DB::table('purchases')->insert(
                 [
-                    'room_id' => $this->getRandomRoomId(),
+                    'supplier_id' => $this->getRandomSupplierId(),
                     'item_id' => $item->id,
-                    'quantity' => $faker->numberBetween(1, 100)
+                    'quantity' => $faker->numberBetween(80, 120)
                 ]
             );
         }
     }
 
-    private function getRandomRoomId()
+    private function getRandomSupplierId()
     {
-        $room = App\Room::inRandomOrder()->first();
-        return $room->id;
+        $supplier = App\Supplier::inRandomOrder()->first();
+        return $supplier->id;
     }
 }

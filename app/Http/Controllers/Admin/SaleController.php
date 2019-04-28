@@ -33,7 +33,7 @@ class SaleController extends Controller
 
         $html = $builder->columns([
             ['title' => 'Room', 'data' => 'room.room_name'],
-            ['title' => 'Item Category', 'data' => 'item_category.id'],
+            ['title' => 'Item Category', 'data' => 'item_category_id'],
             ['title' => 'Quantity', 'data' => 'quantity'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);

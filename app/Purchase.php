@@ -12,9 +12,9 @@ class Purchase extends Eloquent
 
     
 
-    public function room()
+    public function supplier()
     {
-        return $this->belongsTo('App\Room');
+        return $this->belongsTo('App\Supplier');
     }
 
     public function item()

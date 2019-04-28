@@ -21,7 +21,7 @@ class PurchaseController extends Controller
     public function index(Builder $builder)
     {
         if (request()->ajax()) {
-            $purchases = Purchase::query()->with('room', 'item');
+            $purchases = Purchase::query()->with('supplier', 'item');
             $datatable = datatables($purchases)
                 ->editColumn('actions', function ($purchase) {
                     return view('admin.purchases.datatable.actions', compact('purchase'));
@@ -32,7 +32,7 @@ class PurchaseController extends Controller
         }
 
         $html = $builder->columns([
-            ['title' => 'Room', 'data' => 'room.room_name'],
+            ['title' => 'Supplier', 'data' => 'supplier.supplier_name'],
             ['title' => 'Item', 'data' => 'item.item_name'],
             ['title' => 'Quantity', 'data' => 'quantity'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
@@ -50,7 +50,7 @@ class PurchaseController extends Controller
     public function create()
     {
         $this->validate(request(), [
-            "room_id" => "required|exists:rooms,id",
+            "supplier_id" => "required|exists:suppliers,id",
             "item_id" => "required|exists:items,id",
             "quantity" => "required|integer",
         ]);
@@ -81,7 +81,7 @@ class PurchaseController extends Controller
     public function update(Purchase $purchase)
     {
         $this->validate(request(), [
-            "room_id" => "required|exists:rooms,id",
+            "supplier_id" => "required|exists:suppliers,id",
             "item_id" => "required|exists:items,id",
             "quantity" => "required|",
         ]);
