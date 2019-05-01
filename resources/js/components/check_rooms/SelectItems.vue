@@ -13,7 +13,7 @@
     export default {
         name: 'SelectItems',
         props: {
-            categories: Object
+            categories: Object 
         },
         components: {
             ItemCategory

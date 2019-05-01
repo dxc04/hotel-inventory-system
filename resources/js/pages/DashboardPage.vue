@@ -122,7 +122,7 @@
             DailyLogs
         },
         mounted() {
-            console.log(this.roomsData.room_statuses)
+
         },
         computed: {
             ...mapGetters({
@@ -181,8 +181,15 @@
                     return acc
                 }, {})
 
+                let ics = this.roomsData.item_categories.reduce(function (acc, obj) {
+                    var key = obj['id']
+                    acc[key] = obj
+                    return acc
+                }, {})
+
                 let sales = this.roomsData.sales.reduce(function (sale_items, obj) {
-                    let item = items[obj['item_id']]
+                    let item_id = ics[obj['item_category_id']]['item_id']
+                    let item = items[item_id]
                     let item_amount = obj['quantity'] * item.amount
                     if (name in sale_items) {
                         sale_items[item.item_name] = sale_items[item.item_name] + item_amount

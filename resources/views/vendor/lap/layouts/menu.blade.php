@@ -1,6 +1,16 @@
 <li{!! request()->is('admin/dashboard') ? ' class="active"' : '' !!}>
     <a href="{{ route('admin.dashboard') }}"><i class="fal fa-fw fa-tachometer mr-3"></i>Dashboard</a>
 </li>
+@can('Read Item Stocks')
+    <li{!! request()->is('admin/item_stocks') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.item_stocks') }}"><i class="fal fa-fw fa-box mr-3"></i>Item Stocks</a>
+    </li>
+@endcan
+@can('Read Item Rejects')
+    <li{!! request()->is('admin/item_rejects') ? ' class="active"' : '' !!}>
+        <a href="{{ route('admin.item_rejects') }}"><i class="fal fa-fw fa-times-circle mr-3"></i>Item Rejects</a>
+    </li>
+@endcan
 @can('Read Room Stock Limits')
     <li{!! request()->is('admin/room_stock_limits') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.room_stock_limits') }}"><i class="fal fa-fw fa-layer-group mr-3"></i>Room Stock Limits</a>

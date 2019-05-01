@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\RoomStatus as RoomStatusRepo;
 use App\RoomStatus;
 use Auth;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -33,7 +34,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-       // dd($this->room_status_repo->getRoomStatusesToday()->toArray());
+
+        //Cache::put('stock_computations', $this->room_status_repo->getStockComputations());
         return view('layouts.app', [
             'allthedata' => [
                 'user' => Auth::user(),

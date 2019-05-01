@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             ItemCategoryTableSeeder::class,
             SupplierTableSeeder::class,
             PurchaseTableSeeder::class,
-            RoomStocksTableSeeder::class
+            RoomStocksTableSeeder::class,
+           // StocksComputationsTableSeeder::class
         ]);
     }
 }

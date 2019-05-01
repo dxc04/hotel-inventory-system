@@ -110,7 +110,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-                                <select-items :categories="categories" @set-item-categories="setItemCategories"></select-items>
+                                <select-items :categories="categories()" @set-item-categories="setItemCategories"></select-items>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -179,8 +179,8 @@
                 selectedRoom: null,
                 guestName: null,
                 status: null,
-                itemCategories: {},
-                restockItemsCategories: {}
+                itemCategories: [],
+                restockItemsCategories: {},
 
             }
         },
@@ -193,29 +193,6 @@
             },
             floors() {
                 return this.roomsData.floors
-            },
-            categories() {
-                let items = this.roomsData.items
-                let all_item_categories = this.roomsData.item_categories
-                let item_categories = this.roomsData.categories.reduce(function (category, obj) {
-                    let cat = []
-                    cat['category_id'] = obj.id
-                    cat['category_name'] = obj.category_name
-                    cat['items'] = []
-                    
-                    for (let i in all_item_categories) {
-                        let item_category = all_item_categories[i]
-                        if (item_category.category_id == obj.id) {
-                            let item = items.find(item => item_category.item_id == item.id)
-                            cat['items'].push({item_id: item.id, item_amount: item.amount, item_name: item.item_name, item_category_id: item_category.id})
-                        }
-                    }
-                    category[obj.id] = cat
-
-                    return category
-                }, {})
-
-                return item_categories
             },
             restockCategories() {
                 return {}
@@ -252,12 +229,58 @@
             setRestockItemCategories(restock_items) {
                 this.restockItemsCategories = restock_items
             },
+            categories() {
+                let items = this.roomsData.items
+                let all_item_categories = this.roomsData.item_categories
+                let room_ic_stocks = this.roomsData.room_ic_stocks.reduce(function (stock, obj) {
+                    let s = []
+                    s[obj.room_id + '_' + obj.item_category_id] = obj
+                }, {})
+                console.log(this.itemCategories)
+                let sic = this.itemCategories.reduce(function (acc, obj) {
+                    var key = obj['item_category_id']
+                    acc[key] = obj
+                    return acc
+                }, {})
+
+                let item_categories = this.roomsData.categories.reduce(function (category, obj) {
+                    let cat = []
+                    cat['category_id'] = obj.id
+                    cat['category_name'] = obj.category_name
+                    cat['items'] = []
+                    
+                    for (let i in all_item_categories) {
+                        let item_category = all_item_categories[i]
+                        if (item_category.category_id == obj.id) {
+                            let item = items.find(item => item_category.item_id == item.id)
+                            let qty = sic[item_category.id] ? sic[item_category.id].quantity : 0
+                            cat['items'].push({item_id: item.id, item_amount: item.amount, item_name: item.item_name,
+                                item_category_id: item_category.id, quantity: qty
+                            })
+                        }
+                    }
+                    category[obj.id] = cat
+
+                    return category
+                }, {})
+
+                return item_categories
+            },
+            reset() {
+                this.selectedRoom = null
+                this.guestName = null
+                this.status = null
+                this.itemCategories = []
+                this.restockItemsCategories = []
+                this.wasReset = true
+            },
             sale() {
                 if (this.canProcessItem) {
                     let sale_data = {
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+                    this.reset()
                     this.postASale(sale_data)
                     .then(res => {
                         this.$snotify.success('Sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
@@ -269,6 +292,7 @@
             },
             noSale() {
                 if (this.canPostStatus) {
+                    this.reset()
                     this.postNoSale(this.selectedRoom)
                     .then(res => {
                         this.$snotify.success('No Sale posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
@@ -279,6 +303,7 @@
             },
             DNDDueOut() {
                 if (this.canPostStatus) {
+                    this.reset()
                     this.postDNDDueOut(this.selectedRoom)
                     .then(res => {
                         this.$snotify.success('DND Due Out posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
@@ -289,6 +314,7 @@
             },
             DNDStayover() {
                 if (this.canPostStatus) {
+                    this.reset()                    
                     this.postDNDStayover(this.selectedRoom)
                     .then(res => {
                         this.$snotify.success('DND Stayover posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
@@ -303,6 +329,7 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+                    this.reset()
                     this.postAnItemReject(data)
                 }
                 else {
@@ -315,6 +342,7 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+                    this.reset()
                     this.postAnExtraSale(data)
                     .then(res => {
                         this.$snotify.success('An extra sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
@@ -330,6 +358,7 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+                    this.reset()
                     this.postARestock(data)
                     .then(res => {
                         this.$snotify.success('A restock has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)

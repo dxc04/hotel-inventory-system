@@ -6,24 +6,24 @@
         </div>
         <div class="col-lg-9 col-sm-7 m-0">
             <span class="mr-1">
-                <a href="#" class="btn btn-danger btn-circle btn-sm" @click="minusQty()">
+                <button class="btn btn-danger btn-circle btn-sm" @click="minusQty()">
                     <font-awesome-icon class="justify-center" :icon="minus"/>
-                </a>
+                </button>
             </span>
             <span>
                 <b-form-input 
                     :name="'input_' + getItemCategoryId()"
                     class="quantity" 
-                    v-model="quantity"
+                    v-model="itemQty"
                     type="text"
                     @change="updateItem()"
                 >
                 </b-form-input>
             </span>    
             <span class="ml-1">
-                <a href="#" class="btn btn-success btn-circle btn-sm" @click="addQty()">
+                <button class="btn btn-success btn-circle btn-sm" @click="addQty()">
                     <font-awesome-icon class="justify-center" :icon="plus"/>
-                </a>
+                </button>
             </span> 
         </div>
     </div>
@@ -39,32 +39,38 @@
         data() {
             return {
                 disabled: 0,
-                quantity: 0,
                 minus: faMinus,
                 plus: faPlus,
             }
         },
         computed: {
-            itemName() {
+            itemName: function() {
                 return this.item.item_name
             },
-            itemPrice() {
+            itemPrice : function () {
                 return '$' + this.item.item_amount.toFixed(2)
             },
+            itemQty: {
+                get: function() {
+                     return this.item.quantity           
+                },
+                set: function(value) {
+
+                    this.updateItem(value)
+                }
+            }
         },
         methods: {
             addQty() {
-                this.quantity++
-                this.updateItem()
+                this.itemQty = this.itemQty + 1
             },
             minusQty() {
-                if (this.quantity) {
-                    this.quantity--
-                    this.updateItem()
+                if (this.itemQty) {
+                    this.itemQty = this.itemQty - 1
                 }
             },
-            updateItem() {
-                this.$emit('update-item', this.item.item_category_id, this.quantity)
+            updateItem(value) {
+                this.$emit('update-item', this.item.item_category_id, value)
             }, 
             getItemCategoryId() {
                 return this.item.item_category_id

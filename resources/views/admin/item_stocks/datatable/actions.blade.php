@@ -1,0 +1,15 @@
+<div class="text-right text-nowrap">
+    <a href="{{ route('admin.item_stocks.read', $item_stock->id) }}" class="btn btn-link text-secondary p-1" title="Read"><i class="fal fa-lg fa-eye"></i></a>
+    @can('Update Item Stocks')
+        <a href="{{ route('admin.item_stocks.update', $item_stock->id) }}" class="btn btn-link text-secondary p-1" title="Update"><i class="fal fa-lg fa-edit"></i></a>
+    @endcan
+    @can('Delete Item Stocks')
+        <form method="POST" action="{{ route('admin.item_stocks.delete', $item_stock->id) }}" class="d-inline-block" novalidate data-ajax-form>
+            @csrf
+            @method('DELETE')
+            <button type="submit" name="_submit" class="btn btn-link text-secondary p-1" title="Delete" value="reload_datatables" data-confirm>
+                <i class="fal fa-lg fa-trash-alt"></i>
+            </button>
+        </form>
+    @endcan
+</div>

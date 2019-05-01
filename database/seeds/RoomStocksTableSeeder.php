@@ -16,6 +16,8 @@ class RoomStocksTableSeeder extends Seeder
         $available_stocks = App\Purchase::all();
         $item_categories = App\ItemCategory::all();
         $rooms = App\Room::all();
+        $items = App\Item::all();
+    
         
         foreach ($available_stocks as $stock) {
             foreach ($rooms as $num => $room) {

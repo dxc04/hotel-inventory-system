@@ -185,3 +185,21 @@ Route::get('admin/room_stock_limits/read/{room_stock_limit}', 'Admin\RoomStockLi
 Route::get('admin/room_stock_limits/update/{room_stock_limit}', 'Admin\RoomStockLimitController@updateForm')->name('admin.room_stock_limits.update');
 Route::patch('admin/room_stock_limits/update/{room_stock_limit}', 'Admin\RoomStockLimitController@update');
 Route::delete('admin/room_stock_limits/delete/{room_stock_limit}', 'Admin\RoomStockLimitController@delete')->name('admin.room_stock_limits.delete');
+
+// item_rejects
+Route::get('admin/item_rejects', 'Admin\ItemRejectController@index')->name('admin.item_rejects');
+Route::get('admin/item_rejects/create', 'Admin\ItemRejectController@createForm')->name('admin.item_rejects.create');
+Route::post('admin/item_rejects/create', 'Admin\ItemRejectController@create');
+Route::get('admin/item_rejects/read/{item_reject}', 'Admin\ItemRejectController@read')->name('admin.item_rejects.read');
+Route::get('admin/item_rejects/update/{item_reject}', 'Admin\ItemRejectController@updateForm')->name('admin.item_rejects.update');
+Route::patch('admin/item_rejects/update/{item_reject}', 'Admin\ItemRejectController@update');
+Route::delete('admin/item_rejects/delete/{item_reject}', 'Admin\ItemRejectController@delete')->name('admin.item_rejects.delete');
+
+// item_stocks
+Route::get('admin/item_stocks', 'Admin\ItemStockController@index')->name('admin.item_stocks');
+Route::get('admin/item_stocks/create', 'Admin\ItemStockController@createForm')->name('admin.item_stocks.create');
+Route::post('admin/item_stocks/create', 'Admin\ItemStockController@create');
+Route::get('admin/item_stocks/read/{item_stock}', 'Admin\ItemStockController@read')->name('admin.item_stocks.read');
+Route::get('admin/item_stocks/update/{item_stock}', 'Admin\ItemStockController@updateForm')->name('admin.item_stocks.update');
+Route::patch('admin/item_stocks/update/{item_stock}', 'Admin\ItemStockController@update');
+Route::delete('admin/item_stocks/delete/{item_stock}', 'Admin\ItemStockController@delete')->name('admin.item_stocks.delete');
