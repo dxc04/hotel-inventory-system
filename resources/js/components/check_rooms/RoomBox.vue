@@ -3,6 +3,8 @@
 </template>
 
 <script>
+    import { mapGetters, mapActions } from 'vuex'
+
     export default {
         name: 'RoomBox',
         props: {
@@ -16,12 +18,18 @@
             }
         },
         computed: {
+            ...mapGetters({
+                actionPosted: 'getActionPosted'
+            }),
             buttonClass() {
                 return {
                     'btn btn-secondary btn-lg': true,
-                    'room-selected': this.roomSelected
+                    'room-selected': this.getRoomSelected
                 }
             },
+            getRoomSelected() {
+                return this.roomSelected && !this.actionPosted
+            }
         },
         methods: {
             selectRoom() {

@@ -10,16 +10,21 @@ export default new Vuex.Store({
   state: {
     user: {},
     app_name: {},
-    rooms_data: {}
+    rooms_data: {},
+    action_posted: false
   },
   actions: {
     loadAllTheData({ commit }, atd) {
       commit('mutateUser', atd.user)
       commit('mutateAppName', atd.app_name)
-      commit('mutateRoomsData', atd.rooms_data)
+      commit('mutateRoomsData', atd.rooms_data),
+      commit('mutateActionPosted', false)
     },
     loadRoomData({ commit, state }, rooms_data) {
       commit('mutateRoomsData', rooms_data)
+    },
+    postActionPosted({ commit }, action_status) {
+      commit('mutateActionPosted', action_status)
     },
     postASale({ commit }, data) {
       return axios.post('/api/v1/post-a-sale', data)
@@ -87,6 +92,9 @@ export default new Vuex.Store({
     },
     mutateRoomsData(state, rooms_data) {
       state.rooms_data = rooms_data
+    },
+    mutateActionPosted(state, action_posted) {
+        state.action_posted = action_posted
     }
   },
   getters: {
@@ -94,6 +102,7 @@ export default new Vuex.Store({
     appName: state => state.app_name,
     getRoomsData: state => {
       return state.rooms_data
-    }
+    },
+    getActionPosted: state => state.action_posted
   }
 })

@@ -212,9 +212,11 @@
                 'postDNDStayover',
                 'postAnItemReject',
                 'postAnExtraSale',
-                'postARestock'
+                'postARestock',
+                'postActionPosted'
             ]),
             setSelectedRoom(room) {
+                this.postActionPosted(false)
                 this.selectedRoom = room
             },
             inputGuestName(guest_name) {
@@ -273,6 +275,7 @@
                 this.itemCategories = []
                 this.restockItemsCategories = []
                 this.wasReset = true
+                this.postActionPosted(true)
             },
             sale() {
                 if (this.canProcessItem) {
@@ -280,10 +283,12 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
-                    this.reset()
                     this.postASale(sale_data)
                     .then(res => {
                         this.$snotify.success('Sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
+                    .finally(() => {
+                        this.reset()
                     })
                 }
                 else {
@@ -292,10 +297,12 @@
             },
             noSale() {
                 if (this.canPostStatus) {
-                    this.reset()
                     this.postNoSale(this.selectedRoom)
                     .then(res => {
                         this.$snotify.success('No Sale posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
+                    .finally(() => {
+                        this.reset()
                     })
                 } else {
                     this.postStatusWarning()
@@ -303,10 +310,12 @@
             },
             DNDDueOut() {
                 if (this.canPostStatus) {
-                    this.reset()
                     this.postDNDDueOut(this.selectedRoom)
                     .then(res => {
                         this.$snotify.success('DND Due Out posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
+                    .finally(() => {
+                        this.reset()
                     })
                 } else {
                     this.postStatusWarning()
@@ -314,10 +323,12 @@
             },
             DNDStayover() {
                 if (this.canPostStatus) {
-                    this.reset()                    
                     this.postDNDStayover(this.selectedRoom)
                     .then(res => {
                         this.$snotify.success('DND Stayover posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
+                    .finally(() => {
+                        this.reset()
                     })
                 } else {
                     this.postStatusWarning()
@@ -329,8 +340,13 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
-                    this.reset()
                     this.postAnItemReject(data)
+                    .then(res => {
+                        this.$snotify.success('Item reject posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
+                    .finally(() => {
+                        this.reset()
+                    })
                 }
                 else {
                     this.postProcessItemWarning()
@@ -342,10 +358,12 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
-                    this.reset()
                     this.postAnExtraSale(data)
                     .then(res => {
                         this.$snotify.success('An extra sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
+                    .finally(() => {
+                        this.reset()
                     })
                 }
                 else {
@@ -358,10 +376,12 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
-                    this.reset()
                     this.postARestock(data)
                     .then(res => {
                         this.$snotify.success('A restock has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                    })
+                    .finally(() => {
+                        this.reset()
                     })
                 }
                 else {

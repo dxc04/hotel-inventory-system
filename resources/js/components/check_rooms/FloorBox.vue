@@ -16,12 +16,18 @@
             }
         },
         computed: {
+            ...mapGetters({
+                actionPosted: 'getActionPosted'
+            }),
             buttonClass() {
                 return {
                     'btn btn-secondary btn-lg': true,
-                    'floor-selected': this.floorSelected
+                    'floor-selected': this.getFloorSelected
                 }
             },
+            getFloorSelected() {
+                return this.floorSelected && !this.actionPosted
+            }
         },
         methods: {
             selectFloor() {
