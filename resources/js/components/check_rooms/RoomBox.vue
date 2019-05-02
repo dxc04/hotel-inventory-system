@@ -18,7 +18,7 @@
         computed: {
             buttonClass() {
                 return {
-                    'btn btn-secondary btn-lg': true,
+                    'btn btn-secondary btn-lg p-2': true,
                     'room-selected': this.roomSelected
                 }
             },

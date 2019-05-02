@@ -2,7 +2,7 @@
     <div>
         <div class="row mb-2 ml-1"><h4>Which floor?</h4></div>
         <div class="row mb-4 align-content-center align-items-center center">
-            <div class="col-auto" v-for="floor in floors">
+            <div class="col-auto pb-2" v-for="floor in floors">
                 <floor-box :floor="floor" @select-floor="selectFloor" :floorSelected="floorSelected(floor)"></floor-box>
             </div>
         </div>
