@@ -44,7 +44,7 @@
             }
         },
         mounted() {
-            console.log('Select Rooms', this.rooms, this.floors, this.roomsByFloor)
+
         },
         computed: {
             roomsBySelectedFloor() {

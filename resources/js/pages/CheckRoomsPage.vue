@@ -278,10 +278,11 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+                    let room_name = this.selectedRoom.room_name
                     this.reset()
                     this.postASale(sale_data)
                     .then(res => {
-                        this.$snotify.success('Sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('Sale has been posted to room ' + room_name, this.notifyOptions)
                     })
                 }
                 else {
@@ -290,10 +291,11 @@
             },
             noSale() {
                 if (this.canPostStatus) {
+                    let room_name = this.selectedRoom.room_name
                     this.reset()
                     this.postNoSale(this.selectedRoom)
                     .then(res => {
-                        this.$snotify.success('No Sale posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('No Sale posted to room ' + room_name, this.notifyOptions)
                     })
                 } else {
                     this.postStatusWarning()
@@ -301,10 +303,11 @@
             },
             DNDDueOut() {
                 if (this.canPostStatus) {
+                    let room_name = this.selectedRoom.room_name
                     this.reset()
                     this.postDNDDueOut(this.selectedRoom)
                     .then(res => {
-                        this.$snotify.success('DND Due Out posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('DND Due Out posted to room ' + room_name, this.notifyOptions)
                     })
                 } else {
                     this.postStatusWarning()
@@ -312,10 +315,11 @@
             },
             DNDStayover() {
                 if (this.canPostStatus) {
+                    let room_name = this.selectedRoom.room_name
                     this.reset()                    
                     this.postDNDStayover(this.selectedRoom)
                     .then(res => {
-                        this.$snotify.success('DND Stayover posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('DND Stayover posted to room ' + room_name, this.notifyOptions)
                     })
                 } else {
                     this.postStatusWarning()
@@ -340,10 +344,11 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+                    let room_name = this.selectedRoom.room_name
                     this.reset()
                     this.postAnExtraSale(data)
                     .then(res => {
-                        this.$snotify.success('An extra sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('An extra sale has been posted to room ' + room_name, this.notifyOptions)
                     })
                 }
                 else {
@@ -356,10 +361,11 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+                    let room_name = this.selectedRoom.room_name
                     this.reset()
                     this.postARestock(data)
                     .then(res => {
-                        this.$snotify.success('A restock has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('A restock has been posted to room ' + room_name, this.notifyOptions)
                     })
                 }
                 else {
