@@ -24,11 +24,16 @@ class AppController extends Controller
         //$this->middleware('api');
     }
 
+    public function getAllthedata()
+    {
+        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);        
+    }
+
     public function postASale()
     {
         $sale_data = request()->post();
         $this->room_status_repo->postASale($sale_data);
-        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
+        return response()->json([]);
     }
 
     public function postNoSale()

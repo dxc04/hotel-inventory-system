@@ -18,13 +18,18 @@ export default new Vuex.Store({
       commit('mutateAppName', atd.app_name)
       commit('mutateRoomsData', atd.rooms_data)
     },
-    loadRoomData({ commit, state }, rooms_data) {
-      commit('mutateRoomsData', rooms_data)
+    loadRoomData({ commit, state }) {
+      return axios.post('/api/v1/get-allthedata')
+      .then(res => {
+        commit('mutateRoomsData', res.data.rooms_data)
+      }).catch(err => {
+        console.log(err)
+      })
     },
     postASale({ commit }, data) {
       return axios.post('/api/v1/post-a-sale', data)
       .then(res => {
-        commit('mutateRoomsData', res.data.rooms_data)
+        //commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
@@ -32,7 +37,7 @@ export default new Vuex.Store({
     postNoSale({ commit }, selected_room) {
       return axios.post('/api/v1/post-no-sale', {'selected_room': selected_room.id})
       .then(res => {
-        commit('mutateRoomsData', res.data.rooms_data)
+        //commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
@@ -40,7 +45,7 @@ export default new Vuex.Store({
     postDNDDueOut({ commit }, selected_room) {
       return axios.post('/api/v1/post-dnd-due-out', {'selected_room': selected_room.id})
       .then(res => {
-        commit('mutateRoomsData', res.data.rooms_data)
+        //commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
@@ -48,7 +53,7 @@ export default new Vuex.Store({
     postDNDStayover({ commit }, selected_room) {
       return axios.post('/api/v1/post-dnd-stayover', {'selected_room': selected_room.id})
       .then(res => {
-        commit('mutateRoomsData', res.data.rooms_data)
+        //commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
@@ -56,7 +61,7 @@ export default new Vuex.Store({
     postAnItemReject({ commit }, data) {
       return axios.post('/api/v1/post-an-item-reject', data)
       .then(res => {
-        commit('mutateRoomsData', res.data.rooms_data)
+        //commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
@@ -64,7 +69,7 @@ export default new Vuex.Store({
     postAnExtraSale({ commit }, data) {
       return axios.post('/api/v1/post-an-extra-sale', data)
       .then(res => {
-        commit('mutateRoomsData', res.data.rooms_data)
+        //commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })
@@ -72,7 +77,7 @@ export default new Vuex.Store({
     postARestock({ commit }, data) {
       return axios.post('/api/v1/post-a-restock', data)
       .then(res => {
-        commit('mutateRoomsData', res.data.rooms_data)
+        //commit('mutateRoomsData', res.data.rooms_data)
       }).catch(err => {
         console.log(err)
       })

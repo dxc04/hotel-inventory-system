@@ -25,6 +25,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
     Route::post('post-an-item-reject', 'Api\AppController@postAnItemReject');
     Route::post('post-an-extra-sale', 'Api\AppController@postAnExtraSale');
     Route::post('post-a-restock', 'Api\AppController@postARestock');
+    Route::get('get-allthedata', 'Api\AppController@getAllthedata')
 });
 
 
