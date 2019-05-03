@@ -29,7 +29,7 @@
                         let item = this.categories[i].items[index]
                         item_categories.push({
                             item_category_id: item.item_category_id,
-                            quantity: 0
+                            quantity: item.quantity
                         })
                     }
                 }

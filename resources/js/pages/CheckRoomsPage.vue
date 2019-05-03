@@ -26,7 +26,7 @@
     </div>
 
     <div class="row">
-        <div class="flex-column col-sm-12 col-md-6">
+        <div class="flex-column col-sm-12 col-lg-6 mb-4">
             <b-card>
                 <div class="row justify-content-center">
                     <div class="col-md-4 text-center justify-center mb-3">
@@ -79,8 +79,6 @@
                     </div>
                 </div>
 
-
-
                 <div role="tablist">
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
@@ -109,7 +107,7 @@
                             <b-button block href="#" v-b-toggle.accordion-3 variant="default">Select Items</b-button></b-button>
                         </b-card-header>
                         <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
+                            <b-card-body class="m-0 p-0">
                                 <select-items :categories="categories()" @set-item-categories="setItemCategories"></select-items>
                             </b-card-body>
                         </b-collapse>
@@ -117,7 +115,7 @@
                 </div>
             </b-card>
         </div>
-        <div class="flex-column col-sm-12 col-md-6">
+        <div class="flex-column col-sm-12 col-lg-6">
             <b-card>
                 <div v-if="restockCategories.length" class="row">
                     <div class="ml-5 mr-5 mb-3 col-auto text-center justify-center">
@@ -238,7 +236,7 @@
                     let s = []
                     s[obj.room_id + '_' + obj.item_category_id] = obj
                 }, {})
-                console.log(this.itemCategories)
+
                 let sic = this.itemCategories.reduce(function (acc, obj) {
                     var key = obj['item_category_id']
                     acc[key] = obj
@@ -283,9 +281,11 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+
+                    let room_name = this.selectedRoom.room_name
                     this.postASale(sale_data)
                     .then(res => {
-                        this.$snotify.success('Sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('Sale has been posted to room ' + room_name, this.notifyOptions)
                     })
                     .finally(() => {
                         this.reset()
@@ -297,9 +297,11 @@
             },
             noSale() {
                 if (this.canPostStatus) {
+                    let room_name = this.selectedRoom.room_name
+
                     this.postNoSale(this.selectedRoom)
                     .then(res => {
-                        this.$snotify.success('No Sale posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('No Sale posted to room ' + room_name, this.notifyOptions)
                     })
                     .finally(() => {
                         this.reset()
@@ -310,9 +312,11 @@
             },
             DNDDueOut() {
                 if (this.canPostStatus) {
+                    let room_name = this.selectedRoom.room_name
+
                     this.postDNDDueOut(this.selectedRoom)
                     .then(res => {
-                        this.$snotify.success('DND Due Out posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('DND Due Out posted to room ' + room_name, this.notifyOptions)
                     })
                     .finally(() => {
                         this.reset()
@@ -323,9 +327,11 @@
             },
             DNDStayover() {
                 if (this.canPostStatus) {
+                    let room_name = this.selectedRoom.room_name
+
                     this.postDNDStayover(this.selectedRoom)
                     .then(res => {
-                        this.$snotify.success('DND Stayover posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('DND Stayover posted to room ' + room_name, this.notifyOptions)
                     })
                     .finally(() => {
                         this.reset()
@@ -358,9 +364,10 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+                    let room_name = this.selectedRoom.room_name
                     this.postAnExtraSale(data)
                     .then(res => {
-                        this.$snotify.success('An extra sale has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('An extra sale has been posted to room ' + room_name, this.notifyOptions)
                     })
                     .finally(() => {
                         this.reset()
@@ -376,9 +383,10 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
+                    let room_name = this.selectedRoom.room_name
                     this.postARestock(data)
                     .then(res => {
-                        this.$snotify.success('A restock has been posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
+                        this.$snotify.success('A restock has been posted to room ' + room_name, this.notifyOptions)
                     })
                     .finally(() => {
                         this.reset()

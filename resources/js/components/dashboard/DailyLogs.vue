@@ -18,7 +18,6 @@
             LogDetails
         },
         mounted() {
-            console.log(this.DailyLogsData)
         }
     }
 </script>

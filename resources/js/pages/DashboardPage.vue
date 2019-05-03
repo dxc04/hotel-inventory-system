@@ -111,7 +111,7 @@
     import QuickList from '../components/QuickList.vue'
     import DailyLogs from '../components/dashboard/DailyLogs.vue'
     import SalesChart from '../charts/SalesChart.js'
-    import { mapGetters } from 'vuex'
+    import { mapGetters, mapActions } from 'vuex'
 
     export default {
         name: 'DashboardPage',
@@ -128,6 +128,10 @@
             ...mapGetters({
                 roomsData: 'getRoomsData'
             }),
+            async beforeRouteEnter(to, from, next) {
+                await this.loadRoomData()
+                next();
+            },
             roomsChecked() {
                 let rooms = this.roomsData.room_statuses.reduce(function (acc, obj) {
                     var key = obj['room_id'];
