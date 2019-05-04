@@ -3,6 +3,8 @@
 </template>
 
 <script>
+    import { mapGetters, mapActions } from 'vuex'
+
     export default {
         name: 'FloorBox',
         props: {
