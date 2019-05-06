@@ -13,34 +13,29 @@ class RoomStocksTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $available_stocks = App\Purchase::all();
         $item_categories = App\ItemCategory::all();
         $rooms = App\Room::all();
-        $items = App\Item::all();
-    
-        
-        foreach ($available_stocks as $stock) {
-            foreach ($rooms as $num => $room) {
-                $max_qty = $faker->numberBetween(2, 4);
-                foreach ($item_categories as $cat) {
-                    $qty = $faker->numberBetween(1, $max_qty);
 
-                    DB::table('room_stock_limits')->insert(
-                        [
-                            'room_id' => $room->id,
-                            'item_category_id' => $cat->id,
-                            'stock_max' => $qty
-                        ]
-                    );
+        foreach ($rooms as $num => $room) {
+            $max_qty = $faker->numberBetween(2, 4);
+            foreach ($item_categories as $cat) {
+                $qty = $faker->numberBetween(1, $max_qty);
 
-                    DB::table('room_stocks')->insert(
-                        [
-                            'room_id' => $room->id,
-                            'item_category_id' => $cat->id,
-                            'stock_quantity' => $qty
-                        ]
-                    );
-                }
+                DB::table('room_stock_limits')->insert(
+                    [
+                        'room_id' => $room->id,
+                        'item_category_id' => $cat->id,
+                        'stock_max' => $qty
+                    ]
+                );
+
+                DB::table('room_stocks')->insert(
+                    [
+                        'room_id' => $room->id,
+                        'item_category_id' => $cat->id,
+                        'stock_quantity' => $qty
+                    ]
+                );
             }
         }
     }

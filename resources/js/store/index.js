@@ -120,20 +120,5 @@ export default new Vuex.Store({
       return state.rooms_data
     },
     getActionPosted: state => state.action_posted,
-    getRoomStocks: state => {
-
-      let room_stocks = state.rooms_data.room_stocks.reduce((acc, stock) => {
-          var room_id = stock.room_id
-          var ic_id = stock.item_category_id
-          if (!acc[room_id]) {
-            acc[room_id] = {}
-          }
-
-          acc[room_id][ic_id] = stock.stock_quantity
-          return acc
-      })
-      
-      return room_stocks
-    }
   }
 })

@@ -54,6 +54,7 @@
         methods: {
             selectFloor(floor) {
                 this.selectedFloor = floor
+                this.$emit('select-floor', floor)
             },
             selectRoom(room) {
                 this.selectedRoom = room

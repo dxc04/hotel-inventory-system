@@ -5,19 +5,22 @@
     </div>
 
     <div class="row ml-3">
-        <div class="col-2">
+        <div class="col-md-3">
             <div class="mb-2">
-                <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Room</span></p>
-                <p class="text-lg pl-0 ml-0 pt-0"><span v-if="selectedRoom">{{ selectedRoom.room_name }}</span>&nbsp;</p>
+                <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Unit</span></p>
+                <p class="text-lg pl-0 ml-0 pt-0">
+                    <span v-if="selectedFloor">F{{ selectedFloor.floor_name }}</span>&nbsp;
+                    <span v-if="selectedRoom"> - {{ selectedRoom.room_name }}</span>&nbsp;
+                </p>
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-md-3">
             <div class="mb-2">
                 <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Guest</span></p>
                 <p class="text-lg pl-0 ml-0 pt-0"><span v-if="guestName">{{ guestName }}</span>&nbsp;</p>
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-md-3">
             <div class="mb-2">
                 <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Status</span></p>
                 <p class="text-lg pl-0 ml-0 pt-0"><span v-if="status">{{ status }}&nbsp;</span></p>
@@ -86,7 +89,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-                                <select-room :rooms="rooms" :floors="floors" @select-room="setSelectedRoom"></select-room>
+                                <select-room :rooms="rooms" :floors="floors" @select-room="setSelectedRoom" @select-floor="setSelectedFloor"></select-room>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -108,7 +111,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                             <b-card-body class="m-0 p-0">
-                                <select-items :hasSelectedRoom="canProcessItem" :categories="categories()" @set-item-categories="setItemCategories"></select-items>
+                                <select-items :hasSelectedRoom="canPostStatus" :categories="categories()" @set-item-categories="setItemCategories"></select-items>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -175,6 +178,7 @@
                 dollarSign: faDollarSign,
                 clipboardCheck: faClipboardCheck,
                 box: faBox,
+                selectedFloor: null,
                 selectedRoom: null,
                 guestName: null,
                 status: null,
@@ -186,7 +190,6 @@
         computed: {
             ...mapGetters({
                 roomsData: 'getRoomsData',
-                roomStocks: 'getRoomStocks'
             }),
             rooms() {
                 return this.roomsData.rooms
@@ -201,11 +204,26 @@
                 return Boolean(this.selectedRoom && this.guestName && this.itemCategories.length)
             },
             canPostStatus() {
-                return this.selectedRoom && this.guestName
+                return Boolean(this.selectedRoom && this.guestName)
             },
             guestInfo() {
                 return { guest_name: this.guestName, status: this.status }
             },
+            roomStocks() {
+                let room_stocks_data = this.roomsData.room_stocks
+                let room_stocks = room_stocks_data.reduce((acc, stock) => {
+                    let room_id = stock.room_id
+                    let ic_id = stock.item_category_id
+                    if (!acc[room_id]) {
+                        acc[room_id] = {}
+                    }
+
+                    acc[room_id][ic_id] = stock.stock_quantity
+                    return acc
+                }, {})
+
+                return room_stocks
+            }
         },
         methods: {
             ...mapActions([
@@ -218,6 +236,9 @@
                 'postARestock',
                 'postActionPosted'
             ]),
+            setSelectedFloor(floor) {
+                this.selectedFloor = floor
+            },
             setSelectedRoom(room) {
                 this.postActionPosted(false)
                 this.selectedRoom = room
@@ -295,10 +316,11 @@
                                 resolve({
                                     title: 'Success!',
                                     body: 'Sale posted to room ' + room_name + '!',
-                                    config: Object.createthis.notifyOptions
+                                    config: this.notifyOptions
                                 })
                             })
                             .catch(err => {
+                                console.log(err)
                                 reject({
                                     title: 'Error!',
                                     body: 'Something went wrong.',

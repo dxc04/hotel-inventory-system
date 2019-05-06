@@ -88,6 +88,7 @@
                 return this.itemQty < this.item.stock_count
             },
             hasNoStock() {
+                console.log(this.hasSelectedRoom , this.item.stock_count)
                 return this.hasSelectedRoom && !this.item.stock_count
             }
         },
