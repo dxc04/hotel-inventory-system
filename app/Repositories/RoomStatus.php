@@ -50,7 +50,7 @@ class RoomStatus extends BaseRepository
             'categories' => CategoryModel::all()->toArray(),
             'item_categories' => ItemCategoryModel::all()->toArray(),
             'floors' => FloorModel::all()->toArray(),
-            'room_ic_stocks' => RoomStockModel::all()->toArray()
+            'room_stocks' => RoomStockModel::all()->toArray()
         ];
     }
 
@@ -158,6 +158,11 @@ class RoomStatus extends BaseRepository
         $item = ItemStockModel::where('item_id', $item_id)->first();
         $item->stock_quantity = $item->stock_quantity + $qty;
         $item->save();
+    }
+
+    public function getRoomStocks()
+    {
+        return RoomStockModel::all()->toArray();
     }
 
 }

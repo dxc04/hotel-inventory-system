@@ -1,6 +1,6 @@
 <template>
     <div class="daily-logs">
-        <log-details v-for="(log, index) in DailyLogsData" :daily-log="log" :key="index"></log-details>
+        <log-details v-for="(log, index) in dailyLogsData" :daily-log="log" :key="index"></log-details>
     </div>
 </template>
 
@@ -10,7 +10,7 @@
     export default {
         name: 'DailyLogs',
         props: {
-            DailyLogsData: {
+            dailyLogsData: {
                 type: Array
             }
         },
@@ -18,6 +18,7 @@
             LogDetails
         },
         mounted() {
+
         }
     }
 </script>

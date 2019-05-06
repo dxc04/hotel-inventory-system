@@ -23,8 +23,7 @@ class RoomStocksTableSeeder extends Seeder
             foreach ($rooms as $num => $room) {
                 $max_qty = $faker->numberBetween(2, 4);
                 foreach ($item_categories as $cat) {
-                    $qty = ($max_qty == 1) ? $max_qty : $max_qty % $faker->numberBetween(1, $max_qty);
-                    $max_qty = $max_qty - $qty;
+                    $qty = $faker->numberBetween(1, $max_qty);
 
                     DB::table('room_stock_limits')->insert(
                         [

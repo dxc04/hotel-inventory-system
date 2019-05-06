@@ -1,7 +1,7 @@
 <template>
     <div>
-        <b-form-input v-model="guest" placeholder="Enter guest name" @blur="inputGuestName"></b-form-input>
-        <b-form-select v-model="status" :options="statusOptions" @change="selectStatus" class="mt-3"></b-form-select>
+        <b-form-input v-model="guestName" placeholder="Enter guest name"></b-form-input>
+        <b-form-select v-model="guestStatus" :options="statusOptions" class="mt-3"></b-form-select>
     </div>
 </template>
 
@@ -9,10 +9,12 @@
 
     export default {
         name: 'AddGuestInfo',
+        props: {
+            guest: String,
+            status: String
+        },
         data() {
             return {
-                guest: '',
-                status: null,
                 statusOptions: [
                     { value: null, text: 'Select status' },
                     { value: 'Stayover', text: 'Stayover' },
@@ -24,13 +26,29 @@
 
         },
         computed: {
+            guestName: {
+                get: function() {
+                     return this.guest          
+                },
+                set: function(value) {
+                    this.inputGuestName(value)
+                }
+            },
+            guestStatus: {
+                get: function() {
+                     return this.status         
+                },
+                set: function(value) {
+                    this.selectStatus(value)
+                }
+            }
         },
         methods: {
-            inputGuestName() {
-                this.$emit('input-guest-name', this.guest)
+            inputGuestName(value) {
+                this.$emit('input-guest-name', value)
             },
-            selectStatus() {
-                this.$emit('select-status', this.status)
+            selectStatus(value) {
+                this.$emit('select-status', value)
             },
         }
     }

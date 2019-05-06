@@ -97,7 +97,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-                                <add-guest-info @input-guest-name="inputGuestName" @select-status="selectStatus"></add-guest-info>
+                                <add-guest-info :guest="this.guestName" :status="this.status" @input-guest-name="inputGuestName" @select-status="selectStatus"></add-guest-info>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -108,7 +108,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                             <b-card-body class="m-0 p-0">
-                                <select-items :categories="categories()" @set-item-categories="setItemCategories"></select-items>
+                                <select-items :hasSelectedRoom="canProcessItem" :categories="categories()" @set-item-categories="setItemCategories"></select-items>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -158,6 +158,7 @@
             RestockItems
         },
         mounted() {
+
         },
         data() {
             return {
@@ -184,7 +185,8 @@
         },
         computed: {
             ...mapGetters({
-                roomsData: 'getRoomsData'
+                roomsData: 'getRoomsData',
+                roomStocks: 'getRoomStocks'
             }),
             rooms() {
                 return this.roomsData.rooms
@@ -196,10 +198,13 @@
                 return {}
             },
             canProcessItem() {
-                return this.selectedRoom && this.guestName && this.itemCategories.length
+                return Boolean(this.selectedRoom && this.guestName && this.itemCategories.length)
             },
             canPostStatus() {
                 return this.selectedRoom && this.guestName
+            },
+            guestInfo() {
+                return { guest_name: this.guestName, status: this.status }
             },
         },
         methods: {
@@ -232,7 +237,7 @@
             categories() {
                 let items = this.roomsData.items
                 let all_item_categories = this.roomsData.item_categories
-                let room_ic_stocks = this.roomsData.room_ic_stocks.reduce(function (stock, obj) {
+                let room_ic_stocks = this.roomsData.room_stocks.reduce(function (stock, obj) {
                     let s = []
                     s[obj.room_id + '_' + obj.item_category_id] = obj
                 }, {})
@@ -243,6 +248,7 @@
                     return acc
                 }, {})
 
+                let stocks = this.selectedRoom ? this.roomStocks[this.selectedRoom.id] : []
                 let item_categories = this.roomsData.categories.reduce(function (category, obj) {
                     let cat = []
                     cat['category_id'] = obj.id
@@ -255,7 +261,7 @@
                             let item = items.find(item => item_category.item_id == item.id)
                             let qty = sic[item_category.id] ? sic[item_category.id].quantity : 0
                             cat['items'].push({item_id: item.id, item_amount: item.amount, item_name: item.item_name,
-                                item_category_id: item_category.id, quantity: qty
+                                item_category_id: item_category.id, quantity: qty, stock_count: stocks[item_category.id] ? stocks[item_category.id] : 0
                             })
                         }
                     }
@@ -283,13 +289,26 @@
                     }
 
                     let room_name = this.selectedRoom.room_name
-                    this.postASale(sale_data)
-                    .then(res => {
-                        this.$snotify.success('Sale has been posted to room ' + room_name, this.notifyOptions)
-                    })
-                    .finally(() => {
-                        this.reset()
-                    })
+                    this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {
+                        this.postASale(sale_data)
+                            .then(res => {
+                                resolve({
+                                    title: 'Success!',
+                                    body: 'Sale posted to room ' + room_name + '!',
+                                    config: Object.createthis.notifyOptions
+                                })
+                            })
+                            .catch(err => {
+                                reject({
+                                    title: 'Error!',
+                                    body: 'Something went wrong.',
+                                    config: this.notifyOptions
+                                })
+                            })
+                            .finally(() => {
+                                this.reset()
+                            })
+                    }), this.notifyOptions);
                 }
                 else {
                     this.postProcessItemWarning()
@@ -298,14 +317,19 @@
             noSale() {
                 if (this.canPostStatus) {
                     let room_name = this.selectedRoom.room_name
-
-                    this.postNoSale(this.selectedRoom)
-                    .then(res => {
-                        this.$snotify.success('No Sale posted to room ' + room_name, this.notifyOptions)
-                    })
-                    .finally(() => {
-                        this.reset()
-                    })
+                    this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                    
+                        this.postNoSale(this.selectedRoom)
+                            .then(res => {
+                                resolve({
+                                    title: 'Success',
+                                    body: 'No Sale posted to room ' + room_name + '!',
+                                    config: this.notifyOptions
+                                })
+                            })
+                            .finally(() => {
+                                this.reset()
+                            })             
+                    }), this.notifyOptions)
                 } else {
                     this.postStatusWarning()
                 }
@@ -313,14 +337,19 @@
             DNDDueOut() {
                 if (this.canPostStatus) {
                     let room_name = this.selectedRoom.room_name
-
-                    this.postDNDDueOut(this.selectedRoom)
-                    .then(res => {
-                        this.$snotify.success('DND Due Out posted to room ' + room_name, this.notifyOptions)
-                    })
-                    .finally(() => {
-                        this.reset()
-                    })
+                    this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                    
+                        this.postDNDDueOut(this.selectedRoom)
+                            .then(res => {
+                                resolve({
+                                    title: 'Success',
+                                    body: 'DND Due Out posted to room ' + room_name + '!',
+                                    config: this.notifyOptions
+                                })
+                            })                            
+                            .finally(() => {
+                                this.reset()
+                            })       
+                    }), this.notifyOptions)                    
                 } else {
                     this.postStatusWarning()
                 }
@@ -328,14 +357,19 @@
             DNDStayover() {
                 if (this.canPostStatus) {
                     let room_name = this.selectedRoom.room_name
-
-                    this.postDNDStayover(this.selectedRoom)
-                    .then(res => {
-                        this.$snotify.success('DND Stayover posted to room ' + room_name, this.notifyOptions)
-                    })
-                    .finally(() => {
-                        this.reset()
-                    })
+                    this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => { 
+                        this.postDNDStayover(this.selectedRoom)
+                            .then(res => {
+                                resolve({
+                                    title: 'Success',
+                                    body: 'DND Stayover posted to room ' + room_name + '!',
+                                    config: this.notifyOptions
+                                })                                
+                            })
+                            .finally(() => {
+                                this.reset()
+                            })
+                    }), this.notifyOptions)
                 } else {
                     this.postStatusWarning()
                 }
@@ -346,13 +380,20 @@
                         room_id: this.selectedRoom.id,
                         item_categories: this.itemCategories
                     }
-                    this.postAnItemReject(data)
-                    .then(res => {
-                        this.$snotify.success('Item reject posted to room ' + this.selectedRoom.room_name, this.notifyOptions)
-                    })
-                    .finally(() => {
-                        this.reset()
-                    })
+                    let room_name = this.selectedRoom.room_name
+                    this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
+                        this.postAnItemReject(data)
+                            .then(res => {
+                                resolve({
+                                    title: 'Success',
+                                    body: 'Item reject posted to room ' + room_name + '!',
+                                    config: this.notifyOptions
+                                })
+                            })
+                            .finally(() => {
+                                this.reset()
+                            })
+                    }), this.notifyOptions)                    
                 }
                 else {
                     this.postProcessItemWarning()
@@ -365,13 +406,20 @@
                         item_categories: this.itemCategories
                     }
                     let room_name = this.selectedRoom.room_name
-                    this.postAnExtraSale(data)
-                    .then(res => {
-                        this.$snotify.success('An extra sale has been posted to room ' + room_name, this.notifyOptions)
-                    })
-                    .finally(() => {
-                        this.reset()
-                    })
+                    this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
+                        this.postAnExtraSale(data)
+                            .then(res => {
+                                resolve({
+                                    title: 'Success',
+                                    body: 'An extra sale has been posted to room ' + room_name + '!',
+                                    config: this.notifyOptions
+                                })
+                            })
+                            .finally(() => {
+                                this.reset()
+                            })
+                    }), this.notifyOptions)                     
+
                 }
                 else {
                     this.postProcessItemWarning()
@@ -384,13 +432,20 @@
                         item_categories: this.itemCategories
                     }
                     let room_name = this.selectedRoom.room_name
-                    this.postARestock(data)
-                    .then(res => {
-                        this.$snotify.success('A restock has been posted to room ' + room_name, this.notifyOptions)
-                    })
-                    .finally(() => {
-                        this.reset()
-                    })
+
+                    this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
+                        this.postARestock(data)
+                            .then(res => {
+                                resolve({
+                                    title: 'Success',
+                                    body: 'A restock has been posted to room ' + room_name + '!',
+                                    config: this.notifyOptions
+                                })
+                            })
+                            .finally(() => {
+                                this.reset()
+                            })
+                    }), this.notifyOptions)                     
                 }
                 else {
                     this.postProcessItemWarning()

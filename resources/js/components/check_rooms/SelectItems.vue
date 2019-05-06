@@ -2,7 +2,7 @@
     <b-card no-body>
         <b-tabs card>
             <b-tab  v-for="(category, index) in categories" :title="category.category_name" :key="index" active>
-                <b-card-text><item-category :category="category" @update-item="updateItem"></item-category></b-card-text>
+                <b-card-text><item-category :hasSelectedRoom="hasSelectedRoom" :category="category" @update-item="updateItem"></item-category></b-card-text>
             </b-tab>
         </b-tabs>
     </b-card>
@@ -13,7 +13,8 @@
     export default {
         name: 'SelectItems',
         props: {
-            categories: Object 
+            categories: Object,
+            hasSelectedRoom: Boolean
         },
         components: {
             ItemCategory

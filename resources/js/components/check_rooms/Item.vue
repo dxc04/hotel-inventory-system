@@ -1,12 +1,12 @@
 <template>
     <div class="row">
         <div class="col-lg-3 col-sm-5 mt-2">
-            <div>{{ itemName }}</div>
+            <div>{{ itemName }} <sup v-if="hasNoStock" class="text-warning">(sold out)</sup></div>
             <div>{{ itemPrice }}</div>
         </div>
         <div class="col-lg-9 col-sm-7 m-0">
             <span class="mr-1">
-                <button class="btn btn-danger btn-circle btn-sm" @click="minusQty()">
+                <button :class="minusClass" @click="minusQty()">
                     <font-awesome-icon class="justify-center" :icon="minus"/>
                 </button>
             </span>
@@ -17,11 +17,12 @@
                     v-model="itemQty"
                     type="text"
                     @change="updateItem()"
+                    readonly
                 >
                 </b-form-input>
             </span>    
             <span class="ml-1">
-                <button class="btn btn-success btn-circle btn-sm" @click="addQty()">
+                <button :class="addClass" @click="addQty()">
                     <font-awesome-icon class="justify-center" :icon="plus"/>
                 </button>
             </span> 
@@ -31,10 +32,12 @@
 
 <script>
     import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+
     export default {
         name: 'Item',
         props: {
-            item: Object
+            item: Object,
+            hasSelectedRoom: Boolean
         },
         data() {
             return {
@@ -43,11 +46,34 @@
                 plus: faPlus,
             }
         },
+        mounted() {
+
+        },
         computed: {
-            itemName: function() {
+            addClass() {
+                let add_class = {
+                    'btn btn-success btn-circle btn-sm' : true
+                }
+                if (this.hasNoStock || !this.canAdd) {
+                    add_class['btn-disable'] = true
+                }
+
+                return add_class
+            },
+            minusClass() {
+                let minus_class = {
+                    'btn btn-danger btn-circle btn-sm' : true
+                }
+                if (this.hasNoStock || !this.itemQty) {
+                    minus_class['btn-disable'] = true
+                }
+
+                return minus_class
+            },
+            itemName() {
                 return this.item.item_name
             },
-            itemPrice : function () {
+            itemPrice() {
                 return '$' + this.item.item_amount.toFixed(2)
             },
             itemQty: {
@@ -55,14 +81,21 @@
                      return this.item.quantity           
                 },
                 set: function(value) {
-
                     this.updateItem(value)
                 }
+            },
+            canAdd() {
+                return this.itemQty < this.item.stock_count
+            },
+            hasNoStock() {
+                return this.hasSelectedRoom && !this.item.stock_count
             }
         },
         methods: {
             addQty() {
-                this.itemQty = this.itemQty + 1
+                if (this.canAdd) {
+                    this.itemQty = this.itemQty + 1
+                }
             },
             minusQty() {
                 if (this.itemQty) {
@@ -94,5 +127,9 @@
         width: 20px;
         height: 20px;
         font-size: 10px;
+    }
+
+    .btn-disable {
+        opacity: 0.5;
     }
 </style>

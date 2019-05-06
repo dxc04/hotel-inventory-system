@@ -1,13 +1,13 @@
 <template>
     <div class="row log-details">
         <div class="col col-lg-8 h5 mb-0 font-weight-bold">
-        <span class="badge" :class="statusClass">
-            {{ DailyLog.room_status.status_name }}
-        </span>
+            <span v-for="(status, index) in dailyLog.room_status" :key="index" :class="getStatusClass(status.status_key)">
+                {{ status.status_name }}
+            </span>
         </div>
         <div class="col col-lg-4 text-right">
         <span>
-            {{ DailyLog.room.room_name }}
+            {{ dailyLog.room }}
         </span>
         </div>
     </div>
@@ -17,26 +17,29 @@
     export default {
         name: 'LogDetails',
         props: {
-            DailyLog: {
-                type: Array
+            dailyLog: {
+                type: Object
             }
         },
         data() {
             return {
                 statusClasses: {
-                    dnd_stayover: 'badge-warning',
-                    dnd_due_out: 'badge-danger',
-                    restocked: 'badge-dark',
-                    no_sale: 'badge-secondary',
-                    sale: 'badge-success',
-                    cleaned: 'badge-primary',
-                    checked_in: 'badge-secondary'
+                    dnd_stayover: 'badge badge-warning mr-1',
+                    dnd_due_out: 'badge badge-danger mr-1',
+                    restocked: 'badge badge-dark mr-1',
+                    no_sale: 'badge badge-secondary mr-1',
+                    sale: 'badge badge-success mr-1',
+                    cleaned: 'badge badge-primary mr-1',
+                    checked_in: 'badge badge-secondary mr-1'
                 }
             }
         },
         computed: {
-            statusClass() {
-                 return this.statusClasses[this.DailyLog.room_status.status_key]
+
+        },
+        methods: {
+            getStatusClass(status) {
+                return this.statusClasses[status]
             }
         }
     }

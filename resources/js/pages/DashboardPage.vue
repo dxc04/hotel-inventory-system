@@ -81,7 +81,7 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <daily-logs :daily-logs-data="dailyLogsData"></daily-logs> 
+                    <daily-logs :dailyLogsData="dailyLogsData"></daily-logs> 
                 </div>
               </div>
             </div>
@@ -267,18 +267,21 @@
             dailyLogsData() {
                 let statuses = this.roomsData.statuses
                 let rooms = this.roomsData.rooms
-                let daily_logs = []
+       
                 let daily_logs_data = this.roomsData.room_statuses.reduce(function (room_status, obj) {
-                    for (let i = 0; i < obj.status.length; i++) {
-                        var log = []
+                    let daily_logs = {room: rooms.find(room => room.id == obj.room_id).room_name, room_status: []}
 
-                        log['room_status'] = statuses.find(status => status.id == obj.status[i])
-                        log['room'] = rooms.find(room => room.id == obj.room_id)
-
-                        daily_logs.push(log)
+                    for (let id in obj.status) {
+                        if (obj.status[id]) {
+                            let status = statuses.find(status => status.id == obj.status[id])
+                            daily_logs.room_status.push({status_key: status.status_key, status_name: status.status_name})
+                        }
                     }
-                },{})
-                return daily_logs
+                    room_status.push(daily_logs)
+                    return room_status
+                }, [])
+
+                return daily_logs_data
             }
         }
     }

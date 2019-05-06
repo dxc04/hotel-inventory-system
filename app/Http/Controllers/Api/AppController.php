@@ -29,11 +29,16 @@ class AppController extends Controller
         return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);        
     }
 
+    public function getRoomsStocks()
+    {
+        return response()->json($this->room_status->getRoomStocks());
+    }
+
     public function postASale()
     {
         $sale_data = request()->post();
         $this->room_status_repo->postASale($sale_data);
-        return response()->json([]);
+        return response()->json(['room_stocks' => $this->room_status_repo->getRoomStocks()]);
     }
 
     public function postNoSale()
@@ -42,7 +47,7 @@ class AppController extends Controller
         $room_id = request('selected_room');
 
         $this->room_status_repo->postRoomStatus($room_id, $status_id);
-        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
+        return response()->json([]);
     }
 
     public function postDNDDueOut()
@@ -51,7 +56,7 @@ class AppController extends Controller
         $room_id = request('selected_room');
 
         $this->room_status_repo->postRoomStatus($room_id, $status_id);
-        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
+        return response()->json([]);
     }
 
     public function postDNDStayover()
@@ -60,7 +65,7 @@ class AppController extends Controller
         $room_id = request('selected_room');
 
         $this->room_status_repo->postRoomStatus($room_id, $status_id);
-        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
+        return response()->json([]);;
 
     }
 
@@ -68,20 +73,20 @@ class AppController extends Controller
     {
         $data = request()->post();
         $this->room_status_repo->postAnItemReject($data);
-        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);
+        return response()->json(['room_stocks' => $this->room_status->getRoomStocks()]);
     }
 
     public function postAnExtraSale()
     {
         $data = request()->post();
         $this->room_status_repo->postAnExtraSale($data);
-        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);    
+        return response()->json(['room_stocks' => $this->room_status->getRoomStocks()]);
     }
 
     public function postARestock()
     {
         $data = request()->post();
         $this->room_status_repo->postARestock($data);
-        return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);      
+        return response()->json(['room_stocks' => $this->room_status->getRoomStocks()]);     
     }
 }

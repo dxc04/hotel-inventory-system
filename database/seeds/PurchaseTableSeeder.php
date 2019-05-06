@@ -17,13 +17,22 @@ class PurchaseTableSeeder extends Seeder
         $items = App\Item::all();
          
         foreach($items as $item) {
+            $qty = $faker->numberBetween(80, 120);
             DB::table('purchases')->insert(
                 [
                     'supplier_id' => $this->getRandomSupplierId(),
                     'item_id' => $item->id,
-                    'quantity' => $faker->numberBetween(80, 120)
+                    'quantity' => $qty
                 ]
             );
+
+            DB::table('item_stocks')->insert(
+                [
+                    'item_id' => $item->id,
+                    'stock_quantity' => $qty
+                ]
+            );
+            
         }
     }
 
