@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="flex-column col-sm-12 col-lg-6 mb-4 border-top-info">
-            <b-card>
+            <b-card header="Manage Rooms" header-class="text-primary">
 
             <div class="row ml-3">
                 <div class="col-md-3">
@@ -105,12 +105,13 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-
+                </div>
+                <div role="tablist">
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                             <b-button block href="#" v-b-toggle.accordion-3 variant="default">Select Items</b-button></b-button>
                         </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-3" visible accordion="my-accordion1" role="tabpanel">
                             <b-card-body class="m-0 p-0">
                                 <select-items 
                                     :hasSelectedRoom="canPostStatus" :categories="roomCategories()"
@@ -123,7 +124,7 @@
             </b-card>
         </div>
         <div class="flex-column col-sm-12 col-lg-6">
-            <b-card>
+            <b-card header="Restock Rooms" header-class="text-primary">
                 <div v-if="roomRestockCategories()">
                     <div class="row">
                         <div class="ml-5 mr-5 mb-3 col-auto text-center justify-center">
@@ -169,7 +170,6 @@
             RestockItems
         },
         mounted() {
-
         },
         data() {
             return {
@@ -314,7 +314,6 @@
                 } else {
                     this.roomRestockItemCategories.push({room_id, item_category_id, quantity}) 
                 }
-                console.log('dixie', this.roomRestockItemCategories)
             },
             roomCategories() {
                 let items = this.items
