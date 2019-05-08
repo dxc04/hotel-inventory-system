@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-lg-3 col-sm-5 mt-2">
-            <div>{{ itemName }} <sup v-if="!isForRestock && hasNoStock" class="text-warning">(sold out)</sup></div>
+            <div>{{ itemName }} <sup v-if="hasNoStock" class="text-info">(sold out)</sup></div>
             <div>{{ itemPrice }}</div>
         </div>
         <div class="col-lg-9 col-sm-7 m-0">
@@ -38,10 +38,6 @@
         props: {
             item: Object,
             hasSelectedRoom: Boolean,
-            isForRestock: {
-                 type: Boolean,
-                 default: false
-            }
         },
         data() {
             return {

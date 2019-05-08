@@ -4,34 +4,35 @@
         <h1 class="h3 mb-0 text-gray-800">Check Rooms</h1>
     </div>
 
-    <div class="row ml-3">
-        <div class="col-md-3">
-            <div class="mb-2">
-                <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Unit</span></p>
-                <p class="text-lg pl-0 ml-0 pt-0">
-                    <span v-if="selectedFloor">F{{ selectedFloor.floor_name }}</span>&nbsp;
-                    <span v-if="selectedRoom"> - {{ selectedRoom.room_name }}</span>&nbsp;
-                </p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="mb-2">
-                <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Guest</span></p>
-                <p class="text-lg pl-0 ml-0 pt-0"><span v-if="guestName">{{ guestName }}</span>&nbsp;</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="mb-2">
-                <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Status</span></p>
-                <p class="text-lg pl-0 ml-0 pt-0"><span v-if="status">{{ status }}&nbsp;</span></p>
-            </div>
-        </div>
-    </div>
-
     <div class="row">
-        <div class="flex-column col-sm-12 col-lg-6 mb-4">
+        <div class="flex-column col-sm-12 col-lg-6 mb-4 border-top-info">
             <b-card>
-                <div class="row justify-content-center">
+
+            <div class="row ml-3">
+                <div class="col-md-3">
+                    <div class="mb-2">
+                        <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Unit</span></p>
+                        <p class="text-lg pl-0 ml-0 pt-0">
+                            <span v-if="selectedFloor">F{{ selectedFloor.floor_name }}</span>&nbsp;
+                            <span v-if="selectedRoom"> - {{ selectedRoom.room_name }}</span>&nbsp;
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-2">
+                        <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Guest</span></p>
+                        <p class="text-lg pl-0 ml-0 pt-0"><span v-if="guestName">{{ guestName }}</span>&nbsp;</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-2">
+                        <p class="small text-uppercase text-info mb-0"><span class="border-left-success pl-2">Status</span></p>
+                        <p class="text-lg pl-0 ml-0 pt-0"><span v-if="status">{{ status }}&nbsp;</span></p>
+                    </div>
+                </div>
+            </div>
+
+                <div class="row justify-content-center border-top ml-2 mr-2 pt-4">
                     <div class="col-md-4 text-center justify-center mb-3">
                         <a href="#" 
                             v-bind:class="getBtnCss('post-sale')"
@@ -304,8 +305,16 @@
             setRoomItemCategories(item_categories) {
                 this.roomItemCategories = item_categories
             },
-            setRoomRestockItemCategories(restock_items) {
-                this.roomRestockItemCategories = restock_items
+            setRoomRestockItemCategories({room_id, item_category_id, quantity}) {
+                let selected_id = this.roomRestockItemCategories.findIndex(ic => {
+                    return ic.room_id == room_id && ic.item_category_id == item_category_id
+                })
+                if (selected_id >= 0) {
+                    this.roomRestockItemCategories[selected_id]['quantity'] = quantity
+                } else {
+                    this.roomRestockItemCategories.push({room_id, item_category_id, quantity}) 
+                }
+                console.log('dixie', this.roomRestockItemCategories)
             },
             roomCategories() {
                 let items = this.items
@@ -372,10 +381,14 @@
                             acc[category_id]['rooms'][rs.room_id] = {room: room, items: []}
                         }
                         let item = items[item_categories[rs.item_category_id].item_id]
-                        let qty = sic[rs.item_category_id] ? sic[rs.item_category_id].quantity : 0
+                        let idx = this.roomRestockItemCategories.findIndex(rsi => {
+                            return rsi.item_category_id == rs.item_category_id && rsi.room_id == rs.room_id
+                        })
+                        let updated = this.roomRestockItemCategories[idx]
+                        let qty = updated ? updated.quantity : 0
                         acc[category_id]['rooms'][rs.room_id]['items'].push({
                             item_id: item.id, item_amount: item.amount, item_name: item.item_name,
-                            item_category_id: rs.item_category_id, quantity: qty, stock_count: restock_count
+                            item_category_id: rs.item_category_id, quantity: qty, restock_count
                         })
                      
                     }
