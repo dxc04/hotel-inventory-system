@@ -43,7 +43,7 @@
                 let index = this.itemCategories.findIndex(ic => ic.item_category_id == item_category_id)
                 this.itemCategories[index].quantity = qty
                 let item_cat_data = this.itemCategories.filter(ic => ic.quantity)
-                this.$emit('set-item-categories', item_cat_data)
+                this.$emit('set-room-item-categories', item_cat_data)
             }, 
         }
     }

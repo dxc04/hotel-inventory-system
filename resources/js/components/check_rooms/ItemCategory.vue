@@ -13,7 +13,7 @@
         name: 'ItemCategory',
         props: {
             category: Array,
-            hasSelectedRoom: Boolean
+            hasSelectedRoom: Boolean,
         },
         mounted() {
         },

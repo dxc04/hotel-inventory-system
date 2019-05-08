@@ -42,6 +42,7 @@ export default new Vuex.Store({
     postASale({ commit }, data) {
       return axios.post('/api/v1/post-a-sale', data)
       .then(res => {
+        console.log('rest', res)
         commit('mutateRoomStocks', res.data.room_stocks)
       }).catch(err => {
         console.log(err)

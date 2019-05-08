@@ -50,7 +50,8 @@ class RoomStatus extends BaseRepository
             'categories' => CategoryModel::all()->toArray(),
             'item_categories' => ItemCategoryModel::all()->toArray(),
             'floors' => FloorModel::all()->toArray(),
-            'room_stocks' => RoomStockModel::all()->toArray()
+            'room_stocks' => RoomStockModel::all()->toArray(),
+            'room_stocks_limit' => RoomStockLimitModel::all()->toArray()
         ];
     }
 

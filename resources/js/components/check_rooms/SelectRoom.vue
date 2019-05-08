@@ -2,14 +2,14 @@
     <div>
         <div class="row mb-2 ml-1"><h4>Which floor?</h4></div>
         <div class="row mb-4 align-content-center align-items-center center">
-            <div class="col-auto pb-2" v-for="floor in floors">
+            <div class="col-auto pb-2" v-for="floor in floors" :key="floor.id">
                 <floor-box :floor="floor" @select-floor="selectFloor" :floorSelected="floorSelected(floor)"></floor-box>
             </div>
         </div>
         <span v-if="selectedFloor">
             <div class="row mb-2 ml-1"><h4>Select a room...</h4></div>
             <div class="row align-content-center align-items-center center">
-                <div class="col-auto" v-for="room in roomsBySelectedFloor">
+                <div class="col-auto" v-for="room in roomsBySelectedFloor" :key="room.id">
                     <room-box :room="room" @select-room="selectRoom" :roomSelected="roomSelected(room)"></room-box>
                 </div>
             </div>
@@ -29,7 +29,7 @@
         },
         props: {
             rooms: { 
-                type: Array,
+                type: Object,
                 required: true
             },
             floors: { 
@@ -48,7 +48,7 @@
         },
         computed: {
             roomsBySelectedFloor() {
-                return this.rooms.filter(room => room.floor_id == this.selectedFloor.id)
+                return Object.values(this.rooms).filter(room => room.floor_id == this.selectedFloor.id)
             },
         },
         methods: {

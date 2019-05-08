@@ -111,7 +111,10 @@
                         </b-card-header>
                         <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                             <b-card-body class="m-0 p-0">
-                                <select-items :hasSelectedRoom="canPostStatus" :categories="categories()" @set-item-categories="setItemCategories"></select-items>
+                                <select-items 
+                                    :hasSelectedRoom="canPostStatus" :categories="roomCategories()"
+                                    @set-room-item-categories="setRoomItemCategories">
+                                </select-items>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -120,19 +123,23 @@
         </div>
         <div class="flex-column col-sm-12 col-lg-6">
             <b-card>
-                <div v-if="restockCategories.length" class="row">
-                    <div class="ml-5 mr-5 mb-3 col-auto text-center justify-center">
-                        <a href="#"
-                            v-bind:class="getBtnCss('restock')"
-                            @click="restock">
-                            <font-awesome-icon :icon="clipboardCheck"/>
-                        </a>  
-                        <div class="mt-2">Restock</div>
+                <div v-if="roomRestockCategories()">
+                    <div class="row">
+                        <div class="ml-5 mr-5 mb-3 col-auto text-center justify-center">
+                            <a href="#"
+                                v-bind:class="getBtnCss('restock')"
+                                @click="restock">
+                                <font-awesome-icon :icon="clipboardCheck"/>
+                            </a>  
+                            <div class="mt-2">Restock</div>
+                        </div>
                     </div>
-                </div>  
-
-                <restock-items v-if="restockCategories.length" :categories="restockCategories" @set-item-restock-categories="setRestockItemCategories"></restock-items>
-                <div v-if="!restockCategories.length" class="text-center justify-center no-restock">
+                    <restock-items 
+                        :categories="roomRestockCategories()"
+                        @set-room-restock-item-categories="setRoomRestockItemCategories">
+                    </restock-items>
+                </div>
+                <div v-else class="text-center justify-center no-restock">
                     <font-awesome-icon size="3x" :icon="box"/> <h3>Nothing to Restock</h3>
                 </div> 
             </b-card>
@@ -182,8 +189,8 @@
                 selectedRoom: null,
                 guestName: null,
                 status: null,
-                itemCategories: [],
-                restockItemsCategories: {},
+                roomItemCategories: [],
+                roomRestockItemCategories: [],
 
             }
         },
@@ -191,23 +198,53 @@
             ...mapGetters({
                 roomsData: 'getRoomsData',
             }),
-            rooms() {
-                return this.roomsData.rooms
-            },
             floors() {
                 return this.roomsData.floors
             },
-            restockCategories() {
-                return {}
-            },
             canProcessItem() {
-                return Boolean(this.selectedRoom && this.guestName && this.itemCategories.length)
+                return Boolean(this.selectedRoom && this.guestName && this.roomItemCategories.length)
             },
             canPostStatus() {
                 return Boolean(this.selectedRoom && this.guestName)
             },
             guestInfo() {
                 return { guest_name: this.guestName, status: this.status }
+            },
+            rooms() {
+                let rooms_data = this.roomsData.rooms
+                let rooms = rooms_data.reduce((acc, room) => {
+                    acc[room.id] = room
+                    return acc
+                }, {})
+
+                return rooms
+            },
+            items() {
+                let items_data = this.roomsData.items
+                let items = items_data.reduce((acc, item) => {
+                    acc[item.id] = item
+                    return acc
+                }, {})
+
+                return items                
+            },
+            categories() {
+                let cats_data = this.roomsData.categories
+                let cats = cats_data.reduce((acc, cat) => {
+                    acc[cat.id] = cat
+                    return acc
+                }, {})
+
+                return cats
+            },
+            itemCategories() {
+                let ics_data = this.roomsData.item_categories
+                let ics = ics_data.reduce((acc, ics) => {
+                    acc[ics.id] = ics
+                    return acc
+                }, {})
+
+                return ics
             },
             roomStocks() {
                 let room_stocks_data = this.roomsData.room_stocks
@@ -223,7 +260,22 @@
                 }, {})
 
                 return room_stocks
-            }
+            },
+            roomStocksLimit() {
+                let room_stocks_data = this.roomsData.room_stocks_limit
+                let room_stocks_limit = room_stocks_data.reduce((acc, stock) => {
+                    let room_id = stock.room_id
+                    let ic_id = stock.item_category_id
+                    if (!acc[room_id]) {
+                        acc[room_id] = {}
+                    }
+
+                    acc[room_id][ic_id] = stock.stock_max
+                    return acc
+                }, {})
+
+                return room_stocks_limit
+            },
         },
         methods: {
             ...mapActions([
@@ -249,21 +301,16 @@
             selectStatus(status) {
                 this.status = status
             },
-            setItemCategories(item_categories) {
-                this.itemCategories = item_categories
+            setRoomItemCategories(item_categories) {
+                this.roomItemCategories = item_categories
             },
-            setRestockItemCategories(restock_items) {
-                this.restockItemsCategories = restock_items
+            setRoomRestockItemCategories(restock_items) {
+                this.roomRestockItemCategories = restock_items
             },
-            categories() {
-                let items = this.roomsData.items
-                let all_item_categories = this.roomsData.item_categories
-                let room_ic_stocks = this.roomsData.room_stocks.reduce(function (stock, obj) {
-                    let s = []
-                    s[obj.room_id + '_' + obj.item_category_id] = obj
-                }, {})
-
-                let sic = this.itemCategories.reduce(function (acc, obj) {
+            roomCategories() {
+                let items = this.items
+                let all_item_categories = this.itemCategories
+                let sic = this.roomItemCategories.reduce(function (acc, obj) {
                     var key = obj['item_category_id']
                     acc[key] = obj
                     return acc
@@ -279,7 +326,7 @@
                     for (let i in all_item_categories) {
                         let item_category = all_item_categories[i]
                         if (item_category.category_id == obj.id) {
-                            let item = items.find(item => item_category.item_id == item.id)
+                            let item = items[item_category.item_id]
                             let qty = sic[item_category.id] ? sic[item_category.id].quantity : 0
                             cat['items'].push({item_id: item.id, item_amount: item.amount, item_name: item.item_name,
                                 item_category_id: item_category.id, quantity: qty, stock_count: stocks[item_category.id] ? stocks[item_category.id] : 0
@@ -293,12 +340,58 @@
 
                 return item_categories
             },
+            roomRestockCategories() {
+                let rooms = this.rooms
+                let limits = this.roomStocksLimit
+                let room_stocks = this.roomStocks
+                let categories = this.categories
+                let item_categories = this.itemCategories
+                let items = this.items
+
+                let sic = this.roomRestockItemCategories.reduce(function (acc, obj) {
+                    var key = obj['item_category_id']
+                    acc[key] = obj
+                    return acc
+                }, {})
+                
+                let item_cats = this.roomsData.room_stocks.reduce((acc, rs) => {
+                    let category_id = item_categories[rs.item_category_id].category_id
+                    let room = rooms[rs.room_id]
+                    if (!acc[category_id]) {
+                        acc[category_id] = {
+                            category_name: categories[category_id].category_name
+                        }
+                    }
+
+                    if (rs.stock_quantity < limits[rs.room_id][rs.item_category_id]) {
+                        let restock_count = limits[rs.room_id][rs.item_category_id] - rs.stock_quantity
+                        if (!acc[category_id]['rooms']) {
+                            acc[category_id]['rooms'] = {}
+                        }
+                        if (!acc[category_id]['rooms'][rs.room_id]) {
+                            acc[category_id]['rooms'][rs.room_id] = {room: room, items: []}
+                        }
+                        let item = items[item_categories[rs.item_category_id].item_id]
+                        let qty = sic[rs.item_category_id] ? sic[rs.item_category_id].quantity : 0
+                        acc[category_id]['rooms'][rs.room_id]['items'].push({
+                            item_id: item.id, item_amount: item.amount, item_name: item.item_name,
+                            item_category_id: rs.item_category_id, quantity: qty, stock_count: restock_count
+                        })
+                     
+                    }
+
+                    return acc
+                }, {})
+
+                return item_cats
+            },
             reset() {
+                this.selectedFloor = null
                 this.selectedRoom = null
                 this.guestName = null
                 this.status = null
-                this.itemCategories = []
-                this.restockItemsCategories = []
+                this.roomItemCategories = []
+                this.roomRestockItemsCategories = []
                 this.wasReset = true
                 this.postActionPosted(true)
             },
@@ -306,21 +399,16 @@
                 if (this.canProcessItem) {
                     let sale_data = {
                         room_id: this.selectedRoom.id,
-                        item_categories: this.itemCategories
+                        item_categories: this.roomItemCategories
                     }
 
                     let room_name = this.selectedRoom.room_name
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {
                         this.postASale(sale_data)
                             .then(res => {
-                                resolve({
-                                    title: 'Success!',
-                                    body: 'Sale posted to room ' + room_name + '!',
-                                    config: this.notifyOptions
-                                })
+                                this.$snotify.success('Sale posted to room ' + room_name + '!', 'Success!', this.notifyOptions)
                             })
                             .catch(err => {
-                                console.log(err)
                                 reject({
                                     title: 'Error!',
                                     body: 'Something went wrong.',
@@ -342,11 +430,7 @@
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                    
                         this.postNoSale(this.selectedRoom)
                             .then(res => {
-                                resolve({
-                                    title: 'Success',
-                                    body: 'No Sale posted to room ' + room_name + '!',
-                                    config: this.notifyOptions
-                                })
+                                this.$snotify.success('No Sale posted to room ' + room_name + '!', 'Success!', this.notifyOptions)                                
                             })
                             .finally(() => {
                                 this.reset()
@@ -362,11 +446,7 @@
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                    
                         this.postDNDDueOut(this.selectedRoom)
                             .then(res => {
-                                resolve({
-                                    title: 'Success',
-                                    body: 'DND Due Out posted to room ' + room_name + '!',
-                                    config: this.notifyOptions
-                                })
+                                this.$snotify.success('DND Due Out posted to room ' + room_name + '!', this.notifyOptions)                                
                             })                            
                             .finally(() => {
                                 this.reset()
@@ -382,11 +462,7 @@
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => { 
                         this.postDNDStayover(this.selectedRoom)
                             .then(res => {
-                                resolve({
-                                    title: 'Success',
-                                    body: 'DND Stayover posted to room ' + room_name + '!',
-                                    config: this.notifyOptions
-                                })                                
+                                this.$snotify.success('DND Stayover posted to room ' + room_name + '!', this.notifyOptions)                               
                             })
                             .finally(() => {
                                 this.reset()
@@ -400,17 +476,13 @@
                 if (this.canProcessItem) {
                     let data = {
                         room_id: this.selectedRoom.id,
-                        item_categories: this.itemCategories
+                        item_categories: this.roomItemCategories
                     }
                     let room_name = this.selectedRoom.room_name
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
                         this.postAnItemReject(data)
                             .then(res => {
-                                resolve({
-                                    title: 'Success',
-                                    body: 'Item reject posted to room ' + room_name + '!',
-                                    config: this.notifyOptions
-                                })
+                                this.$snotify.success('Item reject posted to room ' + room_name + '!', this.notifyOptions)
                             })
                             .finally(() => {
                                 this.reset()
@@ -425,17 +497,13 @@
                 if (this.canProcessItem) {
                     let data = {
                         room_id: this.selectedRoom.id,
-                        item_categories: this.itemCategories
+                        item_categories: this.roomItemCategories
                     }
                     let room_name = this.selectedRoom.room_name
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
                         this.postAnExtraSale(data)
                             .then(res => {
-                                resolve({
-                                    title: 'Success',
-                                    body: 'An extra sale has been posted to room ' + room_name + '!',
-                                    config: this.notifyOptions
-                                })
+                                this.$snotify.success('An extra sale has posted to room ' + room_name + '!', this.notifyOptions)
                             })
                             .finally(() => {
                                 this.reset()
@@ -451,18 +519,14 @@
                 if (this.canProcessItem) {
                     let data = {
                         room_id: this.selectedRoom.id,
-                        item_categories: this.itemCategories
+                        item_categories: this.roomItemCategories
                     }
                     let room_name = this.selectedRoom.room_name
 
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
                         this.postARestock(data)
                             .then(res => {
-                                resolve({
-                                    title: 'Success',
-                                    body: 'A restock has been posted to room ' + room_name + '!',
-                                    config: this.notifyOptions
-                                })
+                                this.$snotify.success('A restock has posted to room ' + room_name + '!', this.notifyOptions)
                             })
                             .finally(() => {
                                 this.reset()
