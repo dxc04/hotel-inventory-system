@@ -119,11 +119,11 @@ class RoomStatus extends BaseRepository
     {
         $restock_status_id = StatusModel::where('status_key', 'restock')->pluck('id')->first();
 
-        foreach ($data['item_categories'] as $ic) {
+        foreach ($data as $ic) {
             $item = ItemCategoryModel::where('item_id', $ic['item_category_id'])->first();
             $this->addItemStock($ic['room_id'], $item->item_id, $ic['quantity']);
 
-            $this->postRoomStatus($data['room_id'], $restock_status_id);
+            $this->postRoomStatus($ic['room_id'], $restock_status_id);
         }
     }
 

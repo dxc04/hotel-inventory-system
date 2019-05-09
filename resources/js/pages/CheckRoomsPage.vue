@@ -528,17 +528,11 @@
                 }
             },
             restock() {
-                if (this.canProcessItem) {
-                    let data = {
-                        room_id: this.selectedRoom.id,
-                        item_categories: this.roomItemCategories
-                    }
-                    let room_name = this.selectedRoom.room_name
-
+                if (this.roomRestockItemCategories.length) {
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
-                        this.postARestock(data)
+                        this.postARestock(this.roomRestockItemCategories)
                             .then(res => {
-                                this.$snotify.success('A restock has posted to room ' + room_name + '!', this.notifyOptions)
+                                this.$snotify.success('A restock has posted!', this.notifyOptions)
                             })
                             .finally(() => {
                                 this.reset()
@@ -556,6 +550,8 @@
                 } 
                 else if (['no-sale', 'dnd-due-out', 'dnd-stayover'].includes(btn) && this.canPostStatus) {
                     btn_state = true    
+                } else if (btn =='restock') {
+                    btn_state = this.roomRestockItemCategories.length ? true :false
                 }
 
                 return {
