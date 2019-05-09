@@ -1,7 +1,10 @@
 <template>
     <div class="row">
         <div class="col-lg-3 col-sm-5 mt-2">
-            <div>{{ itemName }} <sup v-if="hasNoStock" class="text-info">(sold out)</sup></div>
+            <div>{{ itemName }} 
+                <sup v-if="hasItemToRestock" class="text-info">{{ item.stock_count }}</sup> 
+                <sup v-if="hasNoStock" class="text-info">(sold out)</sup>
+            </div>
             <div>{{ itemPrice }}</div>
         </div>
         <div class="col-lg-9 col-sm-7 m-0">
@@ -25,7 +28,7 @@
                 <button :class="addClass" @click="addQty()">
                     <font-awesome-icon class="justify-center" :icon="plus"/>
                 </button>
-            </span> 
+            </span>
         </div>
     </div>
 </template>
@@ -67,6 +70,9 @@
 
                 return minus_class
             },
+            isMaxedOut() {
+                return this.hasSelectedRoom && !this.hasNoStock && !this.canAdd
+            },
             itemName() {
                 return this.item.item_name
             },
@@ -86,6 +92,9 @@
             },
             hasNoStock() {
                 return this.hasSelectedRoom && !this.item.stock_count
+            },
+            hasItemToRestock() {
+                return this.hasSelectedRoom && this.item.stock_count
             }
         },
         methods: {

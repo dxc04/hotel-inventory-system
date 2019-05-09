@@ -101,7 +101,9 @@
                         </b-card-header>
                         <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-                                <add-guest-info :guest="this.guestName" :status="this.status" @input-guest-name="inputGuestName" @select-status="selectStatus"></add-guest-info>
+                                <add-guest-info :guest="this.guestName" :status="this.status" @input-guest-name="inputGuestName"
+                                    @select-status="selectStatus">
+                                </add-guest-info>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -114,7 +116,7 @@
                         <b-collapse id="accordion-3" visible accordion="my-accordion1" role="tabpanel">
                             <b-card-body class="m-0 p-0">
                                 <select-items 
-                                    :hasSelectedRoom="canPostStatus" :categories="roomCategories()"
+                                    :hasSelectedRoom="hasSelectedRoom" :categories="roomCategories()"
                                     @set-room-item-categories="setRoomItemCategories">
                                 </select-items>
                             </b-card-body>
@@ -201,6 +203,9 @@
             }),
             floors() {
                 return this.roomsData.floors
+            },
+            hasSelectedRoom() {
+                return Boolean(this.selectedRoom)
             },
             canProcessItem() {
                 return Boolean(this.selectedRoom && this.guestName && this.roomItemCategories.length)
@@ -336,8 +341,10 @@
                         if (item_category.category_id == obj.id) {
                             let item = items[item_category.item_id]
                             let qty = sic[item_category.id] ? sic[item_category.id].quantity : 0
-                            cat['items'].push({item_id: item.id, item_amount: item.amount, item_name: item.item_name,
-                                item_category_id: item_category.id, quantity: qty, stock_count: stocks[item_category.id] ? stocks[item_category.id] : 0
+                            cat['items'].push({
+                                item_id: item.id, item_amount: item.amount, item_name: item.item_name,
+                                item_category_id: item_category.id, quantity: qty, 
+                                stock_count: stocks[item_category.id] ? stocks[item_category.id] : 0
                             })
                         }
                     }
