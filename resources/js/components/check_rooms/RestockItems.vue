@@ -1,7 +1,7 @@
 <template>
     <b-card no-body>
         <b-tabs card>
-            <b-tab  v-for="(category, index) in categories" :title="category.category_name" :key="index" active>
+            <b-tab  v-for="(category, index) in categories" :title="category.category_name" :key="index">
                 <b-card-text>
                     <restock-item-category
                         :rooms="category.rooms"

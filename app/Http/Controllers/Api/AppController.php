@@ -73,20 +73,20 @@ class AppController extends Controller
     {
         $data = request()->post();
         $this->room_status_repo->postAnItemReject($data);
-        return response()->json(['room_stocks' => $this->room_status->getRoomStocks()]);
+        return response()->json(['room_stocks' => $this->room_status_repo->getRoomStocks()]);
     }
 
     public function postAnExtraSale()
     {
         $data = request()->post();
         $this->room_status_repo->postAnExtraSale($data);
-        return response()->json(['room_stocks' => $this->room_status->getRoomStocks()]);
+        return response()->json(['room_stocks' => $this->room_status_repo->getRoomStocks()]);
     }
 
     public function postARestock()
     {
         $data = request()->post();
         $this->room_status_repo->postARestock($data);
-        return response()->json(['room_stocks' => $this->room_status->getRoomStocks()]);     
+        return response()->json(['room_stocks' => $this->room_status_repo->getRoomStocks()]);     
     }
 }

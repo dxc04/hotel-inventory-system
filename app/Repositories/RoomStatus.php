@@ -121,7 +121,8 @@ class RoomStatus extends BaseRepository
 
         foreach ($data as $ic) {
             $item = ItemCategoryModel::where('item_id', $ic['item_category_id'])->first();
-            $this->addItemStock($ic['room_id'], $item->item_id, $ic['quantity']);
+            $this->deductItemStock($ic['room_id'], $item->item_id, $ic['quantity']);
+            $this->addRoomStock($ic['room_id'], $ic['item_category_id'], $ic['quantity']);
 
             $this->postRoomStatus($ic['room_id'], $restock_status_id);
         }

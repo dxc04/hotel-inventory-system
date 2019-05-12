@@ -208,10 +208,10 @@
                 return Boolean(this.selectedRoom)
             },
             canProcessItem() {
-                return Boolean(this.selectedRoom && this.guestName && this.roomItemCategories.length)
+                return Boolean(this.selectedRoom && this.roomItemCategories.length)
             },
             canPostStatus() {
-                return Boolean(this.selectedRoom && this.guestName)
+                return Boolean(this.selectedRoom )
             },
             guestInfo() {
                 return { guest_name: this.guestName, status: this.status }
