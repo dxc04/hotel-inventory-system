@@ -55,7 +55,6 @@
             }
         },
         mounted() {
-            console.log(this.roomsData)
         }
     }
 </script>
