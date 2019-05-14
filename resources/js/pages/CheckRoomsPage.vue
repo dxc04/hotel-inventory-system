@@ -292,7 +292,8 @@
                 'postAnItemReject',
                 'postAnExtraSale',
                 'postARestock',
-                'postActionPosted'
+                'postActionPosted',
+                'loadRoomData'
             ]),
             setSelectedFloor(floor) {
                 this.selectedFloor = floor
@@ -573,7 +574,11 @@
             postProcessItemWarning() {
                 this.$snotify.warning('You need to select a room, add guest information, and select items first.', this.notifyOptions)
             }
-        }
+        },
+        async beforeRouteLeave(to, from, next) {
+            await this.loadRoomData()
+            next()
+        },
     }
 </script>
 

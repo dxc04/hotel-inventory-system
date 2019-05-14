@@ -128,10 +128,6 @@
             ...mapGetters({
                 roomsData: 'getRoomsData'
             }),
-            async beforeRouteEnter(to, from, next) {
-                await this.loadRoomData()
-                next();
-            },
             roomsChecked() {
                 let rooms = this.roomsData.room_statuses.reduce(function (acc, obj) {
                     var key = obj['room_id'];
@@ -283,6 +279,11 @@
 
                 return daily_logs_data
             }
-        }
+        },
+        methods: {
+            ...mapActions({
+                loadRoomData: 'loadRoomData'
+            }),
+        },
     }
 </script>

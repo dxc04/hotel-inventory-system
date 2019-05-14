@@ -21,7 +21,7 @@ export default new Vuex.Store({
       commit('mutateActionPosted', false)
     },
     loadRoomData({ commit, state }) {
-      return axios.post('/api/v1/get-allthedata')
+      return axios.get('/api/v1/get-allthedata')
         .then(res => {
           commit('mutateRoomsData', res.data.rooms_data)
         }).catch(err => {

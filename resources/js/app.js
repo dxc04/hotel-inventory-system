@@ -35,7 +35,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 
-
 store.dispatch('loadAllTheData', window.allthedata)
 const router = makeRouter()
 const app = new Vue({

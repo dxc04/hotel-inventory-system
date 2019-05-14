@@ -14,28 +14,28 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <router-link to='/'>          
+            <router-link to='/' :key="dashboard">          
                 <i class="fas fa-2x fa-th-large"></i>
                 <span>Dashboard</span>
             </router-link>
         </li>
 
         <li class="nav-item">
-            <router-link to='/check-rooms'>
+            <router-link to='/check-rooms' :key="check-rooms">
                 <i class="fas fa-fw fa-door-open"></i>
                 <span>Check Rooms</span>
             </router-link>
         </li>
 
         <li class="nav-item">
-            <router-link to='/rooms'>
+            <router-link to='/rooms' :key="rooms">
                 <i class="fas fa-2x fa-fw fa-building"></i>
                 <span>Rooms</span>
             </router-link>
         </li>
 
         <li class="nav-item">
-            <router-link to='/notes'>
+            <router-link to='/notes' :key="notes">
                 <i class="fas fa-fw fa-edit"></i>
                 <span>Notes</span></a>
             </router-link>
