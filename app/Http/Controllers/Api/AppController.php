@@ -29,6 +29,11 @@ class AppController extends Controller
         return response()->json(['rooms_data' => $this->room_status_repo->getAllTheData()]);        
     }
 
+    public function getRoomStatus()
+    {
+        return response()->json($this->room_status_repo->getRoomStatus());        
+    }
+
     public function getRoomsStocks()
     {
         return response()->json($this->room_status->getRoomStocks());

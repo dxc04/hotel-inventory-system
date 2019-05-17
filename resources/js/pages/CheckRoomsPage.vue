@@ -137,6 +137,14 @@
                             </a>  
                             <div class="mt-2">Restock</div>
                         </div>
+                        <div class="ml-5 mr-5 mb-3 col-auto text-center justify-center">
+                            <a href="#"
+                                v-bind:class="getBtnCss('download-restock')"
+                                @click="downloadRestockReport()">
+                                <font-awesome-icon :icon="downloadIcon"/>
+                            </a>  
+                            <div class="mt-2">Restock</div>
+                        </div>                        
                     </div>
                     <restock-items 
                         :categories="roomRestockCategories()"
@@ -160,8 +168,9 @@
     import SelectItems from '../components/check_rooms/SelectItems.vue'
     import RestockItems from '../components/check_rooms/RestockItems.vue'
     import { faFileInvoiceDollar, faMinusSquare, faDoorClosed, faTimesCircle,
-        faCommentDollar, faDollarSign, faClipboardCheck, faBox } from '@fortawesome/free-solid-svg-icons'
+        faCommentDollar, faDollarSign, faClipboardCheck, faBox, faDownload } from '@fortawesome/free-solid-svg-icons'
     import { mapGetters, mapActions } from 'vuex'
+    import jsPDF from 'jspdf'
 
     export default {
         name: 'CheckRoomsPage',
@@ -187,6 +196,7 @@
                 timesCircle: faTimesCircle,
                 dollarSign: faDollarSign,
                 clipboardCheck: faClipboardCheck,
+                downloadIcon: faDownload,
                 box: faBox,
                 selectedFloor: null,
                 selectedRoom: null,
@@ -282,6 +292,52 @@
 
                 return room_stocks_limit
             },
+            restocksPerRooms() {
+                let rooms = this.rooms
+                let limits = this.roomStocksLimit
+                let room_stocks = this.roomStocks
+                let categories = this.categories
+                let item_categories = this.itemCategories
+                let items = this.items
+                let floors = this.roomsData.floors.reduce((acc, floor) => {
+                    acc[floor.id] = floor
+                    return acc
+                }, {})
+
+                let item_cats = this.roomsData.room_stocks.reduce((acc, rs) => {
+                    let category_id = item_categories[rs.item_category_id].category_id
+                    let room = rooms[rs.room_id]
+                    let floor = floors[room.floor_id]
+                    if (!acc[rs.room_id]) {
+                        acc[rs.room_id] = {
+                            room: room.room_name,
+                            floor: floor.floor_name,
+                            categories: {}
+                        }
+                    }
+
+                    if (rs.stock_quantity < limits[rs.room_id][rs.item_category_id]) {
+                        let restock_count = limits[rs.room_id][rs.item_category_id] - rs.stock_quantity
+                        if (!acc[rs.room_id]['categories'][category_id]) {
+                            acc[rs.room_id]['categories'][category_id] = {
+                                category_name: categories[category_id].category_name,
+                                items: []
+                            }
+                        }
+
+                        let item = items[item_categories[rs.item_category_id].item_id]
+                        acc[rs.room_id]['categories'][category_id]['items'].push({
+                            item_amount: item.amount, item_name: item.item_name, restock_count
+                        })
+                     
+                    }
+
+                    return acc
+                }, {})
+
+                return item_cats
+            }
+
         },
         methods: {
             ...mapActions([
@@ -293,7 +349,7 @@
                 'postAnExtraSale',
                 'postARestock',
                 'postActionPosted',
-                'loadRoomData'
+                'loadRoomStatus'
             ]),
             setSelectedFloor(floor) {
                 this.selectedFloor = floor
@@ -364,12 +420,6 @@
                 let item_categories = this.itemCategories
                 let items = this.items
 
-                let sic = this.roomRestockItemCategories.reduce(function (acc, obj) {
-                    var key = obj['item_category_id']
-                    acc[key] = obj
-                    return acc
-                }, {})
-                
                 let item_cats = this.roomsData.room_stocks.reduce((acc, rs) => {
                     let category_id = item_categories[rs.item_category_id].category_id
                     let room = rooms[rs.room_id]
@@ -558,8 +608,10 @@
                 } 
                 else if (['no-sale', 'dnd-due-out', 'dnd-stayover'].includes(btn) && this.canPostStatus) {
                     btn_state = true    
-                } else if (btn =='restock') {
+                } else if (btn == 'restock') {
                     btn_state = this.roomRestockItemCategories.length ? true :false
+                } else if (btn == 'download-restock') {
+                    btn_state = true
                 }
 
                 return {
@@ -573,10 +625,72 @@
             },
             postProcessItemWarning() {
                 this.$snotify.warning('You need to select a room, add guest information, and select items first.', this.notifyOptions)
+            },
+            downloadRestockReport() {
+                let restock_data = Object.values(this.restocksPerRooms).filter(rs => {
+                    let categories = Object.values(rs.categories)
+                    if (categories.length) {
+                        rs.categories = categories
+                        return rs
+                    }
+                })
+                
+                let restock_html = `
+                    <html>
+                        <body>
+                        <h3 style="font-family: arial;">Current Items for Restock</h3>
+                        ${restock_data.map((data, i) => {return `
+                            <h4 style="font-family: arial;">F${data.floor} - ${data.room}</h4>
+                            ${data.categories.map((cat, i) => {return `
+                                <div style="font-family: arial; font-size: 12px; width:800px; border: 1px solid grey; margin-top: 20px;">
+                                    <span style="font-family: arial, sans-serif; padding-right: 10px; font-size: 12px;width: 100px; font-weight: bold;">Location&nbsp;&nbsp;&nbsp;</span>
+                                    <span style="font-family: arial, sans-serif; padding-right: 10px; font-size: 12px;width: 100px; font-weight: bold;">Quantity&nbsp;&nbsp;&nbsp;</span>
+                                    <span style="font-family: arial, sans-serif; padding-right: 10px; font-size: 12px;width: 100px; font-weight: bold;">Item&nbsp;&nbsp;&nbsp;</span>
+                                </div>
+                                ${cat.items.map((item, i) => {return `
+                                <div style="font-family: arial; font-size: 12px; width:800px; border: 1px solid grey;">
+                                    <span style="font-family: arial; font-size: 12px;width: 30px;">${cat.category_name}</span>
+                                    <span style="font-family: arial; font-size: 12px;width: 30px;">${item.restock_count}</span>  
+                                    <span style="font-family: arial; font-size: 12px;width: 100px;">${item.item_name}</span>
+                                </div>
+                                `}).join('')}
+                            `}).join('')}
+                        `}).join('')}
+                        </body>
+                    </html>
+                `
+                console.log('restock', restock_html)
+
+                var doc = new jsPDF({
+                    orientation: 'p',
+                    unit: 'mm',
+                    format: 'letter',
+                    putOnlyUsedFonts:true
+                }); 
+                let margins = {
+                    top: 10,
+                    bottom: 60,
+                    left: 10,
+                    width: 522
+                }
+                let date = new Date()
+                let cdate = date.toISOString()
+                doc.fromHTML(
+                    restock_html, // HTML string or DOM elem ref.
+                    margins.left, // x coord
+                    margins.top, { // y coord
+                        'width': margins.width,
+                    },
+
+                    function (dispose) {
+                        doc.save('For-Restock-' + cdate + '.pdf');
+                    }, margins);
+
             }
+
         },
         async beforeRouteLeave(to, from, next) {
-            await this.loadRoomData()
+            await this.loadRoomStatus()
             next()
         },
     }

@@ -14,6 +14,7 @@ class CreatePurchaseTable extends Migration
             $table->integer('supplier_id');
             $table->integer('item_id');
             $table->integer('quantity')->default(1);
+            $table->text('status')->nullable();
             $table->timestamps();
         });
 

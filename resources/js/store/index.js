@@ -36,6 +36,14 @@ export default new Vuex.Store({
           console.log(err)
         })      
     },
+    loadRoomStatus({ commit, state }) {
+      return axios.get('/api/v1/get-room-status')
+        .then(res => {
+          commit('mutateRoomStatus', res.data)
+        }).catch(err => {
+          console.log(err)
+        })      
+    },  
     postActionPosted({ commit }, action_status) {
       commit('mutateActionPosted', action_status)
     },
@@ -112,6 +120,11 @@ export default new Vuex.Store({
     },
     mutateRoomStocks(state, room_stocks) {
       state.rooms_data.room_stocks = room_stocks
+    },
+    mutateRoomStatus(state, room_status) {
+      for (let index in room_status) {
+        state.rooms_data[index] = room_status[index]
+      }
     }
   },
   getters: {

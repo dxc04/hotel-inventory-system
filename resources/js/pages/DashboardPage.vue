@@ -103,6 +103,39 @@
             </div>
         </div>       
 
+        <!-- Content Row -->
+
+        <div class="row">
+
+            <!-- Purchases -->
+            <div class="col-xl-12 col-lg-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Item Purchases</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <b-table striped hover 
+                        :items="itemPurchases" 
+                        :current-page="currentPage"
+                        :per-page="perPage">
+                    </b-table>
+                    <b-row>
+                        <b-col md="6" class="my-1">
+                            <b-pagination
+                            v-model="currentPage"
+                            :total-rows="totalRows"
+                            :per-page="perPage"
+                            class="my-0"
+                            ></b-pagination>
+                        </b-col>
+                    </b-row>
+                </div>
+              </div>
+            </div>
+        </div>   
+
     </div>
 </template>
 
@@ -121,13 +154,48 @@
             SalesChart,
             DailyLogs
         },
-        mounted() {
-
+        data() {
+            return {
+                currentPage: 1,
+                perPage: 10,
+                totalRows: 1,
+            }
         },
         computed: {
             ...mapGetters({
                 roomsData: 'getRoomsData'
             }),
+            itemPurchases() {
+                return this.roomsData.purchases.map(purchase => {
+                    let row = {
+                        supplier: this.suppliers[purchase.supplier_id].supplier_name,
+                        item: this.items[[purchase.item_id]].item_name,
+                        quantity: purchase['quantity'],
+                        status: purchase['status'],
+                        ordered_last: purchase['created_at'],
+                        updated_at: purchase['updated_at']
+                    }
+                    return row
+                })
+            },
+            items() {
+                let items = this.roomsData.items.reduce(function (acc, obj) {
+                    var key = obj['id']
+                    acc[key] = obj
+                    return acc
+                }, {})
+
+                return items
+            },
+            suppliers() {
+                let suppliers = this.roomsData.suppliers.reduce(function (acc, obj) {
+                    var key = obj['id']
+                    acc[key] = obj
+                    return acc
+                }, {})
+
+                return suppliers
+            },
             roomsChecked() {
                 let rooms = this.roomsData.room_statuses.reduce(function (acc, obj) {
                     var key = obj['room_id'];
@@ -175,18 +243,12 @@
                 return sales;
             },
             salesByItems() {
-                let items = this.roomsData.items.reduce(function (acc, obj) {
-                    var key = obj['id']
-                    acc[key] = obj
-                    return acc
-                }, {})
-
                 let ics = this.roomsData.item_categories.reduce(function (acc, obj) {
                     var key = obj['id']
                     acc[key] = obj
                     return acc
                 }, {})
-
+                let items = this.items
                 let sales = this.roomsData.sales.reduce(function (sale_items, obj) {
                     let item_id = ics[obj['item_category_id']]['item_id']
                     let item = items[item_id]
@@ -282,7 +344,7 @@
         },
         methods: {
             ...mapActions({
-                loadRoomData: 'loadRoomData'
+                loadRoomStatus: 'loadRoomStatus'
             }),
         },
     }

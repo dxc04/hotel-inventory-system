@@ -46,7 +46,7 @@
     <li{!! request()->is('admin/item_stocks') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.item_stocks') }}"><i class="fal fa-fw fa-box mr-3"></i>Item Stocks</a>
     </li>
-@endca
+@endcan
 @can('Read Suppliers')
     <li{!! request()->is('admin/suppliers') ? ' class="active"' : '' !!}>
         <a href="{{ route('admin.suppliers') }}"><i class="fal fa-fw fa-user-tag mr-3"></i>Suppliers</a>

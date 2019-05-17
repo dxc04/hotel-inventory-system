@@ -46,6 +46,23 @@
                 </div>
             </div>
 
+            <div class="list-group-item">
+                <div class="form-group row mb-0">
+                    <label for="status" class="col-md-2 col-form-label">Status</label>
+                    <div class="col-md-8">
+                        <div class="form-control-plaintext">
+                            <input type="hidden" name="{attribute}">
+                            @foreach(['Ordered', 'Delivered'] as $option)
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" name="status" id="status_{{ $loop->index }}" class="custom-control-input" value="{{ $option }}"{{ $option == $purchase->status ? ' checked' : '' }}>
+                                    <label for="status_{{ $loop->index }}" class="custom-control-label">{{ $option }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="list-group-item bg-light text-left text-md-right pb-1">
                 <button type="submit" name="_submit" class="btn btn-primary mb-2" value="reload_page">Save</button>
                 <button type="submit" name="_submit" class="btn btn-primary mb-2" value="redirect">Save &amp; Go Back</button>

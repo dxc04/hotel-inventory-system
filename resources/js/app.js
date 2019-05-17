@@ -25,6 +25,9 @@ import { makeRouter } from './router.js'
 import store from './store/index';
 import App from './App.vue'
 import Snotify from 'vue-snotify'
+import html2canvas from "html2canvas"
+
+window.html2canvas = html2canvas;
 
 import 'vue-snotify/styles/material.css'
 

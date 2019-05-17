@@ -9,6 +9,7 @@ use App\Floor as FloorModel;
 use App\Room as RoomModel; 
 use App\Status as StatusModel;
 use App\Purchase as PurchaseModel;
+use App\Supplier as SupplierModel;
 use App\Item as ItemModel;
 use App\Category as CategoryModel;
 use App\ItemCategory as ItemCategoryModel;
@@ -44,6 +45,8 @@ class RoomStatus extends BaseRepository
             //'sales' => SaleModel::whereDate('created_at', Carbon::today())->get()->toArray(),
             'room_statuses' => RoomStatusModel::all()->toArray(),
             'sales' => SaleModel::all()->toArray(),
+            'suppliers' => SupplierModel::all()->toArray(),
+            'purchases' => PurchaseModel::all()->toArray(),
             'rooms' => RoomModel::all()->toArray(),
             'statuses' => StatusModel::all()->toArray(),
             'items' => ItemModel::all()->toArray(),
@@ -165,6 +168,23 @@ class RoomStatus extends BaseRepository
     public function getRoomStocks()
     {
         return RoomStockModel::all()->toArray();
+    }
+
+    public function getRoomStatus()
+    {
+        return [
+            //'room_statuses' => RoomStatusModel::whereDate('created_at', Carbon::today())->get()->toArray(),
+            //'sales' => SaleModel::whereDate('created_at', Carbon::today())->get()->toArray(),
+            'room_statuses' => RoomStatusModel::all()->toArray(),
+            'sales' => SaleModel::all()->toArray(),
+            'purchases' => PurchaseModel::all()->toArray(),
+            'suppliers' => SupplierModel::all()->toArray(),
+            'rooms' => RoomModel::all()->toArray(),
+            'statuses' => StatusModel::all()->toArray(),
+            'items' => ItemModel::all()->toArray(),
+            'categories' => CategoryModel::all()->toArray(),
+            'item_categories' => ItemCategoryModel::all()->toArray()
+        ];
     }
 
 }

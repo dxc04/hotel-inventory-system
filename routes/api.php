@@ -27,4 +27,5 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
     Route::post('post-a-restock', 'Api\AppController@postARestock');
     Route::get('get-allthedata', 'Api\AppController@getAllthedata');
     Route::get('get-room-stocks', 'Api\AppController@getRoomStocks');
+    Route::get('get-room-status', 'Api\AppController@getRoomStatus');
 });

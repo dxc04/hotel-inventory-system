@@ -90,6 +90,20 @@ return [
             ],
         ],
 
+        'status' => [
+            'migrations' => [
+                'text:status|nullable',
+            ],
+            'datatable' => [
+                'title' => 'Status',
+                'data' => 'status',
+            ],
+            'input' => [
+                'type' => 'radio',
+                'options' => ['Ordered', 'Delivered'],
+            ],            
+        ]
+
     ],
 
 ];

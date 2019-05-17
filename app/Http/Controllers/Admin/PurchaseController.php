@@ -35,6 +35,7 @@ class PurchaseController extends Controller
             ['title' => 'Supplier', 'data' => 'supplier.supplier_name'],
             ['title' => 'Item', 'data' => 'item.item_name'],
             ['title' => 'Quantity', 'data' => 'quantity'],
+            ['title' => 'Status', 'data' => 'status'],
             ['title' => '', 'data' => 'actions', 'searchable' => false, 'orderable' => false],
         ]);
         $html->setTableAttribute('id', 'purchases_datatable');
