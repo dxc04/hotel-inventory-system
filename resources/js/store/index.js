@@ -104,6 +104,26 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    generateRestockReport({ commit }, data) {
+      console.log()
+      return axios('/api/v1/download-restock-report', {
+          method: 'post',
+          responseType: 'blob',
+          data
+        })
+        .then(response => {
+          const url = window.URL.createObjectURL(new Blob([response.data]))
+          const link = document.createElement('a')
+          link.href = url
+          let date = new Date()
+          let cdate = date.toISOString()
+          link.setAttribute('download', 'For-Restock-' + cdate + '.pdf')
+          document.body.appendChild(link)
+          link.click()
+        }).catch(err => {
+          console.log(err)
+        })      
+    }, 
   },
   mutations: {
     mutateUser(state, user) {

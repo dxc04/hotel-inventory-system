@@ -170,7 +170,6 @@
     import { faFileInvoiceDollar, faMinusSquare, faDoorClosed, faTimesCircle,
         faCommentDollar, faDollarSign, faClipboardCheck, faBox, faDownload } from '@fortawesome/free-solid-svg-icons'
     import { mapGetters, mapActions } from 'vuex'
-    import jsPDF from 'jspdf'
 
     export default {
         name: 'CheckRoomsPage',
@@ -312,22 +311,15 @@
                         acc[rs.room_id] = {
                             room: room.room_name,
                             floor: floor.floor_name,
-                            categories: {}
+                            items: []
                         }
                     }
 
                     if (rs.stock_quantity < limits[rs.room_id][rs.item_category_id]) {
                         let restock_count = limits[rs.room_id][rs.item_category_id] - rs.stock_quantity
-                        if (!acc[rs.room_id]['categories'][category_id]) {
-                            acc[rs.room_id]['categories'][category_id] = {
-                                category_name: categories[category_id].category_name,
-                                items: []
-                            }
-                        }
-
                         let item = items[item_categories[rs.item_category_id].item_id]
-                        acc[rs.room_id]['categories'][category_id]['items'].push({
-                            item_amount: item.amount, item_name: item.item_name, restock_count
+                        acc[rs.room_id]['items'].push({
+                            category_name: categories[category_id].category_name, item_amount: item.amount, item_name: item.item_name, restock_count
                         })
                      
                     }
@@ -349,7 +341,8 @@
                 'postAnExtraSale',
                 'postARestock',
                 'postActionPosted',
-                'loadRoomStatus'
+                'loadRoomStatus',
+                'generateRestockReport',
             ]),
             setSelectedFloor(floor) {
                 this.selectedFloor = floor
@@ -628,63 +621,20 @@
             },
             downloadRestockReport() {
                 let restock_data = Object.values(this.restocksPerRooms).filter(rs => {
-                    let categories = Object.values(rs.categories)
-                    if (categories.length) {
-                        rs.categories = categories
+                    if (rs.items.length) {
                         return rs
                     }
                 })
-                
-                let restock_html = `
-                    <html>
-                        <body>
-                        <h3 style="font-family: arial;">Current Items for Restock</h3>
-                        ${restock_data.map((data, i) => {return `
-                            <h4 style="font-family: arial;">F${data.floor} - ${data.room}</h4>
-                            ${data.categories.map((cat, i) => {return `
-                                <div style="font-family: arial; font-size: 12px; width:800px; border: 1px solid grey; margin-top: 20px;">
-                                    <span style="font-family: arial, sans-serif; padding-right: 10px; font-size: 12px;width: 100px; font-weight: bold;">Location&nbsp;&nbsp;&nbsp;</span>
-                                    <span style="font-family: arial, sans-serif; padding-right: 10px; font-size: 12px;width: 100px; font-weight: bold;">Quantity&nbsp;&nbsp;&nbsp;</span>
-                                    <span style="font-family: arial, sans-serif; padding-right: 10px; font-size: 12px;width: 100px; font-weight: bold;">Item&nbsp;&nbsp;&nbsp;</span>
-                                </div>
-                                ${cat.items.map((item, i) => {return `
-                                <div style="font-family: arial; font-size: 12px; width:800px; border: 1px solid grey;">
-                                    <span style="font-family: arial; font-size: 12px;width: 30px;">${cat.category_name}</span>
-                                    <span style="font-family: arial; font-size: 12px;width: 30px;">${item.restock_count}</span>  
-                                    <span style="font-family: arial; font-size: 12px;width: 100px;">${item.item_name}</span>
-                                </div>
-                                `}).join('')}
-                            `}).join('')}
-                        `}).join('')}
-                        </body>
-                    </html>
-                `
-                console.log('restock', restock_html)
 
-                var doc = new jsPDF({
-                    orientation: 'p',
-                    unit: 'mm',
-                    format: 'letter',
-                    putOnlyUsedFonts:true
-                }); 
-                let margins = {
-                    top: 10,
-                    bottom: 60,
-                    left: 10,
-                    width: 522
-                }
-                let date = new Date()
-                let cdate = date.toISOString()
-                doc.fromHTML(
-                    restock_html, // HTML string or DOM elem ref.
-                    margins.left, // x coord
-                    margins.top, { // y coord
-                        'width': margins.width,
-                    },
-
-                    function (dispose) {
-                        doc.save('For-Restock-' + cdate + '.pdf');
-                    }, margins);
+                this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
+                    this.generateRestockReport(restock_data)
+                        .then(res => {
+                            this.$snotify.success('Restock Report was generated!', this.notifyOptions)
+                        })
+                        .finally(() => {
+                            this.reset()
+                        })
+                }), this.notifyOptions)
 
             }
 
