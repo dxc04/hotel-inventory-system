@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\RoomStatus as RoomStatusRepo;
 use Auth;
+use PDF;
 
 class AppController extends Controller
 {
@@ -93,5 +94,13 @@ class AppController extends Controller
         $data = request()->post();
         $this->room_status_repo->postARestock($data);
         return response()->json(['room_stocks' => $this->room_status_repo->getRoomStocks()]);     
+    }
+
+    public function itemsForRestockReport()
+    {
+        $date = date("d/m/Y");
+        $pdf = PDF::loadView('restock_report', ['data' => request()->all(), 'date' => $date]);
+        
+        return $pdf->output();
     }
 }
