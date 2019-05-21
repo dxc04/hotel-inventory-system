@@ -74,12 +74,6 @@
                         <div class="mt-2">Item Reject</div>
                     </div>
                     <div class="col-md-4 text-center justify-center mb-3">
-                        <a href="#"
-                            v-bind:class="getBtnCss('extra-sale')"
-                            @click="extraSale">
-                            <font-awesome-icon :icon="dollarSign"/>
-                        </a>  
-                        <div class="mt-2">Extra Sale</div>
                     </div>
                 </div>
 
@@ -143,7 +137,7 @@
                                 @click="downloadRestockReport()">
                                 <font-awesome-icon :icon="downloadIcon"/>
                             </a>  
-                            <div class="mt-2">Restock</div>
+                            <div class="mt-2">Download</div>
                         </div>                        
                     </div>
                     <restock-items 
