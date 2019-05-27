@@ -142,6 +142,7 @@
                     </div>
                     <restock-items 
                         :categories="roomRestockCategories()"
+                        :item-stocks="itemStocks"
                         @set-room-restock-item-categories="setRoomRestockItemCategories">
                     </restock-items>
                 </div>
@@ -255,6 +256,16 @@
 
                 return ics
             },
+            itemStocks() {
+                let item_stocks_data = this.roomsData.item_stocks
+                let item_stocks = item_stocks_data.reduce((acc, is) => {
+                    is.qty = is.stock_quantity
+                    acc[is.id] = is
+                    return acc
+                }, {})
+
+                return item_stocks             
+            },
             roomStocks() {
                 let room_stocks_data = this.roomsData.room_stocks
                 let room_stocks = room_stocks_data.reduce((acc, stock) => {
@@ -354,10 +365,12 @@
             setRoomItemCategories(item_categories) {
                 this.roomItemCategories = item_categories
             },
-            setRoomRestockItemCategories({room_id, item_category_id, quantity}) {
+            setRoomRestockItemCategories({room_id, item_category_id, item_id, quantity}) {
                 let selected_id = this.roomRestockItemCategories.findIndex(ic => {
                     return ic.room_id == room_id && ic.item_category_id == item_category_id
                 })
+                let item_stock_qty = this.itemStocks[item_id].stock_quantity - quantity 
+                this.itemStocks[item_id].qty = item_stock_qty
                 if (selected_id >= 0) {
                     this.roomRestockItemCategories[selected_id]['quantity'] = quantity
                 } else {

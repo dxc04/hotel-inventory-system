@@ -36,6 +36,14 @@ export default new Vuex.Store({
           console.log(err)
         })      
     },
+    loadItemtocks({ commit, state }) {
+      return axios.post('/api/v1/get-item-stocks')
+        .then(res => {
+          commit('mutateItemStocks', res.data)
+        }).catch(err => {
+          console.log(err)
+        })      
+    },    
     loadRoomStatus({ commit, state }) {
       return axios.get('/api/v1/get-room-status')
         .then(res => {
@@ -100,6 +108,7 @@ export default new Vuex.Store({
       return axios.post('/api/v1/post-a-restock', data)
       .then(res => {
         commit('mutateRoomStocks', res.data.room_stocks)
+        commit('mutateItemStocks', res.data.item_stocks)
       }).catch(err => {
         console.log(err)
       })
@@ -138,6 +147,9 @@ export default new Vuex.Store({
     mutateActionPosted(state, action_posted) {
         state.action_posted = action_posted
     },
+    mutateItemStocks(state, item_stocks) {
+      state.rooms_data.item_stocks = item_stocks
+    },    
     mutateRoomStocks(state, room_stocks) {
       state.rooms_data.room_stocks = room_stocks
     },

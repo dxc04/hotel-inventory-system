@@ -24,12 +24,12 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="item_category_id" class="col-md-2 col-form-label">Item Category Id</label>
+                    <label for="item_category_id" class="col-md-2 col-form-label">Item Category</label>
                     <div class="col-md-8">
                         <select name="item_category_id" id="item_category_id" class="form-control">
                             <option value=""></option>
                             @foreach(app('App\ItemCategory')->orderBy('id')->get() as $model)
-                                <option value="{{ $model->id }}">{{ $model->id }}</option>
+                                <option value="{{ $model->id }}">{{ $model->category->category_name . ' - ' . $model->item->item_name }}</option>
                             @endforeach
                         </select>
                     </div>

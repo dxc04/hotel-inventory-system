@@ -2,7 +2,6 @@
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
 
           <!-- Content Row -->
@@ -87,7 +86,7 @@
             </div>
 
             <!-- Today's Sales -->
-            <div class="col-xl-6 col-lg-6">
+            <div class="col-md-6 col-lg-6">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -108,7 +107,7 @@
         <div class="row">
 
             <!-- Purchases -->
-            <div class="col-xl-12 col-lg-12">
+            <div class="col-md-6 col-lg-8">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -118,22 +117,51 @@
                 <div class="card-body">
                     <b-table striped hover 
                         :items="itemPurchases" 
-                        :current-page="currentPage"
-                        :per-page="perPage">
+                        :current-page="itemPurchasesData.currentPage"
+                        :per-page="itemPurchasesData.perPage">
                     </b-table>
                     <b-row>
                         <b-col md="6" class="my-1">
                             <b-pagination
-                            v-model="currentPage"
-                            :total-rows="totalRows"
-                            :per-page="perPage"
-                            class="my-0"
+                                v-model="itemPurchasesData.currentPage"
+                                :total-rows="itemPurchasesData.totalRows"
+                                :per-page="itemPurchasesData.perPage"  
+                                class="my-0"
                             ></b-pagination>
                         </b-col>
                     </b-row>
                 </div>
               </div>
             </div>
+
+            <!-- Item Stocks -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Item Stocks</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <b-table striped hover 
+                        :items="itemStocks" 
+                        :current-page="itemStocksData.currentPage"
+                        :per-page="itemStocksData.perPage">
+                    </b-table>
+                    <b-row>
+                        <b-col md="6" class="my-1">
+                            <b-pagination
+                                v-model="itemStocksData.currentPage"
+                                :total-rows="itemStocksData.totalRows"
+                                :per-page="itemStocksData.perPage"  
+                            class="my-0"
+                            ></b-pagination>
+                        </b-col>
+                    </b-row>
+                </div>
+              </div>
+            </div>            
+
         </div>   
 
     </div>
@@ -156,9 +184,16 @@
         },
         data() {
             return {
-                currentPage: 1,
-                perPage: 10,
-                totalRows: 1,
+                itemPurchasesData : {
+                    currentPage: 1,
+                    perPage: 10,
+                    totalRows: 1,
+                },
+                itemStocksData : {
+                    currentPage: 1,
+                    perPage: 10,
+                    totalRows: 1,
+                },                
             }
         },
         computed: {
@@ -169,14 +204,22 @@
                 return this.roomsData.purchases.map(purchase => {
                     let row = {
                         supplier: this.suppliers[purchase.supplier_id].supplier_name,
-                        item: this.items[[purchase.item_id]].item_name,
+                        item: this.items[purchase.item_id].item_name,
                         quantity: purchase['quantity'],
                         status: purchase['status'],
-                        ordered_last: purchase['created_at'],
-                        updated_at: purchase['updated_at']
+                        ordered_last: purchase['created_at']
                     }
                     return row
                 })
+            },
+            itemStocks() {
+                return this.roomsData.item_stocks.map(is => {
+                    let row = {
+                        item: this.items[is.item_id].item_name,
+                        stock_quantity: is.stock_quantity
+                    }
+                    return row
+                })                
             },
             items() {
                 let items = this.roomsData.items.reduce(function (acc, obj) {

@@ -52,7 +52,7 @@
                     <div class="col-md-8">
                         <div class="form-control-plaintext">
                             <input type="hidden" name="{attribute}">
-                            @foreach(['Ordered', 'Delivered'] as $option)
+                            @foreach(['Ordered', 'Delivered', 'Stocked'] as $option)
                                 <div class="custom-control custom-radio">
                                     <input type="radio" name="status" id="status_{{ $loop->index }}" class="custom-control-input" value="{{ $option }}"{{ $option == $purchase->status ? ' checked' : '' }}>
                                     <label for="status_{{ $loop->index }}" class="custom-control-label">{{ $option }}</label>

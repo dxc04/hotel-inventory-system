@@ -23,7 +23,7 @@ class PurchaseTableSeeder extends Seeder
                     'supplier_id' => $this->getRandomSupplierId(),
                     'item_id'     => $item->id,
                     'quantity'    => $qty,
-                    'status'      => 'Delivered',
+                    'status'      => 'Stocked',
                     'created_at'  => date("Y-m-d H:i:s")
                 ]
             );

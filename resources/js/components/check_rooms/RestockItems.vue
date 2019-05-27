@@ -6,6 +6,7 @@
                     <restock-item-category
                         :rooms="category.rooms"
                         :category="category"
+                        :item-stocks="itemStocks"
                         @update-item="updateItem">
                     </restock-item-category>
                 </b-card-text>
@@ -19,14 +20,15 @@
     export default {
         name: 'RestockItems',
         props: {
-            categories: Object
+            categories: Object,
+            itemStocks: Object,
         },
         components: {
             RestockItemCategory
         },
         methods: {
-            updateItem(room_id, item_category_id, quantity) {
-                this.$emit('set-room-restock-item-categories', {room_id, item_category_id, quantity})
+            updateItem(room_id, item_category_id, item_id, quantity) {
+                this.$emit('set-room-restock-item-categories', {room_id, item_category_id, item_id, quantity})
             }, 
         }
     }

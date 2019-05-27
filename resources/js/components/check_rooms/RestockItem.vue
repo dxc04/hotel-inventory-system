@@ -25,6 +25,8 @@
                 <button :class="addClass" @click="addQty()">
                     <font-awesome-icon class="justify-center" :icon="plus"/>
                 </button>
+                <sup v-if="stocksLeft" class="text-info">({{ stocksLeft }} stocks left)</sup>
+                <sup v-if="!stocksLeft" class="text-warning">(out of stock)</sup>
             </span> 
         </div>
     </div>
@@ -38,6 +40,7 @@
         props: {
             item: Object,
             room: Object,
+            stocksLeft: Number,
         },
         data() {
             return {
@@ -79,8 +82,11 @@
                 }
             },
             canAdd() {
-                return this.itemQty < this.item.restock_count
+                return this.itemQty < this.maxLimit
             },
+            maxLimit() {
+                return this.stocksLeft < this.item.restock_count ? this.stocksLeft : this.item.restock_count
+            }
         },
         methods: {
             addQty() {
@@ -94,7 +100,7 @@
                 }
             },
             updateItem(value) {
-                this.$emit('update-item', this.room.id, this.item.item_category_id, value)
+                this.$emit('update-item', this.room.id, this.item.item_category_id, this.item.item_id, value)
             }, 
             getItemCategoryId() {
                 return this.item.item_category_id

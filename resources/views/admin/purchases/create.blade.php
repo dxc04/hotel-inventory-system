@@ -10,7 +10,7 @@
         <div class="list-group">
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="supplier_id" class="col-md-2 col-form-label">Supplier Id</label>
+                    <label for="supplier_id" class="col-md-2 col-form-label">Supplier</label>
                     <div class="col-md-8">
                         <select name="supplier_id" id="supplier_id" class="form-control">
                             <option value=""></option>
@@ -24,7 +24,7 @@
 
             <div class="list-group-item">
                 <div class="form-group row mb-0">
-                    <label for="item_id" class="col-md-2 col-form-label">Item Id</label>
+                    <label for="item_id" class="col-md-2 col-form-label">Item</label>
                     <div class="col-md-8">
                         <select name="item_id" id="item_id" class="form-control">
                             <option value=""></option>
@@ -51,7 +51,7 @@
                     <div class="col-md-8">
                         <div class="form-control-plaintext">
                             <input type="hidden" name="{attribute}">
-                            @foreach(['Ordered', 'Delivered'] as $option)
+                            @foreach(['Ordered', 'Delivered', 'Stocked'] as $option)
                                 <div class="custom-control custom-radio">
                                     <input type="radio" name="status" id="status_{{ $loop->index }}" class="custom-control-input" value="{{ $option }}">
                                     <label for="status_{{ $loop->index }}" class="custom-control-label">{{ $option }}</label>

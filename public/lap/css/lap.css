@@ -62,6 +62,9 @@ img {
 .sidebar .list-admin ul li a {
     padding: 0 1rem 0 3.25rem;
 }
+.sidebar .table-list ul li a {
+    padding: 0 1rem 1rem 2rem;
+}
 .sidebar .list-admin [data-toggle="collapse"] {
     position: relative;
 }

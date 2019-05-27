@@ -93,7 +93,10 @@ class AppController extends Controller
     {
         $data = request()->post();
         $this->room_status_repo->postARestock($data);
-        return response()->json(['room_stocks' => $this->room_status_repo->getRoomStocks()]);     
+        return response()->json([
+            'room_stocks' => $this->room_status_repo->getRoomStocks(),
+            'item_stocks' => $this->room_status_repo->getItemStocks()
+        ]);     
     }
 
     public function itemsForRestockReport()

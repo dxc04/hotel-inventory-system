@@ -30,14 +30,14 @@
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Supplier Id</div>
+                <div class="col-md-2">Supplier</div>
                 <div class="col-md-8">{{ $purchase->supplier_id }}</div>
             </div>
         </div>
 
         <div class="list-group-item">
             <div class="row">
-                <div class="col-md-2">Item Id</div>
+                <div class="col-md-2">Item</div>
                 <div class="col-md-8">{{ $purchase->item_id }}</div>
             </div>
         </div>
