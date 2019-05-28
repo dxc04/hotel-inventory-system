@@ -646,10 +646,6 @@
             }
 
         },
-        async beforeRouteLeave(to, from, next) {
-            await this.loadRoomStatus()
-            next()
-        },
     }
 </script>
 

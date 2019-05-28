@@ -99,6 +99,17 @@ class AppController extends Controller
         ]);     
     }
 
+    public function addItemStock()
+    {
+        $data = request()->post();
+        $this->room_status_repo->addItemStock($data['purchase_id'], $data['item_id'], $data['quantity']);
+        return response()->json([
+            'room_stocks' => $this->room_status_repo->getRoomStocks(),
+            'item_stocks' => $this->room_status_repo->getItemStocks(),
+            'purchases' => $this->room_status_repo->getPurchases(),
+        ]);     
+    }
+
     public function itemsForRestockReport()
     {
         $date = date("d/m/Y");

@@ -159,8 +159,12 @@ class RoomStatus extends BaseRepository
         $item->save();
     }
 
-    public function addItemStock($room_id, $item_id, $qty)
+    public function addItemStock($purchase_id, $item_id, $qty)
     {
+        $purchase = PurchaseModel::find($purchase_id);
+        $purchase->status = 'Stocked';
+        $purchase->save();
+        
         $item = ItemStockModel::where('item_id', $item_id)->first();
         $item->stock_quantity = $item->stock_quantity + $qty;
         $item->save();
@@ -174,6 +178,11 @@ class RoomStatus extends BaseRepository
     public function getItemStocks()
     {
         return ItemStockModel::all()->toArray();
+    }
+
+    public function getPurchases()
+    {
+        return PurchaseModel::all()->toArray();
     }
 
     public function getRoomStatus()

@@ -113,8 +113,18 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    addItemStock({ commit }, data) {
+      console.log('dada', data)
+      return axios.post('/api/v1/add-item-stock', data)
+      .then(res => {
+        commit('mutateRoomStocks', res.data.room_stocks)
+        commit('mutateItemStocks', res.data.item_stocks)
+        commit('mutatePurchases', res.data.purchases)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     generateRestockReport({ commit }, data) {
-      console.log()
       return axios('/api/v1/download-restock-report', {
           method: 'post',
           responseType: 'blob',
@@ -157,7 +167,10 @@ export default new Vuex.Store({
       for (let index in room_status) {
         state.rooms_data[index] = room_status[index]
       }
-    }
+    },
+    mutatePurchases(state, purchases) {
+      state.rooms_data.purchases = purchases
+    },
   },
   getters: {
     user: state => state.user,

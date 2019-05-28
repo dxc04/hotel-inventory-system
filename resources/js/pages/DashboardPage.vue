@@ -119,6 +119,17 @@
                         :items="itemPurchases" 
                         :current-page="itemPurchasesData.currentPage"
                         :per-page="itemPurchasesData.perPage">
+
+                        <template slot="actions" slot-scope="row">
+                            <b-button v-if="row.item.actions.was_stocked"
+                                pill
+                                variant="success"
+                                size="sm"
+                                @click="addToStock(row.item.actions)"
+                                >
+                                Stock
+                            </b-button>
+                        </template>
                     </b-table>
                     <b-row>
                         <b-col md="6" class="my-1">
@@ -163,7 +174,7 @@
             </div>            
 
         </div>   
-
+        <vue-snotify></vue-snotify>
     </div>
 </template>
 
@@ -184,6 +195,12 @@
         },
         data() {
             return {
+                notifyOptions: {
+                    timeout: 3000,
+                    showProgressBar: false,
+                    closeOnClick: false,
+                    position: 'rightTop',
+                },
                 itemPurchasesData : {
                     currentPage: 1,
                     perPage: 10,
@@ -202,12 +219,20 @@
             }),
             itemPurchases() {
                 return this.roomsData.purchases.map(purchase => {
+                    let was_stocked = purchase.status == 'Stocked'
+                    let item = this.items[purchase.item_id]
                     let row = {
                         supplier: this.suppliers[purchase.supplier_id].supplier_name,
-                        item: this.items[purchase.item_id].item_name,
+                        item: item.item_name,
                         quantity: purchase['quantity'],
                         status: purchase['status'],
-                        ordered_last: purchase['created_at']
+                        ordered_last: purchase['created_at'],
+                        actions: {
+                            purchase_id: purchase.id, 
+                            was_stocked,
+                            item_id: item.id,
+                            quantity: purchase['quantity']
+                        }
                     }
                     return row
                 })
@@ -383,12 +408,27 @@
                 }, [])
 
                 return daily_logs_data
-            }
+            },
         },
         methods: {
             ...mapActions({
-                loadRoomStatus: 'loadRoomStatus'
+                loadRoomStatus: 'loadRoomStatus',
+                addItemStock: 'addItemStock'
             }),
+            addToStock(data) {
+                this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
+                    this.addItemStock(data)
+                        .then(res => {
+                            this.$snotify.success('Purchased item was successfully stocked!', this.notifyOptions)
+                        })
+                        .finally(() => {
+                            this.reset()
+                        })
+                }), this.notifyOptions)   
+            }
+        },
+        beforeRouteEnter(to, from, next) {
+            next(vm => vm.loadRoomStatus())
         },
     }
 </script>
