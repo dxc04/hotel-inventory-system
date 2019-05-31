@@ -65,6 +65,19 @@ return [
             ],
         ],
 
+        'notes' => [
+            'migrations' => [
+                'text:notes|nullable',
+            ],
+            'validations' => [
+                'create' => 'required|min:10',
+                'update' => 'required|min:10',
+            ],
+            'input' => [
+                'type' => 'textarea',
+            ],
+        ],
+
     ],
 
 ];

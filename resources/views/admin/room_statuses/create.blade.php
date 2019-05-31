@@ -39,6 +39,15 @@
                 </div>
             </div>
 
+            <div class="list-group-item">
+                <div class="form-group row mb-0">
+                    <label for="notes" class="col-md-2 col-form-label">Notes</label>
+                    <div class="col-md-8">
+                        <textarea name="notes" id="notes" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+
             <div class="list-group-item bg-light text-left text-md-right pb-1">
                 <button type="submit" name="_submit" class="btn btn-primary mb-2" value="reload_page">Save</button>
                 <button type="submit" name="_submit" class="btn btn-primary mb-2" value="redirect">Save &amp; Go Back</button>

@@ -59,7 +59,7 @@ class RoomStatus extends BaseRepository
         ];
     }
 
-    public function postRoomStatus($room_id, $status_id)
+    public function postRoomStatus($room_id, $status_id, $notes)
     {
         $room_status = RoomStatusModel::firstOrCreate(['room_id' => $room_id]);
 
@@ -69,13 +69,16 @@ class RoomStatus extends BaseRepository
         }
 
         $room_status->status = $statuses;
+        $room_status->notes = json_encode($notes);
         $room_status->save();
     }
 
     public function postASale($data)
     {
         $status_id = StatusModel::where('status_key', 'sale')->pluck('id')->first();
-        $this->postRoomStatus($data['room_id'], $status_id);
+        $this->postRoomStatus($data['room_id'], $status_id, 
+            ['guest_name' => $data['guest_name'], 'status' => $data['status']]
+        );
 
         foreach ($data['item_categories'] as $ic) {
             $ic['room_id'] = $data['room_id'];
@@ -103,7 +106,9 @@ class RoomStatus extends BaseRepository
     public function postAnExtraSale($data)
     {
         $restock_status_id = StatusModel::where('status_key', 'restock')->pluck('id')->first();
-        $this->postRoomStatus($data['room_id'], $restock_status_id);
+        $this->postRoomStatus($data['room_id'], $restock_status_id, 
+            ['guest_name' => $data['guest_name'], 'status' => $data['status']]
+        );
 
         foreach ($data['item_categories'] as $ic) {
             $ic['room_id'] = $data['room_id'];
@@ -116,7 +121,9 @@ class RoomStatus extends BaseRepository
         }
 
         $sale_status_id = StatusModel::where('status_key', 'sale')->pluck('id')->first();
-        $this->postRoomStatus($data['room_id'], $sale_status_id);
+        $this->postRoomStatus($data['room_id'], $sale_status_id, 
+            ['guest_name' => $data['guest_name'], 'status' => $data['status']]
+        );
     }
 
     public function postARestock($data)
@@ -128,7 +135,7 @@ class RoomStatus extends BaseRepository
             $this->deductItemStock($ic['room_id'], $item->item_id, $ic['quantity']);
             $this->addRoomStock($ic['room_id'], $ic['item_category_id'], $ic['quantity']);
 
-            $this->postRoomStatus($ic['room_id'], $restock_status_id);
+            $this->postRoomStatus($ic['room_id'], $restock_status_id, []);
         }
     }
 
@@ -167,7 +174,7 @@ class RoomStatus extends BaseRepository
         
         $item = ItemStockModel::where('item_id', $item_id)->first();
         $item->stock_quantity = $item->stock_quantity + $qty;
-        $item->save();
+        $item->save();  
     }
 
     public function getRoomStocks()
@@ -188,8 +195,6 @@ class RoomStatus extends BaseRepository
     public function getRoomStatus()
     {
         return [
-            //'room_statuses' => RoomStatusModel::whereDate('created_at', Carbon::today())->get()->toArray(),
-            //'sales' => SaleModel::whereDate('created_at', Carbon::today())->get()->toArray(),
             'room_statuses' => RoomStatusModel::all()->toArray(),
             'sales' => SaleModel::all()->toArray(),
             'purchases' => PurchaseModel::all()->toArray(),

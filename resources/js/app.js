@@ -23,7 +23,7 @@ import BootstrapVue from 'bootstrap-vue';
 import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
 import { makeRouter } from './router.js'
 import store from './store/index';
-import App from './App.vue'
+import App from './layouts/HomeLayout.vue'
 import Snotify from 'vue-snotify'
 import html2canvas from "html2canvas"
 

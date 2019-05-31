@@ -116,11 +116,6 @@
                             <a href="{{ route('admin.bookings') }}"><i class="fal fa-fw fa-file-user mr-3"></i>Bookings</a>
                         </li-->
                     @endcan
-                    @can('Read Config Definitions')
-                        <!--li{!! request()->is('admin/config_definitions') ? ' class="active"' : '' !!}>
-                            <a href="{{ route('admin.config_definitions') }}"><i class="fal fa-fw fa-tags mr-3"></i>Config Definitions</a>
-                        </li-->
-                    @endcan
                 </ul>    
             </div>
         </div>

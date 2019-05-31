@@ -469,7 +469,9 @@
                 if (this.canProcessItem) {
                     let sale_data = {
                         room_id: this.selectedRoom.id,
-                        item_categories: this.roomItemCategories
+                        item_categories: this.roomItemCategories,
+                        guest_name: this.guestName,
+                        status: this.status
                     }
 
                     let room_name = this.selectedRoom.room_name
@@ -497,8 +499,13 @@
             noSale() {
                 if (this.canPostStatus) {
                     let room_name = this.selectedRoom.room_name
+                    let data = {
+                        selected_room: this.selectedRoom.id,
+                        guest_name: this.guestName,
+                        status: this.status
+                    }
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                    
-                        this.postNoSale(this.selectedRoom)
+                        this.postNoSale(data)
                             .then(res => {
                                 this.$snotify.success('No Sale posted to room ' + room_name + '!', 'Success!', this.notifyOptions)                                
                             })
@@ -513,8 +520,13 @@
             DNDDueOut() {
                 if (this.canPostStatus) {
                     let room_name = this.selectedRoom.room_name
+                    let data = {
+                        selected_room: this.selectedRoom.id,
+                        guest_name: this.guestName,
+                        status: this.status
+                    }
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                    
-                        this.postDNDDueOut(this.selectedRoom)
+                        this.postDNDDueOut(data)
                             .then(res => {
                                 this.$snotify.success('DND Due Out posted to room ' + room_name + '!', this.notifyOptions)                                
                             })                            
@@ -529,8 +541,13 @@
             DNDStayover() {
                 if (this.canPostStatus) {
                     let room_name = this.selectedRoom.room_name
+                    let data = {
+                        selected_room: this.selectedRoom.id,
+                        guest_name: this.guestName,
+                        status: this.status
+                    }                    
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => { 
-                        this.postDNDStayover(this.selectedRoom)
+                        this.postDNDStayover(data)
                             .then(res => {
                                 this.$snotify.success('DND Stayover posted to room ' + room_name + '!', this.notifyOptions)                               
                             })
@@ -546,7 +563,9 @@
                 if (this.canProcessItem) {
                     let data = {
                         room_id: this.selectedRoom.id,
-                        item_categories: this.roomItemCategories
+                        item_categories: this.roomItemCategories,
+                        guest_name: this.guestName,
+                        status: this.status
                     }
                     let room_name = this.selectedRoom.room_name
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     
@@ -567,7 +586,9 @@
                 if (this.canProcessItem) {
                     let data = {
                         room_id: this.selectedRoom.id,
-                        item_categories: this.roomItemCategories
+                        item_categories: this.roomItemCategories,
+                        guest_name: this.guestName,
+                        status: this.status                        
                     }
                     let room_name = this.selectedRoom.room_name
                     this.$snotify.async('Processing request...', 'Request Sent', () => new Promise((resolve, reject) => {                     

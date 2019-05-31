@@ -3,7 +3,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <sidebar></sidebar>
+        <sidebar :appName="appName"></sidebar>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -17,7 +17,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <slot />
+                <router-view />
                 <!-- /.container-fluid -->
 
             </div>
@@ -50,20 +50,24 @@
         mounted() {
             "use strict"; // Start of use strict
 
+            $("body").toggleClass("sidebar-toggled");
+            $(".sidebar").toggleClass("toggled");
+            if ($(".sidebar").hasClass("toggled")) {
+                $('.sidebar .collapse').collapse('hide');
+            };
+
             // Toggle the side navigation
             $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
                 $("body").toggleClass("sidebar-toggled");
                 $(".sidebar").toggleClass("toggled");
                 if ($(".sidebar").hasClass("toggled")) {
-                $('.sidebar .collapse').collapse('hide');
+                    $('.sidebar .collapse').collapse('hide');
                 };
             });
 
             // Close any open menu accordions when window is resized below 768px
             $(window).resize(function() {
-                if ($(window).width() < 768) {
                 $('.sidebar .collapse').collapse('hide');
-                };
             });
 
             // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
@@ -97,7 +101,7 @@
         },
         methods: {
             logout() {
-                //document.getElementById('logout-form').submit()
+                document.getElementById('logout-form').submit()
             }
         },
         computed: {

@@ -121,7 +121,7 @@
                         :per-page="itemPurchasesData.perPage">
 
                         <template slot="actions" slot-scope="row">
-                            <b-button v-if="row.item.actions.was_stocked"
+                            <b-button v-if="!row.item.actions.was_stocked"
                                 pill
                                 variant="success"
                                 size="sm"

@@ -55,5 +55,11 @@
 <script>
     export default {
         name: 'Sidebar',
+        props: {
+            appName: {
+                type: String,
+                default: 'HSG Portal'
+            },
+        },
     }
 </script>

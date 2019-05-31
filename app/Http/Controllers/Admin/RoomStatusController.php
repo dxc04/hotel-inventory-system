@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Status;
 use App\RoomStatus;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Html\Builder;
@@ -22,13 +21,10 @@ class RoomStatusController extends Controller
     public function index(Builder $builder)
     {
         if (request()->ajax()) {
-            $room_statuses = RoomStatus::query()->with('room');
+            $room_statuses = RoomStatus::query()->with('room')->select('room_statuses.*', 'rooms.room_name');
             $datatable = datatables($room_statuses)
                 ->editColumn('actions', function ($room_status) {
                     return view('admin.room_statuses.datatable.actions', compact('room_status'));
-                })
-                ->editColumn('status', function ($room_status) {
-                    return Status::findMany($room_status->status)->pluck('status_name')->toArray();
                 })
                 ->rawColumns(['actions']);
 
@@ -53,7 +49,8 @@ class RoomStatusController extends Controller
     public function create()
     {
         $this->validate(request(), [
-            "room_id" => "required|exists:rooms,id",
+            "room_id" => "required|exists:rooms,id|unique:room_statuses",
+            "notes" => "required|min:10",
         ]);
 
         $room_status = RoomStatus::create(request()->all());
@@ -83,6 +80,7 @@ class RoomStatusController extends Controller
     {
         $this->validate(request(), [
             "room_id" => "required|exists:rooms,id|unique:room_statuses,room_id,{$room_status->id}",
+            "notes" => "required|min:10",
         ]);
 
         $room_status->update(request()->all());
