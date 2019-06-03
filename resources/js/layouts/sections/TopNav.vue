@@ -31,9 +31,6 @@
 
 <script>
 
-    import Avatars from '@dicebear/avatars';
-    import sprites from '@dicebear/avatars-identicon-sprites';
-
     export default {
         name: 'TopNav',
         props: {
