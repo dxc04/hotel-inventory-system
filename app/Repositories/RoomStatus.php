@@ -128,7 +128,7 @@ class RoomStatus extends BaseRepository
 
     public function postARestock($data)
     {
-        $restock_status_id = StatusModel::where('status_key', 'restock')->pluck('id')->first();
+        $restock_status_id = StatusModel::where('status_key', 'restocked')->pluck('id')->first();
 
         foreach ($data as $ic) {
             $item = ItemCategoryModel::where('item_id', $ic['item_category_id'])->first();

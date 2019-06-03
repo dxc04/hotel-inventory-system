@@ -146,7 +146,7 @@
             </div>
 
             <!-- Item Stocks -->
-            <div class="col-xl-4 col-md-12">
+            <div class="col-xl-4 col-md-12">    
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -276,7 +276,7 @@
                 return rooms
             },
             roomsRestocked() {
-                let restocked_status = this.roomsData.statuses.find(status => status.status_name === 'Restocked')
+                let restocked_status = this.roomsData.statuses.find(status => status.status_key === 'restocked')
                 let rooms = this.roomsData.room_statuses.filter(room_status => {
                     return room_status.status.find(status => status == restocked_status.id)
                 })
@@ -284,7 +284,7 @@
             },
             dndRooms() {
                 let dnd_statuses = this.roomsData.statuses.reduce((acc, status) => {
-                    if (status.status_name === 'DND Due-Out' || status.status_name === 'DND Stayover') {
+                    if (status.status_key === 'dnd_due_out' || status.status_key === 'dnd_stayover') {
                         acc.push(status.id)
                     }
                     return acc
